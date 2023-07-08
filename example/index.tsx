@@ -1,0 +1,26 @@
+import 'react-app-polyfill/ie11';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { Tag, ThemeProvider } from '../.';
+import Button from './components/Button'
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <Button href="https://google.com">Click</Button>
+      <Tag
+        p={2}
+        radius={2}
+        bgcolor="success.main"
+        color="success.text"
+        typography='h3'
+        component='h1'
+        m={2}
+      >
+        Wellcome
+      </Tag>
+    </ThemeProvider>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
