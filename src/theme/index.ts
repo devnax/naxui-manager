@@ -63,12 +63,12 @@ export const useTheme = (): ThemeOptions => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const name = State.get("current_theme")
-    return ThemeFactory.get(name) || createTheme("default", defaultThemeOption) as ThemeOptions
+    return ThemeFactory.get(name) || createTheme("default", defaultThemeOption as any) as ThemeOptions
 }
 
 export const getTheme = (): ThemeOptions => {
     const name = State.get("current_theme")
-    return ThemeFactory.get(name) || createTheme("default", defaultThemeOption)
+    return ThemeFactory.get(name) || createTheme("default", defaultThemeOption as any)
 }
 
 export const changeTheme = (name: string) => {
@@ -78,7 +78,7 @@ export const changeTheme = (name: string) => {
     }
 }
 
-createTheme('default', defaultThemeOption)
+createTheme('default', defaultThemeOption as any)
 createTheme('default-dark', {
     color: {
         ...darkModeColor

@@ -75,7 +75,7 @@ export interface ThemeOptionsPartial {
     breakpoints?: { [key: string]: number };
     color?: Partial<ThemeColorOptions>;
     typography?: Partial<ThemeTypographyOptions>;
-    shadows?: { [key: number]: string };
+    shadow?: { [key: number]: string };
     interfaces?: { [key: string]: () => InterfaceType };
 }
 
