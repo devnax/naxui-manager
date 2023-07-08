@@ -20,6 +20,11 @@ Create Component
   - [changeTheme](#changetheme)
   - [mergeTheme](#mergetheme)
   - [Default Theme Option](#default-theme-option)
+  - [css_option](#css_option)
+- Hooks
+  - [useMediaScreen](#usemediascreen)
+  - [useWindowResize](#usewindowresize)
+  - [useWindow](#usewindow)
 - [CSS](#css) - Learn the [naxcss](https://www.npmjs.com/package/naxcss)
 - [Server Side Rendering](https://www.npmjs.com/package/naxcss#server-side-rendering)
 - [Typescript](#typescript)
@@ -52,7 +57,7 @@ const App = () => {
 Here is the example to create your custom `Button` component
 ```tsx
 import * as React from 'react';
-import Tag, { TagProps, TagComponenntType } from 'naxui-manager';
+import {Tag, TagProps, TagComponenntType } from 'naxui-manager';
 
 export type ButtonProps<T extends TagComponenntType = 'button'> = TagProps<T> & {
     // Additional props specific to the Button component can be defined here
@@ -68,17 +73,12 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
             radius={1.5}
             cursor="pointer"
             typography="button"
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
             {...rest}
             hover={{
                 bgcolor: "primary.dark",
-                ...((rest as any).hover || {})
             }}
             sx={{
                 transition: "background .3s",
-                ...((rest as any).sx || {})
             }}
             ref={ref}
         >
@@ -438,6 +438,44 @@ mergeTheme(theme1, theme2)
 </details>
 }
 
+
+## css_option
+this is a function where the customized the `naxcss` option. If you need it you can use it.
+
+
+## useMediaScreen
+this hook help you to responsive.
+```ts
+import {useMediaScreen} from 'naxui-manager'
+
+const screen = useMediaScree()
+screen.is("xs" | "sm" | "md" | "lg" | "xl" | number)
+screen.isDown("xs" | "sm" | "md" | "lg" | "xl" | number)
+screen.isUp("xs" | "sm" | "md" | "lg" | "xl" | number)
+
+```
+
+## useWindowResize
+this hook expect a callback and when the screen is resizing at that time the callback will firing.
+```ts
+import {useWindowResize} from 'naxui-manager'
+useWindowResize(() => {
+  ...
+})
+```
+
+
+## isWindow
+this hook will help to get the `window`. so you can work with server side and client side.
+```ts
+import {isWindow} from 'naxui-manager'
+
+const win = isWindow()
+if(win){
+  // then  do something
+}
+
+```
 
 ## css
 You can learn the [naxcss](https://www.npmjs.com/package/naxcss). and you must need to import them from `naxui-manager`

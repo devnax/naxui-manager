@@ -2,10 +2,16 @@ type GlobalConfigType = "default_css_option"
 export const globalConfig = new Map<GlobalConfigType, any>()
 import ThemeProvider from './ThemeProvider'
 import Tag, { TagProps } from './Tag'
+import isWindow from './hooks/isWindow'
+import useMediaScreen from './hooks/useMediaScreen'
+import useWindowResize from './hooks/useWindowResize'
 export {
     ThemeProvider,
     Tag,
-    TagProps
+    TagProps,
+    isWindow,
+    useMediaScreen,
+    useWindowResize
 }
 export * from './css'
 export * from "./useProps"
