@@ -1,8 +1,13 @@
 import { getTheme } from "../theme"
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default (value: string, prop: string) => {
-    const { shadow } = getTheme()
+const getValue = (value: string, prop: string): any => {
+    const theme = getTheme()
+    if (typeof value === "function") {
+        const v = (value as any)(theme)
+        return getValue(v, prop) || v
+    }
+
 
     const values: any = {
         'background.main': "var(--color-background-main)",
@@ -73,10 +78,12 @@ export default (value: string, prop: string) => {
     }
 
     if (prop === 'shadow' || prop === 'boxShadow') {
-        if (shadow[value as any]) {
+        if (theme.shadow[value as any]) {
             return `var(--shadow-${value})`
         }
     }
 
     return values[value] || value
 }
+
+export default getValue

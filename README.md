@@ -20,6 +20,7 @@ Create Component
   - [changeTheme](#changetheme)
   - [mergeTheme](#mergetheme)
   - [Default Theme Option](#default-theme-option)
+  - [CSS Value](#css-value)
   - [css_option](#css_option)
 - Hooks
   - [useMediaScreen](#usemediascreen)
@@ -437,6 +438,32 @@ mergeTheme(theme1, theme2)
   ```
 </details>
 }
+
+
+
+## CSS Value
+There are many way to pass css value. `string`, `number`, `breakpoint` or `function`. in the `string` you can pass string value and also theme prop. with the `breakpoint` you can do responsive design. and the `function` you can read the theme and return the value.
+
+`Example`
+```jsx
+<MyComp 
+  bgcolor="red"
+  
+  // use theme prop
+  bgcolor="primary.main"
+
+  // responsive
+  bgcolor={{
+    sm: "red",
+    md: (theme) => theme.color.primary.main
+  }}
+
+  // function
+  bgcolor={(theme) => theme.color.error.main}
+/>
+```
+Here you can see the value  is `primary.main` so it will automatically get the theme primary.main color. in this way you can use everything from theme. like you want to use the `shadow` so you can pass the value `shadow.1`.
+
 
 
 ## css_option

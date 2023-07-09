@@ -1,56 +1,59 @@
 import * as CSS from 'csstype'
 import { ThemeOptions } from '../theme';
-import { ColorsRefTypes, BreakpointsType, ShadowRefTyeps, TypographyRefTypes } from '../theme/types';
-type ValueType<T extends keyof CSS.Properties> = CSS.Properties[T] | ThemeOptions['breakpoints'] | number
+import { ColorsRefTypes, BreakpointsType, ShadowRefTyeps, TypographyRefTypes, } from '../theme/types';
+
+export type FN = (theme: ThemeOptions) => string | number
+export type CSSBreakpointType = { [key in BreakpointsType]: string | number | FN }
+export type CSSValueType<T extends keyof CSS.Properties> = CSS.Properties[T] | Partial<CSSBreakpointType> | number | FN
 
 
 export type AliasesTypes = {
-    bgcolor?: ValueType<'background'> | ColorsRefTypes;
-    bgImage?: ValueType<'backgroundImage'>;
-    bg?: ValueType<'background'> | ColorsRefTypes;
-    p?: ValueType<'padding'>;
-    pt?: ValueType<'padding'>;
-    pr?: ValueType<'padding'>;
-    pb?: ValueType<'padding'>;
-    pl?: ValueType<'padding'>;
-    px?: ValueType<'padding'>;
-    py?: ValueType<'margin'>;
-    m?: ValueType<'margin'>;
-    mt?: ValueType<'margin'>;
-    mr?: ValueType<'margin'>;
-    mb?: ValueType<'margin'>;
-    ml?: ValueType<'margin'>;
-    mx?: ValueType<'margin'>;
-    my?: ValueType<'margin'>;
-    size?: ValueType<'width'>;
+    bgcolor?: CSSValueType<'background'> | ColorsRefTypes;
+    bgImage?: CSSValueType<'backgroundImage'>;
+    bg?: CSSValueType<'background'> | ColorsRefTypes;
+    p?: CSSValueType<'padding'>;
+    pt?: CSSValueType<'padding'>;
+    pr?: CSSValueType<'padding'>;
+    pb?: CSSValueType<'padding'>;
+    pl?: CSSValueType<'padding'>;
+    px?: CSSValueType<'padding'>;
+    py?: CSSValueType<'margin'>;
+    m?: CSSValueType<'margin'>;
+    mt?: CSSValueType<'margin'>;
+    mr?: CSSValueType<'margin'>;
+    mb?: CSSValueType<'margin'>;
+    ml?: CSSValueType<'margin'>;
+    mx?: CSSValueType<'margin'>;
+    my?: CSSValueType<'margin'>;
+    size?: CSSValueType<'width'>;
 
-    radius?: ValueType<'borderRadius'> | number;
-    shadow?: ValueType<'boxShadow'> | ShadowRefTyeps;
-    w?: ValueType<"width">;
-    h?: ValueType<"height">;
-    maxw?: ValueType<"width"> | BreakpointsType;
-    minw?: ValueType<"width"> | BreakpointsType;
-    maxh?: ValueType<"height">;
-    minh?: ValueType<"height">;
-    bgSize?: ValueType<'backgroundSize'>,
-    bgPosition?: ValueType<'backgroundPosition'>,
-    bgRepeat?: ValueType<'backgroundRepeat'>,
-    border?: ValueType<'border'>;
+    radius?: CSSValueType<'borderRadius'> | number;
+    shadow?: CSSValueType<'boxShadow'> | ShadowRefTyeps;
+    w?: CSSValueType<"width">;
+    h?: CSSValueType<"height">;
+    maxw?: CSSValueType<"width"> | BreakpointsType;
+    minw?: CSSValueType<"width"> | BreakpointsType;
+    maxh?: CSSValueType<"height">;
+    minh?: CSSValueType<"height">;
+    bgSize?: CSSValueType<'backgroundSize'>,
+    bgPosition?: CSSValueType<'backgroundPosition'>,
+    bgRepeat?: CSSValueType<'backgroundRepeat'>,
+    border?: CSSValueType<'border'>;
 
     flexBox?: boolean;
     flexRow?: boolean;
     flexColumn?: boolean;
     flexWraped?: boolean;
 
-    color?: ValueType<'color'> | ColorsRefTypes;
-    width?: ValueType<'width'> | BreakpointsType;
-    height?: ValueType<'height'> | BreakpointsType;
-    borderColor?: ValueType<'backgroundColor'> | ColorsRefTypes;
+    color?: CSSValueType<'color'> | ColorsRefTypes;
+    width?: CSSValueType<'width'> | BreakpointsType;
+    height?: CSSValueType<'height'> | BreakpointsType;
+    borderColor?: CSSValueType<'backgroundColor'> | ColorsRefTypes;
 
-    fontFamily?: ValueType<"fontFamily"> | "default-font-family";
-    fontSize?: ValueType<"fontSize"> | TypographyRefTypes | "default-font-size";
-    minWidth?: ValueType<"minWidth"> | BreakpointsType;
-    maxWidth?: ValueType<"maxWidth"> | BreakpointsType;
-    minHeight?: ValueType<"minHeight"> | BreakpointsType;
-    maxHeight?: ValueType<"maxHeight"> | BreakpointsType;
+    fontFamily?: CSSValueType<"fontFamily"> | "default-font-family";
+    fontSize?: CSSValueType<"fontSize"> | TypographyRefTypes | "default-font-size";
+    minWidth?: CSSValueType<"minWidth"> | BreakpointsType;
+    maxWidth?: CSSValueType<"maxWidth"> | BreakpointsType;
+    minHeight?: CSSValueType<"minHeight"> | BreakpointsType;
+    maxHeight?: CSSValueType<"maxHeight"> | BreakpointsType;
 }

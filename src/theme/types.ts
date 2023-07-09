@@ -99,7 +99,6 @@ export type StateKeys = "current_theme" | "dispatch"
 
 export type BreakpointsType = "xs" | "sm" | "md" | "lg" | "xl"
 
-
 export type TextRefTypes =
     | "text"
     | "subtext"

@@ -1,10 +1,18 @@
 {
-    "version": "1.0.1",
+    "version": "1.1.1",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
-    "files": ["dist", "src"],
-    "keywords": ["react-ui", "react ui builder", "react custom ui manager"],
+    "description": "The naxui-manager is an innovative React library that revolutionizes the process of creating custom UI library",
+    "files": [
+        "dist",
+        "src"
+    ],
+    "keywords": [
+        "react-ui",
+        "react ui builder",
+        "react custom ui manager"
+    ],
     "engines": {
         "node": ">=10"
     },
@@ -34,13 +42,16 @@
     "name": "naxui-manager",
     "author": "Naxrul Ahmed",
     "module": "dist/naxui-manager.esm.js",
-    "size-limit": [{
-        "path": "dist/naxui-manager.cjs.production.min.js",
-        "limit": "10 KB"
-    }, {
-        "path": "dist/naxui-manager.esm.js",
-        "limit": "10 KB"
-    }],
+    "size-limit": [
+        {
+            "path": "dist/naxui-manager.cjs.production.min.js",
+            "limit": "10 KB"
+        },
+        {
+            "path": "dist/naxui-manager.esm.js",
+            "limit": "10 KB"
+        }
+    ],
     "devDependencies": {
         "@size-limit/preset-small-lib": "^8.2.6",
         "@types/react": "^18.2.14",
@@ -54,6 +65,6 @@
         "typescript": "^3.9.10"
     },
     "dependencies": {
-        "naxcss": "^2.2.9"
+        "naxcss": "^2.3.2"
     }
 }

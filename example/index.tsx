@@ -9,13 +9,19 @@ const App = () => {
     <ThemeProvider>
       <Button href="https://google.com">Click</Button>
       <Tag
-        p={2}
+        p={{
+          sm: 10
+        }}
         radius={2}
-        bgcolor="success.main"
         color="success.text"
         typography='h3'
         component='h1'
         m={2}
+        sx={{
+          background: {
+            xs: (t) => t.color.success.main,
+          }
+        }}
       >
         Wellcome
       </Tag>
