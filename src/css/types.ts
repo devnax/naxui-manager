@@ -50,8 +50,8 @@ export type AliasesTypes = {
     height?: CSSValueType<'height'> | BreakpointsType;
     borderColor?: CSSValueType<'backgroundColor'> | ColorsRefTypes;
 
-    fontFamily?: CSSValueType<"fontFamily"> | "default-font-family";
-    fontSize?: CSSValueType<"fontSize"> | TypographyRefTypes | "default-font-size";
+    fontFamily?: CSSValueType<"fontFamily"> | "font-family";
+    fontSize?: CSSValueType<"fontSize"> | TypographyRefTypes;
     minWidth?: CSSValueType<"minWidth"> | BreakpointsType;
     maxWidth?: CSSValueType<"maxWidth"> | BreakpointsType;
     minHeight?: CSSValueType<"minHeight"> | BreakpointsType;

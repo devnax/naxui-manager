@@ -55,8 +55,6 @@ export interface ThemeTypographyOptions {
         baseFontSize: number;
         sizes: number[]
     };
-    fontFamily: string;
-    fontSize: number | string;
     text: TextStyleProps;
     subtext: TextStyleProps;
     button: TextStyleProps;

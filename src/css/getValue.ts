@@ -59,8 +59,7 @@ const getValue = (value: string, prop: string): any => {
         'grey.9': "var(--color-grey-9)",
         'grey.10': "var(--color-grey-10)",
 
-        'default-font-family': "var(--default-font-family)",
-        'default-font-size': "var(--default-font-size)",
+        'font-family': "var(--font-family)",
         'fontsize.1': "var(--fontsize-1)",
         'fontsize.2': "var(--fontsize-2)",
         'fontsize.3': "var(--fontsize-3)",

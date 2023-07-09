@@ -165,13 +165,14 @@ In this library there are already included many css property aliases. If you wan
 
 
 ## ThemeProvider
-The `ThemeProvider` component to handle the theme. you must be call this at the root of the app. you can pass the `css_option` in this component which will work for all the css rendering.
+The `ThemeProvider` component to handle the theme. you must be call this at the root of the app. you can pass the `css_option` and `defaultFontFamily` in this component.
+
 ```tsx
 import {ThemeProvider} from 'naxui-manager'
 
 const App = () => {
   return (
-    <ThemeProvider>
+    <ThemeProvider css_option={{}} defaultFontFamily="Inter">
       <div>Hello<div>
     </ThemeProvider>
   )
@@ -346,53 +347,51 @@ mergeTheme(theme1, theme2)
       baseFontSize: 15,
       sizes: []
     },
-    fontFamily: '"Inter","Helvetica","Arial",sans-serif',
-    fontSize: 16,
     h1: {
-      fontFamily: 'default-font-family',
+      fontFamily: 'font-family',
       fontSize: 'fontsize.7',
       color: "text.primary"
     },
     h2: {
-      fontFamily: 'default-font-family',
+      fontFamily: 'font-family',
       fontSize: 'fontsize.6',
       color: "text.primary"
     },
     h3: {
-      fontFamily: 'default-font-family',
+      fontFamily: 'font-family',
       fontSize: 'fontsize.5',
       color: "text.primary"
     },
     h4: {
-      fontFamily: 'default-font-family',
+      fontFamily: 'font-family',
       fontSize: 'fontsize.4',
       color: "text.primary"
     },
     h5: {
-      fontFamily: 'default-font-family',
+      fontFamily: 'font-family',
       fontSize: 'fontsize.3',
       color: "text.primary"
     },
     h6: {
-      fontFamily: 'default-font-family',
+      fontFamily: 'font-family',
       fontSize: 'fontsize.2',
       fontWeight: 600,
       color: "text.primary"
     },
     text: {
-      fontFamily: 'default-font-family',
+      fontFamily: 'font-family',
       fontSize: 'fontsize.1',
       fontWeight: 400,
       color: "text.primary"
     },
     subtext: {
-      fontFamily: 'default-font-family',
+      fontFamily: 'font-family',
       fontSize: 'fontsize.1',
       fontWeight: 400,
       color: "text.secondary"
     },
     button: {
-      fontFamily: 'default-font-family',
+      fontFamily: 'font-family',
       fontSize: 'fontsize.1',
       fontWeight: 400,
       color: "primary.text",

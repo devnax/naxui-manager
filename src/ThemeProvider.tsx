@@ -3,6 +3,7 @@ import { globalCss } from './css'
 import { useTheme } from './theme'
 import { NAXCSS_CACHE, OptionsProps } from 'naxcss'
 import { globalConfig } from './'
+
 const HandleTheme = () => {
     const theme = useTheme()
     useMemo(() => {
@@ -23,6 +24,9 @@ const HandleTheme = () => {
             document.querySelector("style[data-naxcss='theme-manager']")?.remove()
         }
         NAXCSS_CACHE.delete("theme-manager")
+
+        const defaultFontFamily = globalConfig.get("defaultFontFamily")
+
         globalCss("theme-manager", {
             ...theme.globalStyle,
             "body": {
@@ -30,15 +34,15 @@ const HandleTheme = () => {
                 padding: 0,
                 listStyle: "none",
                 outline: "none",
-                fontFamily: "var(--default-font-family)",
-                fontSize: "var(--default-font-size)",
+                fontFamily: "var(--font-family)",
+                fontSize: "var(--fontsize-1)",
                 bgcolor: "var(--color-background-main)",
                 ...((theme.globalStyle as any)["body"] || {})
             },
             ":root": {
-                "--default-font-family": theme.typography.fontFamily,
-                "--default-font-size": theme.typography.fontSize,
-                // Colore
+                "--font-family": defaultFontFamily || '"Inter","Helvetica","Arial",sans-serif',
+
+                // Color
                 "--color-background": theme.color.background.main,
                 "--color-background-main": theme.color.background.main,
                 "--color-background-light": theme.color.background.light,
@@ -127,12 +131,15 @@ const HandleTheme = () => {
 
 type Props = {
     children: any;
-    css_option?: OptionsProps
+    css_option?: OptionsProps;
+    defaultFontFamily?: string;
 }
-const ThemeProvider = ({ children, css_option }: Props) => {
+
+const ThemeProvider = ({ children, css_option, defaultFontFamily }: Props) => {
     useMemo(() => {
-        globalConfig.set("default_css_option", css_option)
-    }, [css_option])
+        css_option && globalConfig.set("default_css_option", css_option)
+        defaultFontFamily && globalConfig.set("defaultFontFamily", defaultFontFamily)
+    }, [css_option, defaultFontFamily])
     return <>
         <HandleTheme />
         {children}

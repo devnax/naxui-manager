@@ -1,5 +1,7 @@
-type GlobalConfigType = "default_css_option"
+type GlobalConfigType = "default_css_option" | "defaultFontFamily"
 export const globalConfig = new Map<GlobalConfigType, any>()
+
+
 import ThemeProvider from './ThemeProvider'
 import Tag, { TagProps } from './Tag'
 import isWindow from './hooks/isWindow'
