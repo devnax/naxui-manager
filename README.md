@@ -20,6 +20,7 @@ Create Component
   - [changeTheme](#changetheme)
   - [mergeTheme](#mergetheme)
   - [Default Theme Option](#default-theme-option)
+  - [SX Prop](#sx-prop)
   - [CSS Value](#css-value)
   - [css_option](#css_option)
 - Hooks
@@ -212,7 +213,7 @@ changeTheme("my-theme")
 ```
 
 ## mergeTheme
-This is a optional function. If you need then you can use this function to merge two them
+This is a optional function. If you need then you can use this function to merge two theme
 
 ```js
 import {mergeTheme} from 'naxui-manager'
@@ -437,6 +438,33 @@ mergeTheme(theme1, theme2)
   ```
 </details>
 }
+
+
+
+## SX Prop
+The sx prop is a shortcut for defining custom styles.
+
+```tsx
+<MyComp 
+  sx={{ 
+    bgcolor:"red",
+
+    // use theme prop
+    bgcolor:"primary.main",
+
+    // responsive
+    bgcolor: {
+      sm: "red",
+      md: (theme) => theme.color.primary.main,
+    },
+
+    // function
+    bgcolor: (theme) => theme.color.error.main
+  }} 
+/>
+
+```
+
 
 
 
