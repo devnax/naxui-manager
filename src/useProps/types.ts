@@ -166,5 +166,6 @@ interface CSSProperties {
 export type CSSPropAsAttr = Partial<CSSProperties> & AliasesTypes & {
     sx?: CSSProps;
     hover?: CSSProps;
+    baseClass?: string;
     typography?: keyof ThemeOptions['typography'];
 }

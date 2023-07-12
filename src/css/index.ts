@@ -73,6 +73,6 @@ export const keyframes = (frames: keyframesType<AliasesTypes>, options?: Options
 export const makeCacheKey = (css_raw: object) => naxcss.makeCacheKey(css_raw, css_options())
 
 
-export const alpha = (hex: ColorsRefTypes & string, opacity: number) => {
+export const alpha = (hex: ColorsRefTypes | string, opacity: number) => {
     return naxcss.alpha(getValue(hex, "") || hex, opacity)
 }

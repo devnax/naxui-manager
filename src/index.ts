@@ -4,6 +4,7 @@ export const globalConfig = new Map<GlobalConfigType, any>()
 
 import ThemeProvider from './ThemeProvider'
 import Tag, { TagProps, TagComponenntType } from './Tag'
+import useVariant from './hooks/useVariant'
 import isWindow from './hooks/isWindow'
 import useMediaScreen from './hooks/useMediaScreen'
 import useWindowResize from './hooks/useWindowResize'
@@ -15,6 +16,7 @@ export {
     isWindow,
     useMediaScreen,
     useWindowResize,
+    useVariant
 }
 export * from './css'
 export * from "./useProps"

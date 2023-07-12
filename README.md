@@ -10,7 +10,8 @@ The [naxui-manager](https://www.npmjs.com/package/naxui-manager) is using the [n
 Create Component
   - [Tag](#tag)
   - [Creare First Component](#create-first-component)
-  - [useProps](#useProps)
+  - [useProps](#useprops)
+  - [useVariant](#usevariant)
   - [Props List](#props-list)
   - [Aliases](#aliases)
 - Theme
@@ -48,7 +49,14 @@ this is the base component you can use it to [create custom component](#create-f
 import { Tag } from 'naxui-manager'
 
 const App = () => {
-  return <Tag> My UI Library</Tag>
+  return <Tag
+    component="div"
+    baseClass="my-comp" 
+    sx={} // css style sheet
+    typography="h1" // theme typography name
+    hover={} // css style for hover effect
+    // you can also pass all the css property as attribute
+  > My UI Library</Tag>
 }
 
 ```
@@ -120,6 +128,35 @@ const App = () => {
     </div>
   )
 }
+```
+
+
+
+
+## useVariants
+the `useVariant` hook you can use to get the color variant.
+
+```tsx
+import {useVariant} from 'naxui-manager'
+
+
+// variants: containe | outline | text
+// colors: "primary" | "secondary" | "success" | "error" | "warning"
+const css = useVariant("containe", color: "primary")
+
+// custom variant and ts
+type MoreVariants = "A" | "B"
+const css = useVariant<MoreVariants>("containe", "primary", (variant, color) => {
+  switch(variant){
+    case "A":
+      return {} // CSS Props
+      break;
+    case "B":
+      return {}
+      break;
+  }
+})
+
 ```
 
 

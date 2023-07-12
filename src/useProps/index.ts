@@ -5,7 +5,7 @@ import CSSPropsList from './CSSPropsList';
 import { CSSPropAsAttr } from './types'
 export * from './types'
 
-export const useProps = ({ sx, hover, ...props }: CSSPropAsAttr, css_option?: OptionsProps) => {
+export const useProps = ({ sx, hover, baseClass, ...props }: CSSPropAsAttr, css_option?: OptionsProps) => {
     const m = useMemo(() => {
         const _props: any = {}
         const _css: any = {}
@@ -22,7 +22,7 @@ export const useProps = ({ sx, hover, ...props }: CSSPropAsAttr, css_option?: Op
             if (hover) {
                 _sx['&:hover'] = hover
             }
-            const cls = css({ ..._css, ..._sx }, {
+            let cls: string = css({ ..._css, ..._sx }, {
                 ...css_option,
                 getProps: (p: any, v: any): any => {
                     if (css_option?.getProps) {
@@ -33,8 +33,8 @@ export const useProps = ({ sx, hover, ...props }: CSSPropAsAttr, css_option?: Op
                     }
                 }
             })
-            // injectStyle(_css_return.css, _css_return.classname)
-            _props.className = cls + (_props.className ? " " + _props.className : "")
+
+            _props.className = ((baseClass || "") + " " + (_props.className || "") + " " + cls).replaceAll("  ", " ")
         }
 
         return _props

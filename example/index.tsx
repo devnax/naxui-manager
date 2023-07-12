@@ -9,6 +9,8 @@ const App = () => {
     <ThemeProvider>
       <Button href="https://google.com">Click</Button>
       <Tag
+        baseClass="Container"
+        className="well"
         p={{
           sm: 10
         }}

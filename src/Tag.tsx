@@ -1,4 +1,3 @@
-import { CSSProps } from 'naxcss';
 import { createElement, forwardRef, ReactNode, HTMLProps } from 'react'
 import { CSSPropAsAttr, useProps } from './useProps'
 
@@ -6,7 +5,6 @@ export type TagComponenntType = keyof JSX.IntrinsicElements | React.ComponentTyp
 export type TagProps<T extends TagComponenntType = 'div'> = HTMLProps<T> & {
     component?: T;
     children?: ReactNode;
-    sx?: CSSProps<CSSPropAsAttr>;
     ref?: any;
 } & CSSPropAsAttr
 
