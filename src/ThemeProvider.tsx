@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import * as React from 'react'
 import { globalCss } from './css'
 import { useTheme } from './theme'
 import { NAXCSS_CACHE, OptionsProps } from 'naxcss'
@@ -6,7 +6,7 @@ import { globalConfig } from './'
 
 const HandleTheme = () => {
     const theme = useTheme()
-    useMemo(() => {
+    React.useMemo(() => {
 
         let breakpoints: any = {}
         for (let key in theme.breakpoints) {
@@ -136,7 +136,7 @@ type Props = {
 }
 
 const ThemeProvider = ({ children, css_option, defaultFontFamily }: Props) => {
-    useMemo(() => {
+    React.useMemo(() => {
         css_option && globalConfig.set("default_css_option", css_option)
         defaultFontFamily && globalConfig.set("defaultFontFamily", defaultFontFamily)
     }, [css_option, defaultFontFamily])

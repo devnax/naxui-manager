@@ -1,4 +1,4 @@
-import { useEffect, useId, } from "react"
+import * as React from "react"
 type FactoryType = {
     callback: Function
 }
@@ -6,8 +6,8 @@ type FactoryType = {
 const factory = new Map<string, FactoryType>()
 
 const useWindowResize = (callback: Function) => {
-    const id = useId()
-    useEffect(() => {
+    const id = React.useId()
+    React.useEffect(() => {
         const items = Array.from(factory)
         if (!items.length) {
             // load only first time

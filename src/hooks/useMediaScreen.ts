@@ -1,4 +1,4 @@
-import { useState } from "react"
+import * as React from "react"
 import { css_options } from "../css"
 import { BreakpointsType } from "../theme"
 import useWindowResize from "./useWindowResize"
@@ -12,7 +12,7 @@ const throwError = (n: any) => {
 
 const useMediaScreen = () => {
     const win = isWindow()
-    const [windowSize, setWindowSize] = useState(win ? win.innerWidth : 0)
+    const [windowSize, setWindowSize] = React.useState(win ? win.innerWidth : 0)
     const _css_option = css_options()
     useWindowResize(() => setWindowSize(window.innerWidth))
 

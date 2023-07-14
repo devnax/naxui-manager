@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import * as React from 'react';
 import { OptionsProps } from 'naxcss';
 import { css } from '../css';
 import CSSPropsList from './CSSPropsList';
@@ -6,7 +6,7 @@ import { CSSPropAsAttr } from './types'
 export * from './types'
 
 export const useProps = ({ sx, hover, baseClass, ...props }: CSSPropAsAttr, css_option?: OptionsProps) => {
-    const m = useMemo(() => {
+    const m = React.useMemo(() => {
         const _props: any = {}
         const _css: any = {}
         for (const prop in props) {

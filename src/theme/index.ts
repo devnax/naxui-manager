@@ -1,6 +1,6 @@
 import { ThemeOptions, ObjectType, StateKeys, ThemeOptionsPartial, ScaleNameTypes } from "./types"
 import defaultThemeOption from './default'
-import { useEffect, useId, useState } from "react"
+import * as React from "react"
 import { darkModeColor } from "./default/color"
 export * from './types'
 const ThemeFactory = new Map<string, ThemeOptions>()
@@ -53,9 +53,9 @@ export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOp
 }
 
 export const useTheme = (): ThemeOptions => {
-    const id = useId()
-    const [, dispatch] = useState(0)
-    useEffect(() => {
+    const id = React.useId()
+    const [, dispatch] = React.useState(0)
+    React.useEffect(() => {
         DispatchFactory.set(id, () => dispatch(Math.random()))
         return () => {
             DispatchFactory.delete(id)

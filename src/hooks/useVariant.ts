@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import * as React from 'react'
 import { CSSProps } from 'naxcss'
 import { getTheme } from '../theme'
 import { alpha } from '..'
@@ -8,7 +8,7 @@ export type UseVariantColors = "primary" | "secondary" | "success" | "error" | "
 export type UseVariantCallback<V> = (variant: UseVariantVariants<V>, color?: UseVariantColors) => CSSProps | void
 
 const useVariant = <V = "">(variant: UseVariantVariants<V>, color?: UseVariantColors, callback?: UseVariantCallback<V>) => {
-    return useMemo(() => {
+    return React.useMemo(() => {
         const theme = getTheme()
         let tcolor = theme.color[color || "primary"] || theme.color.primary
         let css: any = {
