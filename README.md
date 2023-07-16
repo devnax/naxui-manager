@@ -29,7 +29,7 @@ Create Component
   - [useWindowResize](#usewindowresize)
   - [useWindow](#usewindow)
 - [CSS](#css) - Learn the [naxcss](https://www.npmjs.com/package/naxcss)
-- [Server Side Rendering](https://www.npmjs.com/package/naxcss#server-side-rendering)
+- [Server Side Rendering](#server-side-rendering)
 - [Typescript](#typescript)
 
 ## Quick Start
@@ -573,6 +573,16 @@ You can learn the [naxcss](https://www.npmjs.com/package/naxcss). and you must n
 
 ```js
 import {css, keyframes, alpha} from 'naxui-manager'
+
+```
+
+## Server Side Rendering
+You can learn the [naxcss](https://www.npmjs.com/package/naxcss#server-side-rendering) for server side rendering or you can use a `component` from this library. you need to call `ServerStyles` at the root of your project. If you are using the `nextjs` then you can call this in the `__document.ts` or `useServerInsertedHTML` registry.
+
+```js
+import {ServerStyles} from 'naxui-manager'
+
+<ServerStyles />
 
 ```
 

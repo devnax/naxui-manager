@@ -8,6 +8,9 @@ import useVariant from './hooks/useVariant'
 import isWindow from './hooks/isWindow'
 import useMediaScreen from './hooks/useMediaScreen'
 import useWindowResize from './hooks/useWindowResize'
+import ServerStyles from './ServerStyles'
+
+
 export {
     ThemeProvider,
     Tag,
@@ -16,7 +19,8 @@ export {
     isWindow,
     useMediaScreen,
     useWindowResize,
-    useVariant
+    useVariant,
+    ServerStyles
 }
 export * from './css'
 export * from "./useProps"

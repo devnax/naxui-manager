@@ -34,6 +34,7 @@ const HandleTheme = () => {
                 padding: 0,
                 listStyle: "none",
                 outline: "none",
+                boxSizing: "border-box",
                 fontFamily: "var(--font-family)",
                 fontSize: "var(--fontsize-1)",
                 bgcolor: "var(--color-background-main)",
