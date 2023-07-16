@@ -32,6 +32,7 @@ const CSSPropsList: any = [
     "flexRow",
     "flexColumn",
     "flexWraped",
+    "disabled",
 
     // CSS Props
     "alignContent",
@@ -188,7 +189,7 @@ const CSSPropsList: any = [
     "wordBreak",
     "wordSpacing",
     "wordWrap",
-    "zIndex",
+    "zIndex"
 ]
 
 

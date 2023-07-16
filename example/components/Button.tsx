@@ -10,6 +10,7 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
         <Tag
             component="button"
             border={0}
+            bgcolor="primary"
             minWidth={100}
             height={40}
             radius={1.5}
@@ -18,6 +19,7 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
             display="flex"
             flexDirection="row"
             alignItems="center"
+            justifyContent="center"
             {...rest}
             hover={{
                 bgcolor: "primary.dark",

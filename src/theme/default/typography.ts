@@ -51,8 +51,8 @@ export default {
     button: {
         fontFamily: 'font-family',
         fontSize: 'fontsize.1',
-        fontWeight: 400,
+        fontWeight: 500,
+        textTransform: "uppercase",
         color: "primary.text",
-        bgcolor: "primary.main"
     }
 }

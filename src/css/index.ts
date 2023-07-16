@@ -25,35 +25,35 @@ export const css_options = (options?: OptionsProps) => {
             ...aliases,
             ...(globalOption.aliases || {})
         },
-        getValue: (v: any, p: any) => {
+        getValue: (v: any, p: any, _c: any) => {
             if (options?.getValue) {
-                let _val = options?.getValue(p, v)
+                let _val = options?.getValue(p, v, _c)
                 if (_val) {
                     return _val
                 }
             }
             if (globalOption?.getValue) {
-                let _val = globalOption?.getValue(p, v)
+                let _val = globalOption?.getValue(p, v, _c)
                 if (_val) {
                     return _val
                 }
             }
-            return getValue(v, p)
+            return getValue(v, p, _c)
         },
-        getProps: (p: any, v: any) => {
+        getProps: (p: any, v: any, _c: any) => {
             if (options?.getProps) {
-                let _p = options?.getProps(p, v)
+                let _p = options?.getProps(p, v, _c)
                 if (_p) {
                     return _p
                 }
             }
             if (globalOption?.getProps) {
-                let _p = globalOption?.getProps(p, v)
+                let _p = globalOption?.getProps(p, v, _c)
                 if (_p) {
                     return _p
                 }
             }
-            return getProps(p, v)
+            return getProps(p, v, _c)
         },
     }
 }
@@ -74,5 +74,5 @@ export const makeCacheKey = (css_raw: object) => naxcss.makeCacheKey(css_raw, cs
 
 
 export const alpha = (hex: ColorsRefTypes | string, opacity: number) => {
-    return naxcss.alpha(getValue(hex, "") || hex, opacity)
+    return naxcss.alpha(getValue(hex, "", {}) || hex, opacity)
 }

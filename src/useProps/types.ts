@@ -167,5 +167,6 @@ export type CSSPropAsAttr = Partial<CSSProperties> & AliasesTypes & {
     sx?: CSSProps;
     hover?: CSSProps;
     baseClass?: string;
+    disabled?: boolean;
     typography?: keyof ThemeOptions['typography'];
 }

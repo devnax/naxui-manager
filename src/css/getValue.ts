@@ -1,18 +1,20 @@
 import { getTheme } from "../theme"
+import { CSSProps } from 'naxcss'
 
 // eslint-disable-next-line import/no-anonymous-default-export
-const getValue = (value: string, prop: string): any => {
+const getValue = (value: string, prop: string, _css: CSSProps): any => {
     const theme = getTheme()
+
     if (typeof value === "function") {
         const v = (value as any)(theme)
-        return getValue(v, prop) || v
+        return getValue(v, prop, _css) || v
     }
-
 
     const values: any = {
         'background.main': "var(--color-background-main)",
         'background.light': "var(--color-background-light)",
         'background.dark': "var(--color-background-dark)",
+        'background.text': "var(--color-background-text)",
 
         'text.primary': "var(--color-text-primary)",
         'text.secondary': "var(--color-text-secondary)",
@@ -81,7 +83,6 @@ const getValue = (value: string, prop: string): any => {
             return `var(--shadow-${value})`
         }
     }
-
     return values[value] || value
 }
 

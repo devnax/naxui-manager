@@ -5,10 +5,11 @@ import { Tag, ThemeProvider } from '../.';
 import Button from './components/Button'
 
 const App = () => {
+  const [disabled, setDisabled] = React.useState(true)
   return (
     <ThemeProvider>
-      <Button href="https://google.com">Click</Button>
-      <Tag
+      <Button disabled={disabled} m={2} onClick={() => setDisabled(!disabled)}>Click</Button>
+      {/* <Tag
         baseClass="Container"
         className="well"
         p={{
@@ -26,7 +27,7 @@ const App = () => {
         }}
       >
         Wellcome
-      </Tag>
+      </Tag> */}
     </ThemeProvider>
   );
 };

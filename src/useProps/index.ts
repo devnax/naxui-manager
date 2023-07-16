@@ -24,17 +24,19 @@ export const useProps = ({ sx, hover, baseClass, ...props }: CSSPropAsAttr, css_
             }
             let cls: string = css({ ..._css, ..._sx }, {
                 ...css_option,
-                getProps: (p: any, v: any): any => {
+                getProps: (p: any, v: any, _c): any => {
                     if (css_option?.getProps) {
-                        let _p = css_option?.getProps(p, v)
+                        let _p = css_option?.getProps(p, v, _c)
                         if (_p) {
                             return _p
                         }
                     }
                 }
             })
-
-            _props.className = ((baseClass || "") + " " + (_props.className || "") + " " + cls).replaceAll("  ", " ")
+            let _clss = ""
+            baseClass && (_clss += baseClass + " ")
+            _props.className && (_clss += _props.className + " ")
+            _props.className = _clss + cls
         }
 
         return _props

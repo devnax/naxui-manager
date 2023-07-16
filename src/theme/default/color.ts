@@ -18,7 +18,8 @@ export const lightModeColor = {
     background: {
         main: "#ffffff",
         light: "#f5f5f5",
-        dark: "#e9e9e9"
+        dark: "#e9e9e9",
+        text: "#111"
     },
     text: {
         primary: "#111111",
