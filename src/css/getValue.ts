@@ -1,6 +1,5 @@
 import { getTheme } from "../theme"
-import { CSSProps } from 'naxcss'
-
+import { CSSProps, alpha } from 'naxcss'
 // eslint-disable-next-line import/no-anonymous-default-export
 const getValue = (value: string, prop: string, _css: CSSProps): any => {
     const theme = getTheme()
@@ -15,10 +14,10 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         'background.light': "var(--color-background-light)",
         'background.dark': "var(--color-background-dark)",
         'background.text': "var(--color-background-text)",
+        'divider': alpha("var(--color-text-primary)", 1.5),
 
         'text.primary': "var(--color-text-primary)",
         'text.secondary': "var(--color-text-secondary)",
-        'text.disabled': "var(--color-text-disabled)",
 
         'primary': "var(--color-primary-main)",
         'primary.main': "var(--color-primary-main)",

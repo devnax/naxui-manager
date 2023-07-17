@@ -51,10 +51,10 @@ export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOp
     }
     return ThemeFactory.get(name) as ThemeOptions
 }
-
 export const useTheme = (): ThemeOptions => {
     const id = React.useId()
     const [, dispatch] = React.useState(0)
+
     React.useEffect(() => {
         DispatchFactory.set(id, () => dispatch(Math.random()))
         return () => {

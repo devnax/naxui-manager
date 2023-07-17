@@ -65,6 +65,6 @@
         "typescript": "^3.9.10"
     },
     "dependencies": {
-        "naxcss": "^2.3.7"
+        "naxcss": "^2.3.8"
     }
 }

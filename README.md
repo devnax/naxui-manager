@@ -313,8 +313,7 @@ mergeTheme(theme1, theme2)
       },
       text: {
         primary: "#111111",
-        secondary: "#666666",
-        disabled: "#999999"
+        secondary: "#666666"
       },
       primary: {
         light: "#60a5fa",

@@ -8,8 +8,7 @@ export const darkModeColor = {
     },
     text: {
         primary: "#ffffff",
-        secondary: "#BDBDBD",
-        disabled: "#dddddd"
+        secondary: "#BDBDBD"
     },
 }
 
@@ -23,8 +22,7 @@ export const lightModeColor = {
     },
     text: {
         primary: "#111111",
-        secondary: "#666666",
-        disabled: "#999999"
+        secondary: "#666666"
     },
 }
 

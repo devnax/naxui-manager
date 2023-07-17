@@ -30,7 +30,6 @@ export interface ThemeColorOptions {
     text: {
         primary: string;
         secondary: string;
-        disabled: string;
     };
 }
 
@@ -114,6 +113,7 @@ export type ColorsRefTypes =
     | "background.main"
     | "background.light"
     | "background.dark"
+    | "divider"
     | "primary"
     | "primary.main"
     | "primary.light"
