@@ -43,6 +43,7 @@ const HandleTheme = () => {
                 fontFamily: "var(--font-family)",
                 fontSize: "var(--fontsize-1)",
                 bgcolor: "var(--color-background-main)",
+                color: "var(--color-text-primary)",
                 fontWeight: "normal",
                 "-webkit-font-smoothing": "antialiased",
             },

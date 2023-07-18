@@ -23,6 +23,7 @@ Create Component
   - [Default Theme Option](#default-theme-option)
   - [SX Prop](#sx-prop)
   - [CSS Value](#css-value)
+  - [Use Gradient](#use-gradient)
   - [css_option](#css_option)
 - Hooks
   - [useMediaScreen](#usemediascreen)
@@ -526,6 +527,25 @@ There are many way to pass css value. `string`, `number`, `breakpoint` or `funct
 />
 ```
 Here you can see the value  is `primary.main` so it will automatically get the theme primary.main color. in this way you can use everything from theme. like you want to use the `shadow` so you can pass the value `shadow.1`.
+
+
+
+
+## Use Gradient
+How you can use the `gradient color`. you can use the geadient in `background` and text `color`
+```jsx
+<MyComp 
+  // use theme color props
+  bgcolor="linear(90deg, primary, secondary.main)"
+  // use rgb or hex
+  bgcolor="linear(90deg, rgb(255, 0, 0), secondary.main 20%)"
+
+  // text color
+  color="linear(90deg, primary, secondary.main)"
+  // use rgb or hex
+  color="linear(90deg, rgb(255, 0, 0), secondary.main 20%)"
+/>
+```
 
 
 

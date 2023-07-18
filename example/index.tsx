@@ -21,13 +21,12 @@ const App = () => {
       <Tag component="input" />
 
       <Tag
-        width={100}
-        height={100}
         m={2}
         radius={2}
         border={1}
-      // gradientText="to bottom, primary, secondary"
-      ></Tag>
+        color="linear(120deg, primary 1%, secondary.dark)"
+        typography="h1"
+      >Move Faster</Tag>
     </ThemeProvider>
   );
 };

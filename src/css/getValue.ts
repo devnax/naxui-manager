@@ -13,7 +13,6 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         'background.main': "var(--color-background-main)",
         'background.light': "var(--color-background-light)",
         'background.dark': "var(--color-background-dark)",
-        'background.text': "var(--color-background-text)",
         'divider': alpha("var(--color-text-primary)", 1.5),
 
         'text.primary': "var(--color-text-primary)",
@@ -76,6 +75,9 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         "lg": "var(--breakpoint-lg)",
         "xl": "var(--breakpoint-xl)",
     }
+
+
+
 
     if (prop === 'shadow' || prop === 'boxShadow') {
         if (theme.shadow[value as any]) {
