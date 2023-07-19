@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { globalCss } from './css'
-import { useTheme } from './theme'
+import { useTheme, changeTheme } from './theme'
 import { NAXCSS_CACHE, OptionsProps } from 'naxcss'
 import { globalConfig } from './'
 
@@ -160,13 +160,15 @@ type Props = {
     children: any;
     css_option?: OptionsProps;
     defaultFontFamily?: string;
+    defaultTheme?: string;
 }
 
-const ThemeProvider = ({ children, css_option, defaultFontFamily }: Props) => {
+const ThemeProvider = ({ children, css_option, defaultFontFamily, defaultTheme }: Props) => {
     React.useMemo(() => {
         css_option && globalConfig.set("default_css_option", css_option)
         defaultFontFamily && globalConfig.set("defaultFontFamily", defaultFontFamily)
-    }, [css_option, defaultFontFamily])
+        defaultTheme && changeTheme(defaultTheme)
+    }, [css_option, defaultFontFamily, defaultTheme])
     return <>
         <HandleTheme />
         {children}

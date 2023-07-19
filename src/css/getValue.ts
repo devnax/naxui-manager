@@ -40,7 +40,7 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         'error.main': "var(--color-error-main)",
         'error.dark': "var(--color-error-dark)",
         'error.light': "var(--color-error-light)",
-        'error.text': "var(--color-success-text)",
+        'error.text': "var(--color-error-text)",
 
         'warning': "var(--color-warning-main)",
         'warning.main': "var(--color-warning-main)",

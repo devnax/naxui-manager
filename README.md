@@ -19,6 +19,7 @@ Create Component
   - [createTheme](#createtheme)
   - [useTheme](#usetheme)
   - [changeTheme](#changetheme)
+  - [modifyTheme](#modifytheme)
   - [mergeTheme](#mergetheme)
   - [Default Theme Option](#default-theme-option)
   - [SX Prop](#sx-prop)
@@ -211,7 +212,7 @@ import {ThemeProvider} from 'naxui-manager'
 
 const App = () => {
   return (
-    <ThemeProvider css_option={{}} defaultFontFamily="Inter">
+    <ThemeProvider css_option={{}} defaultFontFamily="Inter" defaultTheme="default">
       <div>Hello<div>
     </ThemeProvider>
   )
@@ -247,6 +248,26 @@ You can change the theme by calling this function. you have to pass the theme na
 import {changeTheme} from 'naxui-manager'
 
 changeTheme("my-theme")
+
+```
+
+
+## modifyTheme
+Sometime you need to modify the existing theme then you can use this function. like you want to modidy the `default` theme primary color and others.
+
+```js
+import {modifyTheme} from 'naxui-manager'
+
+modifyTheme("default", {
+  color: {
+    primary: {
+      main: "red",
+      dark: "darkred",
+      light: "red",
+      text: "#fff"
+    }
+  }
+})
 
 ```
 

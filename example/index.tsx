@@ -3,7 +3,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Tag, ThemeProvider, alpha } from '../src';
 import Button from './components/Button'
-import { getTheme, changeTheme } from '../src';
+import { getTheme, changeTheme, modifyTheme } from '../src';
+
 
 const App = () => {
   const [disabled, setDisabled] = React.useState(true)
@@ -15,6 +16,8 @@ const App = () => {
           const theme = getTheme()
           changeTheme(theme.name === 'default' ? "default-dark" : "default")
         }}
+        color="error.text"
+        bgcolor="error"
       >Button</Button>
       <Tag component="a" href="/about" m={2} onClick={() => setDisabled(!disabled)}>Click</Tag>
       <Tag component="p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae adipisci doloremque eum assumenda. Blanditiis laboriosam reprehenderit provident maxime, velit aliquam earum voluptatibus alias voluptate veniam quo sapiente! Laboriosam, quos rerum!</Tag>

@@ -41,6 +41,7 @@ export const mergeTheme = (a: ObjectType, b: ObjectType) => {
     }
     return a
 }
+
 export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOptions => {
     if (!ThemeFactory.get(name)) {
         ThemeFactory.set(name, mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptions)
@@ -48,6 +49,13 @@ export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOp
         const sizes = createFontScale(t.typography.scale.baseFontSize, t.typography.scale.name)
         t.typography.scale.sizes = sizes
         ThemeFactory.set(name, t)
+    }
+    return ThemeFactory.get(name) as ThemeOptions
+}
+
+export const modifyTheme = (name: string, options: ThemeOptionsPartial): ThemeOptions => {
+    if (ThemeFactory.get(name)) {
+        ThemeFactory.set(name, mergeTheme(ThemeFactory.get(name) as ThemeOptions, { ...options, name }) as ThemeOptions)
     }
     return ThemeFactory.get(name) as ThemeOptions
 }
@@ -62,12 +70,12 @@ export const useTheme = (): ThemeOptions => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    const name = State.get("current_theme")
+    const name = State.get("current_theme") || "default"
     return ThemeFactory.get(name) || createTheme("default", defaultThemeOption as any) as ThemeOptions
 }
 
 export const getTheme = (): ThemeOptions => {
-    const name = State.get("current_theme")
+    const name = State.get("current_theme") || "default"
     return ThemeFactory.get(name) || createTheme("default", defaultThemeOption as any)
 }
 
