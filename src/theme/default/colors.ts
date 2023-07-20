@@ -18,7 +18,7 @@ export const lightModeColor = {
         main: "#ffffff",
         light: "#f5f5f5",
         dark: "#e9e9e9",
-        text: "#111"
+        text: "#111111"
     },
     text: {
         primary: "#111111",
@@ -32,31 +32,31 @@ export const main_pallete = {
         light: "#3b82f6",
         dark: "#1d4ed8",
         main: "#2563eb",
-        text: '#fff',
+        text: '#ffffff',
     },
     secondary: {
         light: "#14b8a6",
         dark: "#0f766e",
         main: '#0d9488',
-        text: '#fff',
+        text: '#ffffff',
     },
     success: {
         light: "#22c55e",
         dark: "#15803d",
         main: "#16a34a",
-        text: '#fff',
+        text: '#ffffff',
     },
     error: {
         light: "#ef4444",
         dark: "#b91c1c",
         main: '#dc2626',
-        text: '#fff',
+        text: '#ffffff',
     },
     warning: {
         light: "#f59e0b",
         dark: "#b45309",
         main: "#d97706",
-        text: '#fff',
+        text: '#ffffff',
     },
     grey: {
         1: "#f9fafb",

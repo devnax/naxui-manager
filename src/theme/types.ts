@@ -2,14 +2,14 @@ import { GlobalCSSType } from "naxcss"
 import { AliasesTypes } from "../css/types";
 
 
-export type Color = {
+export type ColorType = {
     light: string;
     dark: string;
     main: string;
     text: string;
 }
-export interface ThemeColorOptions {
-    background: Omit<Color, 'text'>;
+export interface ThemeColorsOptions {
+    background: Omit<ColorType, 'text'>;
     grey: {
         1: string;
         2: string;
@@ -22,11 +22,11 @@ export interface ThemeColorOptions {
         9: string;
         10: string;
     };
-    primary: Color;
-    secondary: Color;
-    success: Color;
-    error: Color;
-    warning: Color;
+    primary: ColorType;
+    secondary: ColorType;
+    success: ColorType;
+    error: ColorType;
+    warning: ColorType;
     text: {
         primary: string;
         secondary: string;
@@ -49,6 +49,7 @@ export type TextStyleProps = {
 }
 
 export interface ThemeTypographyOptions {
+    fontFamily: string;
     scale: {
         name: ScaleNameTypes,
         baseFontSize: number;
@@ -70,9 +71,9 @@ export type InterfaceType = { [key: string]: any }
 export interface ThemeOptionsPartial {
     globalStyle?: GlobalCSSType<AliasesTypes>,
     breakpoints?: { [key: string]: number };
-    color?: Partial<ThemeColorOptions>;
+    colors?: Partial<ThemeColorsOptions>;
     typography?: Partial<ThemeTypographyOptions>;
-    shadow?: { [key: number]: string };
+    shadows?: { [key: number]: string };
     interfaces?: { [key: string]: () => InterfaceType };
 }
 
@@ -80,9 +81,9 @@ export interface ThemeOptions {
     name: string;
     globalStyle: GlobalCSSType<AliasesTypes>,
     breakpoints: { [key in BreakpointsType]: number };
-    color: ThemeColorOptions;
+    colors: ThemeColorsOptions;
     typography: ThemeTypographyOptions;
-    shadow: { [key: number]: string };
+    shadows: { [key: number]: string };
     interfaces: { [key: string]: (userProps: InterfaceType) => InterfaceType };
 }
 

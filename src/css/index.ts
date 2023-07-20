@@ -70,7 +70,7 @@ export const keyframes = (frames: keyframesType<AliasesTypes>, options?: Options
     return naxcss.keyframes(frames, css_options(options))
 }
 
-export const makeCacheKey = (css_raw: object) => naxcss.makeCacheKey(css_raw, css_options())
+export const makeCacheKey = (css_raw: object) => naxcss.makeCacheKey(css_raw)
 
 
 export const alpha = (hex: ColorsRefTypes | string, opacity: number) => {

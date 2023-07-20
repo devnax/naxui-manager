@@ -1,7 +1,9 @@
 import { ThemeOptions, ObjectType, StateKeys, ThemeOptionsPartial, ScaleNameTypes } from "./types"
 import defaultThemeOption from './default'
+import { globalCss } from '../css'
+import { NAXCSS_CACHE } from 'naxcss'
 import * as React from "react"
-import { darkModeColor } from "./default/color"
+import { darkModeColor } from "./default/colors"
 export * from './types'
 const ThemeFactory = new Map<string, ThemeOptions>()
 const DispatchFactory = new Map<string, () => void>()
@@ -82,13 +84,84 @@ export const getTheme = (): ThemeOptions => {
 export const changeTheme = (name: string) => {
     if (ThemeFactory.has(name)) {
         State.set("current_theme", name)
+        const { breakpoints, colors, typography, shadows, globalStyle } = getTheme()
+
+        if (typeof window !== 'undefined' && window.document) {
+            document.querySelector("style[data-naxcss='theme-vars']")?.remove()
+            document.querySelector("style[data-naxcss='reset-css']")?.remove()
+            document.querySelector("style[data-naxcss='global-css']")?.remove()
+        }
+        NAXCSS_CACHE.delete("theme-vars")
+        NAXCSS_CACHE.delete("reset-css")
+        NAXCSS_CACHE.delete("global-css")
+
+        globalCss("reset-css", {
+            "*": {
+                m: 0,
+                padding: 0,
+                outline: "none",
+                boxSizing: "border-box",
+                verticalAlign: "baseline",
+            },
+            "html, body": {
+                height: " 100%"
+            },
+            "body": {
+                fontFamily: "var(--font-family)",
+                fontSize: "var(--fontsize-1)",
+                bgcolor: "var(--color-background-main)",
+                color: "var(--color-text-primary)",
+                fontWeight: "normal",
+                "-webkit-font-smoothing": "antialiased",
+            },
+            "img, picture, video, canvas, svg": {
+                maxWidth: "100%",
+                display: "block"
+            },
+            "input, button, textarea, select": {
+                font: "inherit"
+            },
+            "table": {
+                borderCollapse: "collapse",
+                borderSpacing: 0
+            },
+            "ol, ul ": {
+                listStyle: "none"
+            },
+            "p, h1, h2, h3, h4, h5, h6": {
+                overflowWrap: " break-word"
+            }
+        })
+
+        let root: any = {
+            "--font-family": typography.fontFamily,
+        }
+
+        for (let key in breakpoints) {
+            root[`--breakpoint-${key}`] = (breakpoints as any)[key]
+        }
+
+        for (let c_key in colors) {
+            let c = (colors as any)[c_key]
+            c.main && (root[`--color-${c_key}`] = c.main)
+            for (let c_i in c) {
+                root[`--color-${c_key}-${c_i}`] = c[c_i]
+            }
+        }
+
+        Object.keys(shadows).forEach((s_key: any) => root[`--shadow-${s_key}`] = shadows[s_key])
+        typography.scale.sizes.forEach((size, i) => root[`--fontsize-${i + 1}`] = size + "px");
+
+        globalCss("theme-vars", { ":root": root });
+
+        (globalStyle && Object.keys(globalStyle).length) && globalCss("global-css", globalStyle)
         DispatchFactory.forEach(d => d())
     }
 }
 
 createTheme('default', defaultThemeOption as any)
 createTheme('default-dark', {
-    color: {
+    colors: {
         ...darkModeColor
     }
 })

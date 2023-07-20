@@ -10,7 +10,7 @@ export type UseVariantCallback<V> = (variant: UseVariantVariants<V>, color?: Use
 const useVariant = <V = "">(variant: UseVariantVariants<V>, color?: UseVariantColors, callback?: UseVariantCallback<V>) => {
     return React.useMemo(() => {
         const theme = getTheme()
-        let tcolor = theme.color[color || "primary"] || theme.color.primary
+        let tcolor = theme.colors[color || "primary"] || theme.colors.primary
         let css: any = {
             bgcolor: tcolor.main,
             color: tcolor.text,

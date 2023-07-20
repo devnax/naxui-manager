@@ -1,7 +1,7 @@
 import { ThemeOptions } from "../types"
-import color from "./color"
+import colors from "./colors"
 import typography from "./typography"
-import shadow from "./shadow"
+import shadows from "./shadows"
 
 export default {
     name: "default",
@@ -13,8 +13,8 @@ export default {
         xl: 1536
     },
     globalStyle: {},
-    color,
+    colors,
     typography,
-    shadow,
+    shadows,
     interfaces: {},
 } as ThemeOptions

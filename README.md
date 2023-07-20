@@ -189,7 +189,7 @@ In this library there are already included many css property aliases. If you wan
 | `mx` | `margin-left` and `margin-right` |
 | `my` | `margin-top` and `margin-bottom`|
 | `radius` | `border-radius`, if you pass a number then it will multiply with `8`|
-| `shadow` | `box-shadow`, you can pass string or theme shadows, example: `shadow.1`, `shadow.2`|
+| `shadow` | `box-shadow`, you can pass number, string or theme shadows, example: `shadow.1`, `shadow.2`|
 | `border` | `border`|
 | `w` | `width` |
 | `h` | `height` |
@@ -212,7 +212,7 @@ import {ThemeProvider} from 'naxui-manager'
 
 const App = () => {
   return (
-    <ThemeProvider css_option={{}} defaultFontFamily="Inter" defaultTheme="default">
+    <ThemeProvider css_option={{...naxcss_option}} defaultFontFamily="Inter" defaultTheme="default">
       <div>Hello<div>
     </ThemeProvider>
   )
@@ -322,50 +322,51 @@ mergeTheme(theme1, theme2)
   ```
 </details>
 <details>
-  <summary>color</summary>
+  <summary>colors</summary>
 
   In the theme already has some predefine color pallate. here is the list.
 
   ```js
-    color: {
+    colors: {
       background: {
         main: "#ffffff",
         light: "#f5f5f5",
-        dark: "#e9e9e9"
+        dark: "#e9e9e9",
+        text: "#111111"
       },
       text: {
         primary: "#111111",
         secondary: "#666666"
       },
       primary: {
-        light: "#60a5fa",
-        dark: "#2563eb",
-        main: "#205fff",
-        text: '#eff6ff',
+        light: "#3b82f6",
+        dark: "#1d4ed8",
+        main: "#2563eb",
+        text: '#ffffff',
       },
       secondary: {
-        light: "#2dd4bf",
-        dark: "#0d9488",
-        main: '#14b8a6',
-        text: '#f0fdfa',
+        light: "#14b8a6",
+        dark: "#0f766e",
+        main: '#0d9488',
+        text: '#ffffff',
       },
       success: {
-        light: "#4ade80",
-        dark: "#16a34a",
-        main: "#22c55e",
-        text: '#f0fdf4',
+        light: "#22c55e",
+        dark: "#15803d",
+        main: "#16a34a",
+        text: '#ffffff',
       },
       error: {
-        light: "#f87171",
+        light: "#ef4444",
         dark: "#b91c1c",
-        main: '#ef4444',
-        text: '#fef2f2',
+        main: '#dc2626',
+        text: '#ffffff',
       },
       warning: {
-        light: "#ff9800",
-        dark: "#e65100",
-        main: "#f97316",
-        text: '#fff7ed',
+        light: "#f59e0b",
+        dark: "#b45309",
+        main: "#d97706",
+        text: '#ffffff',
       },
       grey: {
         1: "#f9fafb",
@@ -389,6 +390,7 @@ mergeTheme(theme1, theme2)
 
   ```js
   typography: {
+    fontFamily: '"Inter","Helvetica","Arial",sans-serif',
     scale: {
 
       /*
@@ -460,12 +462,12 @@ mergeTheme(theme1, theme2)
   ```
 </details>
 <details>
-  <summary>shadow</summary>
+  <summary>shadows</summary>
 
   Theme default shadows.
 
   ```js
-  shadow: {
+  shadows: {
     1: "0 1px 2px 0 rgb(0 0 0 / 0.05);",
     2: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);",
     3: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);",
