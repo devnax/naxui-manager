@@ -23,12 +23,6 @@ const aliases: { [key in keyof AliasesTypes]: AliasFN } = {
    my: v => ({ "margin-top": isStr(v, 8 * v), "margin-bottom": isStr(v, 8 * v) }),
    radius: v => ({ "border-radius": isStr(v, 8 * v) }),
    shadow: v => ({ "box-shadow": v }),
-   border: v => {
-      return typeof v === 'number' ? {
-         border: `${v}px solid`,
-         "border-color": "divider"
-      } : { "border": v }
-   },
    w: v => ({ "width": v }),
    h: v => ({ "height": v }),
    maxw: v => ({ "max-width": v }),

@@ -57,6 +57,7 @@ const App = () => {
     sx={} // css style sheet
     typography="h1" // theme typography name
     hover={} // css style for hover effect
+    spacing={} // children spacing (number | breackpoin)
     // you can also pass all the css property as attribute
   > My UI Library</Tag>
 }

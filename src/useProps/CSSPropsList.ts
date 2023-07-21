@@ -33,6 +33,7 @@ const CSSPropsList: any = [
     "flexColumn",
     "flexWraped",
     "disabled",
+    "spacing",
 
     // CSS Props
     "alignContent",

@@ -24,12 +24,27 @@ const App = () => {
       <Tag component="input" />
 
       <Tag
-        m={2}
-        radius={2}
-        border={1}
-        color="linear(120deg, primary 1%, secondary.dark)"
-        typography="h1"
-      >Move Faster</Tag>
+        // m={2}
+        // radius={2}
+        // borderBottom={0}
+        // color="linear(120deg, primary 1%, secondary.dark)"
+        // typography="h1"
+        spacing={{
+          xs: 2
+        }}
+        flexBox
+        width={200}
+        flexWrap="wrap"
+      >
+        <Tag width={100}>Move Faster</Tag>
+        <Tag width={100}>Second</Tag>
+        <Tag width={100}>Move Faster</Tag>
+        <Tag width={100}>Second</Tag>
+        <Tag width={100}>Move Faster</Tag>
+        <Tag width={100}>Second</Tag>
+        <Tag width={100}>Move Faster</Tag>
+        <Tag width={100}>Second</Tag>
+      </Tag>
     </ThemeProvider>
   );
 };

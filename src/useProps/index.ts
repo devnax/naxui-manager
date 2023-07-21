@@ -5,7 +5,7 @@ import CSSPropsList from './CSSPropsList';
 import { CSSPropAsAttr } from './types'
 export * from './types'
 
-export const useProps = ({ sx, hover, baseClass, ...props }: CSSPropAsAttr, css_option?: OptionsProps) => {
+export const useProps = ({ sx, hover, baseClass, spacing, ...props }: CSSPropAsAttr, css_option?: OptionsProps) => {
     const m = React.useMemo(() => {
         const _props: any = {}
         const _css: any = {}
@@ -17,12 +17,19 @@ export const useProps = ({ sx, hover, baseClass, ...props }: CSSPropAsAttr, css_
             }
         }
 
-        if (Object.keys(_css).length || sx) {
-            let _sx: any = sx as any || {}
-            if (hover) {
-                _sx['&:hover'] = hover
+        if (hover) {
+            sx = sx || {};
+            (sx as any)['&:hover'] = hover
+        }
+        if (spacing) {
+            sx = sx || {};
+            (sx as any)['& > *'] = {
+                pt: spacing,
+                pl: spacing
             }
-            let cls: string = css({ ..._css, ..._sx }, {
+        }
+        if (Object.keys(_css).length || sx) {
+            let cls: string = css({ ..._css, ...(sx as any) }, {
                 ...css_option,
                 getProps: (p: any, v: any, _c): any => {
                     if (css_option?.getProps) {

@@ -6,7 +6,6 @@ export type FN = (theme: ThemeOptions) => string | number
 export type CSSBreakpointType = { [key in BreakpointsType]: string | number | FN }
 export type CSSValueType<T extends keyof CSS.Properties> = CSS.Properties[T] | Partial<CSSBreakpointType> | number | FN
 
-
 export type AliasesTypes = {
     bgcolor?: CSSValueType<'background'> | ColorsRefTypes;
     bgImage?: CSSValueType<'backgroundImage'>;
@@ -26,6 +25,7 @@ export type AliasesTypes = {
     mx?: CSSValueType<'margin'>;
     my?: CSSValueType<'margin'>;
     size?: CSSValueType<'width'>;
+    spacing?: Partial<CSSBreakpointType> | number;
 
     radius?: CSSValueType<'borderRadius'> | number;
     shadow?: CSSValueType<'boxShadow'> | ShadowRefTyeps;
@@ -38,7 +38,6 @@ export type AliasesTypes = {
     bgSize?: CSSValueType<'backgroundSize'>,
     bgPosition?: CSSValueType<'backgroundPosition'>,
     bgRepeat?: CSSValueType<'backgroundRepeat'>,
-    border?: CSSValueType<'border'>;
 
     flexBox?: boolean;
     flexRow?: boolean;
