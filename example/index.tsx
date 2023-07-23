@@ -18,6 +18,9 @@ const App = () => {
         }}
         color="error.text"
         bgcolor="error"
+        baseClass="button"
+        className="well"
+        classNames={["hello", { a: false, b: true }]}
       >Button</Button>
       <Tag component="a" href="/about" m={2} onClick={() => setDisabled(!disabled)}>Click</Tag>
       <Tag component="p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae adipisci doloremque eum assumenda. Blanditiis laboriosam reprehenderit provident maxime, velit aliquam earum voluptatibus alias voluptate veniam quo sapiente! Laboriosam, quos rerum!</Tag>

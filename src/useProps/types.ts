@@ -1,5 +1,5 @@
 import * as CSS from 'csstype'
-import { CSSProps } from 'naxcss';
+import { CSSProps, classNamesTypes } from 'naxcss';
 import { ThemeOptions } from '../theme';
 import { AliasesTypes, CSSValueType } from "../css/types"
 import { ColorsRefTypes, BreakpointsType, ShadowRefTyeps, TypographyRefTypes } from '../theme/types';
@@ -169,4 +169,5 @@ export type CSSPropAsAttr = Partial<CSSProperties> & AliasesTypes & {
     baseClass?: string;
     disabled?: boolean;
     typography?: keyof ThemeOptions['typography'];
+    classNames?: classNamesTypes[]
 }

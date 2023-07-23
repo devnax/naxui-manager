@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { OptionsProps } from 'naxcss';
-import { css } from '../css';
+import { OptionsProps, classNames as mergecls } from 'naxcss';
+import { css, css_options } from '../css';
 import CSSPropsList from './CSSPropsList';
 import { CSSPropAsAttr } from './types'
 export * from './types'
 
-export const useProps = ({ sx, hover, baseClass, spacing, ...props }: CSSPropAsAttr, css_option?: OptionsProps) => {
+export const useProps = ({ sx, hover, baseClass, spacing, classNames, ...props }: CSSPropAsAttr, css_option?: OptionsProps) => {
     const m = React.useMemo(() => {
+        const options = css_options()
         const _props: any = {}
         const _css: any = {}
         for (const prop in props) {
@@ -40,10 +41,7 @@ export const useProps = ({ sx, hover, baseClass, spacing, ...props }: CSSPropAsA
                     }
                 }
             })
-            let _clss = ""
-            baseClass && (_clss += baseClass + " ")
-            _props.className && (_clss += _props.className + " ")
-            _props.className = _clss + cls
+            _props.className = mergecls(baseClass && (options.classPrefix + baseClass as any), _props.className, ...(classNames || []), cls)
         }
 
         return _props

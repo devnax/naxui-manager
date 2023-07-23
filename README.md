@@ -54,6 +54,7 @@ const App = () => {
   return <Tag
     component="div"
     baseClass="my-comp" 
+    classNames={["a", "b"]} // see naxcss classNames funcion
     sx={} // css style sheet
     typography="h1" // theme typography name
     hover={} // css style for hover effect
