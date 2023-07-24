@@ -22,6 +22,7 @@ const aliases: { [key in keyof AliasesTypes]: AliasFN } = {
    mx: v => ({ "margin-left": isStr(v, 8 * v), "margin-right": isStr(v, 8 * v) }),
    my: v => ({ "margin-top": isStr(v, 8 * v), "margin-bottom": isStr(v, 8 * v) }),
    radius: v => ({ "border-radius": isStr(v, 8 * v) }),
+   borderRadius: v => ({ "border-radius": isStr(v, 8 * v) }),
    shadow: v => ({ "box-shadow": v }),
    w: v => ({ "width": v }),
    h: v => ({ "height": v }),

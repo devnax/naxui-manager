@@ -111,7 +111,7 @@ export const changeTheme = (name: string) => {
                 fontSize: "var(--fontsize-1)",
                 bgcolor: "var(--color-background-main)",
                 color: "var(--color-text-primary)",
-                fontWeight: "normal",
+                fontWeight: 400,
                 "-webkit-font-smoothing": "antialiased",
             },
             "img, picture, video, canvas, svg": {

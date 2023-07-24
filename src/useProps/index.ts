@@ -6,6 +6,9 @@ import { CSSPropAsAttr } from './types'
 export * from './types'
 
 export const useProps = ({ sx, hover, baseClass, spacing, classNames, ...props }: CSSPropAsAttr, css_option?: OptionsProps) => {
+
+    const values = Object.values(props);
+
     const m = React.useMemo(() => {
         const _props: any = {}
         const _css: any = {}
@@ -38,13 +41,19 @@ export const useProps = ({ sx, hover, baseClass, spacing, classNames, ...props }
                             return _p
                         }
                     }
+                },
+                getStyleTag: (t) => {
+                    baseClass && t.setAttribute("data-ui", baseClass)
                 }
             })
             _props.className = mergecls(baseClass && baseClass as any, _props.className, ...(classNames || []), cls)
         }
-
         return _props
-    }, [props, sx])
+    }, [sx, hover, baseClass, spacing, classNames, ...values])
 
+    React.useMemo(() => {
+        console.log('ss');
+
+    }, [...values, sx, hover])
     return m
 }

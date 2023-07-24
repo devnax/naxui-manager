@@ -28,6 +28,7 @@ export type AliasesTypes = {
     spacing?: Partial<CSSBreakpointType> | number;
 
     radius?: CSSValueType<'borderRadius'> | number;
+    borderRadius?: CSSValueType<'borderRadius'> | number;
     shadow?: CSSValueType<'boxShadow'> | ShadowRefTyeps;
     w?: CSSValueType<"width">;
     h?: CSSValueType<"height">;

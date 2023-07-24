@@ -8,7 +8,7 @@ import useVariant from './hooks/useVariant'
 import isWindow from './hooks/isWindow'
 import useMediaScreen from './hooks/useMediaScreen'
 import useWindowResize from './hooks/useWindowResize'
-import ServerStyles from './ServerStyles'
+import serverStyleTags from './serverStyleTags'
 
 
 export {
@@ -20,7 +20,7 @@ export {
     useMediaScreen,
     useWindowResize,
     useVariant,
-    ServerStyles
+    serverStyleTags
 }
 export * from './css'
 export * from "./useProps"

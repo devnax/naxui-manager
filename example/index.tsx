@@ -7,23 +7,20 @@ import { getTheme, changeTheme, modifyTheme } from '../src';
 
 
 const App = () => {
-  const [disabled, setDisabled] = React.useState(true)
+  const [disabled, setDisabled] = React.useState(false)
 
   return (
     <ThemeProvider >
-      <Button m={2}
-        onClick={() => {
-          const theme = getTheme()
-          changeTheme(theme.name === 'default' ? "default-dark" : "default")
-        }}
-        color="error.text"
-        bgcolor="error"
-        baseClass="button"
-        className="well"
-        classNames={["hello", { a: false, b: true }]}
+      <Button
+        disabled={disabled}
+
       >Button</Button>
-      <Tag component="a" href="/about" m={2} onClick={() => setDisabled(!disabled)}>Click</Tag>
-      <Tag component="p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae adipisci doloremque eum assumenda. Blanditiis laboriosam reprehenderit provident maxime, velit aliquam earum voluptatibus alias voluptate veniam quo sapiente! Laboriosam, quos rerum!</Tag>
+      <Tag onClick={() => {
+        console.log(disabled);
+
+        setDisabled(!disabled ? true : false)
+      }}>Click</Tag>
+      {/* <Tag component="p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae adipisci doloremque eum assumenda. Blanditiis laboriosam reprehenderit provident maxime, velit aliquam earum voluptatibus alias voluptate veniam quo sapiente! Laboriosam, quos rerum!</Tag>
       <Tag component="input" />
 
       <Tag
@@ -47,7 +44,7 @@ const App = () => {
         <Tag width={100}>Second</Tag>
         <Tag width={100}>Move Faster</Tag>
         <Tag width={100}>Second</Tag>
-      </Tag>
+      </Tag> */}
     </ThemeProvider>
   );
 };

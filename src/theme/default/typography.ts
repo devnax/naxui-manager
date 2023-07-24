@@ -3,7 +3,7 @@ export default {
     fontFamily: '"Inter","Helvetica","Arial",sans-serif',
     scale: {
         name: "major-third",
-        baseFontSize: 15,
+        baseFontSize: 16,
         sizes: []
     },
     h1: {

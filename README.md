@@ -621,12 +621,12 @@ import {css, keyframes, alpha} from 'naxui-manager'
 ```
 
 ## Server Side Rendering
-You can learn the [naxcss](https://www.npmjs.com/package/naxcss#server-side-rendering) for server side rendering or you can use a `component` from this library. you need to call `ServerStyles` at the root of your project. If you are using the `nextjs` then you can call this in the `__document.ts` or `useServerInsertedHTML` registry.
+You can learn the [naxcss](https://www.npmjs.com/package/naxcss#server-side-rendering) for server side rendering or you can use a function `serverStyleTags` to render server-side style tags. If you are using the `nextjs` then you can call this in the `__document.ts` or `useServerInsertedHTML` registry.
 
 ```js
-import {ServerStyles} from 'naxui-manager'
+import {serverStyleTags} from 'naxui-manager'
 
-<ServerStyles />
+const styles = serverStyleTags()
 
 ```
 

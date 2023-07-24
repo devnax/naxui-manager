@@ -3,6 +3,7 @@ import Tag, { TagProps, TagComponenntType } from '../../src/Tag';
 
 export type ButtonProps<T extends TagComponenntType = 'button'> = TagProps<T> & {
     // Additional props specific to the Button component can be defined here
+    datalist?: any
 };
 
 const Button = <T extends TagComponenntType = "button">({ children, ...rest }: ButtonProps<T>, ref: React.Ref<any>) => {
