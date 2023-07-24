@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { CSSProps } from 'naxcss'
-import { getTheme } from '../theme'
 import { alpha } from '..'
+import getValue from '../css/getValue'
 
 export type UseVariantVariants<V> = "text" | "containe" | "outline" | V
 export type UseVariantColors = "primary" | "secondary" | "success" | "error" | "warning"
@@ -9,30 +9,30 @@ export type UseVariantCallback<V> = (variant: UseVariantVariants<V>, color?: Use
 
 const useVariant = <V = "">(variant: UseVariantVariants<V>, color?: UseVariantColors, callback?: UseVariantCallback<V>) => {
     return React.useMemo(() => {
-        const theme = getTheme()
-        let tcolor = theme.colors[color || "primary"] || theme.colors.primary
+        const cname = color || "primary";
+        const mainColor = getValue(cname, "bgcolor", {})
         let css: any = {
-            bgcolor: tcolor.main,
-            color: tcolor.text,
-            hover: { bgcolor: tcolor.dark }
+            bgcolor: mainColor,
+            color: getValue(`${cname}.text`, "color", {}),
+            hover: { bgcolor: getValue(`${cname}.dark`, "bgcolor", {}) }
         }
 
         switch (variant) {
             case "outline":
                 css = {
                     border: 1,
-                    borderColor: tcolor.main,
-                    color: tcolor.main,
+                    borderColor: mainColor,
+                    color: mainColor,
                     hover: {
-                        bgcolor: alpha(tcolor.main, .2)
+                        bgcolor: alpha(cname, .2)
                     }
                 }
                 break;
             case "text":
                 css = {
-                    color: tcolor.main,
+                    color: mainColor,
                     hover: {
-                        bgcolor: alpha(tcolor.main, .2)
+                        bgcolor: alpha(cname, .2)
                     }
                 }
                 break;
