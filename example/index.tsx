@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Tag, ThemeProvider, alpha } from '../src';
 import Button from './components/Button'
+// import Button from '@mui/material/Button'
 import { getTheme, changeTheme, modifyTheme } from '../src';
 
 
@@ -11,15 +12,18 @@ const App = () => {
 
   return (
     <ThemeProvider >
-      <Button
-        disabled={disabled}
-
-      >Button</Button>
+      <Tag spacing={3} p={3}>
+        <Tag width={100} height={10} bgcolor="primary"></Tag>
+        <Tag width={100} height={10} bgcolor="primary.dark"></Tag>
+        <Tag width={100} height={10} bgcolor="primary.light"></Tag>
+      </Tag>
       <Tag onClick={() => {
-        console.log(disabled);
-
         setDisabled(!disabled ? true : false)
       }}>Click</Tag>
+
+      {/* {
+        Array.from(Array(10).keys()).map((_i, idx) => <Button key={idx} disabled={disabled} sx={{ fontFamily: idx }}>Button {idx}</Button>)
+      } */}
       {/* <Tag component="p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae adipisci doloremque eum assumenda. Blanditiis laboriosam reprehenderit provident maxime, velit aliquam earum voluptatibus alias voluptate veniam quo sapiente! Laboriosam, quos rerum!</Tag>
       <Tag component="input" />
 

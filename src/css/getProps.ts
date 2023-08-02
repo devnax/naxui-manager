@@ -10,8 +10,12 @@ export default (prop: string, value: string, _css: CSSProps) => {
         'typography': typography,
     }
 
+    // if (value === undefined) {
+    //     return {}
+    // }
+
     // gradient
-    if (prop === 'color' || prop === 'bgcolor' || prop === 'background' || prop === 'background-color' || prop === 'backgroundColor') {
+    if (value !== undefined && (prop === 'color' || prop === 'bgcolor' || prop === 'background' || prop === 'background-color' || prop === 'backgroundColor')) {
         if (value.startsWith("linear") || value.startsWith("radial")) {
             let gradientVals: string[] = value.replace(/linear\(|radial\(|\)/gi, "").split(",")
             let valueMatchWith = ["primary", "secondary", "success", "warning", "error", "grey"]
@@ -52,7 +56,7 @@ export default (prop: string, value: string, _css: CSSProps) => {
         }
     }
 
-    if (prop === 'disabled') {
+    if (value !== undefined && prop === 'disabled') {
         if (value) {
             const keys = Object.keys(_css)
             let _dcss: any = {

@@ -1,59 +1,54 @@
 import * as React from 'react';
 import { OptionsProps, classNames as mergecls } from 'naxcss';
 import { css } from '../css';
-import CSSPropsList from './CSSPropsList';
+import { extractProps } from './parceProps';
 import { CSSPropAsAttr } from './types'
 export * from './types'
 
+
 export const useProps = ({ sx, hover, baseClass, spacing, classNames, ...props }: CSSPropAsAttr, css_option?: OptionsProps) => {
+    const extract = extractProps(props)
 
-    const values = Object.values(props);
-
-    const m = React.useMemo(() => {
-        const _props: any = {}
-        const _css: any = {}
-        for (const prop in props) {
-            if (CSSPropsList.includes(prop)) {
-                _css[prop] = (props as any)[prop]
-            } else {
-                _props[prop] = (props as any)[prop]
+    extract.css = React.useMemo(() => {
+        let _css: any = {}
+        for (let ckey in extract.css) {
+            if ((extract as any).css[ckey] !== undefined) {
+                _css[ckey] = (extract as any).css[ckey]
             }
         }
 
-        if (hover) {
-            sx = sx || {};
-            (sx as any)['&:hover'] = hover
+        return _css
+    }, [Object.values(extract.css).join('')])
+
+    let _css: any = { ...extract.css, ...(sx as any) }
+    if (hover) {
+        _css['&:hover'] = hover
+    }
+    if (spacing) {
+        _css['& > *'] = {
+            pt: spacing,
+            pl: spacing
         }
-        if (spacing) {
-            sx = sx || {};
-            (sx as any)['& > *'] = {
-                pt: spacing,
-                pl: spacing
-            }
-        }
-        if (Object.keys(_css).length || sx) {
-            let cls: string = css({ ..._css, ...(sx as any) }, {
-                ...css_option,
-                getProps: (p: any, v: any, _c): any => {
-                    if (css_option?.getProps) {
-                        let _p = css_option?.getProps(p, v, _c)
-                        if (_p) {
-                            return _p
-                        }
+    }
+
+    if (Object.keys(_css).length) {
+        let cls: string = css(_css, {
+            ...css_option,
+            getProps: (p: any, v: any, _c): any => {
+                if (css_option?.getProps) {
+                    let _p = css_option?.getProps(p, v, _c)
+                    if (_p) {
+                        return _p
                     }
-                },
-                getStyleTag: (t) => {
-                    baseClass && t.setAttribute("data-ui", baseClass)
                 }
-            })
-            _props.className = mergecls(baseClass && baseClass as any, _props.className, ...(classNames || []), cls)
-        }
-        return _props
-    }, [sx, hover, baseClass, spacing, classNames, ...values])
+            },
+            getStyleTag: (t) => {
+                baseClass && t.setAttribute("data-ui", baseClass)
+            }
+        })
+        extract.props.className = mergecls(baseClass && baseClass as any, extract.props.className, ...(classNames || []), cls)
+    }
 
-    React.useMemo(() => {
-        console.log('ss');
+    return extract.props
 
-    }, [...values, sx, hover])
-    return m
 }

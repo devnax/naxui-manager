@@ -1,4 +1,3 @@
-import { ThemeOptions } from "../types"
 import colors from "./colors"
 import typography from "./typography"
 import shadows from "./shadows"
@@ -17,4 +16,4 @@ export default {
     typography,
     shadows,
     interfaces: {},
-} as ThemeOptions
+} as any

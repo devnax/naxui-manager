@@ -4,6 +4,7 @@ import { globalCss } from '../css'
 import { NAXCSS_CACHE } from 'naxcss'
 import * as React from "react"
 import { darkModeColor } from "./default/colors"
+import colorGenerate from './colorGenerate'
 export * from './types'
 const ThemeFactory = new Map<string, ThemeOptions>()
 const DispatchFactory = new Map<string, () => void>()
@@ -46,7 +47,19 @@ export const mergeTheme = (a: ObjectType, b: ObjectType) => {
 
 export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOptions => {
     if (!ThemeFactory.get(name)) {
-        ThemeFactory.set(name, mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptions)
+        let merged = mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptions
+        if (merged.colors) {
+            for (let key in merged.colors) {
+                const item = (merged.colors as any)[key]
+                if (item.main) {
+                    const { lightColor, darkColor, textColor } = colorGenerate(item.main, 15);
+                    (merged as any).colors[key].light = item.light || lightColor;
+                    (merged as any).colors[key].dark = item.dark || darkColor;
+                    (merged as any).colors[key].text = item.text || textColor;
+                }
+            }
+        }
+        ThemeFactory.set(name, merged)
         const t = ThemeFactory.get(name) as ThemeOptions
         const sizes = createFontScale(t.typography.scale.baseFontSize, t.typography.scale.name)
         t.typography.scale.sizes = sizes

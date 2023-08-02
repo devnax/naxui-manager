@@ -71,7 +71,30 @@ export type InterfaceType = { [key: string]: any }
 export interface ThemeOptionsPartial {
     globalStyle?: GlobalCSSType<AliasesTypes>,
     breakpoints?: { [key: string]: number };
-    colors?: Partial<ThemeColorsOptions>;
+    colors?: {
+        background?: Omit<ColorType, 'text'>;
+        grey?: {
+            1?: string;
+            2?: string;
+            3?: string;
+            4?: string;
+            5?: string;
+            6?: string;
+            7?: string;
+            8?: string;
+            9?: string;
+            10?: string;
+        };
+        primary?: Partial<ColorType> & { main: string };
+        secondary?: Partial<ColorType> & { main: string };
+        success?: Partial<ColorType> & { main: string };
+        error?: Partial<ColorType> & { main: string };
+        warning?: Partial<ColorType> & { main: string };
+        text?: {
+            primary: string;
+            secondary: string;
+        };
+    };
     typography?: Partial<ThemeTypographyOptions>;
     shadows?: { [key: number]: string };
     interfaces?: { [key: string]: () => InterfaceType };

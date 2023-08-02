@@ -11,25 +11,23 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
         <Tag
             component="button"
             border={0}
-            bgcolor="primary"
+            bgcolor="warning"
+            color="warning.text"
             minWidth={100}
             height={40}
             radius={1.5}
             cursor="pointer"
             typography="button"
-            display="flex"
+            display="inline-flex"
             flexDirection="row"
             alignItems="center"
             justifyContent="center"
             {...rest}
             hover={{
-                bgcolor: "primary.dark",
+                bgcolor: "warning.dark",
                 ...((rest as any).hover || {})
             }}
-            sx={{
-                transition: "background .3s",
-                ...((rest as any).sx || {})
-            }}
+
             ref={ref}
         >
             {children}
