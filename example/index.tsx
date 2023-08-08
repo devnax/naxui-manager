@@ -5,10 +5,16 @@ import { Tag, ThemeProvider, alpha } from '../src';
 import Button from './components/Button'
 // import Button from '@mui/material/Button'
 import { getTheme, changeTheme, modifyTheme } from '../src';
+import useTransitions from '../src/hooks/useTransitions';
 
 
 const App = () => {
-  const [disabled, setDisabled] = React.useState(false)
+  const [In, setIn] = React.useState(false)
+  const [ref, classname] = useTransitions("fadeUp", In, {
+    onFinish: () => {
+      !In && console.log("finished");
+    }
+  })
 
   return (
     <ThemeProvider >
@@ -17,8 +23,13 @@ const App = () => {
         <Tag width={100} height={10} bgcolor="primary.dark"></Tag>
         <Tag width={100} height={10} bgcolor="primary.light"></Tag>
       </Tag>
-      <Tag onClick={() => {
-        setDisabled(!disabled ? true : false)
+      <Tag p={3} m={3}>
+        <Tag ref={ref} className={classname} width={100} height={100} radius={2} shadow={4} m={2} bgcolor="primary">
+          Wellcome
+        </Tag>
+      </Tag>
+      <Tag component="button" typography="button" cursor="pointer" onClick={() => {
+        setIn(!In ? true : false)
       }}>Click</Tag>
 
       {/* {

@@ -11,7 +11,7 @@ Create Component
   - [Tag](#tag)
   - [Creare First Component](#create-first-component)
   - [useProps](#useprops)
-  - [useVariant](#usevariant)
+  - [useVariants](#usevariants)
   - [Props List](#props-list)
   - [Aliases](#aliases)
 - Theme
@@ -28,6 +28,9 @@ Create Component
   - [css_option](#css_option)
 - Hooks
   - [useMediaScreen](#usemediascreen)
+  - [useAnimation](#useanimation)
+  - [useTransiton](#usetransition)
+  - [useTransitons](#usetransitions)
   - [useWindowResize](#usewindowresize)
   - [useWindow](#usewindow)
 - [CSS](#css) - Learn the [naxcss](https://www.npmjs.com/package/naxcss)
@@ -138,26 +141,18 @@ const App = () => {
 
 
 ## useVariants
-the `useVariant` hook you can use to get the color variant.
+the `useVariants` hook you can use to get value with a key.
 
 ```tsx
-import {useVariant} from 'naxui-manager'
+import {useVariants} from 'naxui-manager'
 
-
-// variants: containe | outline | text
-// colors: "primary" | "secondary" | "success" | "error" | "warning"
-const css = useVariant("containe", color: "primary")
-
-// custom variant and ts
-type MoreVariants = "A" | "B"
-const css = useVariant<MoreVariants>("containe", "primary", (variant, color) => {
-  switch(variant){
-    case "A":
-      return {} // CSS Props
-      break;
-    case "B":
-      return {}
-      break;
+const css = useVariants("contained", {
+  text: {
+    color: "primary",
+  },
+  contained: {
+    color: "primary.text",
+    bgcolor: "primary"
   }
 })
 
@@ -588,6 +583,57 @@ screen.is("xs" | "sm" | "md" | "lg" | "xl" | number)
 screen.isDown("xs" | "sm" | "md" | "lg" | "xl" | number)
 screen.isUp("xs" | "sm" | "md" | "lg" | "xl" | number)
 
+```
+
+
+## useAnimation
+you can create attractive animation with css `keyframes`
+```ts
+import {useAnimation} from 'naxui-manager'
+
+const classname = useAnimation({
+  from: {},
+  to: {},
+  delay: 0,
+  duration: 600,
+  ease: "ease" | "easeIn" | "easeOut" | "easeInOut" | "linear" | "bouncEaseIn" | "bounceEaseOut", 
+  onStart: () => {},
+  onFinish: () => {}
+})
+
+```
+## useTransiton
+create css transition
+```ts
+import {useTransiton} from 'naxui-manager'
+
+const [ref, classname] = useTransiton({
+  initial: {},
+  from: {},
+  to: {},
+  delay: 0,
+  duration: 600,
+  ease: "ease" | "easeIn" | "easeOut" | "easeInOut" | "linear" | "bouncEaseIn" | "bounceEaseOut", 
+  onStart: () => {},
+  onFinish: () => {}
+})
+```
+
+## useTransitons
+we have some predefined transitions. you can use them with this function.
+```ts
+import {useTransitons} from 'naxui-manager'
+
+let type = "fade" //or "fadeDown" | "fadeUp" | "fadeRight" | "fadeLeft" | "zoom" | "zoomOver" | "collapsVerticle" | "collapsHorizental"
+let In = true
+
+const [ref, classname] = useTransitons(type, In, {
+  delay: 0,
+  duration: 600,
+  ease: "ease" | "easeIn" | "easeOut" | "easeInOut" | "linear" | "bouncEaseIn" | "bounceEaseOut", 
+  onStart: () => {},
+  onFinish: () => {}
+})
 ```
 
 ## useWindowResize

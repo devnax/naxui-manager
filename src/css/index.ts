@@ -3,6 +3,7 @@ import {
     CSSProps,
     OptionsProps,
     keyframesType,
+    classNames
 } from 'naxcss'
 import * as naxcss from 'naxcss'
 import { getTheme, ColorsRefTypes } from "../theme"
@@ -11,6 +12,14 @@ import getProps from "./getProps"
 import aliases from "./aliases"
 import { AliasesTypes } from './types'
 import { globalConfig } from '../'
+
+export * from './getProps'
+export * from './getValue'
+
+
+export {
+    classNames
+}
 
 export const css_options = (options?: OptionsProps) => {
     const theme = getTheme()
