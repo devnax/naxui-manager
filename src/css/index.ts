@@ -13,12 +13,11 @@ import aliases from "./aliases"
 import { AliasesTypes } from './types'
 import { globalConfig } from '../'
 
-export * from './getProps'
-export * from './getValue'
-
 
 export {
-    classNames
+    classNames,
+    getValue,
+    getProps
 }
 
 export const css_options = (options?: OptionsProps) => {
