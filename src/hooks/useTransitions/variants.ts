@@ -27,7 +27,7 @@ export const fadeDown = (_arg: VariantArgs) => {
     return {
         in: {
             from: {
-                transform: `translateY(-${_arg.boxHeight + 10}px)`,
+                transform: `translateY(-${_arg.boxHeight / 2}px)`,
                 opacity: 0
             },
             to: {
@@ -41,7 +41,7 @@ export const fadeDown = (_arg: VariantArgs) => {
                 opacity: 1
             },
             to: {
-                transform: `translateY(-${_arg.boxHeight + 10}px)`,
+                transform: `translateY(-${_arg.boxHeight / 2}px)`,
                 opacity: 0
             }
         }
@@ -52,7 +52,7 @@ export const fadeUp = (_arg: VariantArgs) => {
     return {
         in: {
             from: {
-                transform: `translateY(${_arg.boxHeight + 10}px)`,
+                transform: `translateY(${_arg.boxHeight / 2}px)`,
                 opacity: 0
             },
             to: {
@@ -66,7 +66,7 @@ export const fadeUp = (_arg: VariantArgs) => {
                 opacity: 1
             },
             to: {
-                transform: `translateY(${_arg.boxHeight + 10}px)`,
+                transform: `translateY(${_arg.boxHeight / 2}px)`,
                 opacity: 0
             }
         }
@@ -77,7 +77,7 @@ export const fadeRight = (_arg: VariantArgs) => {
     return {
         in: {
             from: {
-                transform: `translateX(-${_arg.boxWidth + 10}px)`,
+                transform: `translateX(-${_arg.boxWidth / 2}px)`,
                 opacity: 0
             },
             to: {
@@ -91,7 +91,7 @@ export const fadeRight = (_arg: VariantArgs) => {
                 opacity: 1
             },
             to: {
-                transform: `translateY(-${_arg.boxWidth + 10}px)`,
+                transform: `translateY(-${_arg.boxWidth / 2}px)`,
                 opacity: 0
             }
         }
@@ -102,7 +102,7 @@ export const fadeLeft = (_arg: VariantArgs) => {
     return {
         in: {
             from: {
-                transform: `translateX(${_arg.boxWidth + 10}px)`,
+                transform: `translateX(${_arg.boxWidth / 2}px)`,
                 opacity: 0
             },
             to: {
@@ -116,7 +116,7 @@ export const fadeLeft = (_arg: VariantArgs) => {
                 opacity: 1
             },
             to: {
-                transform: `translateY(${_arg.boxWidth + 10}px)`,
+                transform: `translateY(${_arg.boxWidth / 2}px)`,
                 opacity: 0
             }
         }

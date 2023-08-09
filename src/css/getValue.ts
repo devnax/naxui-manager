@@ -34,10 +34,6 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         ...gen
     }
 
-    if (value && ["border", "borderTop", "borderBottom", "borderLeft", "borderRight"].includes(prop) && typeof value === 'number') {
-        return `${value}px solid`
-    }
-
     if (prop === 'shadow' || prop === 'boxShadow') {
         if (theme.shadows[value as any]) {
             return `var(--shadow-${value})`

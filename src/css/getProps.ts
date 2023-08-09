@@ -10,10 +10,6 @@ export default (prop: string, value: string, _css: CSSProps) => {
         'typography': typography,
     }
 
-    // if (value === undefined) {
-    //     return {}
-    // }
-
     // gradient
     if (value !== undefined && (prop === 'color' || prop === 'bgcolor' || prop === 'background' || prop === 'background-color' || prop === 'backgroundColor')) {
         if (value.startsWith("linear") || value.startsWith("radial")) {

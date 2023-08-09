@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import useTransition, { UseTransitionProps } from '../useTransiton'
 import * as variants from './variants'
 
-export type VariantsTypes = keyof typeof variants
+export type UseTransitionsVariantsTypes = keyof typeof variants
 export type UseTransitionsProps = Omit<UseTransitionProps, "from" | "to" | "initial">
 
-const useTransitions = (type: VariantsTypes, _in?: boolean, transProps?: UseTransitionsProps) => {
+const useTransitions = (type: UseTransitionsVariantsTypes, _in?: boolean, transProps?: UseTransitionsProps) => {
     const [state, setState] = useState({
         boxHeight: 0,
         boxWidth: 0

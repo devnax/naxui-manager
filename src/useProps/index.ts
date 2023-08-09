@@ -46,7 +46,7 @@ export const useProps = ({ sx, hover, baseClass, spacing, classNames, ...props }
                 baseClass && t.setAttribute("data-ui", baseClass)
             }
         })
-        extract.props.className = mergecls(baseClass && baseClass as any, ...(classNames || []), cls, extract.props.className,)
+        extract.props.className = mergecls(baseClass && baseClass as any, ...(classNames || []), cls, extract.props.className)
     }
 
     return extract.props
