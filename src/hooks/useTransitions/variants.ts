@@ -127,7 +127,7 @@ export const grow = (_arg: VariantArgs) => {
     return {
         in: {
             from: {
-                transform: "scale(.60, .60)",
+                transform: "scale(0.75, 0.55)",
                 opacity: 0
             },
             to: {
@@ -141,7 +141,7 @@ export const grow = (_arg: VariantArgs) => {
                 opacity: 1
             },
             to: {
-                transform: "scale(.60, .60)",
+                transform: "scale(0.75, 0.55)",
                 opacity: 0
             }
         }

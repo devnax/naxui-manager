@@ -10,7 +10,7 @@ import useTransitions from '../src/hooks/useTransitions';
 
 const App = () => {
   const [In, setIn] = React.useState(false)
-  const [ref, classname] = useTransitions("fadeUp", In, {
+  const [ref, classname] = useTransitions("grow", In, {
     onFinish: () => {
       !In && console.log("finished");
     }
