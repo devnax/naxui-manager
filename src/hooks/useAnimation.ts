@@ -4,13 +4,12 @@ import { useState, useEffect } from 'react';
 
 
 export const animationEases = {
-    ease: "cubic-bezier(0.25, 0.1, 0.25, 1)",
-    easeIn: "cubic-bezier(0.42, 0, 1, 1)",
-    easeOut: "cubic-bezier(0, 0, 0.58, 1)",
-    easeInOut: "cubic-bezier(0.42, 0, 0.58, 1)",
+    easeInOut: "cubic-bezier(0.4, 0, 0.2, 1)",
+    easeOut: "cubic-bezier(0.0, 0, 0.2, 1)",
+    easeIn: "cubic-bezier(0.4, 0, 1, 1)",
+    sharp: "cubic-bezier(0.4, 0, 0.6, 1)",
     linear: "cubic-bezier(0, 0, 1, 1)",
-    bouncEaseIn: "cubic-bezier(0.71, 1.7, 0.77, 1.0)",
-    bounceEaseOut: "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+    easeBounceOut: "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
 }
 
 export interface UseAnimationProps {
@@ -26,7 +25,7 @@ export interface UseAnimationProps {
 const useAnimation = ({ from, to, delay, ease, duration, onStart, onFinish }: UseAnimationProps) => {
     let _delay = delay || 0;
     let _duration = duration || 600;
-    let _ease = ease || "bounceEaseOut"
+    let _ease = ease || "easeBounceOut"
 
     const [timer, setTimer] = useState<any>()
     const [targetCss, setTargetCss] = useState<any>(from)
@@ -46,7 +45,7 @@ const useAnimation = ({ from, to, delay, ease, duration, onStart, onFinish }: Us
         animationName: animName,
         animationDelay: _delay + "ms",
         animationDuration: _duration + "ms",
-        animationTimingFunction: animationEases[_ease] || animationEases.bounceEaseOut,
+        animationTimingFunction: animationEases[_ease] || animationEases.easeBounceOut,
         ...(targetCss as any)
     })
 }

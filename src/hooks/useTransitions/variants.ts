@@ -123,6 +123,31 @@ export const fadeLeft = (_arg: VariantArgs) => {
     }
 }
 
+export const grow = (_arg: VariantArgs) => {
+    return {
+        in: {
+            from: {
+                transform: "scale(.60, .60)",
+                opacity: 0
+            },
+            to: {
+                transform: "scale(1)",
+                opacity: 1
+            }
+        },
+        out: {
+            from: {
+                transform: "scale(1)",
+                opacity: 1
+            },
+            to: {
+                transform: "scale(.60, .60)",
+                opacity: 0
+            }
+        }
+    }
+}
+
 
 export const zoom = (_arg: VariantArgs) => {
     return {

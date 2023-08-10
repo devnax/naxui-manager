@@ -8,23 +8,25 @@ export interface UseTransitionProps {
     initial?: CSSProps<AliasesTypes>;
     from: CSSProps<AliasesTypes>;
     to: CSSProps<AliasesTypes>;
-    ease?: keyof typeof animationEases;
+    ease?: string;
+    easing?: keyof typeof animationEases;
     duration?: number;
     delay?: number;
     onStart?: () => void;
     onFinish?: () => void;
 }
 
-const useTransition = ({ from, to, initial, ease, duration, delay, onStart, onFinish }: UseTransitionProps) => {
+
+const useTransition = ({ from, to, initial, easing, ease, duration, delay, onStart, onFinish }: UseTransitionProps) => {
     const ref: any = useRef()
     let _from: any = from || {}
     let _to: any = to || {}
     let _initial: any = initial || {}
     const [_css, setCss] = useState<any>(_from)
-    ease = ease || "bounceEaseOut"
+    easing = easing || "easeBounceOut"
     duration = duration === undefined ? 400 : duration
     delay = delay === undefined ? 0 : delay
-    let _ease = animationEases[ease] || animationEases.bounceEaseOut
+    let _ease = ease || animationEases[easing] || animationEases.easeBounceOut
     let trans = ` ${duration}ms ${_ease} ${delay}ms`
 
     const classname = css({

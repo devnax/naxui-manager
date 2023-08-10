@@ -29,8 +29,9 @@ Create Component
 - Hooks
   - [useMediaScreen](#usemediascreen)
   - [useAnimation](#useanimation)
-  - [useTransiton](#usetransition)
-  - [useTransitons](#usetransitions)
+  - [useTransiton](#usetransiton)
+  - [useTransitons](#usetransitons)
+  - [useVariants](#usevariants)
   - [useWindowResize](#usewindowresize)
   - [useWindow](#usewindow)
 - [CSS](#css) - Learn the [naxcss](https://www.npmjs.com/package/naxcss)
@@ -613,14 +614,15 @@ const [ref, classname] = useTransiton({
   to: {},
   delay: 0,
   duration: 600,
-  ease: "ease" | "easeIn" | "easeOut" | "easeInOut" | "linear" | "bouncEaseIn" | "bounceEaseOut", 
+  ease: "cubic-bezier(0.25, 0.1, 0.25, 1)", // optional
+  easing: "easeInOut"| "easeOut"| "easeIn"| "sharp"| "linear"| "bounceEaseOut", 
   onStart: () => {},
   onFinish: () => {}
 })
 ```
 
 ## useTransitons
-we have some predefined transitions. you can use them with this function.
+You can use with some predefined transitions. you can use them with this function.
 ```ts
 import {useTransitons} from 'naxui-manager'
 
