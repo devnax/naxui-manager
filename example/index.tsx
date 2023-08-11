@@ -6,6 +6,9 @@ import Button from './components/Button'
 // import Button from '@mui/material/Button'
 import { getTheme, changeTheme, modifyTheme } from '../src';
 import useTransitions from '../src/hooks/useTransitions';
+import useColorVariant from '../src/hooks/useColorVariant';
+import useCornerVariant from '../src/hooks/useCornerVariant';
+import useUIVariant from '../src/hooks/useUIVariant';
 
 
 const App = () => {
@@ -16,8 +19,30 @@ const App = () => {
     }
   })
 
+  const colorCss = useColorVariant("error", .2)
+  const cornerCss = useCornerVariant("rounded")
+  const usCss = useUIVariant("text", "default", false)
+
   return (
     <ThemeProvider >
+      <Tag m={5}>
+        <Tag
+          component="input"
+          radius={2}
+          p={2}
+          display="inline-flex"
+          justifyContent="center"
+          alignItems="center"
+          transition="all .3s"
+          fontWeight={500}
+          fontSize={14}
+          border={0}
+          placeholder="Write something..."
+
+          {...cornerCss}
+          {...usCss}
+        />
+      </Tag>
       <Tag spacing={3} p={3}>
         <Tag width={100} height={10} bgcolor="primary"></Tag>
         <Tag width={100} height={10} bgcolor="primary.dark"></Tag>

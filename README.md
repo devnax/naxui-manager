@@ -32,6 +32,9 @@ Create Component
   - [useTransiton](#usetransiton)
   - [useTransitons](#usetransitons)
   - [useVariants](#usevariants)
+  - [useColorVariant](#usecolorvariant)
+  - [useCornerVariant](#usecornervariant)
+  - [useUIVornerVariant](#useuiornervariant)
   - [useWindowResize](#usewindowresize)
   - [useWindow](#usewindow)
 - [CSS](#css) - Learn the [naxcss](https://www.npmjs.com/package/naxcss)
@@ -157,6 +160,30 @@ const css = useVariants("contained", {
   }
 })
 
+```
+
+
+
+## useColorVariant
+
+```js
+import {useColorVariant} from 'naxui-manager'
+const colorCss = useColorVariant("default" | "primary" | "secondary" | "success" | "error" | "warning", .2)
+```
+
+
+## useCornerVariant
+
+```js
+import {useCornerVariant} from 'naxui-manager'
+const _css = useCornerVariant("square" | "rounded" | "circle")
+```
+
+## useUIVariant
+
+```js
+import {useUIVariant} from 'naxui-manager'
+const _css = useUIVariant("filled" | "outlined" | "text", color, opacity)
 ```
 
 
