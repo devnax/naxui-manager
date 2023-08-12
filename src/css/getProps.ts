@@ -5,6 +5,13 @@ import getValue from './getValue'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (prop: string, value: string, _css: CSSProps) => {
+    let important;
+    if (typeof value === 'string') {
+        const split = value.split("!")
+        important = split[1] ? "!important" : ""
+        value = split[0]
+    }
+
     const { typography } = getTheme()
     const props: any = {
         'typography': typography,
@@ -59,10 +66,10 @@ export default (prop: string, value: string, _css: CSSProps) => {
                 pointerEvents: "none",
                 cursor: "default",
                 userSelect: "none",
-                color: alpha("text.primary", 2.6) + "!important",
+                color: alpha("text.primary", .26) + "!important",
             }
             if (keys.includes("bgcolor") || keys.includes("bg") || keys.includes("background") || keys.includes("backgroundColor")) {
-                _dcss.bgcolor = alpha("text.primary", 1.2) + "!important"
+                _dcss.bgcolor = alpha("text.primary", .12) + "!important"
             }
             return _dcss
         } else {
@@ -70,7 +77,20 @@ export default (prop: string, value: string, _css: CSSProps) => {
         }
     }
 
+    // Border
+    if (prop === 'border' && typeof value === "number") {
+        return {
+            borderWidth: value + 'px' + (important || ""),
+            borderStyle: "solid",
+            borderColor: "divider"
+        }
+    }
+
     if (props[prop] && props[prop][value]) {
-        return props[prop][value]
+        let v = props[prop][value]
+        if (important) {
+            return v + important
+        }
+        return v
     }
 }

@@ -57,7 +57,7 @@ interface CSSProperties {
     cursor: CSSValueType<"cursor">;
     color: CSS.Properties['color'] | ColorsRefTypes;
     display: CSSValueType<"display">;
-    direction: CSSValueType<"direction">;
+    direction: "row" | "column" | CSSValueType<"direction">;
     filter: CSSValueType<"filter">;
     flex: CSSValueType<"flex">;
     flexBasis: CSSValueType<"flexBasis">;

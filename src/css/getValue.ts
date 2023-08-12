@@ -22,24 +22,38 @@ const generate = () => {
 
 
 const getValue = (value: string, prop: string, _css: CSSProps): any => {
+    let important;
+    if (typeof value === 'string') {
+        const split = value.split("!")
+        important = split[1] ? "!important" : ""
+        value = split[0]
+    }
+
     const theme = getTheme()
     if (typeof value === "function") {
-        const v = (value as any)(theme)
+        let v = (value as any)(theme)
+        if (important) {
+            v = v + important
+        }
         return getValue(v, prop, _css) || v
     }
     const gen = generate()
     const values: any = {
-        'divider': alpha("var(--color-text-primary)", 1.5),
+        'divider': alpha("var(--color-text-primary)", .15),
         'font-family': "var(--font-family)",
         ...gen
     }
 
     if (prop === 'shadow' || prop === 'boxShadow') {
         if (theme.shadows[value as any]) {
-            return `var(--shadow-${value})`
+            return `var(--shadow-${value})` + (important || "")
         }
     }
-    return values[value] || value
+    let v = (values[value] || value)
+    if (important) {
+        return v + important
+    }
+    return v
 }
 
 export default getValue

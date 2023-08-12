@@ -34,6 +34,14 @@ const aliases: { [key in keyof AliasesTypes]: AliasFN } = {
    flexRow: v => (v ? { "flex-direction": "row" } : {}),
    flexColumn: v => (v ? { "flex-direction": "column" } : {}),
    flexWraped: v => (v ? { "flex-wrap": "wrap" } : {}),
+   direction: v => {
+      if (v === 'row' || v === 'column') {
+         return {
+            "flex-direction": v
+         }
+      }
+      return { direction: v }
+   }
 };
 
 export default aliases

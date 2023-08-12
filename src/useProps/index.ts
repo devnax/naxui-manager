@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { OptionsProps, classNames as mergecls } from 'naxcss';
-import { css } from '../css';
+import { css, css_options } from '../css';
 import { extractProps } from './parceProps';
 import { CSSPropAsAttr } from './types'
 export * from './types'
@@ -46,7 +46,11 @@ export const useProps = ({ sx, hover, baseClass, spacing, classNames, ...props }
                 baseClass && t.setAttribute("data-ui", baseClass)
             }
         })
-        extract.props.className = mergecls(baseClass && baseClass as any, ...(classNames || []), cls, extract.props.className)
+        if (baseClass) {
+            const cssOpt = css_options()
+            baseClass = cssOpt.classPrefix + baseClass
+        }
+        extract.props.className = mergecls(baseClass as any, classNames as any, cls, extract.props.className)
     }
 
     return extract.props

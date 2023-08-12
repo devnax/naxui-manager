@@ -44,6 +44,7 @@ export type AliasesTypes = {
     flexRow?: boolean;
     flexColumn?: boolean;
     flexWraped?: boolean;
+    direction?: "row" | "column" | CSSValueType<'direction'>;
 
     color?: CSSValueType<'color'> | ColorsRefTypes;
     width?: CSSValueType<'width'> | BreakpointsType;

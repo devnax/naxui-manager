@@ -25,8 +25,22 @@ const App = () => {
 
   return (
     <ThemeProvider >
+      <Tag
+        flexBox
+        gap={1}
+        baseClass="stack"
+      >
+        <Tag>
+          <Tag width={100} height={100} bgcolor="primary"></Tag>
+        </Tag>
+        <Tag>
+          <Tag width={100} height={100} bgcolor="primary"></Tag>
+        </Tag>
+      </Tag>
       <Tag m={5}>
         <Tag
+          border={1}
+          direction="row"
           component="input"
           radius={2}
           p={2}
@@ -36,9 +50,8 @@ const App = () => {
           transition="all .3s"
           fontWeight={500}
           fontSize={14}
-          border={0}
           placeholder="Write something..."
-
+          {...colorCss}
           {...cornerCss}
           {...usCss}
         />

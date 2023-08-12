@@ -115,7 +115,6 @@ export const changeTheme = (name: string) => {
                 outline: "none",
                 boxSizing: "border-box",
                 verticalAlign: "baseline",
-                borderColor: "divider"
             },
             "html, body": {
                 height: " 100%"
