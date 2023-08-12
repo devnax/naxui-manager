@@ -50,7 +50,7 @@ export const useProps = ({ sx, hover, baseClass, spacing, classNames, ...props }
             const cssOpt = css_options()
             baseClass = cssOpt.classPrefix + baseClass
         }
-        extract.props.className = mergecls(baseClass as any, classNames as any, cls, extract.props.className)
+        extract.props.className = mergecls(baseClass as any, ...(classNames || []), cls, extract.props.className)
     }
 
     return extract.props
