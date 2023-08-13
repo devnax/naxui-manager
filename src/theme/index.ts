@@ -45,21 +45,26 @@ export const mergeTheme = (a: ObjectType, b: ObjectType) => {
     return a
 }
 
-export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOptions => {
-    if (!ThemeFactory.get(name)) {
-        let merged = mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptions
-        if (merged.colors) {
-            for (let key in merged.colors) {
-                const item = (merged.colors as any)[key]
-                if (item.main) {
-                    const { lightColor, darkColor, textColor } = colorGenerate(item.main, 15);
-                    (merged as any).colors[key].light = item.light || lightColor;
-                    (merged as any).colors[key].dark = item.dark || darkColor;
-                    (merged as any).colors[key].text = item.text || textColor;
-                }
+const generateColor = (theme: ThemeOptionsPartial) => {
+    if (theme.colors) {
+        for (let key in theme.colors) {
+            const item = (theme.colors as any)[key]
+            if (item.main) {
+                const { lightColor, darkColor, textColor } = colorGenerate(item.main, 15);
+                (theme as any).colors[key].light = item.light || lightColor;
+                (theme as any).colors[key].dark = item.dark || darkColor;
+                (theme as any).colors[key].text = item.text || textColor;
             }
         }
-        ThemeFactory.set(name, merged)
+    }
+    return theme
+}
+
+export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOptions => {
+    if (!ThemeFactory.get(name)) {
+        let theme: any = mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptions
+        theme = generateColor(theme)
+        ThemeFactory.set(name, theme)
         const t = ThemeFactory.get(name) as ThemeOptions
         const sizes = createFontScale(t.typography.scale.baseFontSize, t.typography.scale.name)
         t.typography.scale.sizes = sizes
@@ -68,12 +73,13 @@ export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOp
     return ThemeFactory.get(name) as ThemeOptions
 }
 
-export const modifyTheme = (name: string, options: ThemeOptionsPartial): ThemeOptions => {
-    if (ThemeFactory.get(name)) {
+export const modifyTheme = (name: string, options: ThemeOptionsPartial) => {
+    if (ThemeFactory.has(name)) {
+        options = generateColor(options)
         ThemeFactory.set(name, mergeTheme(ThemeFactory.get(name) as ThemeOptions, { ...options, name }) as ThemeOptions)
     }
-    return ThemeFactory.get(name) as ThemeOptions
 }
+
 export const useTheme = (): ThemeOptions => {
     const id = React.useId()
     const [, dispatch] = React.useState(0)
