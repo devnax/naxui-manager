@@ -6,26 +6,11 @@ import { CSSPropAsAttr } from './types'
 export * from './types'
 
 
-export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
+export const useProps = (rootProps: CSSPropAsAttr, css_option?: OptionsProps) => {
+    let { sx, hover, baseClass, spacing, classNames, ...props } = rootProps
 
-    return React.useMemo(() => {
-
-        let { sx, hover, baseClass, spacing, classNames, ...restProps } = props
-
+    let format = React.useMemo(() => {
         let _css: any = {}
-        let _props: any = {}
-        for (let prop in restProps) {
-            if (CSS_PROP_LIST.includes(prop)) {
-                _css[prop] = (props as any)[prop]
-            } else {
-                _props[prop] = (props as any)[prop]
-            }
-        }
-
-        _css = { ..._css, ...(sx as any || {}) }
-        if (hover) {
-            _css['&:hover'] = hover
-        }
         if (spacing) {
             _css['& > *'] = {
                 pt: spacing,
@@ -33,8 +18,22 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
             }
         }
 
-        if (Object.keys(_css).length) {
+        let propKeys: any = []
+        for (let prop in props) {
+            if (CSS_PROP_LIST.includes(prop)) {
+                _css[prop] = (props as any)[prop]
+            } else {
+                propKeys.push(prop)
+            }
+        }
 
+        _css = { ..._css, ...(sx as any || {}) }
+        if (hover) {
+            _css['&:hover'] = hover
+        }
+
+        let classname = "";
+        if (Object.keys(_css).length) {
             let cls: string = css(_css, {
                 ...css_option,
                 getProps: (p: any, v: any, _c): any => {
@@ -53,10 +52,20 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
                 const cssOpt = css_options()
                 baseClass = cssOpt.classPrefix + baseClass
             }
-            _props.className = mergecls(baseClass as any, ...(classNames || []), cls, _props.className)
+            classname = mergecls(baseClass as any, ...(classNames || []), cls, (props as any).className)
         }
+        return {
+            classname,
+            propKeys
+        }
+    }, [JSON.stringify(props)]);
 
-        return _props
-    }, [JSON.stringify(props)])
-
+    const _props: any = {};
+    if (format.classname) {
+        _props.className = format.classname
+    }
+    for (let prop of format.propKeys) {
+        _props[prop] = (props as any)[prop]
+    }
+    return _props
 }

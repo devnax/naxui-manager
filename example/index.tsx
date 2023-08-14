@@ -13,22 +13,31 @@ import Stack from './components/Stack'
 
 const App = () => {
   const [In, setIn] = React.useState(false)
-  const [ref, classname] = useTransitions("grow", In, {
-    onFinish: () => {
-      !In && console.log("finished");
-    }
-  })
-
-  const colorCss = useColorVariant("error", .2)
-  const cornerCss = useCornerVariant("rounded")
-  const usCss = useUIVariant("text", "default", false)
+  // const colorCss = useColorVariant("error", .2)
+  // const cornerCss = useCornerVariant("rounded")
+  // const usCss = useUIVariant("text", "default", false)
 
   return (
     <ThemeProvider >
-      <button onClick={() => setIn(!In)}>Random</button>
-      <Stack flexRow disabled={In}>
-        Well
-      </Stack>
+      <Button onClick={() => setIn(!In)}>Random</Button>
+      {
+        new Array(2000).fill(0).map((_i, idx) => <Stack
+          key={idx}
+          fontSize={In ? idx : 20}
+          onClick={() => { }}
+          onDoubleClick={() => { }}
+          onMouseDown={() => { }}
+          onMouseLeave={() => { }}
+          onMouseEnter={() => { }}
+          onMouseOut={() => { }}
+          onMouseMove={() => { }}
+          onMouseOver={() => { }}
+          onMouseUp={() => { }}
+          onMouseDownCapture={() => { }}
+        >
+          Well
+      </Stack>)
+      }
       {/* <Tag
         flexBox
         flexRow
