@@ -9,7 +9,7 @@ import useTransitions from '../src/hooks/useTransitions';
 import useColorVariant from '../src/hooks/useColorVariant';
 import useCornerVariant from '../src/hooks/useCornerVariant';
 import useUIVariant from '../src/hooks/useUIVariant';
-
+import Stack from './components/Stack'
 
 const App = () => {
   const [In, setIn] = React.useState(false)
@@ -25,8 +25,13 @@ const App = () => {
 
   return (
     <ThemeProvider >
-      <Tag
+      <button onClick={() => setIn(!In)}>Random</button>
+      <Stack flexRow disabled={In}>
+        Well
+      </Stack>
+      {/* <Tag
         flexBox
+        flexRow
         gap={1}
         baseClass="stack"
       >
@@ -68,7 +73,7 @@ const App = () => {
       </Tag>
       <Tag component="button" typography="button" cursor="pointer" onClick={() => {
         setIn(!In ? true : false)
-      }}>Click</Tag>
+      }}>Click</Tag> */}
 
       {/* {
         Array.from(Array(10).keys()).map((_i, idx) => <Button key={idx} disabled={disabled} sx={{ fontFamily: idx }}>Button {idx}</Button>)
