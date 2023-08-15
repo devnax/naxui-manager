@@ -11,8 +11,10 @@ import useCornerVariant from '../src/hooks/useCornerVariant';
 import useUIVariant from '../src/hooks/useUIVariant';
 import Stack from './components/Stack'
 
+
 const App = () => {
   const [In, setIn] = React.useState(false)
+  const [ref, cls] = useTransitions("fadeDown", In)
   // const colorCss = useColorVariant("error", .2)
   // const cornerCss = useCornerVariant("rounded")
   // const usCss = useUIVariant("text", "default", false)
@@ -20,7 +22,18 @@ const App = () => {
   return (
     <ThemeProvider >
       <Button onClick={() => setIn(!In)}>Random</Button>
-      {
+      <Tag
+        ref={ref}
+        className={cls}
+        width={100}
+        height={100}
+        radius={1}
+        m={2}
+        bgcolor="primary"
+      >
+
+      </Tag>
+      {/* {
         new Array(2000).fill(0).map((_i, idx) => <Stack
           key={idx}
           fontSize={In ? idx : 20}
@@ -37,7 +50,7 @@ const App = () => {
         >
           Well
       </Stack>)
-      }
+      } */}
       {/* <Tag
         flexBox
         flexRow

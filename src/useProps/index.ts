@@ -53,19 +53,20 @@ export const useProps = (rootProps: CSSPropAsAttr, css_option?: OptionsProps) =>
                 baseClass = cssOpt.classPrefix + baseClass
             }
             classname = mergecls(baseClass as any, ...(classNames || []), cls, (props as any).className)
+
         }
         return {
             classname,
             propKeys
         }
-    }, [JSON.stringify(props)]);
+    }, [JSON.stringify(rootProps)]);
 
     const _props: any = {};
-    if (format.classname) {
-        _props.className = format.classname
-    }
     for (let prop of format.propKeys) {
         _props[prop] = (props as any)[prop]
+    }
+    if (format.classname) {
+        _props.className = format.classname
     }
     return _props
 }
