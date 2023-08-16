@@ -15,7 +15,7 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
             color="warning.text"
             minWidth={100}
             height={40}
-            radius={1.5}
+            radius={1}
             cursor="pointer"
             typography="button"
             display="inline-flex"

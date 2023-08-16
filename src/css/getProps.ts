@@ -59,8 +59,8 @@ export default (prop: string, value: string, _css: CSSProps) => {
         }
     }
 
-    if (value !== undefined && prop === 'disabled') {
-        if (value) {
+    if (prop === 'disabled') {
+        if ((value as any) === true) {
             const keys = Object.keys(_css)
             let _dcss: any = {
                 pointerEvents: "none",
@@ -72,9 +72,8 @@ export default (prop: string, value: string, _css: CSSProps) => {
                 _dcss.bgcolor = alpha("text.primary", .12) + "!important"
             }
             return _dcss
-        } else {
-            return {}
         }
+        return {}
     }
 
     // Border

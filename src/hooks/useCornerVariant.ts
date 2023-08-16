@@ -8,7 +8,7 @@ const useCornerVariant = (type?: UseCornerVariantTypes): object => {
             radius: 0
         },
         rounded: {
-            radius: 1.5
+            radius: 1
         },
         circle: {
             radius: 100

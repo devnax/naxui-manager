@@ -15,23 +15,30 @@ import Stack from './components/Stack'
 const App = () => {
   const [In, setIn] = React.useState(false)
   const [ref, cls] = useTransitions("fadeDown", In)
-  // const colorCss = useColorVariant("error", .2)
-  // const cornerCss = useCornerVariant("rounded")
-  // const usCss = useUIVariant("text", "default", false)
+  const colorCss = useColorVariant("error", .2)
+  const cornerCss = useCornerVariant("rounded")
+  const usCss = useUIVariant("filled", "primary", .2)
+  const hoverusCss = useUIVariant("filled", "primary", .1)
 
   return (
     <ThemeProvider >
-      <Button onClick={() => setIn(!In)}>Random</Button>
+      <Button onClick={() => setIn(!In)} >Random</Button>
       <Tag
         ref={ref}
-        className={cls}
+        // className={cls}
         width={100}
-        height={100}
+        height={40}
         radius={1}
         m={2}
         bgcolor="primary"
+        alignItems="center"
+        justifyContent="center"
+        flexBox
+        transition="all .3s"
+        {...usCss}
+        hover={hoverusCss}
       >
-
+        Hello
       </Tag>
       {/* {
         new Array(2000).fill(0).map((_i, idx) => <Stack

@@ -1,34 +1,21 @@
 import { alpha } from "..";
 
 export type UseColorVariantColorTypes = "default" | "primary" | "secondary" | "success" | "error" | "warning"
+export type UseColorVariantReturnType = { main: string, text: string }
+const useColorVariant = (color?: UseColorVariantColorTypes, softness?: number): UseColorVariantReturnType | void => {
+    if (!color) return
+    let _cl: any = color === 'default' ? "gery.3" : color
 
-const useColorVariant = (color?: UseColorVariantColorTypes, softness?: boolean | number): object => {
-    color = color || "default"
-    if (color === 'default') {
-        return {
-            bgcolor: 'grey.3',
-            color: `text.primary`,
-            hover: {
-                bgcolor: `grey.2`
-            }
-        }
-    }
     if (softness) {
-        softness = typeof softness === 'boolean' ? .2 : softness
         return {
-            bgcolor: alpha(color, softness),
-            color,
-            hover: {
-                bgcolor: alpha(color, softness - .1),
-            }
+            main: alpha(_cl, softness),
+            text: color === "default" ? "text.primary" : `${color}.text`,
         }
     }
+
     return {
-        bgcolor: color,
-        color: `${color}.text`,
-        hover: {
-            bgcolor: `${color}.dark`
-        }
+        main: color,
+        text: color === "default" ? "text.primary" : `${color}.text`,
     }
 }
 

@@ -183,7 +183,7 @@ const _css = useCornerVariant("square" | "rounded" | "circle")
 
 ```js
 import {useUIVariant} from 'naxui-manager'
-const _css = useUIVariant("filled" | "outlined" | "text", color, opacity)
+const _css = useUIVariant("filled" | "outlined" | "text", color, softness)
 ```
 
 

@@ -1,25 +1,30 @@
-import useColorVariant, { UseColorVariantColorTypes } from './useColorVariant'
+import { UseColorVariantColorTypes } from './useColorVariant'
+import { alpha } from '..'
 
 export type UseUIVariantTypes = "filled" | "outlined" | "text"
 
-const useUIVariant = (type?: UseUIVariantTypes, color?: UseColorVariantColorTypes, softness?: boolean): object => {
+const useUIVariant = (type?: UseUIVariantTypes, color?: UseColorVariantColorTypes, softness?: number): object => {
     color = color || "default"
     type = type || "filled"
+    let _color: any = color === 'default' ? "grey.3" : color
 
     switch (type) {
         case "filled":
-            return useColorVariant(color, softness)
-        case "outlined":
-            const _colors: any = useColorVariant(color)
             return {
+                bgcolor: softness ? alpha(_color, softness) : _color,
+                color: color === "default" ? "text.primary" : (softness && softness < .4 ? color : `${color}.text`)
+            }
+        case "outlined":
+            return {
+                bgcolor: softness ? alpha(_color, softness) : "transparent",
                 border: `1px solid`,
-                borderColor: _colors.bgcolor,
-                color: color === 'default' ? _colors.color : _colors.bgcolor,
-                ...(softness ? useColorVariant(color, softness) : {})
+                borderColor: color === "default" ? "grey.4" : _color,
+                color: color === "default" ? "text.primary" : (softness && softness > .4 ? `${color}.text` : color)
             }
         case "text":
             return {
-                color: color === 'default' ? "text.primary" : color
+                bgcolor: "transparent",
+                color: color === "default" ? "text.primary" : color
             }
     }
 }

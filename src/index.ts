@@ -11,7 +11,7 @@ import serverStyleTags from './serverStyleTags'
 import useAnimation, { UseAnimationProps } from './hooks/useAnimation'
 import useTransition, { UseTransitionProps } from './hooks/useTransiton'
 import useTransitions, { UseTransitionsProps, UseTransitionsVariantsTypes } from './hooks/useTransitions'
-import useColorVariant, { UseColorVariantColorTypes } from './hooks/useColorVariant'
+import useColorVariant, { UseColorVariantColorTypes, UseColorVariantReturnType } from './hooks/useColorVariant'
 import useCornerVariant, { UseCornerVariantTypes } from './hooks/useCornerVariant'
 import useUIVariant, { UseUIVariantTypes } from './hooks/useUIVariant'
 
@@ -31,7 +31,8 @@ export type {
     UseTransitionsVariantsTypes,
     UseColorVariantColorTypes,
     UseCornerVariantTypes,
-    UseUIVariantTypes
+    UseUIVariantTypes,
+    UseColorVariantReturnType
 }
 
 
