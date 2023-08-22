@@ -4,7 +4,6 @@ import { globalCss } from '../css'
 import { NAXCSS_CACHE } from 'naxcss'
 import * as React from "react"
 import { darkModeColor } from "./default/colors"
-import colorGenerate from './colorGenerate'
 export * from './types'
 const ThemeFactory = new Map<string, ThemeOptions>()
 const DispatchFactory = new Map<string, () => void>()
@@ -45,25 +44,10 @@ export const mergeTheme = (a: ObjectType, b: ObjectType) => {
     return a
 }
 
-const generateColor = (theme: ThemeOptionsPartial) => {
-    if (theme.colors) {
-        for (let key in theme.colors) {
-            const item = (theme.colors as any)[key]
-            if (item.main) {
-                const { lightColor, darkColor, textColor } = colorGenerate(item.main, 15);
-                (theme as any).colors[key].light = item.light || lightColor;
-                (theme as any).colors[key].dark = item.dark || darkColor;
-                (theme as any).colors[key].text = item.text || textColor;
-            }
-        }
-    }
-    return theme
-}
 
 export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOptions => {
     if (!ThemeFactory.get(name)) {
         let theme: any = mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptions
-        theme = generateColor(theme)
         ThemeFactory.set(name, theme)
         const t = ThemeFactory.get(name) as ThemeOptions
         const sizes = createFontScale(t.typography.scale.baseFontSize, t.typography.scale.name)
@@ -75,7 +59,6 @@ export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOp
 
 export const modifyTheme = (name: string, options: ThemeOptionsPartial) => {
     if (ThemeFactory.has(name)) {
-        options = generateColor(options)
         ThemeFactory.set(name, mergeTheme(ThemeFactory.get(name) as ThemeOptions, { ...options, name }) as ThemeOptions)
     }
 }
@@ -126,10 +109,10 @@ export const changeTheme = (name: string) => {
                 height: " 100%"
             },
             "body": {
-                fontFamily: "var(--font-family)",
-                fontSize: "var(--fontsize-1)",
-                bgcolor: "var(--color-background-main)",
-                color: "var(--color-text-primary)",
+                fontFamily: "font-family",
+                fontSize: "fontsize.1",
+                bgcolor: "background.default",
+                color: "text.primary",
                 fontWeight: 400,
                 "-webkit-font-smoothing": "antialiased",
             },
@@ -162,7 +145,7 @@ export const changeTheme = (name: string) => {
 
         for (let c_key in colors) {
             let c = (colors as any)[c_key]
-            c.main && (root[`--color-${c_key}`] = c.main)
+            c.color && (root[`--color-${c_key}`] = c.color)
             for (let c_i in c) {
                 root[`--color-${c_key}-${c_i}`] = c[c_i]
             }
@@ -170,9 +153,7 @@ export const changeTheme = (name: string) => {
 
         Object.keys(shadows).forEach((s_key: any) => root[`--shadow-${s_key}`] = shadows[s_key])
         typography.scale.sizes.forEach((size, i) => root[`--fontsize-${i + 1}`] = size + "px");
-
         globalCss("theme-vars", { ":root": root });
-
         (globalStyle && Object.keys(globalStyle).length) && globalCss("global-css", globalStyle)
         DispatchFactory.forEach(d => d())
     }

@@ -26,13 +26,13 @@ Create Component
   - [CSS Value](#css-value)
   - [Use Gradient](#use-gradient)
   - [css_option](#css_option)
+  - [alpha](#alpha)
 - Hooks
   - [useMediaScreen](#usemediascreen)
   - [useAnimation](#useanimation)
   - [useTransiton](#usetransiton)
   - [useTransitons](#usetransitons)
   - [useVariants](#usevariants)
-  - [useColorVariant](#usecolorvariant)
   - [useCornerVariant](#usecornervariant)
   - [useUIVornerVariant](#useuiornervariant)
   - [useWindowResize](#usewindowresize)
@@ -163,15 +163,6 @@ const css = useVariants("contained", {
 ```
 
 
-
-## useColorVariant
-
-```js
-import {useColorVariant} from 'naxui-manager'
-const colorCss = useColorVariant("default" | "primary" | "secondary" | "success" | "error" | "warning", .2)
-```
-
-
 ## useCornerVariant
 
 ```js
@@ -196,7 +187,7 @@ In this library there are already included many css property aliases. If you wan
 
 | Name  |  Description |
 |---|---|
-| `bgcolor` | `background-color`, you can pass string or theme colors name example: `primary`, `primary.main`|
+| `bgcolor` | `background-color`, you can pass string or theme colors name example: `primary`, `primary.color`|
 | `bgImage` | `background-image` |
 | `bg` | `background` |
 | `p` | `padding`|
@@ -354,43 +345,31 @@ mergeTheme(theme1, theme2)
   ```js
     colors: {
       background: {
-        main: "#ffffff",
-        light: "#f5f5f5",
-        dark: "#e9e9e9",
-        text: "#111111"
+        default: "#ffffff",
+        paper: "#f5f5f5",
       },
       text: {
         primary: "#111111",
         secondary: "#666666"
       },
       primary: {
-        light: "#3b82f6",
-        dark: "#1d4ed8",
-        main: "#2563eb",
+        color: "#2563eb",
         text: '#ffffff',
       },
       secondary: {
-        light: "#14b8a6",
-        dark: "#0f766e",
-        main: '#0d9488',
+        color: '#0d9488',
         text: '#ffffff',
       },
       success: {
-        light: "#22c55e",
-        dark: "#15803d",
-        main: "#16a34a",
+        color: "#16a34a",
         text: '#ffffff',
       },
       error: {
-        light: "#ef4444",
-        dark: "#b91c1c",
-        main: '#dc2626',
+        color: '#dc2626',
         text: '#ffffff',
       },
       warning: {
-        light: "#f59e0b",
-        dark: "#b45309",
-        main: "#d97706",
+        color: "#d97706",
         text: '#ffffff',
       },
       grey: {
@@ -481,7 +460,7 @@ mergeTheme(theme1, theme2)
       fontSize: 'fontsize.1',
       fontWeight: 400,
       color: "primary.text",
-      bgcolor: "primary.main"
+      bgcolor: "primary.color"
     }
   }
   ```
@@ -535,16 +514,16 @@ The sx prop is a shortcut for defining custom styles.
     bgcolor:"red",
 
     // use theme prop
-    bgcolor:"primary.main",
+    bgcolor:"primary.color",
 
     // responsive
     bgcolor: {
       sm: "red",
-      md: (theme) => theme.color.primary.main,
+      md: (theme) => theme.color.primary.color,
     },
 
     // function
-    bgcolor: (theme) => theme.color.error.main
+    bgcolor: (theme) => theme.color.error.color
   }} 
 />
 
@@ -562,19 +541,19 @@ There are many way to pass css value. `string`, `number`, `breakpoint` or `funct
   bgcolor="red"
   
   // use theme prop
-  bgcolor="primary.main"
+  bgcolor="primary.color"
 
   // responsive
   bgcolor={{
     sm: "red",
-    md: (theme) => theme.color.primary.main
+    md: (theme) => theme.color.primary.color
   }}
 
   // function
-  bgcolor={(theme) => theme.color.error.main}
+  bgcolor={(theme) => theme.color.error.color}
 />
 ```
-Here you can see the value  is `primary.main` so it will automatically get the theme primary.main color. in this way you can use everything from theme. like you want to use the `shadow` so you can pass the value `shadow.1`.
+Here you can see the value  is `primary.color` so it will automatically get the theme primary.color color. in this way you can use everything from theme. like you want to use the `shadow` so you can pass the value `shadow.1`.
 
 
 
@@ -584,14 +563,14 @@ How you can use the `gradient color`. you can use the geadient in `background` a
 ```jsx
 <MyComp 
   // use theme color props
-  bgcolor="linear(90deg, primary, secondary.main)"
+  bgcolor="linear(90deg, primary, secondary.color)"
   // use rgb or hex
-  bgcolor="linear(90deg, rgb(255, 0, 0), secondary.main 20%)"
+  bgcolor="linear(90deg, rgb(255, 0, 0), secondary.color 20%)"
 
   // text color
-  color="linear(90deg, primary, secondary.main)"
+  color="linear(90deg, primary, secondary.color)"
   // use rgb or hex
-  color="linear(90deg, rgb(255, 0, 0), secondary.main 20%)"
+  color="linear(90deg, rgb(255, 0, 0), secondary.color 20%)"
 />
 ```
 
@@ -600,6 +579,16 @@ How you can use the `gradient color`. you can use the geadient in `background` a
 ## css_option
 this is a function where the customized the `naxcss` option. If you need it you can use it.
 
+## alpha
+customize you color. first argument you can pass the color name or hex and the second arg you can pass `0-2` this number will present the color light to dark and `1` will present the same color which you pass in first arg.
+```tsx
+import {alpha} from 'naxui-manager'
+
+<Tag 
+  bgcolor={alpha("primary", .3)}
+/>
+
+```
 
 ## useMediaScreen
 this hook help you to responsive.

@@ -3,13 +3,23 @@ import { AliasesTypes } from "../css/types";
 
 
 export type ColorType = {
-    light: string;
-    dark: string;
-    main: string;
+    color: string;
     text: string;
 }
 export interface ThemeColorsOptions {
-    background: Omit<ColorType, 'text'>;
+    background: {
+        paper: string;
+        default: string;
+    };
+    primary: ColorType;
+    secondary: ColorType;
+    success: ColorType;
+    error: ColorType;
+    warning: ColorType;
+    text: {
+        primary: string;
+        secondary: string;
+    };
     grey: {
         1: string;
         2: string;
@@ -21,15 +31,6 @@ export interface ThemeColorsOptions {
         8: string;
         9: string;
         10: string;
-    };
-    primary: ColorType;
-    secondary: ColorType;
-    success: ColorType;
-    error: ColorType;
-    warning: ColorType;
-    text: {
-        primary: string;
-        secondary: string;
     };
 }
 
@@ -45,7 +46,6 @@ export type ScaleNameTypes = "minor-second" |
 export type TextStyleProps = {
     fontSize?: string | number;
     fontFamily?: string;
-    color?: string | number;
 }
 
 export interface ThemeTypographyOptions {
@@ -72,7 +72,19 @@ export interface ThemeOptionsPartial {
     globalStyle?: GlobalCSSType<AliasesTypes>,
     breakpoints?: { [key: string]: number };
     colors?: {
-        background?: Omit<ColorType, 'text'>;
+        background?: {
+            paper?: string;
+            default?: string;
+        };
+        primary?: Partial<ColorType>;
+        secondary?: Partial<ColorType>;
+        success?: Partial<ColorType>;
+        error?: Partial<ColorType>;
+        warning?: Partial<ColorType>;
+        text?: {
+            primary: string;
+            secondary: string;
+        };
         grey?: {
             1?: string;
             2?: string;
@@ -84,15 +96,6 @@ export interface ThemeOptionsPartial {
             8?: string;
             9?: string;
             10?: string;
-        };
-        primary?: Partial<ColorType> & { main: string };
-        secondary?: Partial<ColorType> & { main: string };
-        success?: Partial<ColorType> & { main: string };
-        error?: Partial<ColorType> & { main: string };
-        warning?: Partial<ColorType> & { main: string };
-        text?: {
-            primary: string;
-            secondary: string;
         };
     };
     typography?: Partial<ThemeTypographyOptions>;
@@ -109,9 +112,6 @@ export interface ThemeOptions {
     shadows: { [key: number]: string };
     interfaces: { [key: string]: (userProps: InterfaceType) => InterfaceType };
 }
-
-
-
 
 export type ObjectType = { [key: string]: any }
 
@@ -133,40 +133,26 @@ export type TextRefTypes =
 
 
 export type ColorsRefTypes =
-    | "background"
-    | "background.main"
-    | "background.light"
-    | "background.dark"
+    | "background.default"
+    | "background.paper"
     | "divider"
     | "primary"
-    | "primary.main"
-    | "primary.light"
-    | "primary.dark"
+    | "primary.color"
     | "primary.text"
     | "secondary"
-    | "secondary.main"
-    | "secondary.light"
-    | "secondary.dark"
+    | "secondary.color"
     | "secondary.text"
     | "success"
-    | "success.main"
-    | "success.light"
-    | "success.dark"
+    | "success.color"
     | "success.text"
     | "error"
-    | "error.main"
-    | "error.light"
-    | "error.dark"
+    | "error.color"
     | "error.text"
     | "warning"
-    | "warning.main"
-    | "warning.light"
-    | "warning.dark"
+    | "warning.color"
     | "warning.text"
-    | "text"
     | "text.primary"
     | "text.secondary"
-    | "text.disabled"
     | "grey.1"
     | "grey.2"
     | "grey.3"

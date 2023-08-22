@@ -6,12 +6,14 @@ const generate = () => {
     if (generated) return generated;
     const { breakpoints, colors, typography } = getTheme()
     generated = {}
+
     for (let key in breakpoints) {
         generated[key] = `var(--breakpoint-${key})`
     }
+
     for (let c_key in colors) {
         let c = (colors as any)[c_key]
-        c.main && (generated[c_key] = `var(--color-${c_key})`)
+        c.color && (generated[c_key] = `var(--color-${c_key})`)
         for (let c_i in c) {
             generated[`${c_key}.${c_i}`] = `var(--color-${c_key}-${c_i})`
         }

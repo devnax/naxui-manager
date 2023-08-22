@@ -82,8 +82,14 @@ export const makeCacheKey = (css_raw: object) => naxcss.makeCacheKey(css_raw)
 
 export type AlphaOpacityType = number | "soft" | "lighten"
 
-export const alpha = (hex: ColorsRefTypes | string, opacity: AlphaOpacityType) => {
-    opacity = opacity === "soft" ? .2 : opacity
-    opacity = opacity === "lighten" ? .1 : opacity
-    return naxcss.alpha(getValue(hex, "", {}) || hex, opacity)
+export const alpha = (color: ColorsRefTypes | string, opacity = 1) => {
+    color = getValue(color, "", {}) || color
+    let opDark = 0, opLight = opacity;
+    if (opacity > 1) {
+        opDark = opacity - 1;
+        opLight = 1;
+    }
+    opDark = opDark * 100
+    opLight = opLight * 100
+    return `color-mix(in srgb, ${color} ${opLight}%, #000 ${opDark}%)`
 }

@@ -1,9 +1,8 @@
-import { UseColorVariantColorTypes } from './useColorVariant'
 import { alpha } from '..'
 
 export type UseUIVariantTypes = "filled" | "outlined" | "text"
 
-const useUIVariant = (type?: UseUIVariantTypes, color?: UseColorVariantColorTypes, softness?: number): object => {
+const useUIVariant = (type?: UseUIVariantTypes, color?: string, softness?: number): object => {
     color = color || "default"
     type = type || "filled"
     let _color: any = color === 'default' ? "grey.3" : color

@@ -2,9 +2,8 @@
 
 export const darkModeColor = {
     background: {
-        main: "#24262a",
-        light: "#313339",
-        dark: "#1b1c1f"
+        default: "#24262a",
+        paper: "#313339",
     },
     text: {
         primary: "#ffffff",
@@ -15,9 +14,8 @@ export const darkModeColor = {
 
 export const lightModeColor = {
     background: {
-        main: "#ffffff",
-        light: "#f5f5f5",
-        dark: "#e9e9e9"
+        default: "#ffffff",
+        paper: "#f5f5f5"
     },
     text: {
         primary: "#111111",
@@ -28,33 +26,23 @@ export const lightModeColor = {
 export const main_pallete = {
     ...lightModeColor,
     primary: {
-        // light: "#3b82f6",
-        // dark: "#1d4ed8",
-        main: "#2563eb",
-        // text: '#ffffff',
+        color: "#2563eb",
+        text: '#ffffff',
     },
     secondary: {
-        // light: "#14b8a6",
-        // dark: "#0f766e",
-        main: '#0d9488',
-        // text: '#ffffff',
+        color: '#0d9488',
+        text: '#ffffff',
     },
     success: {
-        // light: "#22c55e",
-        // dark: "#15803d",
-        main: "#16a34a",
-        // text: '#ffffff',
+        color: "#16a34a",
+        text: '#ffffff',
     },
     error: {
-        // light: "#ef4444",
-        // dark: "#b91c1c",
-        main: '#dc2626',
-        // text: '#ffffff',
+        color: '#dc2626',
+        text: '#ffffff',
     },
     warning: {
-        // light: "#f59e0b",
-        // dark: "#b45309",
-        main: "#d97706",
+        color: "#d97706",
         text: '#ffffff',
     },
     grey: {
