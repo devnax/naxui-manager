@@ -32,9 +32,6 @@ Create Component
   - [useAnimation](#useanimation)
   - [useTransiton](#usetransiton)
   - [useTransitons](#usetransitons)
-  - [useVariants](#usevariants)
-  - [useCornerVariant](#usecornervariant)
-  - [useUIVornerVariant](#useuiornervariant)
   - [useWindowResize](#usewindowresize)
   - [useWindow](#usewindow)
 - [CSS](#css) - Learn the [naxcss](https://www.npmjs.com/package/naxcss)
@@ -140,43 +137,6 @@ const App = () => {
   )
 }
 ```
-
-
-
-
-## useVariants
-the `useVariants` hook you can use to get value with a key.
-
-```tsx
-import {useVariants} from 'naxui-manager'
-
-const css = useVariants("contained", {
-  text: {
-    color: "primary",
-  },
-  contained: {
-    color: "primary.text",
-    bgcolor: "primary"
-  }
-})
-
-```
-
-
-## useCornerVariant
-
-```js
-import {useCornerVariant} from 'naxui-manager'
-const _css = useCornerVariant("square" | "rounded" | "circle")
-```
-
-## useUIVariant
-
-```js
-import {useUIVariant} from 'naxui-manager'
-const _css = useUIVariant("filled" | "outlined" | "text", color, softness)
-```
-
 
 ## Props List
 you can import the typescript type `CSSPropAsAttr` from `naxui-manager` to see what kind aliases and css props you can use as a component attribute.

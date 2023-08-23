@@ -11,6 +11,7 @@ export interface ThemeColorsOptions {
         paper: string;
         default: string;
     };
+
     primary: ColorType;
     secondary: ColorType;
     success: ColorType;

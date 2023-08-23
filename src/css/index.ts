@@ -91,5 +91,7 @@ export const alpha = (color: ColorsRefTypes | string, opacity = 1) => {
     }
     opDark = opDark * 100
     opLight = opLight * 100
-    return `color-mix(in srgb, ${color} ${opLight}%, #000 ${opDark}%)`
+    let d = opDark ? `#000 ${opDark}%` : 'transparent'
+    let l = opLight ? `${color} ${opLight}%` : 'transparent'
+    return `color-mix(in srgb, ${l}, ${d})`
 }
