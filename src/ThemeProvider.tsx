@@ -7,7 +7,7 @@ type Props = {
     children: any;
     css_option?: OptionsProps;
     defaultFontFamily?: string;
-    defaultTheme?: string;
+    defaultTheme?: "default" | "default-dark";
 }
 
 const ThemeProvider = ({ children, css_option, defaultFontFamily, defaultTheme }: Props) => {

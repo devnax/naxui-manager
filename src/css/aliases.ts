@@ -5,7 +5,7 @@ const isStr = (v: any, or: any) => typeof v === 'string' ? v : or
 
 const aliases: { [key in keyof AliasesTypes]: AliasFN } = {
    bgcolor: v => ({ "background-color": v }),
-   bgImage: v => ({ "background-image": `url(${v})`, "background-size": "cover", "background-repeat": "no-repeat" }),
+   bgimage: v => ({ "background-image": `url(${v})`, "background-size": "cover", "background-repeat": "no-repeat" }),
    bg: v => ({ 'background': v }),
    p: v => ({ "padding-top": isStr(v, 8 * v), "padding-right": isStr(v, 8 * v), "padding-bottom": isStr(v, 8 * v), "padding-left": isStr(v, 8 * v) }),
    pt: v => ({ "padding-top": isStr(v, 8 * v) }),
@@ -34,14 +34,7 @@ const aliases: { [key in keyof AliasesTypes]: AliasFN } = {
    flexRow: v => (v ? { "flex-direction": "row" } : {}),
    flexColumn: v => (v ? { "flex-direction": "column" } : {}),
    flexWraped: v => (v ? { "flex-wrap": "wrap" } : {}),
-   direction: v => {
-      if (v === 'row' || v === 'column') {
-         return {
-            "flex-direction": v
-         }
-      }
-      return { direction: v }
-   }
+   direction: v => (v === 'row' || v === 'column' ? { "flex-direction": v } : { direction: v })
 };
 
 export default aliases

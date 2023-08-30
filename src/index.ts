@@ -14,11 +14,9 @@ import useTransitions, { UseTransitionsProps, UseTransitionsVariantsTypes } from
 export * from './css'
 export * from "./useProps"
 export * from "./theme"
-
 export * from './css/types'
 export * from './useProps/types'
 export * from './theme/types'
-
 
 export type {
     UseAnimationProps,
@@ -26,7 +24,6 @@ export type {
     UseTransitionsProps,
     UseTransitionsVariantsTypes
 }
-
 
 export {
     ThemeProvider,

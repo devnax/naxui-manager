@@ -7,32 +7,17 @@ export type ColorType = {
     text: string;
 }
 export interface ThemeColorsOptions {
-    background: {
-        paper: string;
-        default: string;
-    };
+    common: string;
+    paper: string;
+    divider: string;
+    text: string;
+    subtext: string;
 
     primary: ColorType;
     secondary: ColorType;
     success: ColorType;
     error: ColorType;
     warning: ColorType;
-    text: {
-        primary: string;
-        secondary: string;
-    };
-    grey: {
-        1: string;
-        2: string;
-        3: string;
-        4: string;
-        5: string;
-        6: string;
-        7: string;
-        8: string;
-        9: string;
-        10: string;
-    };
 }
 
 export type ScaleNameTypes = "minor-second" |
@@ -51,11 +36,8 @@ export type TextStyleProps = {
 
 export interface ThemeTypographyOptions {
     fontFamily: string;
-    scale: {
-        name: ScaleNameTypes,
-        baseFontSize: number;
-        sizes: number[]
-    };
+    fontSize: number;
+    sizes: number[];
     text: TextStyleProps;
     subtext: TextStyleProps;
     button: TextStyleProps;
@@ -73,31 +55,17 @@ export interface ThemeOptionsPartial {
     globalStyle?: GlobalCSSType<AliasesTypes>,
     breakpoints?: { [key: string]: number };
     colors?: {
-        background?: {
-            paper?: string;
-            default?: string;
-        };
+        common?: string;
+        paper?: string;
+        divider?: string;
+        text?: string;
+        subtext?: string;
+
         primary?: Partial<ColorType>;
         secondary?: Partial<ColorType>;
         success?: Partial<ColorType>;
         error?: Partial<ColorType>;
         warning?: Partial<ColorType>;
-        text?: {
-            primary: string;
-            secondary: string;
-        };
-        grey?: {
-            1?: string;
-            2?: string;
-            3?: string;
-            4?: string;
-            5?: string;
-            6?: string;
-            7?: string;
-            8?: string;
-            9?: string;
-            10?: string;
-        };
     };
     typography?: Partial<ThemeTypographyOptions>;
     shadows?: { [key: number]: string };
@@ -115,55 +83,40 @@ export interface ThemeOptions {
 }
 
 export type ObjectType = { [key: string]: any }
-
 export type StateKeys = "current_theme" | "dispatch"
-
-
 export type BreakpointsType = "xs" | "sm" | "md" | "lg" | "xl"
 
 export type TextRefTypes =
-    | "text"
-    | "subtext"
-    | "button"
-    | "h1"
-    | "h2"
-    | "h3"
-    | "h4"
-    | "h5"
-    | "h6";
+    | "typography.font-family"
+    | "typography.font-size"
+// | "typography.text"
+// | "typography.subtext"
+// | "typography.button"
+// | "typography.h1"
+// | "typography.h2"
+// | "typography.h3"
+// | "typography.h4"
+// | "typography.h5"
+// | "typography.h6";
 
 
 export type ColorsRefTypes =
-    | "background.default"
-    | "background.paper"
-    | "divider"
-    | "primary"
-    | "primary.color"
-    | "primary.text"
-    | "secondary"
-    | "secondary.color"
-    | "secondary.text"
-    | "success"
-    | "success.color"
-    | "success.text"
-    | "error"
-    | "error.color"
-    | "error.text"
-    | "warning"
-    | "warning.color"
-    | "warning.text"
-    | "text.primary"
-    | "text.secondary"
-    | "grey.1"
-    | "grey.2"
-    | "grey.3"
-    | "grey.4"
-    | "grey.5"
-    | "grey.6"
-    | "grey.7"
-    | "grey.8"
-    | "grey.9"
-    | "grey.10"
+    | "color.common"
+    | "color.paper"
+    | "color.divider"
+    | "color.text"
+    | "color.subtext"
+    | "color.primary"
+    | "color.primary.text"
+    | "color.secondary"
+    | "color.secondary.text"
+    | "color.success"
+    | "color.success.text"
+    | "color.error"
+    | "color.error.text"
+    | "color.warning"
+    | "color.warning.text";
+
 
 
 export type ShadowRefTyeps =

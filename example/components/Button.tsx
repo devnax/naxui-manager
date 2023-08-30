@@ -10,9 +10,9 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
     return (
         <Tag
             component="button"
-            border={0}
-            bgcolor="warning"
-            color="warning.text"
+            border={1}
+            bgcolor="color.warning"
+            color="color.warning.text"
             minWidth={100}
             height={40}
             radius={1}
@@ -24,7 +24,7 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
             justifyContent="center"
             {...rest}
             hover={{
-                bgcolor: "warning.dark",
+                bgcolor: "color.error",
                 ...((rest as any).hover || {})
             }}
 

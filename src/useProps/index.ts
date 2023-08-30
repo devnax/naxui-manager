@@ -5,11 +5,21 @@ import { CSS_PROP_LIST } from './parceProps';
 import { CSSPropAsAttr } from './types'
 export * from './types'
 
+const Cache = new Map()
 
 export const useProps = (rootProps: CSSPropAsAttr, css_option?: OptionsProps) => {
     let { sx, hover, baseClass, spacing, classNames, ...props } = rootProps
+    let key = JSON.stringify(rootProps)
+    let has = Cache.get(key)
+
+    React.useEffect(() => {
+        return () => {
+            Cache.delete(key)
+        }
+    }, [])
 
     let format = React.useMemo(() => {
+        if (has) return;
         let _css: any = {}
         if (spacing) {
             _css['& > *'] = {
@@ -59,14 +69,19 @@ export const useProps = (rootProps: CSSPropAsAttr, css_option?: OptionsProps) =>
             classname,
             propKeys
         }
-    }, [JSON.stringify(rootProps)]);
+    }, [key]);
+
+    if (has) return has;
 
     const _props: any = {};
-    for (let prop of format.propKeys) {
-        _props[prop] = (props as any)[prop]
+    if (format) {
+        for (let prop of format.propKeys) {
+            _props[prop] = (props as any)[prop]
+        }
+        if (format.classname) {
+            _props.className = format.classname
+        }
     }
-    if (format.classname) {
-        _props.className = format.classname
-    }
+    Cache.set(key, _props)
     return _props
 }

@@ -20,7 +20,15 @@ const App = () => {
 
   return (
     <ThemeProvider >
-      <Button onClick={() => setIn(!In)} >Random</Button>
+      <Tag
+        m={1}
+        border={1}
+        width={300}
+        height={40}
+        radius={1}
+        bgcolor="color.paper"
+      />
+      <Button onClick={() => alert(1)} id={undefined} >Random</Button>
       <Tag
         ref={ref}
         height={40}

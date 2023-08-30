@@ -168,6 +168,6 @@ export type CSSPropAsAttr = Partial<CSSProperties> & AliasesTypes & {
     hover?: CSSProps;
     baseClass?: string;
     disabled?: boolean;
-    typography?: keyof ThemeOptions['typography'];
+    typography?: keyof Omit<ThemeOptions['typography'], "fontSize" | "fontFamily" | "sizes">;
     classNames?: classNamesTypes[]
 }

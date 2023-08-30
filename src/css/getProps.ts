@@ -66,10 +66,10 @@ export default (prop: string, value: string, _css: CSSProps) => {
                 pointerEvents: "none",
                 cursor: "default",
                 userSelect: "none",
-                color: alpha("text.primary", .26) + "!important",
+                color: alpha("color.text", .26) + "!important",
             }
             if (keys.includes("bgcolor") || keys.includes("bg") || keys.includes("background") || keys.includes("backgroundColor")) {
-                _dcss.bgcolor = alpha("text.primary", .12) + "!important"
+                _dcss.bgcolor = alpha("color.text", .12) + "!important"
             }
             return _dcss
         }
@@ -77,11 +77,11 @@ export default (prop: string, value: string, _css: CSSProps) => {
     }
 
     // Border
-    if (prop === 'border' && typeof value === "number") {
+    if (prop === 'border' && typeof value === "number" && value) {
         return {
             borderWidth: value + 'px' + (important || ""),
             borderStyle: "solid",
-            borderColor: "divider"
+            borderColor: "color.divider"
         }
     }
 

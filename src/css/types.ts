@@ -8,7 +8,7 @@ export type CSSValueType<T extends keyof CSS.Properties> = CSS.Properties[T] | P
 
 export type AliasesTypes = {
     bgcolor?: CSSValueType<'background'> | ColorsRefTypes;
-    bgImage?: CSSValueType<'backgroundImage'>;
+    bgimage?: CSSValueType<'backgroundImage'>;
     bg?: CSSValueType<'background'> | ColorsRefTypes;
     p?: CSSValueType<'padding'>;
     pt?: CSSValueType<'padding'>;
@@ -36,9 +36,6 @@ export type AliasesTypes = {
     minw?: CSSValueType<"width"> | BreakpointsType;
     maxh?: CSSValueType<"height">;
     minh?: CSSValueType<"height">;
-    bgSize?: CSSValueType<'backgroundSize'>,
-    bgPosition?: CSSValueType<'backgroundPosition'>,
-    bgRepeat?: CSSValueType<'backgroundRepeat'>,
 
     flexBox?: boolean;
     flexRow?: boolean;

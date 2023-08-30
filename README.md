@@ -93,7 +93,7 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
             typography="button"
             {...rest}
             hover={{
-                bgcolor: "primary.dark",
+                bgcolor: alpha("color.primary", 1.2),
             }}
             sx={{
                 transition: "background .3s",
@@ -148,7 +148,7 @@ In this library there are already included many css property aliases. If you wan
 | Name  |  Description |
 |---|---|
 | `bgcolor` | `background-color`, you can pass string or theme colors name example: `primary`, `primary.color`|
-| `bgImage` | `background-image` |
+| `bgimage` | `background-image` |
 | `bg` | `background` |
 | `p` | `padding`|
 | `pt` |`paddng-top` |
@@ -235,11 +235,9 @@ Sometime you need to modify the existing theme then you can use this function. l
 import {modifyTheme} from 'naxui-manager'
 
 modifyTheme("default", {
-  color: {
+  colors: {
     primary: {
-      main: "red",
-      dark: "darkred",
-      light: "red",
+      color: "red",
       text: "#fff"
     }
   }
@@ -304,14 +302,11 @@ mergeTheme(theme1, theme2)
 
   ```js
     colors: {
-      background: {
-        default: "#ffffff",
-        paper: "#f5f5f5",
-      },
-      text: {
-        primary: "#111111",
-        secondary: "#666666"
-      },
+      common: "#FFFFFF",
+      paper: "#f5f5f5",
+      divider: "#d1d5db",
+      text: "#111111",
+      subtext: "#666666"
       primary: {
         color: "#2563eb",
         text: '#ffffff',
@@ -331,18 +326,6 @@ mergeTheme(theme1, theme2)
       warning: {
         color: "#d97706",
         text: '#ffffff',
-      },
-      grey: {
-        1: "#f9fafb",
-        2: "#f3f4f6",
-        3: "#e5e7eb",
-        4: "#d1d5db",
-        5: "#9ca3af",
-        6: "#6b7280",
-        7: "#4b5563",
-        8: "#374151",
-        9: "#1f2937",
-        10: "#111827",
       }
     }
   ```
@@ -355,72 +338,55 @@ mergeTheme(theme1, theme2)
   ```js
   typography: {
     fontFamily: '"Inter","Helvetica","Arial",sans-serif',
-    scale: {
-
-      /*
-      - All scale names
-      minor-second
-      major-second
-      Minor-third
-      major-third
-      perfect-fourth
-      augmented-fourth
-      perfect-fifth
-      golden-ratio
-      */
-      name: "major-third",
-      baseFontSize: 15,
-      sizes: []
-    },
+    fontSize: 15,
     h1: {
-      fontFamily: 'font-family',
+      fontFamily: 'typography.font-family',
       fontSize: 'fontsize.7',
-      color: "text.primary"
+      color: "color.text"
     },
     h2: {
-      fontFamily: 'font-family',
+      fontFamily: 'typography.font-family',
       fontSize: 'fontsize.6',
-      color: "text.primary"
+      color: "color.text"
     },
     h3: {
-      fontFamily: 'font-family',
+      fontFamily: 'typography.font-family',
       fontSize: 'fontsize.5',
-      color: "text.primary"
+      color: "color.text"
     },
     h4: {
-      fontFamily: 'font-family',
+      fontFamily: 'typography.font-family',
       fontSize: 'fontsize.4',
-      color: "text.primary"
+      color: "color.text"
     },
     h5: {
-      fontFamily: 'font-family',
+      fontFamily: 'typography.font-family',
       fontSize: 'fontsize.3',
-      color: "text.primary"
+      color: "color.text"
     },
     h6: {
-      fontFamily: 'font-family',
+      fontFamily: 'typography.font-family',
       fontSize: 'fontsize.2',
       fontWeight: 600,
-      color: "text.primary"
+      color: "color.text"
     },
     text: {
-      fontFamily: 'font-family',
+      fontFamily: 'typography.font-family',
       fontSize: 'fontsize.1',
       fontWeight: 400,
-      color: "text.primary"
+      color: "color.text"
     },
     subtext: {
-      fontFamily: 'font-family',
+      fontFamily: 'typography.font-family',
       fontSize: 'fontsize.1',
       fontWeight: 400,
-      color: "text.secondary"
+      color: "color.subtext"
     },
     button: {
-      fontFamily: 'font-family',
+      fontFamily: 'typography.font-family',
       fontSize: 'fontsize.1',
-      fontWeight: 400,
-      color: "primary.text",
-      bgcolor: "primary.color"
+      fontWeight: 500,
+      textTransform: "uppercase",
     }
   }
   ```
@@ -474,16 +440,16 @@ The sx prop is a shortcut for defining custom styles.
     bgcolor:"red",
 
     // use theme prop
-    bgcolor:"primary.color",
+    bgcolor:"color.primary",
 
     // responsive
     bgcolor: {
       sm: "red",
-      md: (theme) => theme.color.primary.color,
+      md: (theme) => theme.colors.primary.color,
     },
 
     // function
-    bgcolor: (theme) => theme.color.error.color
+    bgcolor: (theme) => theme.colors.error.color
   }} 
 />
 
@@ -501,19 +467,19 @@ There are many way to pass css value. `string`, `number`, `breakpoint` or `funct
   bgcolor="red"
   
   // use theme prop
-  bgcolor="primary.color"
+  bgcolor="color.primary"
 
   // responsive
   bgcolor={{
     sm: "red",
-    md: (theme) => theme.color.primary.color
+    md: (theme) => theme.colors.primary.color
   }}
 
   // function
-  bgcolor={(theme) => theme.color.error.color}
+  bgcolor={(theme) => theme.colors.error.color}
 />
 ```
-Here you can see the value  is `primary.color` so it will automatically get the theme primary.color color. in this way you can use everything from theme. like you want to use the `shadow` so you can pass the value `shadow.1`.
+Here you can see the value  is `color.primary` so it will automatically get the theme primary.color color. in this way you can use everything from theme. like you want to use the `shadow` so you can pass the value `shadow.1`.
 
 
 
@@ -523,14 +489,14 @@ How you can use the `gradient color`. you can use the geadient in `background` a
 ```jsx
 <MyComp 
   // use theme color props
-  bgcolor="linear(90deg, primary, secondary.color)"
+  bgcolor="linear(90deg, primary, color.secondary)"
   // use rgb or hex
-  bgcolor="linear(90deg, rgb(255, 0, 0), secondary.color 20%)"
+  bgcolor="linear(90deg, rgb(255, 0, 0), color.secondary  20%)"
 
   // text color
-  color="linear(90deg, primary, secondary.color)"
+  color="redial(90deg, primary, color.secondary)"
   // use rgb or hex
-  color="linear(90deg, rgb(255, 0, 0), secondary.color 20%)"
+  color="redial(90deg, rgb(255, 0, 0), color.secondary  20%)"
 />
 ```
 
@@ -545,7 +511,7 @@ customize you color. first argument you can pass the color name or hex and the s
 import {alpha} from 'naxui-manager'
 
 <Tag 
-  bgcolor={alpha("primary", .3)}
+  bgcolor={alpha("color.primary", .3)}
 />
 
 ```
