@@ -10,7 +10,7 @@ export const darkModeColor = {
 
 export const lightModeColor = {
     common: "#FFFFFF",
-    paper: "#ececec",
+    paper: "#f0f0f0",
     divider: "#d1d5db",
     text: "#111111",
     subtext: "#666666"

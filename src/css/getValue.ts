@@ -36,7 +36,7 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         "color.text": "var(--color-text)",
         "color.subtext": "var(--color-subtext)",
         "color.primary": "var(--color-primary)",
-        "color.primary.text": "var(--color-primary.text)",
+        "color.primary.text": "var(--color-primary-text)",
         "color.secondary": "var(--color-secondary)",
         "color.secondary.text": "var(--color-secondary-text)",
         "color.success": "var(--color-success)",
