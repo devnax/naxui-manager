@@ -22,7 +22,7 @@ export interface ThemeColorsOptions {
 
 export type ScaleNameTypes = "minor-second" |
     "major-second" |
-    "Minor-third" |
+    "minor-third" |
     "major-third" |
     "perfect-fourth" |
     "augmented-fourth" |
@@ -132,7 +132,9 @@ export type ShadowRefTyeps =
     | "shadow.10";
 
 
-export type TypographyRefTypes = "fontSize.1"
+export type TypographyRefTypes =
+    | "fontSize.0"
+    | "fontSize.1"
     | "fontSize.2"
     | "fontSize.3"
     | "fontSize.4"

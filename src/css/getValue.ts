@@ -47,6 +47,7 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         "color.warning.text": "var(--color-warning-text)",
 
         // Typography
+        "fontsize.0": "var(--fontsize-0)",
         "fontsize.1": "var(--fontsize-1)",
         "fontsize.2": "var(--fontsize-2)",
         "fontsize.3": "var(--fontsize-3)",

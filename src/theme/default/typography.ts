@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     fontFamily: '"Inter","Helvetica","Arial",sans-serif',
-    fontSize: 16,
+    fontSize: 15,
     sizes: [],
 
     h1: {
