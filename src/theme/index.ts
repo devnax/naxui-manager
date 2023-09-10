@@ -27,6 +27,7 @@ function createFontScale(baseSize: number, scale: ScaleNameTypes, length = 8) {
         const size = Math.round(baseSize * Math.pow(ratio, i));
         fontSizes.push(size);
     }
+    fontSizes.splice(2, 0, baseSize + 2)
     return fontSizes;
 }
 
@@ -162,15 +163,16 @@ export const changeTheme = (name: string) => {
             "--color-warning-text": colors.warning.text,
 
             // Typography
-            "--fontsize-0": typography.sizes[0],
-            "--fontsize-1": typography.sizes[1],
-            "--fontsize-2": typography.sizes[2],
-            "--fontsize-3": typography.sizes[3],
-            "--fontsize-4": typography.sizes[4],
-            "--fontsize-5": typography.sizes[5],
-            "--fontsize-6": typography.sizes[6],
-            "--fontsize-7": typography.sizes[7],
-            "--fontsize-8": typography.sizes[8],
+            "--fontsize-1": typography.sizes[0],
+            "--fontsize-2": typography.sizes[1],
+            "--fontsize-3": typography.sizes[2],
+            "--fontsize-4": typography.sizes[3],
+            "--fontsize-5": typography.sizes[4],
+            "--fontsize-6": typography.sizes[5],
+            "--fontsize-7": typography.sizes[6],
+            "--fontsize-8": typography.sizes[7],
+            "--fontsize-9": typography.sizes[8],
+            "--fontsize-10": typography.sizes[9],
 
             // Shadow
             "--shadow-1": shadows[1],

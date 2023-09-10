@@ -303,8 +303,8 @@ mergeTheme(theme1, theme2)
   ```js
     colors: {
       common: "#FFFFFF",
-      paper: "#f5f5f5",
-      divider: "#d1d5db",
+      paper: "#f3f3f3",
+      divider: "#ededed",
       text: "#111111",
       subtext: "#666666"
       primary: {
@@ -341,50 +341,49 @@ mergeTheme(theme1, theme2)
     fontSize: 15,
     h1: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.7',
+      fontSize: 'fontsize.10',
       color: "color.text"
     },
     h2: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.6',
+      fontSize: 'fontsize.9',
       color: "color.text"
     },
     h3: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.5',
+      fontSize: 'fontsize.8',
       color: "color.text"
     },
     h4: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.4',
+      fontSize: 'fontsize.7',
       color: "color.text"
     },
     h5: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.3',
+      fontSize: 'fontsize.6',
       color: "color.text"
     },
     h6: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.2',
-      fontWeight: 600,
+      fontSize: 'fontsize.5',
       color: "color.text"
     },
     text: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.1',
+      fontSize: 'fontsize.2',
       fontWeight: 400,
       color: "color.text"
     },
     subtext: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.1',
+      fontSize: 'fontsize.2',
       fontWeight: 400,
       color: "color.subtext"
     },
     button: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.1',
+      fontSize: 'fontsize.2',
       fontWeight: 500,
       textTransform: "uppercase",
     }

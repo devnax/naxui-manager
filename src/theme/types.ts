@@ -133,7 +133,6 @@ export type ShadowRefTyeps =
 
 
 export type TypographyRefTypes =
-    | "fontsize.0"
     | "fontsize.1"
     | "fontsize.2"
     | "fontsize.3"
@@ -142,3 +141,5 @@ export type TypographyRefTypes =
     | "fontsize.6"
     | "fontsize.7"
     | "fontsize.8"
+    | "fontsize.9"
+    | "fontsize.10"

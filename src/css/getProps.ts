@@ -61,14 +61,15 @@ export default (prop: string, value: string, _css: CSSProps) => {
 
     if (prop === 'disabled') {
         if ((value as any) === true) {
-            const keys = Object.keys(_css)
+            const keys: any = Object.keys(_css)
             let _dcss: any = {
                 pointerEvents: "none",
                 cursor: "default",
                 userSelect: "none",
                 color: alpha("color.text", .26) + "!important",
             }
-            if (keys.includes("bgcolor") || keys.includes("bg") || keys.includes("background") || keys.includes("backgroundColor")) {
+            let isBgcolor = keys["bgcolor"] || keys["bg"] || keys["background"] || keys["backgroundColor"]
+            if (isBgcolor && isBgcolor !== 'transparent') {
                 _dcss.bgcolor = alpha("color.text", .12) + "!important"
             }
             return _dcss
@@ -77,9 +78,9 @@ export default (prop: string, value: string, _css: CSSProps) => {
     }
 
     // Border
-    if (prop === 'border' && typeof value === "number" && value) {
+    if (typeof value === "number" && value && ["border", "borderRight", "borderLeft", "borderTop", "borderBottom"].includes(prop as any)) {
         return {
-            borderWidth: value + 'px' + (important || ""),
+            [`${prop}Width`]: value + 'px' + (important || ""),
             borderStyle: "solid",
             borderColor: "color.divider"
         }

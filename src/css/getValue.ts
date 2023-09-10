@@ -13,9 +13,7 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
     const theme = getTheme()
     if (typeof value === "function") {
         let v = (value as any)(theme)
-        if (important) {
-            v = v + important
-        }
+        if (important) v = v + important
         return getValue(v, prop, _css) || v
     }
 
@@ -47,7 +45,6 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         "color.warning.text": "var(--color-warning-text)",
 
         // Typography
-        "fontsize.0": "var(--fontsize-0)",
         "fontsize.1": "var(--fontsize-1)",
         "fontsize.2": "var(--fontsize-2)",
         "fontsize.3": "var(--fontsize-3)",
@@ -56,6 +53,8 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         "fontsize.6": "var(--fontsize-6)",
         "fontsize.7": "var(--fontsize-7)",
         "fontsize.8": "var(--fontsize-8)",
+        "fontsize.9": "var(--fontsize-9)",
+        "fontsize.10": "var(--fontsize-10)",
 
         // Shadow
         "shadow.1": "var(--shadow-1)",
