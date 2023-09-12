@@ -19,7 +19,6 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
 
     const values: any = {
         'typography.font-family': "var(--typography-font-family)",
-        'typography.font-size': "var(--typography-font-family)",
 
         // Breakpoints
         "breakpoints.xs": "var(--breakpoint-xs)",
@@ -45,16 +44,15 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         "color.warning.text": "var(--color-warning-text)",
 
         // Typography
-        "fontsize.1": "var(--fontsize-1)",
-        "fontsize.2": "var(--fontsize-2)",
-        "fontsize.3": "var(--fontsize-3)",
-        "fontsize.4": "var(--fontsize-4)",
-        "fontsize.5": "var(--fontsize-5)",
-        "fontsize.6": "var(--fontsize-6)",
-        "fontsize.7": "var(--fontsize-7)",
-        "fontsize.8": "var(--fontsize-8)",
-        "fontsize.9": "var(--fontsize-9)",
-        "fontsize.10": "var(--fontsize-10)",
+        "fontsize.h1": "var(--fontsize-h1)",
+        "fontsize.h2": "var(--fontsize-h2)",
+        "fontsize.h3": "var(--fontsize-h3)",
+        "fontsize.h4": "var(--fontsize-h4)",
+        "fontsize.h5": "var(--fontsize-h5)",
+        "fontsize.h6": "var(--fontsize-h6)",
+        "fontsize.text": "var(--fontsize-text)",
+        "fontsize.button": "var(--fontsize-button)",
+        "fontsize.small": "var(--fontsize-small)",
 
         // Shadow
         "shadow.1": "var(--shadow-1)",

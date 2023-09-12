@@ -1,11 +1,24 @@
 import { useEffect, useState } from 'react'
 import useTransition, { UseTransitionProps } from '../useTransiton'
 import * as variants from './variants'
+import { CSSProps } from 'naxcss'
+import { AliasesTypes } from '../../css/types'
 
 export type UseTransitionsVariantsTypes = keyof typeof variants
+export type UseTransitionsVariant = {
+    in: {
+        from: CSSProps<AliasesTypes>,
+        to: CSSProps<AliasesTypes>
+    },
+    out: {
+        from: CSSProps<AliasesTypes>,
+        to: CSSProps<AliasesTypes>
+    }
+}
+export type UseTransitionsVariantCallback = (box: { boxHeight: number, boxWidth: number }) => UseTransitionsVariant
 export type UseTransitionsProps = Omit<UseTransitionProps, "from" | "to" | "initial">
 
-const useTransitions = (type: UseTransitionsVariantsTypes, _in?: boolean, transProps?: UseTransitionsProps) => {
+const useTransitions = (type: UseTransitionsVariantsTypes | UseTransitionsVariantCallback, _in?: boolean, transProps?: UseTransitionsProps) => {
     const [state, setState] = useState({
         boxHeight: 0,
         boxWidth: 0
@@ -14,7 +27,12 @@ const useTransitions = (type: UseTransitionsVariantsTypes, _in?: boolean, transP
     _in = _in === undefined ? true : _in
     const [initial, setInitial] = useState(false)
     const [initialCss, setInitialCss] = useState<any>({})
-    let variant = variants[type](state)
+    let variant: UseTransitionsVariant;
+    if (typeof type === "function") {
+        variant = type(state)
+    } else {
+        variant = variants[type](state)
+    }
     let _css: any = _in ? variant.in : variant.out;
 
     useEffect(() => {

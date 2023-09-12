@@ -338,52 +338,51 @@ mergeTheme(theme1, theme2)
   ```js
   typography: {
     fontFamily: '"Inter","Helvetica","Arial",sans-serif',
-    fontSize: 15,
     h1: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.10',
+      fontSize: 'fontsize.h1',
       color: "color.text"
     },
     h2: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.9',
+      fontSize: 'fontsize.h2',
       color: "color.text"
     },
     h3: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.8',
+      fontSize: 'fontsize.h3',
       color: "color.text"
     },
     h4: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.7',
+      fontSize: 'fontsize.h4',
       color: "color.text"
     },
     h5: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.6',
+      fontSize: 'fontsize.h5',
       color: "color.text"
     },
     h6: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.5',
+      fontSize: 'fontsize.h6',
       color: "color.text"
     },
     text: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.2',
+      fontSize: 'fontsize.text',
       fontWeight: 400,
       color: "color.text"
     },
     subtext: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.2',
+      fontSize: 'fontsize.text',
       fontWeight: 400,
       color: "color.subtext"
     },
     button: {
       fontFamily: 'typography.font-family',
-      fontSize: 'fontsize.2',
+      fontSize: 'fontsize.button',
       fontWeight: 500,
       textTransform: "uppercase",
     }
@@ -568,8 +567,20 @@ You can use with some predefined transitions. you can use them with this functio
 import {useTransitons} from 'naxui-manager'
 
 let type = "fade" //or "fadeDown" | "fadeUp" | "fadeRight" | "fadeLeft" | "zoom" | "zoomOver" | "collapsVerticle" | "collapsHorizental"
+// or
+let type = (transitionBoxInfo) => {
+  return {
+    in: {
+      from: {},
+      to: {}
+    },
+    out: {
+      from: {},
+      to: {}
+    }
+  }
+}
 let In = true
-
 const [ref, classname] = useTransitons(type, In, {
   delay: 0,
   duration: 600,

@@ -20,14 +20,6 @@ export interface ThemeColorsOptions {
     warning: ColorType;
 }
 
-export type ScaleNameTypes = "minor-second" |
-    "major-second" |
-    "minor-third" |
-    "major-third" |
-    "perfect-fourth" |
-    "augmented-fourth" |
-    "perfect-fifth" |
-    "golden-ratio";
 
 export type TextStyleProps = {
     fontSize?: string | number;
@@ -36,8 +28,6 @@ export type TextStyleProps = {
 
 export interface ThemeTypographyOptions {
     fontFamily: string;
-    fontSize: number;
-    sizes: number[];
     text: TextStyleProps;
     subtext: TextStyleProps;
     button: TextStyleProps;
@@ -86,19 +76,6 @@ export type ObjectType = { [key: string]: any }
 export type StateKeys = "current_theme" | "dispatch"
 export type BreakpointsType = "xs" | "sm" | "md" | "lg" | "xl"
 
-export type TextRefTypes =
-    | "typography.font-family"
-    | "typography.font-size"
-// | "typography.text"
-// | "typography.subtext"
-// | "typography.button"
-// | "typography.h1"
-// | "typography.h2"
-// | "typography.h3"
-// | "typography.h4"
-// | "typography.h5"
-// | "typography.h6";
-
 
 export type ColorsRefTypes =
     | "color.common"
@@ -133,13 +110,12 @@ export type ShadowRefTyeps =
 
 
 export type TypographyRefTypes =
-    | "fontsize.1"
-    | "fontsize.2"
-    | "fontsize.3"
-    | "fontsize.4"
-    | "fontsize.5"
-    | "fontsize.6"
-    | "fontsize.7"
-    | "fontsize.8"
-    | "fontsize.9"
-    | "fontsize.10"
+    | "fontsize.h1"
+    | "fontsize.h2"
+    | "fontsize.h3"
+    | "fontsize.h4"
+    | "fontsize.h5"
+    | "fontsize.h6"
+    | "fontsize.text"
+    | "fontsize.button"
+    | "fontsize.small"

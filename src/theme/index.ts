@@ -1,4 +1,4 @@
-import { ThemeOptions, ObjectType, StateKeys, ThemeOptionsPartial, ScaleNameTypes } from "./types"
+import { ThemeOptions, ObjectType, StateKeys, ThemeOptionsPartial } from "./types"
 import defaultThemeOption from './default'
 import { globalCss } from '../css'
 import { NAXCSS_CACHE } from 'naxcss'
@@ -8,28 +8,6 @@ export * from './types'
 const ThemeFactory = new Map<string, ThemeOptions>()
 const DispatchFactory = new Map<string, () => void>()
 export const State = new Map<StateKeys, any>()
-
-const ratios: { [scale in ScaleNameTypes]: number } = {
-    "minor-second": 1.067,
-    "major-second": 1.125,
-    "minor-third": 1.200,
-    "major-third": 1.250,
-    "perfect-fourth": 1.333,
-    "augmented-fourth": 1.414,
-    "perfect-fifth": 1.500,
-    "golden-ratio": 1.618,
-}
-
-function createFontScale(baseSize: number, scale: ScaleNameTypes, length = 8) {
-    const ratio = ratios[scale]
-    const fontSizes = [baseSize - 2];
-    for (let i = 0; i < length; i++) {
-        const size = Math.round(baseSize * Math.pow(ratio, i));
-        fontSizes.push(size);
-    }
-    fontSizes.splice(2, 0, baseSize + 2)
-    return fontSizes;
-}
 
 export const mergeTheme = (a: ObjectType, b: ObjectType) => {
     a = { ...a }
@@ -51,8 +29,6 @@ export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOp
         let theme: any = mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptions
         ThemeFactory.set(name, theme)
         const t = ThemeFactory.get(name) as ThemeOptions
-        const sizes = createFontScale(t.typography.fontSize || 16, "minor-third")
-        t.typography.sizes = sizes
         ThemeFactory.set(name, t)
     }
     return ThemeFactory.get(name) as ThemeOptions
@@ -111,7 +87,7 @@ export const changeTheme = (name: string) => {
             },
             "body": {
                 fontFamily: "typography.font-family",
-                fontSize: "fontsize.1",
+                fontSize: "fontsize.text",
                 bgcolor: "color.common",
                 color: "color.text",
                 fontWeight: 400,
@@ -137,8 +113,19 @@ export const changeTheme = (name: string) => {
         })
 
         let root: any = {
+
+            // Typography
             "--typography-font-family": typography.fontFamily,
-            "--typography-font-size": typography.fontSize,
+            "--fontsize-h1": "5.61rem",
+            "--fontsize-h2": "4.209rem",
+            "--fontsize-h3": "3.157rem",
+            "--fontsize-h4": "2.369rem",
+            "--fontsize-h5": "1.777rem",
+            "--fontsize-h6": "1.333rem",
+            "--fontsize-text": "1rem",
+            "--fontsize-button": "0.85rem",
+            "--fontsize-small": "0.75rem",
+
             // Breakpoints
             "--breakpoint-xs": breakpoints.xs,
             "--breakpoint-sm": breakpoints.sm,
@@ -161,18 +148,6 @@ export const changeTheme = (name: string) => {
             "--color-error-text": colors.error.text,
             "--color-warning": colors.warning.color,
             "--color-warning-text": colors.warning.text,
-
-            // Typography
-            "--fontsize-1": typography.sizes[0],
-            "--fontsize-2": typography.sizes[1],
-            "--fontsize-3": typography.sizes[2],
-            "--fontsize-4": typography.sizes[3],
-            "--fontsize-5": typography.sizes[4],
-            "--fontsize-6": typography.sizes[5],
-            "--fontsize-7": typography.sizes[6],
-            "--fontsize-8": typography.sizes[7],
-            "--fontsize-9": typography.sizes[8],
-            "--fontsize-10": typography.sizes[9],
 
             // Shadow
             "--shadow-1": shadows[1],

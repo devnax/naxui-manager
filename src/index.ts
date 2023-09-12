@@ -9,7 +9,7 @@ import useWindowResize from './hooks/useWindowResize'
 import serverStyleTags from './serverStyleTags'
 import useAnimation, { UseAnimationProps } from './hooks/useAnimation'
 import useTransition, { UseTransitionProps } from './hooks/useTransiton'
-import useTransitions, { UseTransitionsProps, UseTransitionsVariantsTypes } from './hooks/useTransitions'
+import useTransitions, { UseTransitionsProps, UseTransitionsVariantsTypes, UseTransitionsVariant, UseTransitionsVariantCallback } from './hooks/useTransitions'
 
 export * from './css'
 export * from "./useProps"
@@ -22,7 +22,9 @@ export type {
     UseAnimationProps,
     UseTransitionProps,
     UseTransitionsProps,
-    UseTransitionsVariantsTypes
+    UseTransitionsVariantsTypes,
+    UseTransitionsVariant,
+    UseTransitionsVariantCallback
 }
 
 export {
