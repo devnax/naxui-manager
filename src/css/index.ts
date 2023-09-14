@@ -104,9 +104,7 @@ export const alpha = (color: ColorsRefTypes | string, opacity = 1) => {
     let _color = colors[color] || color
     if (typeof opacity !== 'number') return color
     let _opacity = opacity * 100
-    if (_opacity > 100) {
-        throw new Error(`opcaity must be 0-1`);
-    }
+
     if (!_color.startsWith("#")) {
         throw new Error(`color must be hex`);
     }
