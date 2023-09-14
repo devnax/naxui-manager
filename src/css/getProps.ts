@@ -81,8 +81,8 @@ export default (prop: string, value: string, _css: CSSProps) => {
     if (typeof value === "number" && value && ["border", "borderRight", "borderLeft", "borderTop", "borderBottom"].includes(prop as any)) {
         return {
             [`${prop}Width`]: value + 'px' + (important || ""),
-            borderStyle: "solid",
-            borderColor: "color.divider"
+            [`${prop}Style`]: "solid",
+            [`${prop}Color`]: "color.divider"
         }
     }
 

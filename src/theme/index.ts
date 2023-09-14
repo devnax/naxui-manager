@@ -1,6 +1,6 @@
 import { ThemeOptions, ObjectType, StateKeys, ThemeOptionsPartial } from "./types"
 import defaultThemeOption from './default'
-import { globalCss } from '../css'
+import { globalCss, alpha } from '../css'
 import { NAXCSS_CACHE } from 'naxcss'
 import * as React from "react"
 import { darkModeColor } from "./default/colors"
@@ -74,16 +74,27 @@ export const changeTheme = (name: string) => {
         NAXCSS_CACHE.delete("reset-css")
         NAXCSS_CACHE.delete("global-css")
 
+
+        const cache_keys = Array.from(NAXCSS_CACHE.keys())
+
+        cache_keys.forEach((key: string) => {
+            const cache = NAXCSS_CACHE.get(key)
+            if (cache && key.startsWith("alpha")) {
+                document.querySelector(`style[data-naxcss='${key}']`)?.remove()
+                NAXCSS_CACHE.delete(key)
+                let _value = key.replace("alpha-", '').split("|")
+                alpha(_value[0], parseFloat(_value[1]))
+            }
+        })
+
+
         globalCss("reset-css", {
             "*": {
                 m: 0,
-                padding: 0,
+                p: 0,
                 outline: "none",
                 boxSizing: "border-box",
                 verticalAlign: "baseline",
-            },
-            "html, body": {
-                height: " 100%"
             },
             "body": {
                 fontFamily: "typography.font-family",
@@ -108,7 +119,8 @@ export const changeTheme = (name: string) => {
                 listStyle: "none"
             },
             "p, h1, h2, h3, h4, h5, h6": {
-                overflowWrap: " break-word"
+                overflowWrap: " break-word",
+                color: "color.text"
             }
         })
 
@@ -116,15 +128,15 @@ export const changeTheme = (name: string) => {
 
             // Typography
             "--typography-font-family": typography.fontFamily,
-            "--fontsize-h1": "5.61rem",
-            "--fontsize-h2": "4.209rem",
-            "--fontsize-h3": "3.157rem",
-            "--fontsize-h4": "2.369rem",
-            "--fontsize-h5": "1.777rem",
-            "--fontsize-h6": "1.333rem",
+            "--fontsize-h1": "3.815rem",
+            "--fontsize-h2": "3.052rem",
+            "--fontsize-h3": "2.441rem",
+            "--fontsize-h4": "1.953rem",
+            "--fontsize-h5": "1.563rem",
+            "--fontsize-h6": "1.25rem",
             "--fontsize-text": "1rem",
-            "--fontsize-button": "0.85rem",
-            "--fontsize-small": "0.75rem",
+            "--fontsize-button": "0.875rem",
+            "--fontsize-block": "0.813rem",
 
             // Breakpoints
             "--breakpoint-xs": breakpoints.xs,

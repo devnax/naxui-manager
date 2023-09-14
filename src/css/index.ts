@@ -80,17 +80,49 @@ export const keyframes = (frames: keyframesType<AliasesTypes>, options?: Options
 
 export const makeCacheKey = (css_raw: object) => naxcss.makeCacheKey(css_raw)
 
-
 export const alpha = (color: ColorsRefTypes | string, opacity = 1) => {
-    color = getValue(color, "", {}) || color
-    let opDark = 0, opLight = opacity;
-    if (opacity > 1) {
-        opDark = opacity - 1;
-        opLight = 1;
+    let _opacity = opacity * 100
+    const theme = getTheme()
+
+    let colors: any = {
+        "color.common": theme.colors.common,
+        "color.paper": theme.colors.paper,
+        "color.divider": theme.colors.divider,
+        "color.text": theme.colors.text,
+        "color.subtext": theme.colors.subtext,
+        "color.primary": theme.colors.primary.color,
+        "color.primary-text": theme.colors.primary.text,
+        "color.secondary": theme.colors.secondary.color,
+        "color.secondary-text": theme.colors.secondary.text,
+        "color.success": theme.colors.success.color,
+        "color.success-text": theme.colors.success.text,
+        "color.error": theme.colors.error.color,
+        "color.error-text": theme.colors.error.text,
+        "color.warning": theme.colors.warning.color,
+        "color.warning-text": theme.colors.warning.text,
     }
-    opDark = opDark * 100
-    opLight = opLight * 100
-    let d = opDark ? `#000 ${opDark}%` : 'transparent'
-    let l = opLight ? `${color} ${opLight}%` : 'transparent'
-    return `color-mix(in srgb, ${l}, ${d})`
-}
+
+    let _color = colors[color] || color
+
+    if (_opacity > 100) {
+        throw new Error(`opcaity must be 0-1`);
+    }
+    if (!_color.startsWith("#")) {
+        throw new Error(`color must be hex`);
+    }
+
+    let _alpha = (_color + (`0${Math.round((255 / 100) * _opacity).toString(16)}`.slice(-2))).toUpperCase();
+    if (color === 'color.paper' || color === 'color.common') {
+        let varname = ("alpha-" + color + opacity).replaceAll(/#|\./gi, '-').toLowerCase()
+        let key = ("alpha-" + color + "|" + opacity)
+        globalCss(key, {
+            ":root": {
+                [`--${varname}`]: _alpha
+            }
+        })
+        _alpha = `var(--${varname})`
+    }
+
+    return _alpha
+};
+

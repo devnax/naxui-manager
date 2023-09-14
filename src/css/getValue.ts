@@ -52,7 +52,7 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         "fontsize.h6": "var(--fontsize-h6)",
         "fontsize.text": "var(--fontsize-text)",
         "fontsize.button": "var(--fontsize-button)",
-        "fontsize.small": "var(--fontsize-small)",
+        "fontsize.block": "var(--fontsize-block)",
 
         // Shadow
         "shadow.1": "var(--shadow-1)",

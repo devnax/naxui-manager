@@ -10,9 +10,9 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
     return (
         <Tag
             component="button"
-            border={1}
-            bgcolor="color.warning"
-            color="color.warning.text"
+            border={0}
+            bgcolor="color.primary"
+            color="color.primary.text"
             minWidth={100}
             height={40}
             radius={1}

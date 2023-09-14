@@ -118,4 +118,4 @@ export type TypographyRefTypes =
     | "fontsize.h6"
     | "fontsize.text"
     | "fontsize.button"
-    | "fontsize.small"
+    | "fontsize.block"

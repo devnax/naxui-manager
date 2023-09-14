@@ -3,60 +3,46 @@ export default {
     fontFamily: '"Inter","Helvetica","Arial",sans-serif',
     h1: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h1',
-        color: "color.text",
-        lineHeight: 1.6
+        fontSize: 'fontsize.h1'
     },
     h2: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h2',
-        color: "color.text",
-        lineHeight: 1.6
+        fontSize: 'fontsize.h2'
     },
     h3: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h3',
-        color: "color.text",
-        lineHeight: 1.6
+        fontSize: 'fontsize.h3'
     },
     h4: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h4',
-        color: "color.text",
-        lineHeight: 1.6
+        fontSize: 'fontsize.h4'
     },
     h5: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h5',
-        color: "color.text",
-        lineHeight: 1.6
+        fontSize: 'fontsize.h5'
     },
     h6: {
         fontFamily: 'typography.font-family',
         fontSize: 'fontsize.h6',
-        fontWeight: 600,
-        color: "color.text",
-        lineHeight: 1.6
+        fontWeight: 600
     },
     text: {
         fontFamily: 'typography.font-family',
         fontSize: 'fontsize.text',
         fontWeight: 400,
         color: "color.text",
-        lineHeight: 1.6
+        lineHeight: 1.75
     },
     subtext: {
         fontFamily: 'typography.font-family',
         fontSize: 'fontsize.text',
         fontWeight: 400,
         color: "color.subtext",
-        lineHeight: 1.6
+        lineHeight: 1.75
     },
     button: {
         fontFamily: 'typography.font-family',
         fontSize: 'fontsize.button',
-        fontWeight: 400,
-        textTransform: "uppercase",
-        lineHeight: 1.6
+        fontWeight: 500
     }
 }

@@ -1,25 +1,25 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 
 export const darkModeColor = {
-    common: "#313339",
-    paper: "#24262a",
-    divider: "#41454d",
-    text: "#FFFFFF",
-    subtext: "#BDBDBD"
+    common: "#1e1e20",
+    paper: "#161618",
+    divider: "#2E2E32",
+    text: "#DFDFD7",
+    subtext: "#99999F"
 }
 
 export const lightModeColor = {
     common: "#FFFFFF",
-    paper: "#f3f3f3",
-    divider: "#e7e6e6",
+    paper: "#f6f6f7",
+    divider: "#E7E7E8",
     text: "#111111",
-    subtext: "#666666"
+    subtext: "#6D6D72"
 }
 
 export const main_pallete = {
     ...lightModeColor,
     primary: {
-        color: "#2563eb",
+        color: "#0066ff",
         text: '#ffffff',
     },
     secondary: {

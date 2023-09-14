@@ -20,15 +20,22 @@ const App = () => {
 
   return (
     <ThemeProvider >
+      <Tag p={3}>
+        <Tag typography="h1" borderBottom={1} mb={1} p={1}>A Visual Type</Tag>
+        <Tag typography="text">What looked like a small patch of purple grass, above five feet square, was moving across the sand in their direction.</Tag>
+        <Tag mt={1} typography="subtext"> When it came near enough he perceived that it was not grass; there were no blades, but only purple roots. The roots were revolving, for each small plant in the whole patch, like the spokes of a rimless wheel.</Tag>
+      </Tag>
       <Tag
         m={1}
-        border={1}
         width={300}
         height={40}
         radius={1}
-        bgcolor="color.paper"
+        bgcolor={"color.paper"}
       />
-      <Button onClick={() => alert(1)} id={undefined} >Random</Button>
+      <Button onClick={() => {
+        const theme = getTheme()
+        changeTheme(theme.name === 'default' ? "default-dark" : "default")
+      }} id={undefined} >Random</Button>
       <Tag
         ref={ref}
         height={40}
