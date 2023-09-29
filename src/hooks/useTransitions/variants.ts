@@ -81,17 +81,17 @@ export const fadeRight = (_arg: VariantArgs) => {
                 opacity: 0
             },
             to: {
-                transform: `translateY(0)`,
+                transform: `translateX(0)`,
                 opacity: 1
             }
         },
         out: {
             from: {
-                transform: `translateY(0)`,
+                transform: `translateX(0)`,
                 opacity: 1
             },
             to: {
-                transform: `translateY(-150px)`,
+                transform: `translateX(-150px)`,
                 opacity: 0
             }
         }
@@ -106,17 +106,17 @@ export const fadeLeft = (_arg: VariantArgs) => {
                 opacity: 0
             },
             to: {
-                transform: `translateY(0)`,
+                transform: `translateX(0)`,
                 opacity: 1
             }
         },
         out: {
             from: {
-                transform: `translateY(0)`,
+                transform: `translateX(0)`,
                 opacity: 1
             },
             to: {
-                transform: `translateY(150px)`,
+                transform: `translateX(150px)`,
                 opacity: 0
             }
         }
