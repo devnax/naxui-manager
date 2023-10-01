@@ -33,6 +33,10 @@ export const useProps = (rootProps: CSSPropAsAttr, css_option?: OptionsProps) =>
         }
 
         let classname = "";
+        if (baseClass) {
+            const cssOpt = css_options()
+            baseClass = cssOpt.classPrefix + baseClass
+        }
         if (Object.keys(_css).length) {
             let cls: string = css(_css, {
                 ...css_option,
@@ -48,12 +52,9 @@ export const useProps = (rootProps: CSSPropAsAttr, css_option?: OptionsProps) =>
                     baseClass && t.setAttribute("data-ui", baseClass)
                 }
             })
-            if (baseClass) {
-                const cssOpt = css_options()
-                baseClass = cssOpt.classPrefix + baseClass
-            }
             classname = mergecls(baseClass as any, ...(classNames || []), cls, (props as any).className)
-
+        } else {
+            classname = mergecls(baseClass as any, ...(classNames || []), (props as any).className)
         }
         return {
             classname,
