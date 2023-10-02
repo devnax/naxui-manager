@@ -11,7 +11,10 @@ import { alpha } from '../src'
 
 const App = () => {
   const [In, setIn] = React.useState(false)
-  const [ref, cls] = useTransitions("fadeDown", In)
+  const [height, setHeight] = React.useState(200)
+  const [ref, cls] = useTransitions("collapsVerticle", In, {
+    duration: In ? 0 : 600
+  })
 
   const [variant, setVariant] = React.useState<any>('filled')
   const [color, setColor] = React.useState<any>('default')
@@ -20,6 +23,32 @@ const App = () => {
 
   return (
     <ThemeProvider >
+      <Tag p={3}>
+        <Tag
+          className={cls}
+          ref={ref}
+        >
+          <Tag
+            bgcolor="color.primary"
+            p={3}
+            width={200}
+            height={height}
+          >
+          </Tag>
+        </Tag>
+        <Button
+          mt={2}
+          onClick={() => {
+            setIn(!In)
+          }}
+        >Toggle</Button>
+        <Button
+          mt={2}
+          onClick={() => {
+            setHeight(height === 200 ? 300 : 200)
+          }}
+        >Change Height</Button>
+      </Tag>
       <Tag p={3}>
         <Tag typography="h1" borderBottom={1} mb={1} p={1}>A Visual Type</Tag>
         <Tag typography="text">What looked like a small patch of purple grass, above five feet square, was moving across the sand in their direction.</Tag>
@@ -37,7 +66,6 @@ const App = () => {
         changeTheme(theme.name === 'default' ? "default-dark" : "default")
       }} id={undefined} >Random</Button>
       <Tag
-        ref={ref}
         height={40}
         px={3}
         cursor="pointer"

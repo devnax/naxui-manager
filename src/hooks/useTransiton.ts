@@ -24,8 +24,8 @@ const useTransition = ({ from, to, initial, easing, ease, duration, delay, onSta
     let _initial: any = initial || {}
     const [_css, setCss] = useState<any>(_from)
     easing = easing || "easeBounceOut"
-    duration = duration === undefined ? 400 : duration
-    delay = delay === undefined ? 0 : delay
+    duration = duration ?? 500
+    delay = delay ?? 0
     let _ease = ease || animationEases[easing] || animationEases.easeBounceOut
     let trans = ` ${duration}ms ${_ease} ${delay}ms`
 
@@ -46,8 +46,7 @@ const useTransition = ({ from, to, initial, easing, ease, duration, delay, onSta
         }
         setCss(_to)
     }, [JSON.stringify({ ..._from, ..._to })])
-
-    return [ref, classname]
+    return [ref, duration ? classname : ""]
 }
 
 export default useTransition

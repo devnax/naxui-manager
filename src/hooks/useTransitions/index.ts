@@ -27,12 +27,7 @@ const useTransitions = (type: UseTransitionsVariantsTypes | UseTransitionsVarian
     _in = _in === undefined ? true : _in
     const [initial, setInitial] = useState(false)
     const [initialCss, setInitialCss] = useState<any>({})
-    let variant: UseTransitionsVariant;
-    if (typeof type === "function") {
-        variant = type(state)
-    } else {
-        variant = variants[type](state)
-    }
+    let variant: UseTransitionsVariant = typeof type === "function" ? type(state) : variants[type](state)
     let _css: any = _in ? variant.in : variant.out;
 
     useEffect(() => {
@@ -47,13 +42,13 @@ const useTransitions = (type: UseTransitionsVariantsTypes | UseTransitionsVarian
                 })
             }
         }
-    }, [state.boxHeight, state.boxWidth])
+    }, [_in])
 
     let [ref, cls]: any = useTransition({
         ..._css,
-        initial: initial ? { ...initialCss } : { visibility: "hidden" },
-        duration: initial ? 400 : 0,
         ...transProps,
+        initial: initial ? { ...initialCss } : { visibility: "hidden" },
+        duration: transProps?.duration ?? 400,
         onStart: () => {
             setInitialCss({})
             transProps?.onStart && transProps.onStart()
