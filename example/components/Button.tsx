@@ -7,6 +7,7 @@ export type ButtonProps<T extends TagComponenntType = 'button'> = TagProps<T> & 
 };
 
 const Button = <T extends TagComponenntType = "button">({ children, ...rest }: ButtonProps<T>, ref: React.Ref<any>) => {
+
     return (
         <Tag
             component="button"

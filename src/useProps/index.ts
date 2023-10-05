@@ -5,11 +5,31 @@ import { CSS_PROP_LIST } from './parceProps';
 import { CSSPropAsAttr } from './types'
 export * from './types'
 
-
-export const useProps = (rootProps: CSSPropAsAttr, css_option?: OptionsProps) => {
-    let { sx, hover, baseClass, spacing, classNames, ...props } = rootProps
+export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
 
     let format = React.useMemo(() => {
+        let sx, hover, baseClass: any, spacing, classNames: any;
+        if (props.sx) {
+            sx = props.sx;
+            delete props.sx
+        }
+        if (props.hover) {
+            hover = props.hover;
+            delete props.hover
+        }
+        if (props.baseClass) {
+            baseClass = props.baseClass;
+            delete props.baseClass
+        }
+        if (props.spacing !== undefined) {
+            spacing = props.spacing;
+            delete props.spacing
+        }
+        if (props.classNames) {
+            classNames = props.classNames;
+            delete props.classNames
+        }
+
         let _css: any = {}
         if (spacing) {
             _css['& > *'] = {
@@ -60,7 +80,7 @@ export const useProps = (rootProps: CSSPropAsAttr, css_option?: OptionsProps) =>
             classname,
             propKeys
         }
-    }, [JSON.stringify(rootProps)]);
+    }, []);
 
 
     const _props: any = {};

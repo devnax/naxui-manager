@@ -23,7 +23,21 @@ const App = () => {
 
   return (
     <ThemeProvider >
-      <Tag p={3}>
+      {
+        Array(2000).fill(1).map((v, i) => {
+          return (
+            <Button
+              key={i}
+              zIndex={i}
+              mt={2}
+              onClick={() => {
+                alert()
+              }}
+            >Click</Button>
+          )
+        })
+      }
+      {/* <Tag p={3}>
         <Tag
           className={cls}
           ref={ref}
@@ -48,8 +62,8 @@ const App = () => {
             setHeight(height === 200 ? 300 : 200)
           }}
         >Change Height</Button>
-      </Tag>
-      <Tag p={3}>
+      </Tag> */}
+      {/* <Tag p={3}>
         <Tag typography="h1" borderBottom={1} mb={1} p={1}>A Visual Type</Tag>
         <Tag typography="text">What looked like a small patch of purple grass, above five feet square, was moving across the sand in their direction.</Tag>
         <Tag mt={1} typography="subtext"> When it came near enough he perceived that it was not grass; there were no blades, but only purple roots. The roots were revolving, for each small plant in the whole patch, like the spokes of a rimless wheel.</Tag>
@@ -116,9 +130,11 @@ const App = () => {
             setSoftness(e.target.value)
           }}
         />
-      </Tag>
+      </Tag> */}
     </ThemeProvider>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { StrictMode } from 'react';
+
+ReactDOM.render(<StrictMode><App /></StrictMode>, document.getElementById('root'));
