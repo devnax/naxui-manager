@@ -80,8 +80,7 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
             classname,
             propKeys
         }
-    }, []);
-
+    }, [JSON.stringify(props)]);
 
     const _props: any = {};
     if (format) {
