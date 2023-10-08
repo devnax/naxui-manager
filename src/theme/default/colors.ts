@@ -26,6 +26,10 @@ export const main_pallete = {
         color: '#0d9488',
         text: '#ffffff',
     },
+    info: {
+        color: "#007bff",
+        text: '#ffffff',
+    },
     success: {
         color: "#16a34a",
         text: '#ffffff',

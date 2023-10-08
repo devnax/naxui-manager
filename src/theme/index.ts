@@ -23,10 +23,10 @@ export const mergeTheme = (a: ObjectType, b: ObjectType) => {
     return a
 }
 
-
 export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOptions => {
     if (!ThemeFactory.get(name)) {
         let theme: any = mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptions
+        theme.shadow = (num: number) => num ? (`0px 0px 2px -1px rgba(0,0,0,0.15), 0px ${num}px ${num}px 0px rgba(0,0,0,0.10), 0px ${num + 1}px ${num + 1}px -${num + 1}px rgba(0,0,0,0.12)`) : num
         ThemeFactory.set(name, theme)
         const t = ThemeFactory.get(name) as ThemeOptions
         ThemeFactory.set(name, t)
@@ -63,7 +63,7 @@ export const getTheme = (): ThemeOptions => {
 export const changeTheme = (name: string) => {
     if (ThemeFactory.has(name)) {
         State.set("current_theme", name)
-        const { breakpoints, colors, typography, shadows, globalStyle } = getTheme()
+        const { breakpoints, colors, typography, globalStyle } = getTheme()
 
         if (typeof window !== 'undefined' && window.document) {
             document.querySelector("style[data-naxcss='theme-vars']")?.remove()
@@ -154,24 +154,14 @@ export const changeTheme = (name: string) => {
             "--color-primary-text": colors.primary.text,
             "--color-secondary": colors.secondary.color,
             "--color-secondary-text": colors.secondary.text,
+            "--color-info": colors.info.color,
+            "--color-info-text": colors.info.text,
             "--color-success": colors.success.color,
             "--color-success-text": colors.success.text,
             "--color-error": colors.error.color,
             "--color-error-text": colors.error.text,
             "--color-warning": colors.warning.color,
             "--color-warning-text": colors.warning.text,
-
-            // Shadow
-            "--shadow-1": shadows[1],
-            "--shadow-2": shadows[2],
-            "--shadow-3": shadows[3],
-            "--shadow-4": shadows[4],
-            "--shadow-5": shadows[5],
-            "--shadow-6": shadows[6],
-            "--shadow-7": shadows[7],
-            "--shadow-8": shadows[8],
-            "--shadow-9": shadows[9],
-            "--shadow-10": shadows[10],
         }
         globalCss("theme-vars", { ":root": root });
         (globalStyle && Object.keys(globalStyle).length) && globalCss("global-css", globalStyle)

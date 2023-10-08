@@ -93,6 +93,8 @@ export const alpha = (color: ColorsRefTypes | string, opacity = 1) => {
         "color.primary-text": theme.colors.primary.text,
         "color.secondary": theme.colors.secondary.color,
         "color.secondary-text": theme.colors.secondary.text,
+        "color.info": theme.colors.info.color,
+        "color.info-text": theme.colors.info.text,
         "color.success": theme.colors.success.color,
         "color.success-text": theme.colors.success.text,
         "color.error": theme.colors.error.color,

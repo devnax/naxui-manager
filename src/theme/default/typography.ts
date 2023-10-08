@@ -31,14 +31,14 @@ export default {
         fontSize: 'fontsize.text',
         fontWeight: 400,
         color: "color.text",
-        lineHeight: 1.75
+        lineHeight: 1.60
     },
     subtext: {
         fontFamily: 'typography.font-family',
         fontSize: 'fontsize.text',
         fontWeight: 400,
         color: "color.subtext",
-        lineHeight: 1.75
+        lineHeight: 1.60
     },
     button: {
         fontFamily: 'typography.font-family',

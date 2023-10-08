@@ -1,6 +1,5 @@
 import colors from "./colors"
 import typography from "./typography"
-import shadows from "./shadows"
 
 export default {
     name: "default",
@@ -14,6 +13,5 @@ export default {
     globalStyle: {},
     colors,
     typography,
-    shadows,
     interfaces: {},
 } as any

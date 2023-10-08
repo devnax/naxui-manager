@@ -36,6 +36,8 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         "color.primary.text": "var(--color-primary-text)",
         "color.secondary": "var(--color-secondary)",
         "color.secondary.text": "var(--color-secondary-text)",
+        "color.info": "var(--color-info)",
+        "color.info.text": "var(--color-info-text)",
         "color.success": "var(--color-success)",
         "color.success.text": "var(--color-success-text)",
         "color.error": "var(--color-error)",
@@ -67,10 +69,8 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
         "shadow.10": "var(--shadow-10)",
     }
 
-    if (prop === 'shadow' || prop === 'boxShadow') {
-        if (theme.shadows[value as any]) {
-            return `var(--shadow-${value})` + (important || "")
-        }
+    if ((prop === 'shadow' || prop === 'boxShadow') && typeof value === "number") {
+        return theme.shadow(value) + (important || "")
     }
     let v = (values[value] || value)
     if (important) {

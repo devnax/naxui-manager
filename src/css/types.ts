@@ -1,6 +1,6 @@
 import * as CSS from 'csstype'
 import { ThemeOptions } from '../theme';
-import { ColorsRefTypes, BreakpointsType, ShadowRefTyeps, TypographyRefTypes, } from '../theme/types';
+import { ColorsRefTypes, BreakpointsType, TypographyRefTypes, } from '../theme/types';
 
 export type FN = (theme: ThemeOptions) => string | number
 export type CSSBreakpointType = { [key in BreakpointsType]: string | number | FN }
@@ -29,7 +29,7 @@ export type AliasesTypes = {
 
     radius?: CSSValueType<'borderRadius'> | number;
     borderRadius?: CSSValueType<'borderRadius'> | number;
-    shadow?: CSSValueType<'boxShadow'> | ShadowRefTyeps;
+    shadow?: CSSValueType<'boxShadow'> | number;
     w?: CSSValueType<"width">;
     h?: CSSValueType<"height">;
     maxw?: CSSValueType<"width"> | BreakpointsType;

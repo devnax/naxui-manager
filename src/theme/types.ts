@@ -15,6 +15,7 @@ export interface ThemeColorsOptions {
 
     primary: ColorType;
     secondary: ColorType;
+    info: ColorType;
     success: ColorType;
     error: ColorType;
     warning: ColorType;
@@ -53,12 +54,13 @@ export interface ThemeOptionsPartial {
 
         primary?: Partial<ColorType>;
         secondary?: Partial<ColorType>;
+        info?: Partial<ColorType>;
         success?: Partial<ColorType>;
         error?: Partial<ColorType>;
         warning?: Partial<ColorType>;
     };
     typography?: Partial<ThemeTypographyOptions>;
-    shadows?: { [key: number]: string };
+    shadow?: (num: number) => string;
     interfaces?: { [key: string]: () => InterfaceType };
 }
 
@@ -68,7 +70,7 @@ export interface ThemeOptions {
     breakpoints: { [key in BreakpointsType]: number };
     colors: ThemeColorsOptions;
     typography: ThemeTypographyOptions;
-    shadows: { [key: number]: string };
+    shadow: (num: number) => string;
     interfaces: { [key: string]: (userProps: InterfaceType) => InterfaceType };
 }
 
@@ -87,26 +89,14 @@ export type ColorsRefTypes =
     | "color.primary.text"
     | "color.secondary"
     | "color.secondary.text"
+    | "color.info"
+    | "color.info.text"
     | "color.success"
     | "color.success.text"
     | "color.error"
     | "color.error.text"
     | "color.warning"
     | "color.warning.text";
-
-
-
-export type ShadowRefTyeps =
-    | "shadow.1"
-    | "shadow.2"
-    | "shadow.3"
-    | "shadow.4"
-    | "shadow.5"
-    | "shadow.6"
-    | "shadow.7"
-    | "shadow.8"
-    | "shadow.9"
-    | "shadow.10";
 
 
 export type TypographyRefTypes =

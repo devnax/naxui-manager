@@ -2,7 +2,7 @@ import * as CSS from 'csstype'
 import { CSSProps, classNamesTypes } from 'naxcss';
 import { ThemeOptions } from '../theme';
 import { AliasesTypes, CSSValueType } from "../css/types"
-import { ColorsRefTypes, BreakpointsType, ShadowRefTyeps, TypographyRefTypes } from '../theme/types';
+import { ColorsRefTypes, BreakpointsType, TypographyRefTypes } from '../theme/types';
 
 
 interface CSSProperties {
@@ -52,7 +52,7 @@ interface CSSProperties {
     borderTopWidth: CSSValueType<"borderTopWidth">;
     borderWidth: CSSValueType<"borderWidth">;
     bottom: CSSValueType<"bottom">;
-    boxShadow: CSSValueType<"boxShadow"> | ShadowRefTyeps;
+    boxShadow: CSSValueType<"boxShadow"> | number;
     boxSizing: CSSValueType<"boxSizing">;
     cursor: CSSValueType<"cursor">;
     color: CSS.Properties['color'] | ColorsRefTypes;

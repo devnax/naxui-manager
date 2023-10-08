@@ -23,20 +23,18 @@ const App = () => {
 
   return (
     <ThemeProvider >
-      {
-        Array(2000).fill(1).map((v, i) => {
-          return (
-            <Button
-              key={i}
-              zIndex={i}
-              mt={2}
-              onClick={() => {
-                alert()
-              }}
-            >Click</Button>
-          )
-        })
-      }
+
+      <Tag flexBox gap={32} flexWrap="wrap" p={3}>
+        {
+          Array(20).fill(1).map((v, i) => <Tag
+            key={i}
+            width={100}
+            height={100}
+            radius={2}
+            shadow={i + 1}
+          />)
+        }
+      </Tag>
       {/* <Tag p={3}>
         <Tag
           className={cls}
