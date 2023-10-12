@@ -1,25 +1,8 @@
 import { GlobalCSSType } from "naxcss"
 import { AliasesTypes } from "../css/types";
 
-
-export type ColorType = {
-    color: string;
-    text: string;
-}
-export interface ThemeColorsOptions {
-    common: string;
-    paper: string;
-    divider: string;
-    text: string;
-    subtext: string;
-
-    primary: ColorType;
-    secondary: ColorType;
-    info: ColorType;
-    success: ColorType;
-    error: ColorType;
-    warning: ColorType;
-}
+export type ObjectType = { [key: string]: any }
+export type StateKeys = "current_theme" | "dispatch"
 
 
 export type TextStyleProps = {
@@ -42,26 +25,45 @@ export interface ThemeTypographyOptions {
 
 export type InterfaceType = { [key: string]: any }
 
-export interface ThemeOptionsPartial {
+
+// ========== Theme Input 
+
+export interface ThemeOptionInput {
     globalStyle?: GlobalCSSType<AliasesTypes>,
     breakpoints?: { [key: string]: number };
     colors?: {
-        common?: string;
         paper?: string;
-        divider?: string;
-        text?: string;
-        subtext?: string;
-
-        primary?: Partial<ColorType>;
-        secondary?: Partial<ColorType>;
-        info?: Partial<ColorType>;
-        success?: Partial<ColorType>;
-        error?: Partial<ColorType>;
-        warning?: Partial<ColorType>;
+        primary?: string;
+        secondary?: string;
+        info?: string;
+        success?: string;
+        error?: string;
+        warning?: string;
     };
     typography?: Partial<ThemeTypographyOptions>;
-    shadow?: (num: number) => string;
     interfaces?: { [key: string]: () => InterfaceType };
+}
+
+
+// =========== Main Theme Options
+
+export type ThemeOptionColorType = {
+    main: string;
+    light: string;
+    dark: string;
+    text: string;
+    subtext: string;
+    divider: string;
+}
+
+export interface ThemeColorsOptions {
+    paper: ThemeOptionColorType;
+    primary: ThemeOptionColorType;
+    secondary: ThemeOptionColorType;
+    info: ThemeOptionColorType;
+    success: ThemeOptionColorType;
+    error: ThemeOptionColorType;
+    warning: ThemeOptionColorType;
 }
 
 export interface ThemeOptions {
@@ -74,30 +76,11 @@ export interface ThemeOptions {
     interfaces: { [key: string]: (userProps: InterfaceType) => InterfaceType };
 }
 
-export type ObjectType = { [key: string]: any }
-export type StateKeys = "current_theme" | "dispatch"
+
 export type BreakpointsType = "xs" | "sm" | "md" | "lg" | "xl"
 
 
-export type ColorsRefTypes =
-    | "color.common"
-    | "color.paper"
-    | "color.divider"
-    | "color.text"
-    | "color.subtext"
-    | "color.primary"
-    | "color.primary.text"
-    | "color.secondary"
-    | "color.secondary.text"
-    | "color.info"
-    | "color.info.text"
-    | "color.success"
-    | "color.success.text"
-    | "color.error"
-    | "color.error.text"
-    | "color.warning"
-    | "color.warning.text";
-
+// ============ Reference Types
 
 export type TypographyRefTypes =
     | "fontsize.h1"
@@ -109,3 +92,55 @@ export type TypographyRefTypes =
     | "fontsize.text"
     | "fontsize.button"
     | "fontsize.block"
+
+
+export type ColorsRefTypes =
+    | "color.paper"
+    | "color.paper.main"
+    | "color.paper.light"
+    | "color.paper.dark"
+    | "color.paper.text"
+    | "color.paper.subtext"
+    | "color.paper.divider"
+    | "color.primary"
+    | "color.primary.main"
+    | "color.primary.light"
+    | "color.primary.dark"
+    | "color.primary.text"
+    | "color.primary.subtext"
+    | "color.primary.divider"
+    | "color.secondary"
+    | "color.secondary.main"
+    | "color.secondary.light"
+    | "color.secondary.dark"
+    | "color.secondary.text"
+    | "color.secondary.subtext"
+    | "color.secondary.divider"
+    | "color.info"
+    | "color.info.main"
+    | "color.info.light"
+    | "color.info.dark"
+    | "color.info.text"
+    | "color.info.subtext"
+    | "color.info.divider"
+    | "color.success"
+    | "color.success.main"
+    | "color.success.light"
+    | "color.success.dark"
+    | "color.success.text"
+    | "color.success.subtext"
+    | "color.success.divider"
+    | "color.warning"
+    | "color.warning.main"
+    | "color.warning.light"
+    | "color.warning.dark"
+    | "color.warning.text"
+    | "color.warning.subtext"
+    | "color.warning.divider"
+    | "color.error"
+    | "color.error.main"
+    | "color.error.light"
+    | "color.error.dark"
+    | "color.error.text"
+    | "color.error.subtext"
+    | "color.error.divider"

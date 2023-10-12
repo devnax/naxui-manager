@@ -6,7 +6,7 @@ import {
     classNames
 } from 'naxcss'
 import * as naxcss from 'naxcss'
-import { getTheme, ColorsRefTypes } from "../theme"
+import { getTheme, ColorsRefTypes, ThemeOptions, ThemeColorsOptions } from "../theme"
 import getValue from "./getValue"
 import getProps from "./getProps"
 import aliases from "./aliases"
@@ -67,6 +67,8 @@ export const css_options = (options?: OptionsProps) => {
 }
 
 export const css = (_css: CSSProps<AliasesTypes>, options?: OptionsProps) => {
+    console.log(_css);
+
     return naxcss.css<AliasesTypes>(_css, css_options(options))
 }
 
@@ -80,49 +82,79 @@ export const keyframes = (frames: keyframesType<AliasesTypes>, options?: Options
 
 export const makeCacheKey = (css_raw: object) => naxcss.makeCacheKey(css_raw)
 
+
+
+
+// Color
+
+export const getColor = (color: keyof ThemeColorsOptions, { colors }: ThemeOptions) => {
+    return {
+        [`color.${color}`]: (colors as any)[color].main,
+        [`color.${color}.main`]: (colors as any)[color].main,
+        [`color.${color}.light`]: (colors as any)[color].light,
+        [`color.${color}.dark`]: (colors as any)[color].dark,
+        [`color.${color}.text`]: (colors as any)[color].text,
+        [`color.${color}.subtext`]: (colors as any)[color].subtext,
+        [`color.${color}.divider`]: (colors as any)[color].divider,
+    }
+}
+
+export const adjustColor = (hex: string, factor: number) => {
+
+    hex = hex.replace(/^#/, '')
+
+    let r = parseInt(hex.slice(0, 2), 16)
+    let g = parseInt(hex.slice(2, 4), 16)
+    let b = parseInt(hex.slice(4, 6), 16)
+
+    r = Math.floor(r * factor)
+    g = Math.floor(g * factor)
+    b = Math.floor(b * factor)
+
+    r = Math.min(255, Math.max(0, r))
+    g = Math.min(255, Math.max(0, g))
+    b = Math.min(255, Math.max(0, b))
+
+    return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+}
+
+export const adjustTextContrast = (color: string) => {
+    color = color.replace(/^#/, '')
+    const r = parseInt(color.slice(0, 2), 16);
+    const g = parseInt(color.slice(2, 4), 16);
+    const b = parseInt(color.slice(4, 6), 16);
+
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.5 ? '#000000' : '#FFFFFF';
+}
+
 export const alpha = (color: ColorsRefTypes | string, opacity = 1) => {
     const theme = getTheme()
 
     let colors: any = {
-        "color.common": theme.colors.common,
-        "color.paper": theme.colors.paper,
-        "color.divider": theme.colors.divider,
-        "color.text": theme.colors.text,
-        "color.subtext": theme.colors.subtext,
-        "color.primary": theme.colors.primary.color,
-        "color.primary-text": theme.colors.primary.text,
-        "color.secondary": theme.colors.secondary.color,
-        "color.secondary-text": theme.colors.secondary.text,
-        "color.info": theme.colors.info.color,
-        "color.info-text": theme.colors.info.text,
-        "color.success": theme.colors.success.color,
-        "color.success-text": theme.colors.success.text,
-        "color.error": theme.colors.error.color,
-        "color.error-text": theme.colors.error.text,
-        "color.warning": theme.colors.warning.color,
-        "color.warning-text": theme.colors.warning.text,
+        ...getColor("paper", theme),
+        ...getColor("primary", theme),
+        ...getColor("secondary", theme),
+        ...getColor("info", theme),
+        ...getColor("success", theme),
+        ...getColor("warning", theme),
+        ...getColor("error", theme),
     }
 
     let _color = colors[color] || color
     if (typeof opacity !== 'number') return color
     let _opacity = opacity * 100
 
-    if (!_color.startsWith("#")) {
-        throw new Error(`color must be hex`);
-    }
+    if (!_color.startsWith("#")) throw new Error(`color must be hex`)
 
     let _alpha = (_color + (`0${Math.round((255 / 100) * _opacity).toString(16)}`.slice(-2))).toUpperCase();
-    if (color === 'color.paper' || color === 'color.common') {
-        let varname = ("alpha-" + color + opacity).replaceAll(/#|\./gi, '-').toLowerCase()
-        let key = ("alpha-" + color + "|" + opacity)
-        globalCss(key, {
-            ":root": {
-                [`--${varname}`]: _alpha
-            }
-        })
-        _alpha = `var(--${varname})`
-    }
+    let varname = ("alpha-" + _alpha).replaceAll(/#|\./gi, '-').toLowerCase()
 
-    return _alpha
+    globalCss("alpha-" + color + "|" + opacity, {
+        ":root": {
+            [`--${varname}`]: _alpha
+        }
+    })
+    return `var(--${varname})`
 };
 

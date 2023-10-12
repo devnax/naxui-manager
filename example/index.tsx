@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom';
 import { Tag, ThemeProvider } from '../src';
 import Button from './components/Button'
 // import Button from '@mui/material/Button'
-import { getTheme, changeTheme, modifyTheme } from '../src';
+import { getTheme, changeTheme } from '../src';
 import useTransitions from '../src/hooks/useTransitions';
 import Stack from './components/Stack'
 import { alpha } from '../src'
@@ -23,7 +23,6 @@ const App = () => {
 
   return (
     <ThemeProvider >
-
       <Tag flexBox gap={32} flexWrap="wrap" p={3}>
         {
           Array(20).fill(1).map((v, i) => <Tag

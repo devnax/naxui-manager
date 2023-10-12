@@ -1,32 +1,38 @@
 import * as React from 'react'
-import { changeTheme, modifyTheme } from './theme'
+import { changeTheme, createTheme, ThemeOptionInput } from './theme'
 import { OptionsProps } from 'naxcss'
 import { globalConfig } from './'
+import { lightPaperColor, darkPaperColor } from './theme/theme-defaults'
 
 type Props = {
     children: any;
     css_option?: OptionsProps;
-    defaultFontFamily?: string;
     defaultTheme?: "default" | "default-dark";
+    themeOption?: ThemeOptionInput
 }
 
-const ThemeProvider = ({ children, css_option, defaultFontFamily, defaultTheme }: Props) => {
+const ThemeProvider = ({ children, css_option, defaultTheme, themeOption }: Props) => {
     React.useMemo(() => {
         css_option && globalConfig.set("default_css_option", css_option)
-        if (defaultFontFamily) {
-            modifyTheme("default", {
-                typography: {
-                    fontFamily: defaultFontFamily
-                }
-            })
-            modifyTheme("default-dark", {
-                typography: {
-                    fontFamily: defaultFontFamily
-                }
-            })
-        }
+
+        createTheme('default', {
+            ...themeOption,
+            colors: {
+                paper: lightPaperColor,
+                ...themeOption?.colors
+            }
+        })
+        createTheme('default-dark', {
+            ...themeOption,
+            colors: {
+                paper: darkPaperColor,
+                ...themeOption?.colors
+            }
+        })
+
+
         changeTheme(defaultTheme || "default")
-    }, [css_option, defaultFontFamily, defaultTheme])
+    }, [css_option, defaultTheme])
     return children
 }
 

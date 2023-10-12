@@ -1,5 +1,20 @@
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+import { ThemeOptionInput } from './types'
+
+export const darkPaperColor = "#161618"
+export const lightPaperColor = "#f6f6f7"
+
+export const ThemeColors = {
+    paper: lightPaperColor,
+    primary: "#0066ff",
+    secondary: '#0d9488',
+    info: "#007bff",
+    success: "#16a34a",
+    error: '#dc2626',
+    warning: "#d97706"
+}
+
+
+export const ThemeTypography = {
     fontFamily: '"Inter","Helvetica","Arial",sans-serif',
     h1: {
         fontFamily: 'typography.font-family',
@@ -46,3 +61,18 @@ export default {
         fontWeight: 500
     }
 }
+
+export default {
+    name: "default",
+    breakpoints: {
+        xs: 0,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1536
+    },
+    globalStyle: {},
+    colors: ThemeColors,
+    typography: ThemeTypography,
+    interfaces: {},
+} as ThemeOptionInput

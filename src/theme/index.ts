@@ -1,15 +1,14 @@
-import { ThemeOptions, ObjectType, StateKeys, ThemeOptionsPartial } from "./types"
-import defaultThemeOption from './default'
-import { globalCss, alpha } from '../css'
+import { ThemeOptions, ObjectType, StateKeys, ThemeOptionInput } from "./types"
+import defaultThemeOption, { lightPaperColor } from './theme-defaults'
+import { globalCss, alpha, adjustColor, adjustTextContrast } from '../css'
 import { NAXCSS_CACHE } from 'naxcss'
 import * as React from "react"
-import { darkModeColor } from "./default/colors"
 export * from './types'
 const ThemeFactory = new Map<string, ThemeOptions>()
 const DispatchFactory = new Map<string, () => void>()
 export const State = new Map<StateKeys, any>()
 
-export const mergeTheme = (a: ObjectType, b: ObjectType) => {
+const mergeTheme = (a: ObjectType, b: ObjectType) => {
     a = { ...a }
     b = { ...b }
     for (const key in b) {
@@ -23,21 +22,30 @@ export const mergeTheme = (a: ObjectType, b: ObjectType) => {
     return a
 }
 
-export const createTheme = (name: string, options: ThemeOptionsPartial): ThemeOptions => {
-    if (!ThemeFactory.get(name)) {
-        let theme: any = mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptions
-        theme.shadow = (num: number) => num ? (`0px 0px 2px -1px rgba(0,0,0,0.15), 0px ${num}px ${num}px 0px rgba(0,0,0,0.10), 0px ${num + 1}px ${num + 1}px -${num + 1}px rgba(0,0,0,0.12)`) : num
-        ThemeFactory.set(name, theme)
-        const t = ThemeFactory.get(name) as ThemeOptions
-        ThemeFactory.set(name, t)
-    }
-    return ThemeFactory.get(name) as ThemeOptions
-}
+export const createTheme = (name: string, options: ThemeOptionInput): ThemeOptions => {
 
-export const modifyTheme = (name: string, options: ThemeOptionsPartial) => {
-    if (ThemeFactory.has(name)) {
-        ThemeFactory.set(name, mergeTheme(ThemeFactory.get(name) as ThemeOptions, { ...options, name }) as ThemeOptions)
+    if (!ThemeFactory.has(name)) {
+
+        let theme: any = mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptionInput
+        theme.shadow = (num: number) => num ? (`0px 0px 2px -1px rgba(0,0,0,0.15), 0px ${num}px ${num}px 0px rgba(0,0,0,0.10), 0px ${num + 1}px ${num + 1}px -${num + 1}px rgba(0,0,0,0.12)`) : num
+        let _colors: any = {}
+        for (let colorName in theme.colors) {
+            let color = theme.colors[colorName]
+            let tcolor = adjustTextContrast(color)
+            _colors[colorName] = {
+                main: color,
+                light: adjustColor(color, 1.2),
+                dark: adjustColor(color, .8),
+                text: tcolor,
+                subtext: adjustColor(color, 1.5),
+                divider: adjustColor(color, .7)
+            }
+        }
+        theme.colors = _colors
+        ThemeFactory.set(name, theme)
     }
+
+    return ThemeFactory.get(name) as ThemeOptions
 }
 
 export const useTheme = (): ThemeOptions => {
@@ -52,12 +60,12 @@ export const useTheme = (): ThemeOptions => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const name = State.get("current_theme") || "default"
-    return ThemeFactory.get(name) || createTheme("default", defaultThemeOption as any) as ThemeOptions
+    return ThemeFactory.get(name) as ThemeOptions
 }
 
 export const getTheme = (): ThemeOptions => {
     const name = State.get("current_theme") || "default"
-    return ThemeFactory.get(name) || createTheme("default", defaultThemeOption as any)
+    return ThemeFactory.get(name) || createTheme(name, { colors: { paper: lightPaperColor } })
 }
 
 export const changeTheme = (name: string) => {
@@ -74,7 +82,6 @@ export const changeTheme = (name: string) => {
         NAXCSS_CACHE.delete("reset-css")
         NAXCSS_CACHE.delete("global-css")
 
-
         const cache_keys = Array.from(NAXCSS_CACHE.keys())
 
         cache_keys.forEach((key: string) => {
@@ -87,7 +94,6 @@ export const changeTheme = (name: string) => {
             }
         })
 
-
         globalCss("reset-css", {
             "*": {
                 m: 0,
@@ -99,8 +105,8 @@ export const changeTheme = (name: string) => {
             "body": {
                 fontFamily: "typography.font-family",
                 fontSize: "fontsize.text",
-                bgcolor: "color.common",
-                color: "color.text",
+                bgcolor: "color.paper",
+                color: "color.paper.text",
                 fontWeight: 400,
                 "-webkit-font-smoothing": "antialiased",
             },
@@ -144,34 +150,21 @@ export const changeTheme = (name: string) => {
             "--breakpoint-md": breakpoints.md,
             "--breakpoint-lg": breakpoints.lg,
             "--breakpoint-xl": breakpoints.xl,
-            // Colors
-            "--color-common": colors.common,
-            "--color-paper": colors.paper,
-            "--color-divider": colors.divider,
-            "--color-text": colors.text,
-            "--color-subtext": colors.subtext,
-            "--color-primary": colors.primary.color,
-            "--color-primary-text": colors.primary.text,
-            "--color-secondary": colors.secondary.color,
-            "--color-secondary-text": colors.secondary.text,
-            "--color-info": colors.info.color,
-            "--color-info-text": colors.info.text,
-            "--color-success": colors.success.color,
-            "--color-success-text": colors.success.text,
-            "--color-error": colors.error.color,
-            "--color-error-text": colors.error.text,
-            "--color-warning": colors.warning.color,
-            "--color-warning-text": colors.warning.text,
         }
+
+        for (let colorName in colors) {
+            let color = (colors as any)[colorName]
+            root[`--color-${colorName}`] = color.main;
+            root[`--color-${colorName}-main`] = color.main;
+            root[`--color-${colorName}-light`] = color.light;
+            root[`--color-${colorName}-dark`] = color.dark;
+            root[`--color-${colorName}-text`] = color.text;
+            root[`--color-${colorName}-subtext`] = color.subtext;
+            root[`--color-${colorName}-divider`] = color.divider;
+        }
+
         globalCss("theme-vars", { ":root": root });
         (globalStyle && Object.keys(globalStyle).length) && globalCss("global-css", globalStyle)
         DispatchFactory.forEach(d => d())
     }
 }
-
-createTheme('default', defaultThemeOption as any)
-createTheme('default-dark', {
-    colors: {
-        ...darkModeColor
-    }
-})
