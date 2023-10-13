@@ -8,13 +8,13 @@ const ThemeFactory = new Map<string, ThemeOptions>()
 const DispatchFactory = new Map<string, () => void>()
 export const State = new Map<StateKeys, any>()
 
-const mergeTheme = (a: ObjectType, b: ObjectType) => {
+const mergeObject = (a: ObjectType, b: ObjectType) => {
     a = { ...a }
     b = { ...b }
     for (const key in b) {
         const v = (b as any)[key]
         if (typeof v === 'object' && !Array.isArray(v)) {
-            a[key] = mergeTheme(a[key], b[key])
+            a[key] = mergeObject(a[key], b[key])
         } else {
             a[key] = v
         }
@@ -26,19 +26,21 @@ export const createTheme = (name: string, options: ThemeOptionInput): ThemeOptio
 
     if (!ThemeFactory.has(name)) {
 
-        let theme: any = mergeTheme(defaultThemeOption, { ...options, name }) as ThemeOptionInput
+        let theme: any = mergeObject(defaultThemeOption, { ...options, name }) as ThemeOptionInput
         theme.shadow = (num: number) => num ? (`0px 0px 2px -1px rgba(0,0,0,0.15), 0px ${num}px ${num}px 0px rgba(0,0,0,0.10), 0px ${num + 1}px ${num + 1}px -${num + 1}px rgba(0,0,0,0.12)`) : num
         let _colors: any = {}
         for (let colorName in theme.colors) {
             let color = theme.colors[colorName]
             let tcolor = adjustTextContrast(color)
+
             _colors[colorName] = {
                 main: color,
                 light: adjustColor(color, 1.2),
                 dark: adjustColor(color, .8),
                 text: tcolor,
-                subtext: adjustColor(color, 1.5),
-                divider: adjustColor(color, .7)
+                subtext: adjustColor(color, tcolor === "#FFFFFF" ? 1.5 : .5), // 1.5
+                divider: adjustColor(color, .9),
+                alpha: alpha(color, .09)
             }
         }
         theme.colors = _colors
@@ -105,7 +107,7 @@ export const changeTheme = (name: string) => {
             "body": {
                 fontFamily: "typography.font-family",
                 fontSize: "fontsize.text",
-                bgcolor: "color.paper",
+                bgcolor: "color.paper.light",
                 color: "color.paper.text",
                 fontWeight: 400,
                 "-webkit-font-smoothing": "antialiased",
@@ -161,6 +163,7 @@ export const changeTheme = (name: string) => {
             root[`--color-${colorName}-text`] = color.text;
             root[`--color-${colorName}-subtext`] = color.subtext;
             root[`--color-${colorName}-divider`] = color.divider;
+            root[`--color-${colorName}-alpha`] = color.alpha;
         }
 
         globalCss("theme-vars", { ":root": root });

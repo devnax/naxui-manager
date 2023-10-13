@@ -10,7 +10,7 @@ export const ThemeColors = {
     info: "#007bff",
     success: "#16a34a",
     error: '#dc2626',
-    warning: "#d97706"
+    warning: "#f59e0b"
 }
 
 
@@ -45,14 +45,14 @@ export const ThemeTypography = {
         fontFamily: 'typography.font-family',
         fontSize: 'fontsize.text',
         fontWeight: 400,
-        color: "color.text",
+        color: "color.paper.text",
         lineHeight: 1.60
     },
     subtext: {
         fontFamily: 'typography.font-family',
         fontSize: 'fontsize.text',
         fontWeight: 400,
-        color: "color.subtext",
+        color: "color.paper.subtext",
         lineHeight: 1.60
     },
     button: {

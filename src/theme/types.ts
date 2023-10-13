@@ -54,6 +54,7 @@ export type ThemeOptionColorType = {
     text: string;
     subtext: string;
     divider: string;
+    alpha: string;
 }
 
 export interface ThemeColorsOptions {
@@ -102,6 +103,7 @@ export type ColorsRefTypes =
     | "color.paper.text"
     | "color.paper.subtext"
     | "color.paper.divider"
+    | "color.paper.alpha"
     | "color.primary"
     | "color.primary.main"
     | "color.primary.light"
@@ -109,6 +111,7 @@ export type ColorsRefTypes =
     | "color.primary.text"
     | "color.primary.subtext"
     | "color.primary.divider"
+    | "color.primary.alpha"
     | "color.secondary"
     | "color.secondary.main"
     | "color.secondary.light"
@@ -116,6 +119,7 @@ export type ColorsRefTypes =
     | "color.secondary.text"
     | "color.secondary.subtext"
     | "color.secondary.divider"
+    | "color.secondary.alpha"
     | "color.info"
     | "color.info.main"
     | "color.info.light"
@@ -123,6 +127,7 @@ export type ColorsRefTypes =
     | "color.info.text"
     | "color.info.subtext"
     | "color.info.divider"
+    | "color.info.alpha"
     | "color.success"
     | "color.success.main"
     | "color.success.light"
@@ -130,6 +135,7 @@ export type ColorsRefTypes =
     | "color.success.text"
     | "color.success.subtext"
     | "color.success.divider"
+    | "color.success.alpha"
     | "color.warning"
     | "color.warning.main"
     | "color.warning.light"
@@ -137,6 +143,7 @@ export type ColorsRefTypes =
     | "color.warning.text"
     | "color.warning.subtext"
     | "color.warning.divider"
+    | "color.warning.alpha"
     | "color.error"
     | "color.error.main"
     | "color.error.light"
@@ -144,3 +151,4 @@ export type ColorsRefTypes =
     | "color.error.text"
     | "color.error.subtext"
     | "color.error.divider"
+    | "color.error.alpha"

@@ -6,7 +6,7 @@ import {
     classNames
 } from 'naxcss'
 import * as naxcss from 'naxcss'
-import { getTheme, ColorsRefTypes, ThemeOptions, ThemeColorsOptions } from "../theme"
+import { getTheme, ThemeOptions, ThemeColorsOptions } from "../theme"
 import getValue from "./getValue"
 import getProps from "./getProps"
 import aliases from "./aliases"
@@ -67,8 +67,6 @@ export const css_options = (options?: OptionsProps) => {
 }
 
 export const css = (_css: CSSProps<AliasesTypes>, options?: OptionsProps) => {
-    console.log(_css);
-
     return naxcss.css<AliasesTypes>(_css, css_options(options))
 }
 
@@ -125,36 +123,13 @@ export const adjustTextContrast = (color: string) => {
     const b = parseInt(color.slice(4, 6), 16);
 
     const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return luminance > 0.5 ? '#000000' : '#FFFFFF';
+    return luminance > 0.5 ? '#111111' : '#FFFFFF';
 }
 
-export const alpha = (color: ColorsRefTypes | string, opacity = 1) => {
-    const theme = getTheme()
-
-    let colors: any = {
-        ...getColor("paper", theme),
-        ...getColor("primary", theme),
-        ...getColor("secondary", theme),
-        ...getColor("info", theme),
-        ...getColor("success", theme),
-        ...getColor("warning", theme),
-        ...getColor("error", theme),
-    }
-
-    let _color = colors[color] || color
+export const alpha = (color: string, opacity = 1) => {
     if (typeof opacity !== 'number') return color
     let _opacity = opacity * 100
-
-    if (!_color.startsWith("#")) throw new Error(`color must be hex`)
-
-    let _alpha = (_color + (`0${Math.round((255 / 100) * _opacity).toString(16)}`.slice(-2))).toUpperCase();
-    let varname = ("alpha-" + _alpha).replaceAll(/#|\./gi, '-').toLowerCase()
-
-    globalCss("alpha-" + color + "|" + opacity, {
-        ":root": {
-            [`--${varname}`]: _alpha
-        }
-    })
-    return `var(--${varname})`
+    if (!color.startsWith("#")) throw new Error(`color must be hex`)
+    return (color + (`0${Math.round((255 / 100) * _opacity).toString(16)}`.slice(-2))).toUpperCase();
 };
 

@@ -9,9 +9,25 @@ import useTransitions from '../src/hooks/useTransitions';
 import Stack from './components/Stack'
 import { alpha } from '../src'
 
+const Pragraph = ({ color, alpha }: any) => {
+  return (
+    <Tag mb={2} radius={2} flexColumn flexBox gap={8} flexWrap="wrap" p={3} bgcolor={alpha ? `color.${color}.alpha` : `color.${color}`}>
+      <Tag typography="h5" fontWeight="bold" color={alpha ? `color.${color}` : `color.${color}.text`}>This is demo sentence</Tag>
+      <Tag height={1} bgcolor={`color.${color}.divider`} />
+      <Tag typography="subtext" fontSize="fontsize.button" color={alpha ? `color.${color}.subtext` : `color.${color}.subtext`}>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        </Tag>
+      <Tag color={alpha ? `color.${color}.dark` : `color.${color}.text`}>
+        Optio accusamus nostrum molestiae debitis nihil consequuntur sequi ea id nobis maiores quas rem quis temporibus, ullam harum voluptates. Sed, dolorum ipsam!
+        </Tag>
+    </Tag>
+  )
+}
+
+
 const App = () => {
   const [In, setIn] = React.useState(false)
-  const [height, setHeight] = React.useState(200)
+  const [alpha, setAlpha] = React.useState(false)
   const [ref, cls] = useTransitions("collapsVerticle", In, {
     duration: In ? 0 : 600
   })
@@ -21,19 +37,20 @@ const App = () => {
   const [softness, setSoftness] = React.useState<any>()
 
 
+
   return (
     <ThemeProvider >
-      <Tag flexBox gap={32} flexWrap="wrap" p={3}>
-        {
-          Array(20).fill(1).map((v, i) => <Tag
-            key={i}
-            width={100}
-            height={100}
-            radius={2}
-            shadow={i + 1}
-          />)
-        }
+      <Button onClick={() => setAlpha(!alpha)}>Toggle Alpha</Button>
+      <Tag p={3}>
+        <Pragraph alpha={alpha} color="paper" />
+        <Pragraph alpha={alpha} color="primary" />
+        <Pragraph alpha={alpha} color="secondary" />
+        <Pragraph alpha={alpha} color="info" />
+        <Pragraph alpha={alpha} color="success" />
+        <Pragraph alpha={alpha} color="warning" />
+        <Pragraph alpha={alpha} color="error" />
       </Tag>
+
       {/* <Tag p={3}>
         <Tag
           className={cls}

@@ -10,6 +10,7 @@ const getColor = (color: string) => {
         [`color.${color}.text`]: `var(--color-${color}-text)`,
         [`color.${color}.subtext`]: `var(--color-${color}-subtext)`,
         [`color.${color}.divider`]: `var(--color-${color}-divider)`,
+        [`color.${color}.alpha`]: `var(--color-${color}-alpha)`,
     }
 }
 const getValue = (value: string, prop: string, _css: CSSProps): any => {
@@ -23,7 +24,7 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
     const theme = getTheme()
     if (typeof value === "function") {
         let v = (value as any)(theme)
-        if (important) v = v + important
+        v = important ? v + important : v
         return getValue(v, prop, _css) || v
     }
 
@@ -59,14 +60,11 @@ const getValue = (value: string, prop: string, _css: CSSProps): any => {
 
     }
 
-    if ((prop === 'shadow' || prop === 'boxShadow') && typeof value === "number") {
+    if (typeof value === "number" && ["shadow", "boxShadow"].includes(prop)) {
         return theme.shadow(value) + (important || "")
     }
     let v = (values[value] || value)
-    if (important) {
-        return v + important
-    }
-    return v
+    return important ? v + important : v
 }
 
 export default getValue

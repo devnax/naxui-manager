@@ -70,7 +70,7 @@ export default (prop: string, value: string, _css: CSSProps) => {
             }
             let isBgcolor = keys["bgcolor"] || keys["bg"] || keys["background"] || keys["backgroundColor"]
             if (isBgcolor && isBgcolor !== 'transparent') {
-                _dcss.bgcolor = alpha("color.text", .12) + "!important"
+                _dcss.bgcolor = alpha("color.paper.text", .12) + "!important"
             }
             return _dcss
         }
@@ -78,11 +78,16 @@ export default (prop: string, value: string, _css: CSSProps) => {
     }
 
     // Border
-    if (typeof value === "number" && value && ["border", "borderRight", "borderLeft", "borderTop", "borderBottom"].includes(prop as any)) {
+    if (typeof value === "number" && !("borderColor" in (_css as any)) && value && ["border", "borderRight", "borderLeft", "borderTop", "borderBottom"].includes(prop as any)) {
+        let bgcolor = (_css as any)["bgcolor"]
+        let c = "color.paper.divider"
+        if (bgcolor && bgcolor.split(".").length === 2) {
+            c = `${bgcolor}.divider`
+        }
         return {
             [`${prop}Width`]: value + 'px' + (important || ""),
             [`${prop}Style`]: "solid",
-            [`${prop}Color`]: "color.divider"
+            [`${prop}Color`]: c
         }
     }
 
