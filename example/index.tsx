@@ -11,7 +11,7 @@ import { alpha } from '../src'
 
 const Pragraph = ({ color, alpha }: any) => {
   return (
-    <Tag mb={2} radius={2} flexColumn flexBox gap={8} flexWrap="wrap" p={3} bgcolor={alpha ? `color.${color}.alpha` : `color.${color}`}>
+    <Tag mb={2} radius={2} flexColumn flexBox gap={8} flexWrap="wrap" p={3} bgcolor={alpha ? `color.${color}.soft` : `color.${color}`}>
       <Tag typography="h5" fontWeight="bold" color={alpha ? `color.${color}` : `color.${color}.text`}>This is demo sentence</Tag>
       <Tag height={1} bgcolor={`color.${color}.divider`} />
       <Tag typography="subtext" fontSize="fontsize.button" color={alpha ? `color.${color}.subtext` : `color.${color}.subtext`}>
@@ -40,7 +40,29 @@ const App = () => {
 
   return (
     <ThemeProvider >
-      <Button onClick={() => setAlpha(!alpha)}>Toggle Alpha</Button>
+      <Button onClick={() => setAlpha(!alpha)} >Toggle Alpha</Button>
+
+
+      <Tag mb={2} radius={2} flexColumn flexBox gap={8} flexWrap="wrap" p={3} bgcolor={alpha ? `color.${color}.soft` : `color.${color}`}>
+        <Tag
+          width={100}
+          height={100}
+          bgcolor="color.paper.light"
+        />
+        <Tag
+          width={100}
+          height={100}
+          bgcolor="color.paper"
+        />
+        <Tag
+          width={100}
+          height={100}
+          bgcolor="color.paper.dark"
+        />
+
+      </Tag>
+
+
       <Tag p={3}>
         <Pragraph alpha={alpha} color="paper" />
         <Pragraph alpha={alpha} color="primary" />

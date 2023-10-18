@@ -23,25 +23,26 @@ export interface ThemeTypographyOptions {
     h6: TextStyleProps;
 }
 
-export type InterfaceType = { [key: string]: any }
-
-
 // ========== Theme Input 
 
+export type ThemeOptionInputColor = {
+    main: string;
+    text: string;
+}
 export interface ThemeOptionInput {
     globalStyle?: GlobalCSSType<AliasesTypes>,
     breakpoints?: { [key: string]: number };
     colors?: {
-        paper?: string;
-        primary?: string;
-        secondary?: string;
-        info?: string;
-        success?: string;
-        error?: string;
-        warning?: string;
+        paper?: string | ThemeOptionInputColor;
+        primary?: string | ThemeOptionInputColor;
+        secondary?: string | ThemeOptionInputColor;
+        info?: string | ThemeOptionInputColor;
+        success?: string | ThemeOptionInputColor;
+        error?: string | ThemeOptionInputColor;
+        warning?: string | ThemeOptionInputColor;
     };
     typography?: Partial<ThemeTypographyOptions>;
-    interfaces?: { [key: string]: () => InterfaceType };
+    interfaces?: { [key: string]: (userProps: ObjectType) => ObjectType };
 }
 
 
@@ -54,7 +55,7 @@ export type ThemeOptionColorType = {
     text: string;
     subtext: string;
     divider: string;
-    alpha: string;
+    soft: string;
 }
 
 export interface ThemeColorsOptions {
@@ -74,7 +75,7 @@ export interface ThemeOptions {
     colors: ThemeColorsOptions;
     typography: ThemeTypographyOptions;
     shadow: (num: number) => string;
-    interfaces: { [key: string]: (userProps: InterfaceType) => InterfaceType };
+    interfaces: { [key: string]: (userProps: ObjectType) => ObjectType };
 }
 
 
@@ -103,7 +104,7 @@ export type ColorsRefTypes =
     | "color.paper.text"
     | "color.paper.subtext"
     | "color.paper.divider"
-    | "color.paper.alpha"
+    | "color.paper.soft"
     | "color.primary"
     | "color.primary.main"
     | "color.primary.light"
@@ -111,7 +112,7 @@ export type ColorsRefTypes =
     | "color.primary.text"
     | "color.primary.subtext"
     | "color.primary.divider"
-    | "color.primary.alpha"
+    | "color.primary.soft"
     | "color.secondary"
     | "color.secondary.main"
     | "color.secondary.light"
@@ -119,7 +120,7 @@ export type ColorsRefTypes =
     | "color.secondary.text"
     | "color.secondary.subtext"
     | "color.secondary.divider"
-    | "color.secondary.alpha"
+    | "color.secondary.soft"
     | "color.info"
     | "color.info.main"
     | "color.info.light"
@@ -127,7 +128,7 @@ export type ColorsRefTypes =
     | "color.info.text"
     | "color.info.subtext"
     | "color.info.divider"
-    | "color.info.alpha"
+    | "color.info.soft"
     | "color.success"
     | "color.success.main"
     | "color.success.light"
@@ -135,7 +136,7 @@ export type ColorsRefTypes =
     | "color.success.text"
     | "color.success.subtext"
     | "color.success.divider"
-    | "color.success.alpha"
+    | "color.success.soft"
     | "color.warning"
     | "color.warning.main"
     | "color.warning.light"
@@ -143,7 +144,7 @@ export type ColorsRefTypes =
     | "color.warning.text"
     | "color.warning.subtext"
     | "color.warning.divider"
-    | "color.warning.alpha"
+    | "color.warning.soft"
     | "color.error"
     | "color.error.main"
     | "color.error.light"
@@ -151,4 +152,4 @@ export type ColorsRefTypes =
     | "color.error.text"
     | "color.error.subtext"
     | "color.error.divider"
-    | "color.error.alpha"
+    | "color.error.soft"

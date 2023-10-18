@@ -11,8 +11,8 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
     return (
         <Tag
             component="button"
+            interface="Button"
             border={0}
-            bgcolor="color.primary"
             color="color.primary.text"
             minWidth={100}
             height={40}

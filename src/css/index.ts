@@ -6,7 +6,7 @@ import {
     classNames
 } from 'naxcss'
 import * as naxcss from 'naxcss'
-import { getTheme, ThemeOptions, ThemeColorsOptions } from "../theme"
+import { getTheme } from "../theme"
 import getValue from "./getValue"
 import getProps from "./getProps"
 import aliases from "./aliases"
@@ -36,30 +36,22 @@ export const css_options = (options?: OptionsProps) => {
         getValue: (v: any, p: any, _c: any) => {
             if (options?.getValue) {
                 let _val = options?.getValue(p, v, _c)
-                if (_val) {
-                    return _val
-                }
+                if (_val) return _val
             }
             if (globalOption?.getValue) {
                 let _val = globalOption?.getValue(p, v, _c)
-                if (_val) {
-                    return _val
-                }
+                if (_val) return _val
             }
             return getValue(v, p, _c)
         },
         getProps: (p: any, v: any, _c: any) => {
             if (options?.getProps) {
                 let _p = options?.getProps(p, v, _c)
-                if (_p) {
-                    return _p
-                }
+                if (_p) return _p
             }
             if (globalOption?.getProps) {
                 let _p = globalOption?.getProps(p, v, _c)
-                if (_p) {
-                    return _p
-                }
+                if (_p) return _p
             }
             return getProps(p, v, _c)
         },
@@ -80,22 +72,6 @@ export const keyframes = (frames: keyframesType<AliasesTypes>, options?: Options
 
 export const makeCacheKey = (css_raw: object) => naxcss.makeCacheKey(css_raw)
 
-
-
-
-// Color
-
-export const getColor = (color: keyof ThemeColorsOptions, { colors }: ThemeOptions) => {
-    return {
-        [`color.${color}`]: (colors as any)[color].main,
-        [`color.${color}.main`]: (colors as any)[color].main,
-        [`color.${color}.light`]: (colors as any)[color].light,
-        [`color.${color}.dark`]: (colors as any)[color].dark,
-        [`color.${color}.text`]: (colors as any)[color].text,
-        [`color.${color}.subtext`]: (colors as any)[color].subtext,
-        [`color.${color}.divider`]: (colors as any)[color].divider,
-    }
-}
 
 export const adjustColor = (hex: string, factor: number) => {
 

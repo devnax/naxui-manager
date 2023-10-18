@@ -10,7 +10,10 @@ export const ThemeColors = {
     info: "#007bff",
     success: "#16a34a",
     error: '#dc2626',
-    warning: "#f59e0b"
+    warning: {
+        main: "#f59e0b",
+        text: "#ffffff"
+    }
 }
 
 
@@ -74,5 +77,14 @@ export default {
     globalStyle: {},
     colors: ThemeColors,
     typography: ThemeTypography,
-    interfaces: {},
+    interfaces: {
+        Button: () => {
+            return {
+                bgcolor: "red",
+                sx: {
+                    shadow: 5
+                }
+            }
+        }
+    },
 } as ThemeOptionInput

@@ -10,7 +10,7 @@ const getColor = (color: string) => {
         [`color.${color}.text`]: `var(--color-${color}-text)`,
         [`color.${color}.subtext`]: `var(--color-${color}-subtext)`,
         [`color.${color}.divider`]: `var(--color-${color}-divider)`,
-        [`color.${color}.alpha`]: `var(--color-${color}-alpha)`,
+        [`color.${color}.soft`]: `var(--color-${color}-soft)`,
     }
 }
 const getValue = (value: string, prop: string, _css: CSSProps): any => {

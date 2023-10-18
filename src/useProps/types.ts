@@ -164,6 +164,7 @@ interface CSSProperties {
 }
 
 export type CSSPropAsAttr = Partial<CSSProperties> & AliasesTypes & {
+    interface?: string;
     sx?: CSSProps;
     hover?: CSSProps;
     baseClass?: string;

@@ -3,16 +3,27 @@ import { OptionsProps, classNames as mergecls } from 'naxcss';
 import { css, css_options } from '../css';
 import { CSS_PROP_LIST } from './parceProps';
 import { CSSPropAsAttr } from './types'
+import { getTheme, mergeObject } from '../theme';
 export * from './types'
 
 export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
 
     let format = React.useMemo(() => {
+        const { interfaces } = getTheme()
         let sx, hover, baseClass: any, spacing, classNames: any;
+        if (props.interface) {
+            const _interface: Function = interfaces[props.interface]
+            delete props.interface
+            if (typeof _interface === 'function') {
+                props = mergeObject(_interface(props), props)
+            }
+        }
+
         if (props.sx) {
             sx = props.sx;
             delete props.sx
         }
+
         if (props.hover) {
             hover = props.hover;
             delete props.hover

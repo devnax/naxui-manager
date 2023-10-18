@@ -302,27 +302,11 @@ mergeTheme(theme1, theme2)
 
   ```js
     colors: {
-      common: "#FFFFFF",
       paper: "#f3f3f3",
-      divider: "#ededed",
-      text: "#111111",
-      subtext: "#666666"
-      primary: {
-        color: "#2563eb",
-        text: '#ffffff',
-      },
-      secondary: {
-        color: '#0d9488',
-        text: '#ffffff',
-      },
-      success: {
-        color: "#16a34a",
-        text: '#ffffff',
-      },
-      error: {
-        color: '#dc2626',
-        text: '#ffffff',
-      },
+      primary: "#2563eb",
+      secondary: "#0d9488",
+      success: "#16a34a",
+      error: "#dc2626",
       warning: {
         color: "#d97706",
         text: '#ffffff',
@@ -443,8 +427,6 @@ The sx prop is a shortcut for defining custom styles.
 ```
 
 
-
-
 ## CSS Value
 There are many way to pass css value. `string`, `number`, `breakpoint` or `function`. in the `string` you can pass string value and also theme prop. with the `breakpoint` you can do responsive design. and the `function` you can read the theme and return the value.
 
@@ -498,7 +480,7 @@ customize you color. first argument you can pass the color name or hex and the s
 import {alpha} from 'naxui-manager'
 
 <Tag 
-  bgcolor={alpha("color.primary", .3)}
+  bgcolor={alpha("#ff3344", .3)}
 />
 
 ```
