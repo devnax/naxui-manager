@@ -39,7 +39,11 @@ const App = () => {
 
 
   return (
-    <ThemeProvider >
+    <ThemeProvider defaultTheme="default-dark">
+      <Button onClick={() => {
+        const theme = getTheme()
+        changeTheme(theme.name === 'default' ? "default-dark" : "default")
+      }} >Toggle Theme</Button>
       <Button onClick={() => setAlpha(!alpha)} >Toggle Alpha</Button>
 
 

@@ -41,7 +41,7 @@ export const createTheme = (name: string, options: ThemeOptionInput): ThemeOptio
                 light: adjustColor(color, 1.2),
                 dark: adjustColor(color, .8),
                 text: tcolor,
-                subtext: adjustColor(color, tcolor === "#FFFFFF" ? 1.5 : .5), // 1.5
+                subtext: adjustColor(color, tcolor.toLowerCase() === "#ffffff" ? 5 : .5), // 1.5
                 divider: adjustColor(color, .9),
                 soft: alpha(color, .09)
             }
@@ -131,7 +131,7 @@ export const changeTheme = (name: string) => {
             },
             "p, h1, h2, h3, h4, h5, h6": {
                 overflowWrap: " break-word",
-                color: "color.text"
+                color: "color.paper.text"
             }
         })
 
