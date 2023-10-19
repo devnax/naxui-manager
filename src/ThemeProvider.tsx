@@ -14,6 +14,7 @@ type Props = {
 
 const ThemeProvider = ({ children, css_option, defaultTheme, fontFamily, themeOption }: Props) => {
     React.useMemo(() => {
+        fontFamily = fontFamily ?? '"Inter","Helvetica","Arial",sans-serif'
         css_option && globalConfig.set("default_css_option", css_option)
         createTheme('default', {
             ...themeOption,

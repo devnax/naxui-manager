@@ -41,7 +41,7 @@ export const createTheme = (name: string, options: ThemeOptionInput): ThemeOptio
                 light: adjustColor(color, 1.2),
                 dark: adjustColor(color, .8),
                 text: tcolor,
-                subtext: adjustColor(color, tcolor.toLowerCase() === "#ffffff" ? 5 : .5), // 1.5
+                subtext: adjustColor(color, tcolor.toLowerCase() === "#ffffff" ? 7 : .5), // 1.5
                 divider: adjustColor(color, .9),
                 soft: alpha(color, .09)
             }
