@@ -1,5 +1,5 @@
 {
-    "version": "1.6.4",
+    "version": "1.6.5",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -65,6 +65,6 @@
         "typescript": "^3.9.10"
     },
     "dependencies": {
-        "naxcss": "^2.4.8"
+        "naxcss": "^2.4.9"
     }
 }
