@@ -78,7 +78,7 @@ export default (prop: string, value: string, _css: CSSProps) => {
     }
 
     // Border
-    if (typeof value === "number" && !("borderColor" in (_css as any)) && value && ["border", "borderRight", "borderLeft", "borderTop", "borderBottom"].includes(prop as any)) {
+    if (value && typeof value === "number" && ["border", "borderRight", "borderLeft", "borderTop", "borderBottom"].includes(prop as any)) {
         let bgcolor = (_css as any)["bgcolor"]
         let c = "color.paper.divider"
         if (bgcolor && bgcolor.split(".").length === 2) {

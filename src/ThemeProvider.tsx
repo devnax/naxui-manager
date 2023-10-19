@@ -8,18 +8,22 @@ type Props = {
     children: any;
     css_option?: OptionsProps;
     defaultTheme?: "default" | "default-dark";
-    themeOption?: ThemeOptionInput
+    themeOption?: ThemeOptionInput;
+    fontFamily?: string;
 }
 
-const ThemeProvider = ({ children, css_option, defaultTheme, themeOption }: Props) => {
+const ThemeProvider = ({ children, css_option, defaultTheme, fontFamily, themeOption }: Props) => {
     React.useMemo(() => {
         css_option && globalConfig.set("default_css_option", css_option)
-
         createTheme('default', {
             ...themeOption,
             colors: {
                 paper: lightPaperColor,
                 ...themeOption?.colors
+            },
+            typography: {
+                fontFamily,
+                ...themeOption?.typography
             }
         })
         createTheme('default-dark', {
@@ -27,12 +31,14 @@ const ThemeProvider = ({ children, css_option, defaultTheme, themeOption }: Prop
             colors: {
                 paper: darkPaperColor,
                 ...themeOption?.colors
+            },
+            typography: {
+                fontFamily,
+                ...themeOption?.typography
             }
         })
-
-
         changeTheme(defaultTheme || "default")
-    }, [css_option, defaultTheme])
+    }, [])
     return children
 }
 

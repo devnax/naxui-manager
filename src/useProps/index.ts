@@ -11,7 +11,7 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
     let format = React.useMemo(() => {
         const { interfaces } = getTheme()
         let sx, hover, baseClass: any, spacing, classNames: any;
-        if (props.interface) {
+        if (props.interface && interfaces) {
             const _interface: Function = interfaces[props.interface]
             delete props.interface
             if (typeof _interface === 'function') {
