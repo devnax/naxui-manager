@@ -107,6 +107,9 @@ export const changeTheme = (name: string) => {
                 boxSizing: "border-box",
                 verticalAlign: "baseline",
             },
+            "html, body": {
+                minHeight: "100%"
+            },
             "body": {
                 fontFamily: "typography.font-family",
                 fontSize: "fontsize.text",

@@ -153,7 +153,7 @@ export const zoom = (_arg: VariantArgs) => {
     return {
         in: {
             from: {
-                transform: "scale(0)",
+                transform: "scale(.7)",
                 opacity: 0
             },
             to: {
@@ -167,7 +167,7 @@ export const zoom = (_arg: VariantArgs) => {
                 opacity: 1
             },
             to: {
-                transform: "scale(0)",
+                transform: "scale(.7)",
                 opacity: 0
             }
         }
