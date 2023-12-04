@@ -66,7 +66,7 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
         let classname = "";
         if (baseClass) {
             const cssOpt = css_options()
-            baseClass = cssOpt.classPrefix + baseClass
+            baseClass = cssOpt.classPrefix + "-" + baseClass
         }
         if (Object.keys(_css).length) {
             let cls: string = css(_css, {

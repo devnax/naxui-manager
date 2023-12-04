@@ -26,7 +26,7 @@ export const css_options = (options?: OptionsProps) => {
 
     return {
         breakpoints: theme.breakpoints,
-        classPrefix: 'ui-',
+        classPrefix: 'ui',
         ...options,
         ...globalOption,
         aliases: {
