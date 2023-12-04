@@ -127,7 +127,7 @@ export const grow = (_arg: VariantArgs) => {
     return {
         in: {
             from: {
-                transform: "scale(0.75, 0.55)",
+                transform: "scale(.8, .6)",
                 opacity: 0
             },
             to: {
@@ -141,7 +141,7 @@ export const grow = (_arg: VariantArgs) => {
                 opacity: 1
             },
             to: {
-                transform: "scale(0.75, 0.55)",
+                transform: "scale(.8, .6)",
                 opacity: 0
             }
         }
@@ -153,7 +153,7 @@ export const zoom = (_arg: VariantArgs) => {
     return {
         in: {
             from: {
-                transform: "scale(.7)",
+                transform: "scale(.8)",
                 opacity: 0
             },
             to: {
@@ -167,7 +167,7 @@ export const zoom = (_arg: VariantArgs) => {
                 opacity: 1
             },
             to: {
-                transform: "scale(.7)",
+                transform: "scale(.8)",
                 opacity: 0
             }
         }
@@ -178,7 +178,7 @@ export const zoomOver = (_arg: VariantArgs) => {
     return {
         in: {
             from: {
-                transform: "scale(1.5)",
+                transform: "scale(1.2)",
                 opacity: 0
             },
             to: {
@@ -192,7 +192,7 @@ export const zoomOver = (_arg: VariantArgs) => {
                 opacity: 1
             },
             to: {
-                transform: "scale(1.5)",
+                transform: "scale(1.2)",
                 opacity: 0
             }
         }

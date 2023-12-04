@@ -1,5 +1,4 @@
 import { getTheme } from "../theme"
-import { alpha } from '..'
 import { CSSProps } from 'naxcss'
 // import getValue from './getValue'
 
@@ -63,14 +62,15 @@ export default (prop: string, value: string, _css: CSSProps) => {
         if ((value as any) === true) {
             const keys: any = Object.keys(_css)
             let _dcss: any = {
-                pointerEvents: "none",
-                cursor: "default",
-                userSelect: "none",
-                color: "" + "!important",
+                pointerEvents: "none!important",
+                cursor: "default!important",
+                userSelect: "none!important",
+                color: "color.paper.text" + "!important",
+                opacity: .5
             }
             let isBgcolor = keys["bgcolor"] || keys["bg"] || keys["background"] || keys["backgroundColor"]
             if (isBgcolor && isBgcolor !== 'transparent') {
-                _dcss.bgcolor = alpha("color.paper.text", .12) + "!important"
+                _dcss.bgcolor = "color.paper.dark" + "!important"
             }
             return _dcss
         }
