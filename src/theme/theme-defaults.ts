@@ -1,19 +1,71 @@
 import { ThemeOptionInput } from './types'
 
-export const darkPaperColor = "#161618"
-export const lightPaperColor = "#f6f6f7"
+export const lightColorPallete = {
+    text: {
+        dark: "#111111",
+        main: "#212B36",
+        light: "#637381",
+    },
+    paper: {
+        light: "#F4F6F8",
+        main: "#DFE3E8",
+        dark: "#C4CDD5",
+    }
+}
+
+export const darkColorPallete = {
+    text: {
+        dark: "#C4CDD5",
+        main: "#FFFFFF",
+        light: "#C4CDD5",
+    },
+    paper: {
+        light: "#637381",
+        main: "#454F5B",
+        dark: "#212B36",
+    }
+}
 
 export const ThemeColors = {
-    paper: lightPaperColor,
-    primary: "#0066ff",
-    secondary: '#0d9488',
-    info: "#007bff",
-    success: "#16a34a",
-    error: '#dc2626',
+    ...lightColorPallete,
+
+    primary: {
+        light: "#5BE49B",
+        main: "#00A76F",
+        dark: "#007867",
+        text: "#FFFFFF"
+    },
+    secondary: {
+        light: "#C684FF",
+        main: "#8E33FF",
+        dark: "#5119B7",
+        text: "#FFFFFF"
+    },
+    info: {
+        light: "#61F3F3",
+        main: "#00B8D9",
+        dark: "#006C9C",
+        text: "#FFFFFF"
+    },
+    success: {
+        light: "#77ED8B",
+        main: "#22C55E",
+        dark: "#118D57",
+        text: "#FFFFFF"
+    },
+
     warning: {
-        main: "#f59e0b",
-        text: "#ffffff"
-    }
+        light: "#FFD666",
+        main: "#FFAB00",
+        dark: "#B76E00",
+        text: "#FFFFFF"
+    },
+    error: {
+        light: "#FFAC82",
+        main: "#FF5630",
+        dark: "#B71D18",
+        text: "#FFFFFF"
+    },
 }
 
 
@@ -21,52 +73,52 @@ export const ThemeTypography = {
     fontFamily: '"Inter","Helvetica","Arial",sans-serif',
     h1: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h1'
+        fontSize: "3.815rem"
     },
     h2: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h2'
+        fontSize: "3.052rem"
     },
     h3: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h3'
+        fontSize: "2.441rem"
     },
     h4: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h4'
+        fontSize: "1.953rem"
     },
     h5: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h5'
+        fontSize: "1.563rem"
     },
     h6: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.h6',
+        fontSize: "1.25rem",
         fontWeight: 600
     },
     text: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.text',
+        fontSize: "1rem",
         fontWeight: 400,
-        color: "color.paper.text",
+        color: "common.text",
         lineHeight: 1.60
     },
     subtext: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.text',
+        fontSize: "1rem",
         fontWeight: 400,
-        color: "color.paper.subtext",
+        color: "common.subtext",
         lineHeight: 1.60
     },
     button: {
         fontFamily: 'typography.font-family',
-        fontSize: 'fontsize.button',
+        fontSize: "0.875rem",
         fontWeight: 500
     }
 }
 
 export default {
-    name: "default",
+    name: "light",
     breakpoints: {
         xs: 0,
         sm: 600,
@@ -77,14 +129,5 @@ export default {
     globalStyle: {},
     colors: ThemeColors,
     typography: ThemeTypography,
-    interfaces: {
-        Button: () => {
-            return {
-                bgcolor: "red",
-                sx: {
-                    shadow: 5
-                }
-            }
-        }
-    },
+    interfaces: {}
 } as ThemeOptionInput

@@ -2,8 +2,6 @@ import { GlobalCSSType } from "naxcss"
 import { AliasesTypes } from "../css/types";
 
 export type ObjectType = { [key: string]: any }
-export type StateKeys = "current_theme" | "dispatch"
-
 
 export type TextStyleProps = {
     fontSize?: string | number;
@@ -23,43 +21,38 @@ export interface ThemeTypographyOptions {
     h6: TextStyleProps;
 }
 
-// ========== Theme Input 
-
-export type ThemeOptionInputColor = {
-    main: string;
+export type ThemeOptionColorType = {
+    light: string; // 300
+    main: string; // 500
+    dark: string; // 700
     text: string;
 }
+
+// ========== Theme Input 
+
 export interface ThemeOptionInput {
     globalStyle?: GlobalCSSType<AliasesTypes>,
     breakpoints?: { [key: string]: number };
     colors?: {
-        paper?: string | ThemeOptionInputColor;
-        primary?: string | ThemeOptionInputColor;
-        secondary?: string | ThemeOptionInputColor;
-        info?: string | ThemeOptionInputColor;
-        success?: string | ThemeOptionInputColor;
-        error?: string | ThemeOptionInputColor;
-        warning?: string | ThemeOptionInputColor;
+        text?: Omit<Partial<ThemeOptionColorType>, "text">;
+        paper?: Omit<Partial<ThemeOptionColorType>, "text">;
+        primary?: Partial<ThemeOptionColorType>;
+        secondary?: Partial<ThemeOptionColorType>;
+        info?: Partial<ThemeOptionColorType>;
+        success?: Partial<ThemeOptionColorType>;
+        error?: Partial<ThemeOptionColorType>;
+        warning?: Partial<ThemeOptionColorType>;
     };
     typography?: Partial<ThemeTypographyOptions>;
-    interfaces?: { [key: string]: (userProps: ObjectType) => ObjectType };
+    interfaces?: { [name: string]: <P extends object>(defaultProps: P) => P };
 }
 
 
 // =========== Main Theme Options
 
-export type ThemeOptionColorType = {
-    main: string;
-    light: string;
-    dark: string;
-    text: string;
-    subtext: string;
-    divider: string;
-    soft: string;
-}
-
 export interface ThemeColorsOptions {
-    paper: ThemeOptionColorType;
+    text: Omit<ThemeOptionColorType, "text">;
+    paper: Omit<ThemeOptionColorType, "text">;
     primary: ThemeOptionColorType;
     secondary: ThemeOptionColorType;
     info: ThemeOptionColorType;
@@ -75,7 +68,7 @@ export interface ThemeOptions {
     colors: ThemeColorsOptions;
     typography: ThemeTypographyOptions;
     shadow: (num: number) => string;
-    interfaces: { [key: string]: (userProps: ObjectType) => ObjectType };
+    interfaces: { [name: string]: <P extends object>(defaultProps: P) => P };
 }
 
 
@@ -93,63 +86,51 @@ export type TypographyRefTypes =
     | "fontsize.h6"
     | "fontsize.text"
     | "fontsize.button"
-    | "fontsize.block"
 
 
 export type ColorsRefTypes =
-    | "color.paper"
-    | "color.paper.main"
-    | "color.paper.light"
-    | "color.paper.dark"
-    | "color.paper.text"
-    | "color.paper.subtext"
-    | "color.paper.divider"
-    | "color.paper.soft"
-    | "color.primary"
-    | "color.primary.main"
-    | "color.primary.light"
-    | "color.primary.dark"
-    | "color.primary.text"
-    | "color.primary.subtext"
-    | "color.primary.divider"
-    | "color.primary.soft"
-    | "color.secondary"
-    | "color.secondary.main"
-    | "color.secondary.light"
-    | "color.secondary.dark"
-    | "color.secondary.text"
-    | "color.secondary.subtext"
-    | "color.secondary.divider"
-    | "color.secondary.soft"
-    | "color.info"
-    | "color.info.main"
-    | "color.info.light"
-    | "color.info.dark"
-    | "color.info.text"
-    | "color.info.subtext"
-    | "color.info.divider"
-    | "color.info.soft"
-    | "color.success"
-    | "color.success.main"
-    | "color.success.light"
-    | "color.success.dark"
-    | "color.success.text"
-    | "color.success.subtext"
-    | "color.success.divider"
-    | "color.success.soft"
-    | "color.warning"
-    | "color.warning.main"
-    | "color.warning.light"
-    | "color.warning.dark"
-    | "color.warning.text"
-    | "color.warning.subtext"
-    | "color.warning.divider"
-    | "color.warning.soft"
-    | "color.error"
-    | "color.error.main"
-    | "color.error.light"
-    | "color.error.dark"
-    | "color.error.text"
-    | "color.error.subtext"
-    | "color.error.divider"
-    | "color.error.soft"
+    | "text"
+    | "text.main"
+    | "text.light"
+    | "text.dark"
+
+    | "paper"
+    | "paper.main"
+    | "paper.light"
+    | "paper.dark"
+
+    | "primary"
+    | "primary.main"
+    | "primary.light"
+    | "primary.dark"
+    | "primary.text"
+
+    | "secondary"
+    | "secondary.main"
+    | "secondary.light"
+    | "secondary.dark"
+    | "secondary.text"
+
+    | "info"
+    | "info.main"
+    | "info.light"
+    | "info.dark"
+    | "info.text"
+
+    | "success"
+    | "success.main"
+    | "success.light"
+    | "success.dark"
+    | "success.text"
+
+    | "warning"
+    | "warning.main"
+    | "warning.light"
+    | "warning.dark"
+    | "warning.text"
+
+    | "error"
+    | "error.main"
+    | "error.light"
+    | "error.dark"
+    | "error.text"

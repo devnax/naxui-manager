@@ -1,68 +1,75 @@
-import { getTheme } from "../theme"
+// import { getTheme } from "../theme"
 import { CSSProps } from 'naxcss'
+import { ThemeOptions } from '../theme';
 
-const getColor = (color: string) => {
+const getColor = (color: string, theme: ThemeOptions) => {
+    let _color: any = (theme.colors as any)[color]
     return {
-        [`color.${color}`]: `var(--color-${color}-main)`,
-        [`color.${color}.main`]: `var(--color-${color}-main)`,
-        [`color.${color}.light`]: `var(--color-${color}-light)`,
-        [`color.${color}.dark`]: `var(--color-${color}-dark)`,
-        [`color.${color}.text`]: `var(--color-${color}-text)`,
-        [`color.${color}.subtext`]: `var(--color-${color}-subtext)`,
-        [`color.${color}.divider`]: `var(--color-${color}-divider)`,
-        [`color.${color}.soft`]: `var(--color-${color}-soft)`,
+        [`${color}`]: _color.main,
+        [`${color}.main`]: _color.main,
+        [`${color}.light`]: _color.light,
+        [`${color}.dark`]: _color.dark,
+        [`${color}.text`]: _color.text
     }
 }
-const getValue = (value: string, prop: string, _css: CSSProps): any => {
+
+const getValue = (prop: any, value: string | number, _css: CSSProps, theme: ThemeOptions): any => {
     let important;
+
     if (typeof value === 'string') {
         const split = value.split("!")
         important = split[1] ? "!important" : ""
         value = split[0]
     }
 
-    const theme = getTheme()
     if (typeof value === "function") {
         let v = (value as any)(theme)
         v = important ? v + important : v
-        return getValue(v, prop, _css) || v
+        return getValue(v, prop, _css, theme) || v
     }
 
     const values: any = {
-        'typography.font-family': "var(--typography-font-family)",
+        // Typography
+        'typography.font-family': theme.typography.fontFamily,
+        "fontsize.h1": theme.typography.h1.fontSize,
+        "fontsize.h2": theme.typography.h2.fontSize,
+        "fontsize.h3": theme.typography.h3.fontSize,
+        "fontsize.h4": theme.typography.h4.fontSize,
+        "fontsize.h5": theme.typography.h5.fontSize,
+        "fontsize.h6": theme.typography.h6.fontSize,
+        "fontsize.text": theme.typography.text.fontSize,
+        "fontsize.button": theme.typography.button.fontSize,
 
         // Breakpoints
-        "breakpoints.xs": "var(--breakpoint-xs)",
-        "breakpoints.sm": "var(--breakpoint-sm)",
-        "breakpoints.md": "var(--breakpoint-md)",
-        "breakpoints.lg": "var(--breakpoint-lg)",
-        "breakpoints.xl": "var(--breakpoint-xl)",
-
-        // Typography
-        "fontsize.h1": "var(--fontsize-h1)",
-        "fontsize.h2": "var(--fontsize-h2)",
-        "fontsize.h3": "var(--fontsize-h3)",
-        "fontsize.h4": "var(--fontsize-h4)",
-        "fontsize.h5": "var(--fontsize-h5)",
-        "fontsize.h6": "var(--fontsize-h6)",
-        "fontsize.text": "var(--fontsize-text)",
-        "fontsize.button": "var(--fontsize-button)",
-        "fontsize.block": "var(--fontsize-block)",
+        "breakpoints.xs": theme.breakpoints.xs,
+        "breakpoints.sm": theme.breakpoints.sm,
+        "breakpoints.md": theme.breakpoints.md,
+        "breakpoints.lg": theme.breakpoints.lg,
+        "breakpoints.xl": theme.breakpoints.xl,
 
         // Colors
-        ...getColor("paper"),
-        ...getColor("primary"),
-        ...getColor("secondary"),
-        ...getColor("info"),
-        ...getColor("success"),
-        ...getColor("warning"),
-        ...getColor("error"),
+        "text": theme.colors.text.main,
+        "text.main": theme.colors.text.main,
+        "text.light": theme.colors.text.light,
+        "text.dark": theme.colors.text.dark,
 
+        "paper": theme.colors.paper.main,
+        "paper.main": theme.colors.paper.main,
+        "paper.light": theme.colors.paper.light,
+        "paper.dark": theme.colors.paper.dark,
+
+        ...getColor("primary", theme),
+        ...getColor("secondary", theme),
+        ...getColor("info", theme),
+        ...getColor("success", theme),
+        ...getColor("warning", theme),
+        ...getColor("error", theme),
     }
 
     if (typeof value === "number" && ["shadow", "boxShadow"].includes(prop)) {
         return theme.shadow(value) + (important || "")
     }
+
     let v = (values[value] || value)
     return important ? v + important : v
 }

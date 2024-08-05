@@ -1,9 +1,8 @@
 import * as CSS from 'csstype'
 import { CSSProps, classNamesTypes } from 'naxcss';
-import { ThemeOptions } from '../theme';
-import { AliasesTypes, CSSValueType } from "../css/types"
-import { ColorsRefTypes, BreakpointsType, TypographyRefTypes } from '../theme/types';
-
+import { ThemeOptions } from '../../theme';
+import { AliasesTypes, CSSValueType } from "../../css/types"
+import { ColorsRefTypes, BreakpointsType, TypographyRefTypes } from '../../theme/types';
 
 interface CSSProperties {
     alignContent: CSSValueType<"alignContent">;
@@ -164,11 +163,10 @@ interface CSSProperties {
 }
 
 export type CSSPropAsAttr = Partial<CSSProperties> & AliasesTypes & {
-    interface?: string;
+    baseClass?: string;
     sx?: CSSProps;
     hover?: CSSProps;
-    baseClass?: string;
     disabled?: boolean;
     typography?: keyof Omit<ThemeOptions['typography'], "fontFamily">;
-    classNames?: classNamesTypes[]
-}
+    classNames?: classNamesTypes[];
+} 

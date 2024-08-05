@@ -1,23 +1,17 @@
 import * as React from 'react';
 import { OptionsProps, classNames as mergecls } from 'naxcss';
-import { css, css_options } from '../css';
+import { css, css_options } from '../../css';
 import { CSS_PROP_LIST } from './parceProps';
 import { CSSPropAsAttr } from './types'
-import { getTheme, mergeObject } from '../theme';
+import { useTheme, mergeObject } from '../../theme';
 export * from './types'
 
+
 export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
+    const theme = useTheme()
 
     let format = React.useMemo(() => {
-        const { interfaces } = getTheme()
-        let sx, hover, baseClass: any, spacing, classNames: any;
-        if (props.interface && interfaces) {
-            const _interface: Function = interfaces[props.interface]
-            delete props.interface
-            if (typeof _interface === 'function') {
-                props = mergeObject(_interface(props), props)
-            }
-        }
+        let sx, hover, baseClass: any, classNames: any;
 
         if (props.sx) {
             sx = props.sx;
@@ -32,24 +26,15 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
             baseClass = props.baseClass;
             delete props.baseClass
         }
-        if (props.spacing !== undefined) {
-            spacing = props.spacing;
-            delete props.spacing
-        }
+
         if (props.classNames) {
             classNames = props.classNames;
             delete props.classNames
         }
 
         let _css: any = {}
-        if (spacing) {
-            _css['& > *'] = {
-                pt: spacing,
-                pl: spacing
-            }
-        }
-
         let propKeys: any = []
+
         for (let prop in props) {
             if (CSS_PROP_LIST.includes(prop)) {
                 _css[prop] = (props as any)[prop]
@@ -58,31 +43,21 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
             }
         }
 
-        _css = { ..._css, ...(sx as any || {}) }
+        _css = sx ? mergeObject(_css, sx) : _css
+
         if (hover) {
             _css['&:hover'] = hover
         }
 
         let classname = "";
         if (baseClass) {
-            const cssOpt = css_options()
+            const cssOpt = css_options(theme, css_option)
             baseClass = cssOpt.classPrefix + "-" + baseClass
         }
+
         if (Object.keys(_css).length) {
-            let cls: string = css(_css, {
-                ...css_option,
-                getProps: (p: any, v: any, _c): any => {
-                    if (css_option?.getProps) {
-                        let _p = css_option?.getProps(p, v, _c)
-                        if (_p) {
-                            return _p
-                        }
-                    }
-                },
-                getStyleTag: (t) => {
-                    baseClass && t.setAttribute("data-ui", baseClass)
-                }
-            })
+            _css.theme = theme.name
+            let cls: string = css(_css, theme, css_option)
             classname = mergecls(baseClass as any, ...(classNames || []), cls, (props as any).className)
         } else {
             classname = mergecls(baseClass as any, ...(classNames || []), (props as any).className)
@@ -91,7 +66,7 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
             classname,
             propKeys
         }
-    }, [JSON.stringify(props)]);
+    }, [JSON.stringify(props), theme.name]);
 
     const _props: any = {};
     if (format) {

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { animationEases } from './useAnimation'
 import { AliasesTypes } from '../css/types'
 import { CSSProps, formatProp } from 'naxcss';
+import { useTheme } from '../theme';
 
 export interface UseTransitionProps {
     initial?: CSSProps<AliasesTypes>;
@@ -18,6 +19,7 @@ export interface UseTransitionProps {
 
 
 const useTransition = ({ from, to, initial, easing, ease, duration, delay, onStart, onFinish }: UseTransitionProps) => {
+    const theme = useTheme()
     const ref: any = useRef()
     let _from: any = from || {}
     let _to: any = to || {}
@@ -33,7 +35,7 @@ const useTransition = ({ from, to, initial, easing, ease, duration, delay, onSta
         ...(_initial || {}),
         ..._css,
         transition: Object.keys(_css || {}).map(k => formatProp(k)).join(trans + ", ") + trans
-    })
+    }, theme)
     useEffect(() => {
         onStart && onStart()
 

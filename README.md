@@ -11,6 +11,7 @@ Create Component
   - [Tag](#tag)
   - [Creare First Component](#create-first-component)
   - [useProps](#useprops)
+  - [useInterafce](#useinterface)
   - [useVariants](#usevariants)
   - [Props List](#props-list)
   - [Aliases](#aliases)
@@ -138,6 +139,22 @@ const App = () => {
 }
 ```
 
+
+## useInterafce
+you can use theme interfacesin a component. give name and default props and user props.
+
+```js
+import {useInterface} from 'naxui-manager'
+
+const Button = (props) => {
+  const defaultProps = {
+    color: "primary",
+    variant: "filled"
+  }
+  const newProps = useInterface("Button", defaultProps, props)
+}
+```
+
 ## Props List
 you can import the typescript type `CSSPropAsAttr` from `naxui-manager` to see what kind aliases and css props you can use as a component attribute.
 
@@ -145,38 +162,38 @@ you can import the typescript type `CSSPropAsAttr` from `naxui-manager` to see w
 ## Aliases
 In this library there are already included many css property aliases. If you want to use your more custom aliases then you can set `css_option` in [ThemeProvider](#themeprovider). If you don't know how to create an alias then you can learn about the [naxcss](https://www.npmjs.com/package/naxcss)
 
-| Name  |  Description |
-|---|---|
-| `bgcolor` | `background-color`, you can pass string or theme colors name example: `primary`, `primary.color`|
-| `bgimage` | `background-image` |
-| `bg` | `background` |
-| `p` | `padding`|
-| `pt` |`paddng-top` |
-| `pr` | `padding-right`|
-| `pb` | `padding-bottom`|
-| `pl` | `padding-left`|
-| `px` | `paddingleft` and `padding-right`|
-| `py` | `padding-top` and `padding-bottom`|
-| `m` | `margin` |
-| `mt` | `margin-top`|
-| `mr` | `margin-right`|
-| `mb` | `margin-bottom`|
-| `ml` | `margin-left`|
-| `mx` | `margin-left` and `margin-right` |
-| `my` | `margin-top` and `margin-bottom`|
-| `radius` | `border-radius`, if you pass a number then it will multiply with `8`|
-| `shadow` | `box-shadow`, you can pass number, string or theme shadows, example: `1`, `2`|
-| `border` | `border`|
-| `w` | `width` |
-| `h` | `height` |
-| `maxw` | `max-width`|
-| `minw` | `min-width`|
-| `maxh` | `max-height`|
-| `minh` | `min-height`|
-| `flexBox` | `display: flex`|
-| `flexRow` | `flex-direction: row`|
-| `flexColumn` | `flex-direction: column`|
-| `flexWraped` | `flex-wrap: wrap`|
+| Name         | Description                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------ |
+| `bgcolor`    | `background-color`, you can pass string or theme colors name example: `primary`, `primary.color` |
+| `bgimage`    | `background-image`                                                                               |
+| `bg`         | `background`                                                                                     |
+| `p`          | `padding`                                                                                        |
+| `pt`         | `paddng-top`                                                                                     |
+| `pr`         | `padding-right`                                                                                  |
+| `pb`         | `padding-bottom`                                                                                 |
+| `pl`         | `padding-left`                                                                                   |
+| `px`         | `paddingleft` and `padding-right`                                                                |
+| `py`         | `padding-top` and `padding-bottom`                                                               |
+| `m`          | `margin`                                                                                         |
+| `mt`         | `margin-top`                                                                                     |
+| `mr`         | `margin-right`                                                                                   |
+| `mb`         | `margin-bottom`                                                                                  |
+| `ml`         | `margin-left`                                                                                    |
+| `mx`         | `margin-left` and `margin-right`                                                                 |
+| `my`         | `margin-top` and `margin-bottom`                                                                 |
+| `radius`     | `border-radius`, if you pass a number then it will multiply with `8`                             |
+| `shadow`     | `box-shadow`, you can pass number, string or theme shadows, example: `1`, `2`                    |
+| `border`     | `border`                                                                                         |
+| `w`          | `width`                                                                                          |
+| `h`          | `height`                                                                                         |
+| `maxw`       | `max-width`                                                                                      |
+| `minw`       | `min-width`                                                                                      |
+| `maxh`       | `max-height`                                                                                     |
+| `minh`       | `min-height`                                                                                     |
+| `flexBox`    | `display: flex`                                                                                  |
+| `flexRow`    | `flex-direction: row`                                                                            |
+| `flexColumn` | `flex-direction: column`                                                                         |
+| `flexWraped` | `flex-wrap: wrap`                                                                                |
 
 
 

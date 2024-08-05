@@ -30,25 +30,19 @@ export type AliasesTypes = {
     radius?: CSSValueType<'borderRadius'> | number;
     borderRadius?: CSSValueType<'borderRadius'> | number;
     shadow?: CSSValueType<'boxShadow'> | number;
-    w?: CSSValueType<"width">;
-    h?: CSSValueType<"height">;
-    maxw?: CSSValueType<"width"> | BreakpointsType;
-    minw?: CSSValueType<"width"> | BreakpointsType;
-    maxh?: CSSValueType<"height">;
-    minh?: CSSValueType<"height">;
-
     flexBox?: boolean;
     flexRow?: boolean;
     flexColumn?: boolean;
     flexWraped?: boolean;
     direction?: "row" | "column" | CSSValueType<'direction'>;
+    gap?: CSSValueType<'gap'>;
 
     color?: CSSValueType<'color'> | ColorsRefTypes;
     width?: CSSValueType<'width'> | BreakpointsType;
     height?: CSSValueType<'height'> | BreakpointsType;
     borderColor?: CSSValueType<'backgroundColor'> | ColorsRefTypes;
 
-    fontFamily?: CSSValueType<"fontFamily"> | "font-family";
+    fontFamily?: CSSValueType<"fontFamily"> | "typography.font-family";
     fontSize?: CSSValueType<"fontSize"> | TypographyRefTypes;
     minWidth?: CSSValueType<"minWidth"> | BreakpointsType;
     maxWidth?: CSSValueType<"maxWidth"> | BreakpointsType;

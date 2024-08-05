@@ -1,8 +1,8 @@
 import * as React from "react"
 import { css_options } from "../css"
-import { BreakpointsType } from "../theme"
 import useWindowResize from "./useWindowResize"
 import isWindow from './isWindow'
+import { useTheme, BreakpointsType } from "../theme"
 
 const throwError = (n: any) => {
     if (typeof n !== 'number') {
@@ -11,9 +11,10 @@ const throwError = (n: any) => {
 }
 
 const useMediaScreen = () => {
+    const theme = useTheme()
     const win = isWindow()
     const [windowSize, setWindowSize] = React.useState(win ? win.innerWidth : 0)
-    const _css_option = css_options()
+    const _css_option = css_options(theme)
     useWindowResize(() => setWindowSize(window.innerWidth))
 
     const factory = {

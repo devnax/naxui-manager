@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { CSSPropAsAttr, useProps } from './useProps'
+import { CSSPropAsAttr, useProps } from './hooks/useProps'
 
 export type TagComponenntType = keyof JSX.IntrinsicElements | React.ComponentType<any>
 export type TagProps<T extends TagComponenntType = 'div'> = Omit<React.HTMLProps<T>, 'width' | 'height'> & {

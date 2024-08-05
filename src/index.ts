@@ -1,7 +1,3 @@
-type GlobalConfigType = "default_css_option" | "defaultFontFamily"
-export const globalConfig = new Map<GlobalConfigType, any>()
-
-import ThemeProvider from './ThemeProvider'
 import Tag, { TagProps, TagComponenntType } from './Tag'
 import isWindow from './hooks/isWindow'
 import useMediaScreen from './hooks/useMediaScreen'
@@ -12,10 +8,10 @@ import useTransition, { UseTransitionProps } from './hooks/useTransiton'
 import useTransitions, { UseTransitionsProps, UseTransitionsVariantsTypes, UseTransitionsVariant, UseTransitionsVariantCallback } from './hooks/useTransitions'
 
 export * from './css'
-export * from "./useProps"
+export * from "./hooks/useProps"
 export * from "./theme"
 export * from './css/types'
-export * from './useProps/types'
+export * from './hooks/useProps/types'
 export * from './theme/types'
 
 export type {
@@ -28,7 +24,6 @@ export type {
 }
 
 export {
-    ThemeProvider,
     Tag,
     TagProps,
     TagComponenntType,
