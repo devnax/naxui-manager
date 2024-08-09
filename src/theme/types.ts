@@ -72,6 +72,77 @@ export interface ThemeOptions {
 }
 
 
+
+export interface ThemeColorType {
+    primary: string;
+    secondary: string;
+}
+export interface Theme {
+    ltr: boolean;
+    breakpoints: { [key in BreakpointsType]: number };
+    shadow: (num: number) => string;
+    interfaces: { [name: string]: <P extends object>(defaultProps: P) => P };
+
+    colors: {
+        background: ThemeColorType;
+        text: ThemeColorType;
+        brand: ThemeColorType;
+        success: ThemeColorType;
+        info: ThemeColorType;
+        warning: ThemeColorType;
+        danger: ThemeColorType;
+    };
+
+    typography: {
+        fontFamily: "'Roboto', sans-serif",
+        fontSize: {
+            h1: 47.78
+            h2: 39.81
+            h3: 33.18
+            h4: 27.65
+            h5: 27.65
+            h6: 23.04
+            body: 16
+            small: 13.33
+        };
+        lineHeight: {
+            h1: 1.3,
+            h2: 1.35,
+            h3: 1.4,
+            h4: 1.45,
+            h5: 1.5,
+            h6: 1.55,
+            body: 1.6,
+            small: 1.6,
+        };
+        fontWeight: {
+            regular: 400,
+            bold: 700,
+        };
+    };
+
+    zIndex: {
+        background: 0,         // Background layers (e.g., base content, backdrop)
+        content: 100,          // Main content (e.g., standard UI elements)
+        dropdown: 200,         // Dropdowns and side menus
+        stickyHeader: 300,    // Sticky headers and footers
+        modalBackdrop: 400,   // Backdrop for modals
+        modal: 500,           // Modal windows
+        popover: 600,         // Popovers and tooltips
+        notification: 700,    // Notifications and toast messages
+        overlay: 800,         // Full-screen overlays
+        tooltip: 900,         // Tooltip elements
+        topmost: 1000,
+    };
+
+    styles: {
+        Button: {
+
+        }
+    }
+
+}
+
 export type BreakpointsType = "xs" | "sm" | "md" | "lg" | "xl"
 
 
