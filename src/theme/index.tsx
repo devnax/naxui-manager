@@ -2,8 +2,7 @@ import { ThemeOptions, ObjectType, ThemeOptionInput } from "./types"
 import defaultThemeOption, { lightColorPallete, darkColorPallete } from './theme-defaults'
 
 import * as React from "react"
-import { globalCss } from "../css"
-import { NAXCSS_CACHE } from "naxcss"
+import { alpha, globalCss } from "../css"
 export * from './types'
 
 const ThemeFactory = new Map<string, ThemeOptions>()
@@ -23,18 +22,38 @@ export const mergeObject = (a: ObjectType, b: ObjectType) => {
     return a
 }
 
-export type ThemeProviderProps = {
-    children: any
-    theme: string;
-    resetCss?: boolean;
-};
-
 export const getTheme = (theme: string) => ThemeFactory.get(theme)
 
-export const createTheme = (name: string, options: ThemeOptionInput): ThemeOptions => {
+export const createTheme = (name: string, options: ThemeOptionInput, darkMode?: boolean): ThemeOptions => {
     if (!ThemeFactory.has(name)) {
-        let theme: any = mergeObject(defaultThemeOption, { ...options, name }) as ThemeOptionInput
-        theme.shadow = (num: number) => num ? (`0px 0px 2px -1px rgba(0,0,0,0.15), 0px ${num}px ${num}px 0px rgba(0,0,0,0.10), 0px ${num + 1}px ${num + 1}px -${num + 1}px rgba(0,0,0,0.12)`) : num
+        let theme: any = mergeObject(defaultThemeOption, {
+            ...(darkMode ? darkColorPallete : {}),
+            ...options,
+            name
+        })
+
+        theme = mergeObject(theme, {
+            colors: {
+                brand: {
+                    alpha: alpha(theme.colors.brand.primary, .15)
+                },
+                accent: {
+                    alpha: alpha(theme.colors.accent.primary, .15)
+                },
+                info: {
+                    alpha: alpha(theme.colors.info.primary, .15)
+                },
+                success: {
+                    alpha: alpha(theme.colors.success.primary, .15)
+                },
+                warning: {
+                    alpha: alpha(theme.colors.warning.primary, .15)
+                },
+                danger: {
+                    alpha: alpha(theme.colors.danger.primary, .15)
+                }
+            }
+        })
         ThemeFactory.set(name, theme)
     } else {
         throw new Error(`theme "${name}" already exists!`);
@@ -55,27 +74,26 @@ createTheme("dark", {
     colors: darkColorPallete
 })
 
+export type ThemeProviderProps = {
+    children: React.ReactNode;
+    theme: string;
+};
 
-export const ThemeProvider = ({ children, theme, resetCss }: ThemeProviderProps) => {
+export const ThemeProvider = ({ children, theme }: ThemeProviderProps) => {
 
     const THEME = ThemeFactory.get(theme) as ThemeOptions
-    if (!THEME) {
-        throw new Error(`Invalid theme name : ${theme}`);
-    }
-
-    resetCss = resetCss ?? true
+    if (!THEME) throw new Error(`Invalid theme name : ${theme}`)
 
     React.useMemo(() => {
-        NAXCSS_CACHE.forEach((c) => {
-            const ele = document.querySelector(`[data-naxcss="${c.classname}"]`)
-            ele?.remove()
-        })
+        // NAXCSS_CACHE.forEach((c) => {
+        //     const ele = document.querySelector(`[data-naxcss="${c.classname}"]`)
+        //     ele?.remove()
+        // })
+        // NAXCSS_CACHE.clear()
 
-        NAXCSS_CACHE.clear()
-    }, [theme])
+        !!Object.keys(THEME.globalStyle).length && globalCss(`${theme}-global-css`, THEME.globalStyle, THEME)
 
-    React.useMemo(() => {
-        resetCss && globalCss("reset-css", {
+        THEME.resetCss && globalCss("reset-css", {
             "*": {
                 m: 0,
                 p: 0,
@@ -84,13 +102,10 @@ export const ThemeProvider = ({ children, theme, resetCss }: ThemeProviderProps)
                 verticalAlign: "baseline",
             },
             "html, body": {
-                minHeight: "100%"
-            },
-            "body": {
+                minHeight: "100%",
                 "-webkit-font-smoothing": "antialiased",
-                fontSize: "fontsize.text",
-                fontFamily: "typography.font-family"
             },
+
             "img, picture, video, canvas, svg": {
                 maxWidth: "100%",
                 display: "block"
@@ -102,19 +117,21 @@ export const ThemeProvider = ({ children, theme, resetCss }: ThemeProviderProps)
                 borderCollapse: "collapse",
                 borderSpacing: 0
             },
-            "ol, ul ": {
+            "ol, ul": {
                 listStyle: "none"
+            },
+            "a": {
+                display: "inline-block"
             },
             "p, h1, h2, h3, h4, h5, h6": {
                 overflowWrap: "break-word",
-                color: "color.paper.text"
             }
         }, THEME)
     }, [theme])
 
-
     return (
         <ThemeContex.Provider value={theme}>
+
             {children}
         </ThemeContex.Provider>
     )

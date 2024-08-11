@@ -1,8 +1,7 @@
 import * as CSS from 'csstype'
 import { CSSProps, classNamesTypes } from 'naxcss';
-import { ThemeOptions } from '../../theme';
 import { AliasesTypes, CSSValueType } from "../../css/types"
-import { ColorsRefTypes, BreakpointsType, TypographyRefTypes } from '../../theme/types';
+import { ColorsRefTypes, BreakpointKeys, TypographyRefTypes } from '../../theme/types';
 
 interface CSSProperties {
     alignContent: CSSValueType<"alignContent">;
@@ -66,10 +65,10 @@ interface CSSProperties {
     flexShrink: CSSValueType<"flexShrink">;
     flexWrap: CSSValueType<"flexWrap">;
     float: CSSValueType<"float">;
-    fontFamily: CSSValueType<"fontFamily"> | "font-family";
+    fontFamily: CSSValueType<"fontFamily"> | "default";
     fontSize: CSSValueType<"fontSize"> | TypographyRefTypes;
     fontStyle: CSSValueType<"fontStyle">;
-    fontWeight: CSSValueType<"fontWeight">;
+    fontWeight: CSSValueType<"fontWeight"> | TypographyRefTypes;
     gap: CSSValueType<"gap">;
     grid: CSSValueType<"grid">;
     gridArea: CSSValueType<"gridArea">;
@@ -89,14 +88,14 @@ interface CSSProperties {
     gridTemplateAreas: CSSValueType<"gridTemplateAreas">;
     gridTemplateColumns: CSSValueType<"gridTemplateColumns">;
     gridTemplateRows: CSSValueType<"gridTemplateRows">;
-    height: CSSValueType<"height"> | BreakpointsType;
+    height: CSSValueType<"height">;
     justifyContent: CSSValueType<"justifyContent">;
     justifyItems: CSSValueType<"justifyItems">;
     justifySelf: CSSValueType<"justifySelf">;
     left: CSSValueType<"left">;
     letterSpacing: CSSValueType<"letterSpacing">;
     lineBreak: CSSValueType<"lineBreak">;
-    lineHeight: CSSValueType<"lineHeight">;
+    lineHeight: CSSValueType<"lineHeight"> | TypographyRefTypes;
     listStyle: CSSValueType<"listStyle">;
     margin: CSSValueType<"margin">;
     marginBlock: CSSValueType<"marginBlock">;
@@ -109,10 +108,10 @@ interface CSSProperties {
     marginLeft: CSSValueType<"marginLeft">;
     marginRight: CSSValueType<"marginRight">;
     marginTop: CSSValueType<"marginTop">;
-    maxHeight: CSSValueType<"maxHeight"> | BreakpointsType;
-    maxWidth: CSSValueType<"maxWidth"> | BreakpointsType;
-    minHeight: CSSValueType<"minHeight"> | BreakpointsType;
-    minWidth: CSSValueType<"minWidth"> | BreakpointsType;
+    maxHeight: CSSValueType<"maxHeight">;
+    maxWidth: CSSValueType<"maxWidth"> | BreakpointKeys;
+    minHeight: CSSValueType<"minHeight">;
+    minWidth: CSSValueType<"minWidth"> | BreakpointKeys;
     objectFit: CSSValueType<"objectFit">;
     objectPosition: CSSValueType<"objectPosition">;
     opacity: CSSValueType<"opacity">;
@@ -155,7 +154,7 @@ interface CSSProperties {
     verticalAlign: CSSValueType<"verticalAlign">;
     visibility: CSSValueType<"visibility">;
     whiteSpace: CSSValueType<"whiteSpace">;
-    width: CSSValueType<"width"> | BreakpointsType;
+    width: CSSValueType<"width"> | BreakpointKeys;
     wordBreak: CSSValueType<"wordBreak">;
     wordSpacing: CSSValueType<"wordSpacing">;
     wordWrap: CSSValueType<"wordWrap">;
@@ -167,6 +166,5 @@ export type CSSPropAsAttr = Partial<CSSProperties> & AliasesTypes & {
     sx?: CSSProps;
     hover?: CSSProps;
     disabled?: boolean;
-    typography?: keyof Omit<ThemeOptions['typography'], "fontFamily">;
     classNames?: classNamesTypes[];
 } 

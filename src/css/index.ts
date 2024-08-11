@@ -41,7 +41,7 @@ export const css_options = (theme: ThemeOptions, options?: OptionsProps) => {
                 let _p = options?.getProps(p, v, _c)
                 if (_p) return _p
             }
-            return getProps(p, v, _c, theme)
+            return getProps(p, v, _c)
         },
     }
 }

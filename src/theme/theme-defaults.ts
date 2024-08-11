@@ -1,124 +1,116 @@
-import { ThemeOptionInput } from './types'
+import { ThemeOptions, ThemeTypographyType } from './types'
 
 export const lightColorPallete = {
     text: {
-        dark: "#111111",
-        main: "#212B36",
-        light: "#637381",
+        primary: "#212B36",
+        secondary: "#637381",
     },
-    paper: {
-        light: "#F4F6F8",
-        main: "#DFE3E8",
-        dark: "#C4CDD5",
+    background: {
+        primary: "#DFE3E8",
+        secondary: "#F4F6F8",
     }
 }
 
 export const darkColorPallete = {
     text: {
-        dark: "#C4CDD5",
-        main: "#FFFFFF",
-        light: "#C4CDD5",
+        primary: "#FFFFFF",
+        secondary: "#C4CDD5",
     },
-    paper: {
-        light: "#637381",
-        main: "#454F5B",
-        dark: "#212B36",
+    background: {
+        primary: "#454F5B",
+        secondary: "#637381",
     }
 }
 
 export const ThemeColors = {
     ...lightColorPallete,
-
-    primary: {
-        light: "#5BE49B",
-        main: "#00A76F",
-        dark: "#007867",
+    brand: {
+        primary: "#00A76F",
+        secondary: "#5BE49B",
         text: "#FFFFFF"
     },
-    secondary: {
-        light: "#C684FF",
-        main: "#8E33FF",
-        dark: "#5119B7",
+    accent: {
+        primary: "#8E33FF",
+        secondary: "#C684FF",
         text: "#FFFFFF"
     },
     info: {
-        light: "#61F3F3",
-        main: "#00B8D9",
-        dark: "#006C9C",
+        primary: "#00B8D9",
+        secondary: "#61F3F3",
         text: "#FFFFFF"
     },
     success: {
-        light: "#77ED8B",
-        main: "#22C55E",
-        dark: "#118D57",
+        primary: "#22C55E",
+        secondary: "#77ED8B",
         text: "#FFFFFF"
     },
-
     warning: {
-        light: "#FFD666",
-        main: "#FFAB00",
-        dark: "#B76E00",
+        primary: "#FFAB00",
+        secondary: "#FFD666",
         text: "#FFFFFF"
     },
-    error: {
-        light: "#FFAC82",
-        main: "#FF5630",
-        dark: "#B71D18",
+    danger: {
+        primary: "#FF5630",
+        secondary: "#FFAC82",
         text: "#FFFFFF"
     },
 }
 
 
-export const ThemeTypography = {
+export const ThemeTypography: ThemeTypographyType = {
     fontFamily: '"Inter","Helvetica","Arial",sans-serif',
     h1: {
-        fontFamily: 'typography.font-family',
-        fontSize: "3.815rem"
+        fontSize: 47.78,
+        lineHeight: 1.3,
+        fontWeight: 400,
     },
     h2: {
-        fontFamily: 'typography.font-family',
-        fontSize: "3.052rem"
+        fontSize: 39.81,
+        lineHeight: 1.35,
+        fontWeight: 400,
     },
     h3: {
-        fontFamily: 'typography.font-family',
-        fontSize: "2.441rem"
+        fontSize: 33.18,
+        lineHeight: 1.4,
+        fontWeight: 400,
     },
     h4: {
-        fontFamily: 'typography.font-family',
-        fontSize: "1.953rem"
+        fontSize: 27.65,
+        lineHeight: 1.45,
+        fontWeight: 400,
     },
     h5: {
-        fontFamily: 'typography.font-family',
-        fontSize: "1.563rem"
+        fontSize: 27.65,
+        lineHeight: 1.5,
+        fontWeight: 400,
     },
     h6: {
-        fontFamily: 'typography.font-family',
-        fontSize: "1.25rem",
-        fontWeight: 600
+        fontSize: 23.04,
+        lineHeight: 1.55,
+        fontWeight: 400,
     },
     text: {
-        fontFamily: 'typography.font-family',
-        fontSize: "1rem",
+        fontSize: 16,
+        lineHeight: 1.6,
         fontWeight: 400,
-        color: "common.text",
-        lineHeight: 1.60
-    },
-    subtext: {
-        fontFamily: 'typography.font-family',
-        fontSize: "1rem",
-        fontWeight: 400,
-        color: "common.subtext",
-        lineHeight: 1.60
     },
     button: {
-        fontFamily: 'typography.font-family',
-        fontSize: "0.875rem",
-        fontWeight: 500
+        fontSize: 13.33,
+        lineHeight: 1.6,
+        fontWeight: 500,
+    },
+    small: {
+        fontSize: 13.33,
+        lineHeight: 1.6,
+        fontWeight: 400,
     }
 }
 
 export default {
     name: "light",
+    ltr: false,
+    resetCss: true,
+    shadow: (num: number) => num ? (`0px 0px 2px -1px rgba(0,0,0,0.15), 0px ${num}px ${num}px 0px rgba(0,0,0,0.10), 0px ${num + 1}px ${num + 1}px -${num + 1}px rgba(0,0,0,0.12)`) : num,
     breakpoints: {
         xs: 0,
         sm: 600,
@@ -130,4 +122,4 @@ export default {
     colors: ThemeColors,
     typography: ThemeTypography,
     interfaces: {}
-} as ThemeOptionInput
+} as ThemeOptions

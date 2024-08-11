@@ -24,7 +24,7 @@ const darktheme = createTheme({
     },
 });
 
-const count = 10000
+const count = 1
 
 
 const MUI = () => {
@@ -115,8 +115,7 @@ const NUI = () => {
             >Change</button>
 
             <NUIT theme={t}>
-
-                <Colors
+                {/* <Colors
                     color="#00A76F"
                 />
 
@@ -137,19 +136,17 @@ const NUI = () => {
                 />
                 <Colors
                     color="#454F5B"
-                />
-
-
-
+                /> */}
 
                 {
                     Array(count).fill(0).map((v, i) => {
                         return (
-                            <div
+                            <Tag
                                 key={i}
+                                p={1}
                             >
-                                <NButton >{i}</NButton>
-                            </div>
+                                <NButton >Button</NButton>
+                            </Tag>
                         )
                     })
                 }

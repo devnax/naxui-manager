@@ -1,9 +1,9 @@
 import * as CSS from 'csstype'
 import { ThemeOptions } from '../theme';
-import { ColorsRefTypes, BreakpointsType, TypographyRefTypes, } from '../theme/types';
+import { ColorsRefTypes, BreakpointKeys, TypographyRefTypes, } from '../theme/types';
 
 export type FN = (theme: ThemeOptions) => string | number
-export type CSSBreakpointType = { [key in BreakpointsType]: string | number | FN }
+export type CSSBreakpointType = { [key in BreakpointKeys]: string | number | FN }
 export type CSSValueType<T extends keyof CSS.Properties> = CSS.Properties[T] | Partial<CSSBreakpointType> | number | FN
 
 export type AliasesTypes = {
@@ -38,14 +38,14 @@ export type AliasesTypes = {
     gap?: CSSValueType<'gap'>;
 
     color?: CSSValueType<'color'> | ColorsRefTypes;
-    width?: CSSValueType<'width'> | BreakpointsType;
-    height?: CSSValueType<'height'> | BreakpointsType;
+    width?: CSSValueType<'width'> | BreakpointKeys;
+    height?: CSSValueType<'height'>
     borderColor?: CSSValueType<'backgroundColor'> | ColorsRefTypes;
 
-    fontFamily?: CSSValueType<"fontFamily"> | "typography.font-family";
+    fontFamily?: CSSValueType<"fontFamily"> | "default";
     fontSize?: CSSValueType<"fontSize"> | TypographyRefTypes;
-    minWidth?: CSSValueType<"minWidth"> | BreakpointsType;
-    maxWidth?: CSSValueType<"maxWidth"> | BreakpointsType;
-    minHeight?: CSSValueType<"minHeight"> | BreakpointsType;
-    maxHeight?: CSSValueType<"maxHeight"> | BreakpointsType;
+    minWidth?: CSSValueType<"minWidth"> | BreakpointKeys;
+    maxWidth?: CSSValueType<"maxWidth"> | BreakpointKeys;
+    minHeight?: CSSValueType<"minHeight">
+    maxHeight?: CSSValueType<"maxHeight">
 }
