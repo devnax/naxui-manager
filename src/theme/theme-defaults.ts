@@ -58,7 +58,7 @@ export const ThemeColors = {
 
 
 export const ThemeTypography: ThemeTypographyType = {
-    fontFamily: '"Inter","Helvetica","Arial",sans-serif',
+    fontFamily: '"Inter",sans-serif,"Helvetica","Arial"',
     h1: {
         fontSize: 47.78,
         lineHeight: 1.3,
@@ -100,7 +100,7 @@ export const ThemeTypography: ThemeTypographyType = {
         fontWeight: 500,
     },
     small: {
-        fontSize: 13.33,
+        fontSize: 12.33,
         lineHeight: 1.6,
         fontWeight: 400,
     }

@@ -170,6 +170,10 @@ export const ThemeProvider = ({ children, theme, resetCss, ...props }: ThemeProv
             <Tag
                 minHeight="100%"
                 bgcolor={THEME.colors.background.primary}
+                fontFamily={THEME.typography.fontFamily}
+                fontSize={THEME.typography.text.fontSize}
+                fontWeight={THEME.typography.text.fontWeight}
+                lineHeight={THEME.typography.text.lineHeight}
                 {...props}
                 baseClass={`${theme}-theme-provider`}
                 direction={THEME.rtl ? "rtl" : "ltr"}

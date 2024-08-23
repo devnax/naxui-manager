@@ -95,7 +95,7 @@ const getValue = (prop: any, value: string | number, _css: CSSProps, theme: Them
 
     if (['width', 'maxWidth', 'minWidth', 'max-width', 'min-width'].includes(prop)) {
         return withImportant(important, breakpoints[value] || value)
-    } else if (['fontFamily', 'font-family'].includes(prop) && value === 'default') {
+    } else if (['fontFamily', 'font-family'].includes(prop) && value === 'theme') {
         return withImportant(important, theme.typography.fontFamily)
     } if (['fontWeight', 'font-weight'].includes(prop) && typeof value === 'string' && ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'text', 'button', 'small'].includes(value)) {
         return withImportant(important, fontWeights[value] || value)

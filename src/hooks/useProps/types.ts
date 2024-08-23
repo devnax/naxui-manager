@@ -65,7 +65,7 @@ interface CSSProperties {
     flexShrink: CSSValueType<"flexShrink">;
     flexWrap: CSSValueType<"flexWrap">;
     float: CSSValueType<"float">;
-    fontFamily: CSSValueType<"fontFamily"> | "default";
+    fontFamily: CSSValueType<"fontFamily"> | "theme";
     fontSize: CSSValueType<"fontSize"> | TypographyRefTypes;
     fontStyle: CSSValueType<"fontStyle">;
     fontWeight: CSSValueType<"fontWeight"> | TypographyRefTypes;
