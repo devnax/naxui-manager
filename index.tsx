@@ -1,60 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { ThemeProvider as NUIT, useTheme } from './src/theme'
+import { getTheme, ThemeProvider as NUIT, useTheme } from './src/theme'
 import { adjustColor, alpha, Tag, useProps } from './src';
-import MButton from "@mui/material/Button"
 import NButton from "./Button"
 
-import { red } from '@mui/material/colors';
-import { ThemeProvider as MUIT, createTheme } from '@mui/material/styles';
-
-const lighttheme = createTheme({
-    palette: {
-        primary: {
-            main: red[500],
-        },
-    },
-});
-
-const darktheme = createTheme({
-    palette: {
-        primary: {
-            main: "#7f91da",
-        },
-    },
-});
 
 const count = 1
 
-
-const MUI = () => {
-    const [t, setT] = React.useState("dark")
-
-    return (
-        <div>
-            <button
-                onClick={() => {
-                    setT(t === 'dark' ? "light" : "dark")
-                }}
-            >Change</button>
-
-            <MUIT theme={t === 'dark' ? darktheme : lighttheme}>
-                {
-                    Array(count).fill(0).map((v, i) => {
-                        return (
-                            <div
-                                key={i}
-                            >
-                                <MButton >{i}</MButton>
-                            </div>
-                        )
-                    })
-                }
-            </MUIT>
-
-        </div>
-    )
-}
 
 const Colors = ({ color }) => {
     return (
@@ -102,57 +54,178 @@ const Colors = ({ color }) => {
     )
 }
 
+
+const VariantButtons = ({ variant }: any) => {
+    return (
+        <Tag
+            flexBox
+            gap={2}
+            alignItems="center"
+            p={2}
+        >
+            <NButton
+                variant={variant}
+                color="outline"
+            >Button</NButton>
+            <NButton
+                variant={variant}
+                color="fill"
+            >Button</NButton>
+            <NButton
+                variant={variant}
+                color="text"
+            >Button</NButton>
+            <NButton
+                variant={variant}
+                color="alpha"
+            >Button</NButton>
+        </Tag>
+    )
+}
+
+
+const List = () => {
+    const theme = useTheme()
+    return (
+        <Tag
+            flexBox
+            flexColumn
+            width={200}
+            radius={1}
+            overflow="hidden"
+            p={1}
+            bgcolor="background.secondary"
+        >
+            <NButton
+                variant="brand"
+                color="alpha"
+            >Dashboard</NButton>
+            <NButton
+                variant="background"
+                color="text"
+                hover={{ ...theme.colors.brand.template.alpha.hover }}
+            >Courses</NButton>
+            <NButton
+                variant="background"
+                color="text"
+                hover={{ ...theme.colors.brand.template.alpha.hover }}
+
+            >Reports</NButton>
+            <NButton
+                variant="background"
+                color="text"
+                hover={{ ...theme.colors.brand.template.alpha.hover }}
+
+            >Sells</NButton>
+            <NButton
+                variant="background"
+                color="text"
+                hover={{ ...theme.colors.brand.template.alpha.hover }}
+
+            >Users</NButton>
+            <NButton
+                variant="background"
+                color="text"
+                hover={{ ...theme.colors.brand.template.alpha.hover }}
+
+            >Settings</NButton>
+        </Tag>
+    )
+}
+
 const NUI = () => {
-    const [t, setT] = React.useState("dark")
+    const [t, setT] = React.useState("light")
+    const theme = getTheme(t)
 
     return (
-        <div>
+        <Tag>
 
-            <button
-                onClick={() => {
-                    setT(t === 'dark' ? "light" : "dark")
-                }}
-            >Change</button>
-
-            <NUIT theme={t}>
-                {/* <Colors
-                    color="#00A76F"
-                />
-
-                <Colors
-                    color="#00B8D9"
-                />
-                <Colors
-                    color="#22C55E"
-                />
-                <Colors
-                    color="#FFAB00"
-                />
-                <Colors
-                    color="#FF5630"
-                />
-                <Colors
-                    color="#DFE3E8"
-                />
-                <Colors
-                    color="#454F5B"
+            <NUIT theme={t} height="100vh">
+                {/* <Tag
+                    position="fixed"
+                    top={0}
+                    left={0}
+                    right={0}
+                    bottom={0}
+                    zIndex={1}
+                    bgcolor={theme?.colors.background.template.fill.bgcolor}
                 /> */}
 
-                {
-                    Array(count).fill(0).map((v, i) => {
-                        return (
-                            <Tag
-                                key={i}
-                                p={1}
-                            >
-                                <NButton >Button</NButton>
-                            </Tag>
-                        )
-                    })
-                }
+                <Tag
+                    height={60}
+                    bgcolor="background.primary"
+                    flexBox
+                    alignItems="center"
+                    px={2}
+                    borderBottom={1}
+                    borderBottomColor="background.secondary"
+                >
+                    <NButton
+                        variant="background"
+                        color="text"
+                        hover={{ ...theme?.colors.brand.template.text.hover }}
+                    >Home</NButton>
+                    <NButton
+                        variant="background"
+                        color="text"
+                        hover={{ ...theme?.colors.brand.template.text.hover }}
+
+                    >About</NButton>
+                    <NButton
+                        variant="background"
+                        color="text"
+                        hover={{ ...theme?.colors.brand.template.text.hover }}
+
+                    >Services</NButton>
+                </Tag>
+                <Tag
+                    bgcolor="background"
+                    flexBox
+                    flexColumn
+                    gap={1}
+                    p={1}
+                >
+
+                    <NButton
+                        onClick={() => {
+                            setT(t === 'dark' ? "light" : "dark")
+                        }}
+                        variant="background"
+                        color="outline"
+                    >Change</NButton>
+                    <Tag
+                        bgcolor="background"
+                        flexBox
+                        flexColumn
+                    >
+                        <List />
+
+                        <VariantButtons
+                            variant="background"
+                        />
+                        <VariantButtons
+                            variant="brand"
+                        />
+                        <VariantButtons
+                            variant="accent"
+                        />
+                        <VariantButtons
+                            variant="success"
+                        />
+                        <VariantButtons
+                            variant="info"
+                        />
+                        <VariantButtons
+                            variant="warning"
+                        />
+                        <VariantButtons
+                            variant="danger"
+                        />
+                    </Tag>
+                </Tag>
             </NUIT>
 
-        </div>
+        </Tag>
     )
 }
 

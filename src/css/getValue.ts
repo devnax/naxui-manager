@@ -39,6 +39,7 @@ const getValue = (prop: any, value: string | number, _css: CSSProps, theme: Them
         "background.secondary": theme.colors.background.secondary,
         "background.alpha": theme.colors.background.alpha,
 
+
         ...getColor("brand", theme),
         ...getColor("accent", theme),
 

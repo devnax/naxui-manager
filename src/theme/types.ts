@@ -4,12 +4,47 @@ import { AliasesTypes } from "../css/types";
 export type ObjectType = { [key: string]: any }
 export type BreakpointKeys = "xs" | "sm" | "md" | "lg" | "xl"
 
-
 export type ThemeColorItem = {
     primary: string;
     secondary: string;
     text: string;
     alpha: string;
+    template: {
+        outline: {
+            bgcolor: string;
+            color: string;
+            border: number;
+            borderColor: string;
+            hover: {
+                bgcolor: string,
+                color: string,
+            }
+        },
+        fill: {
+            bgcolor: string;
+            color: string,
+            hover: {
+                bgcolor: string;
+                color: string;
+            }
+        },
+        text: {
+            bgcolor: string;
+            color: string;
+            hover: {
+                bgcolor: string;
+                color: string;
+            }
+        },
+        alpha: {
+            bgcolor: string
+            color: string;
+            hover: {
+                bgcolor: string;
+                color: string;
+            }
+        }
+    }
 }
 
 export type ThemeTypographyItem = {
@@ -20,7 +55,7 @@ export type ThemeTypographyItem = {
 
 export type ThemeColor = {
     background: Omit<ThemeColorItem, "text">
-    text: Omit<ThemeColorItem, "text" | "alpha">
+    text: Omit<ThemeColorItem, "text" | "alpha" | "template">
     brand: ThemeColorItem;
     accent: ThemeColorItem;
     success: ThemeColorItem
@@ -44,12 +79,11 @@ export type ThemeTypographyType = {
 
 export interface ThemeOptions {
     name: string;
-    ltr: boolean;
-    resetCss: boolean;
+    rtl: boolean;
     globalStyle: GlobalCSSType<AliasesTypes>,
     breakpoints: { [key in BreakpointKeys]: number };
     shadow: (num: number) => string;
-    interfaces: { [name: string]: <P extends object>(defaultProps: P) => P };
+    interfaces: { [name: string]: <P extends object>(defaultProps: P, theme: ThemeOptions) => P };
     colors: ThemeColor;
     typography: ThemeTypographyType;
 }
@@ -86,11 +120,10 @@ export type ThemeTypographyInputType = {
 };
 
 export interface ThemeOptionInput {
-    ltr?: boolean;
-    resetCss?: boolean;
+    rtl?: boolean;
     globalStyle?: GlobalCSSType<AliasesTypes>,
     breakpoints?: { [key in BreakpointKeys]: number };
-    interfaces?: { [name: string]: <P extends object>(defaultProps: P) => P };
+    interfaces?: { [name: string]: <P extends object>(defaultProps: P, theme: ThemeOptions) => P };
     colors?: ThemeColorInput;
     typography?: ThemeTypographyInputType;
 }

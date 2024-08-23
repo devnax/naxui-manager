@@ -2,7 +2,7 @@ import * as React from "react"
 import { css_options } from "../css"
 import useWindowResize from "./useWindowResize"
 import isWindow from './isWindow'
-import { useTheme, BreakpointsType } from "../theme"
+import { useTheme, BreakpointKeys } from "../theme"
 
 const throwError = (n: any) => {
     if (typeof n !== 'number') {
@@ -18,19 +18,19 @@ const useMediaScreen = () => {
     useWindowResize(() => setWindowSize(window.innerWidth))
 
     const factory = {
-        isDown: (breakpoint: BreakpointsType | number) => {
+        isDown: (breakpoint: BreakpointKeys | number) => {
             if (!win) return false
             let targetSize = (_css_option.breakpoints as any)[breakpoint] || breakpoint
             throwError(targetSize)
             return windowSize < targetSize
         },
-        isUp: (breakpoint: BreakpointsType | number) => {
+        isUp: (breakpoint: BreakpointKeys | number) => {
             if (!win) return false
             let targetSize = (_css_option.breakpoints as any)[breakpoint] || breakpoint
             throwError(targetSize)
             return windowSize > targetSize
         },
-        is: (breakpoint: BreakpointsType) => {
+        is: (breakpoint: BreakpointKeys) => {
             switch (['xs', 'sm', 'md', 'lg', 'xl'].indexOf(breakpoint)) {
                 case 0:
                     return factory.isDown("sm")

@@ -94,7 +94,7 @@ const Button = <T extends TagComponenntType = "button">({ children, ...rest }: B
             typography="button"
             {...rest}
             hover={{
-                bgcolor: alpha("color.primary", 1.2),
+                bgcolor: alpha("brand", 1.2),
             }}
             sx={{
                 transition: "background .3s",
@@ -205,7 +205,7 @@ import {ThemeProvider} from 'naxui-manager'
 
 const App = () => {
   return (
-    <ThemeProvider css_option={{...naxcss_option}} defaultFontFamily="Inter" defaultTheme="default">
+    <ThemeProvider theme="light" resetCss>
       <div>Hello<div>
     </ThemeProvider>
   )
@@ -428,7 +428,7 @@ The sx prop is a shortcut for defining custom styles.
     bgcolor:"red",
 
     // use theme prop
-    bgcolor:"color.primary",
+    bgcolor:"brand",
 
     // responsive
     bgcolor: {
@@ -453,7 +453,7 @@ There are many way to pass css value. `string`, `number`, `breakpoint` or `funct
   bgcolor="red"
   
   // use theme prop
-  bgcolor="color.primary"
+  bgcolor="brand"
 
   // responsive
   bgcolor={{
@@ -465,7 +465,7 @@ There are many way to pass css value. `string`, `number`, `breakpoint` or `funct
   bgcolor={(theme) => theme.colors.error.color}
 />
 ```
-Here you can see the value  is `color.primary` so it will automatically get the theme primary.color color. in this way you can use everything from theme. 
+Here you can see the value  is `brand` so it will automatically get the theme primary.color color. in this way you can use everything from theme. 
 
 
 

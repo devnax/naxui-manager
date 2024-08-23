@@ -2,35 +2,34 @@
 import React, { ReactElement, forwardRef } from 'react';
 import Tag, { TagProps, TagComponenntType } from './src/Tag';
 import useInterface from './src/hooks/useInterface'
-import { useTheme } from './src';
+import { ThemeColor, useTheme } from './src';
 
 export type ButtonProps<T extends TagComponenntType = 'button'> = Omit<TagProps<T>, "color" | "size"> & {
     startIcon?: ReactElement;
     endIcon?: ReactElement;
     size?: "small" | "medium" | "large";
     loading?: boolean;
+    variant?: keyof ThemeColor;
+    color?: string;
 }
 
 
-const _Button = <T extends TagComponenntType = 'button'>({ children, startIcon, endIcon, size, loading, ...rest }: ButtonProps<T>, ref: React.Ref<any>) => {
+const _Button = <T extends TagComponenntType = 'button'>({ children, ...props }: ButtonProps<T>, ref: React.Ref<any>) => {
     const theme = useTheme()
+
+    let { variant, color, startIcon, endIcon, size, loading, ...rest } = useInterface<ButtonProps>("Button", {
+        loading: false,
+        size: "medium"
+    }, props as any)
 
     rest.sx = (rest as any).sx || {};
     size = size ?? "medium"
-
-    const defaultProps = useInterface<ButtonProps>("Button", {
-        loading: false,
-        size: "large"
-    }, {
-        loading: false,
-        // size: "small"
-    })
 
     const sizes = {
         small: {
             px: 1.2,
             py: .5,
-            fontSize: "fontsize.block"
+            fontSize: "block"
         },
         medium: {
             px: 2,
@@ -39,7 +38,7 @@ const _Button = <T extends TagComponenntType = 'button'>({ children, startIcon, 
         large: {
             px: 2,
             py: 1,
-            fontSize: "fontsize.text"
+            fontSize: "text"
         }
     }
 
@@ -47,11 +46,8 @@ const _Button = <T extends TagComponenntType = 'button'>({ children, startIcon, 
         <Tag
             radius={1}
             component='button'
-            border={1}
-            borderColor="success.primary"
+            border={0}
             cursor="pointer"
-            bgcolor="success.alpha"
-            color="success.primary"
             fontSize="button"
             fontWeight="button"
             fontFamily="default"
@@ -63,9 +59,12 @@ const _Button = <T extends TagComponenntType = 'button'>({ children, startIcon, 
             lineHeight="button"
             position="relative"
             overflow="hidden"
+            transition=".2s"
             {...(sizes[size] || {})}
             {...rest}
+            {...theme.colors[variant].template[color]}
             hover={{
+                ...theme.colors[variant].template[color].hover,
                 ...((rest as any).hover || {})
             }}
             disabled={loading ?? rest.disabled ?? false}

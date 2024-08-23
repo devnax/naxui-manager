@@ -1,4 +1,4 @@
-import { ThemeOptions, ThemeTypographyType } from './types'
+import { ThemeOptionInput, ThemeTypographyType } from './types'
 
 export const lightColorPallete = {
     text: {
@@ -6,8 +6,8 @@ export const lightColorPallete = {
         secondary: "#637381",
     },
     background: {
-        primary: "#DFE3E8",
-        secondary: "#F4F6F8",
+        primary: "#FFFFFF",
+        secondary: "#EDEFF7",
     }
 }
 
@@ -17,15 +17,15 @@ export const darkColorPallete = {
         secondary: "#C4CDD5",
     },
     background: {
-        primary: "#454F5B",
-        secondary: "#637381",
+        primary: "#272727",
+        secondary: "#1E1E1E",
     }
 }
 
 export const ThemeColors = {
     ...lightColorPallete,
     brand: {
-        primary: "#00A76F",
+        primary: "#1967D2",
         secondary: "#5BE49B",
         text: "#FFFFFF"
     },
@@ -108,8 +108,7 @@ export const ThemeTypography: ThemeTypographyType = {
 
 export default {
     name: "light",
-    ltr: false,
-    resetCss: true,
+    rtl: false,
     shadow: (num: number) => num ? (`0px 0px 2px -1px rgba(0,0,0,0.15), 0px ${num}px ${num}px 0px rgba(0,0,0,0.10), 0px ${num + 1}px ${num + 1}px -${num + 1}px rgba(0,0,0,0.12)`) : num,
     breakpoints: {
         xs: 0,
@@ -121,5 +120,7 @@ export default {
     globalStyle: {},
     colors: ThemeColors,
     typography: ThemeTypography,
-    interfaces: {}
-} as ThemeOptions
+    interfaces: {
+
+    }
+} as ThemeOptionInput

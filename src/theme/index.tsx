@@ -1,8 +1,9 @@
-import { ThemeOptions, ObjectType, ThemeOptionInput } from "./types"
+import { ThemeOptions, ObjectType, ThemeOptionInput, ThemeColor } from "./types"
 import defaultThemeOption, { lightColorPallete, darkColorPallete } from './theme-defaults'
 
 import * as React from "react"
 import { alpha, globalCss } from "../css"
+import Tag, { TagComponenntType, TagProps } from "../Tag"
 export * from './types'
 
 const ThemeFactory = new Map<string, ThemeOptions>()
@@ -24,6 +25,55 @@ export const mergeObject = (a: ObjectType, b: ObjectType) => {
 
 export const getTheme = (theme: string) => ThemeFactory.get(theme)
 
+const createColor = (theme: ThemeOptions, name: keyof ThemeColor) => {
+    let color = theme.colors[name]
+    let { primary, secondary } = color
+    let text = (color as any).text || theme.colors.text.primary
+    let _alpha = alpha(primary, .1)
+
+    const isBag = (a: any, b: any) => name === "background" ? a : b
+
+    return {
+        alpha: _alpha,
+        template: {
+            outline: {
+                bgcolor: "transparent",
+                color: isBag(text, primary),
+                border: 1,
+                borderColor: isBag(alpha(secondary, .6), alpha(primary, .4)),
+                hover: {
+                    bgcolor: isBag(secondary, _alpha),
+                    color: isBag(text, primary),
+                }
+            },
+            fill: {
+                bgcolor: isBag(secondary, primary),
+                color: text,
+                hover: {
+                    bgcolor: isBag(alpha(secondary, .8), secondary),
+                    color: text,
+                }
+            },
+            text: {
+                bgcolor: "transparent",
+                color: isBag(text, primary),
+                hover: {
+                    bgcolor: "transparent",
+                    color: isBag(text, primary),
+                }
+            },
+            alpha: {
+                bgcolor: isBag(alpha(secondary, .5), alpha(primary, .1)),
+                color: isBag(text, primary),
+                hover: {
+                    bgcolor: isBag(alpha(secondary, .8), alpha(primary, .18)),
+                    color: isBag(text, primary),
+                }
+            }
+        }
+    }
+}
+
 export const createTheme = (name: string, options: ThemeOptionInput, darkMode?: boolean): ThemeOptions => {
     if (!ThemeFactory.has(name)) {
         let theme: any = mergeObject(defaultThemeOption, {
@@ -34,24 +84,13 @@ export const createTheme = (name: string, options: ThemeOptionInput, darkMode?: 
 
         theme = mergeObject(theme, {
             colors: {
-                brand: {
-                    alpha: alpha(theme.colors.brand.primary, .15)
-                },
-                accent: {
-                    alpha: alpha(theme.colors.accent.primary, .15)
-                },
-                info: {
-                    alpha: alpha(theme.colors.info.primary, .15)
-                },
-                success: {
-                    alpha: alpha(theme.colors.success.primary, .15)
-                },
-                warning: {
-                    alpha: alpha(theme.colors.warning.primary, .15)
-                },
-                danger: {
-                    alpha: alpha(theme.colors.danger.primary, .15)
-                }
+                background: createColor(theme, "background"),
+                brand: createColor(theme, "brand"),
+                accent: createColor(theme, "accent"),
+                info: createColor(theme, "info"),
+                success: createColor(theme, "success"),
+                warning: createColor(theme, "warning"),
+                danger: createColor(theme, "danger")
             }
         })
         ThemeFactory.set(name, theme)
@@ -74,26 +113,23 @@ createTheme("dark", {
     colors: darkColorPallete
 })
 
-export type ThemeProviderProps = {
-    children: React.ReactNode;
+export type ThemeProviderProps<T extends TagComponenntType = 'div'> = TagProps<T> & {
     theme: string;
-};
+    resetCss?: boolean;
+}
 
-export const ThemeProvider = ({ children, theme }: ThemeProviderProps) => {
+export const ThemeProvider = ({ children, theme, resetCss, ...props }: ThemeProviderProps) => {
 
     const THEME = ThemeFactory.get(theme) as ThemeOptions
-    if (!THEME) throw new Error(`Invalid theme name : ${theme}`)
+    if (!THEME) throw new Error(`Invalid theme name provided: ${theme}`)
 
     React.useMemo(() => {
-        // NAXCSS_CACHE.forEach((c) => {
-        //     const ele = document.querySelector(`[data-naxcss="${c.classname}"]`)
-        //     ele?.remove()
-        // })
-        // NAXCSS_CACHE.clear()
 
-        !!Object.keys(THEME.globalStyle).length && globalCss(`${theme}-global-css`, THEME.globalStyle, THEME)
+        if (!!Object.keys(THEME.globalStyle).length) {
+            globalCss(`${theme}-global-css`, THEME.globalStyle, THEME)
+        }
 
-        THEME.resetCss && globalCss("reset-css", {
+        resetCss && globalCss("reset-css", {
             "*": {
                 m: 0,
                 p: 0,
@@ -131,8 +167,15 @@ export const ThemeProvider = ({ children, theme }: ThemeProviderProps) => {
 
     return (
         <ThemeContex.Provider value={theme}>
-
-            {children}
+            <Tag
+                minHeight="100%"
+                bgcolor={THEME.colors.background.primary}
+                {...props}
+                baseClass={`${theme}-theme-provider`}
+                direction={THEME.rtl ? "rtl" : "ltr"}
+            >
+                {children}
+            </Tag>
         </ThemeContex.Provider>
     )
 }
