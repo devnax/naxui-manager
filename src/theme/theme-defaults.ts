@@ -25,33 +25,33 @@ export const darkColorPallete = {
 export const ThemeColors = {
     ...lightColorPallete,
     brand: {
-        primary: "#1967D2",
-        secondary: "#5BE49B",
+        primary: "#3b82f6",
+        secondary: "#60a5fa",
         text: "#FFFFFF"
     },
     accent: {
-        primary: "#8E33FF",
-        secondary: "#C684FF",
+        primary: "#14b8a6",
+        secondary: "#2dd4bf",
         text: "#FFFFFF"
     },
     info: {
-        primary: "#00B8D9",
-        secondary: "#61F3F3",
+        primary: "#0ea5e9",
+        secondary: "#60a5fa",
         text: "#FFFFFF"
     },
     success: {
-        primary: "#22C55E",
-        secondary: "#77ED8B",
+        primary: "#22c55e",
+        secondary: "#4ade80",
         text: "#FFFFFF"
     },
     warning: {
-        primary: "#FFAB00",
-        secondary: "#FFD666",
+        primary: "#f59e0b",
+        secondary: "#fbbf24",
         text: "#FFFFFF"
     },
     danger: {
-        primary: "#FF5630",
-        secondary: "#FFAC82",
+        primary: "#ef4444",
+        secondary: "#f87171",
         text: "#FFFFFF"
     },
 }

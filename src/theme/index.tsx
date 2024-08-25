@@ -58,7 +58,7 @@ const createColor = (theme: ThemeOptions, name: keyof ThemeColor) => {
                 bgcolor: "transparent",
                 color: isBag(text, primary),
                 hover: {
-                    bgcolor: "transparent",
+                    bgcolor: isBag(alpha(secondary, .8), alpha(primary, .18)),
                     color: isBag(text, primary),
                 }
             },

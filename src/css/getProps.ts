@@ -16,7 +16,6 @@ const getProps = (prop: string, value: string, _css: CSSProps) => {
                 cursor: "default!important",
                 userSelect: "none!important",
                 color: "text.secondary" + "!important",
-                opacity: .5
             }
             let isBgcolor = keys["bgcolor"] || keys["bg"] || keys["background"] || keys["backgroundColor"]
             if (isBgcolor && isBgcolor !== 'transparent') {
@@ -31,6 +30,7 @@ const getProps = (prop: string, value: string, _css: CSSProps) => {
         return {
             [`${prop}Width`]: value + 'px' + (important || ""),
             [`${prop}Style`]: "solid",
+            [`${prop}Color`]: "background.secondary",
         }
     }
 }
