@@ -10,28 +10,28 @@ const getProps = (prop: string, value: string, _css: CSSProps) => {
 
     if (prop === 'disabled') {
         if ((value as any) === true) {
-            const keys: any = Object.keys(_css)
-            let _dcss: any = {
+            return {
                 pointerEvents: "none!important",
                 cursor: "default!important",
                 userSelect: "none!important",
-                color: "text.secondary" + "!important",
-            }
-            let isBgcolor = keys["bgcolor"] || keys["bg"] || keys["background"] || keys["backgroundColor"]
-            if (isBgcolor && isBgcolor !== 'transparent') {
-                _dcss.bgcolor = "background.secondary" + "!important"
-            }
-            return _dcss
+                opacity: ".8!important"
+            } as any
         }
         return {}
     }
 
     if (value && typeof value === "number" && ["border", "borderRight", "borderLeft", "borderTop", "borderBottom"].includes(prop as any)) {
-        return {
+        const keys = Object.keys(_css)
+        let p: any = {
             [`${prop}Width`]: value + 'px' + (important || ""),
-            [`${prop}Style`]: "solid",
-            [`${prop}Color`]: "background.secondary",
         }
+        if (!keys.includes(`${prop}Color`)) {
+            p[`${prop}Color`] = "background.secondary"
+        }
+        if (!keys.includes(`${prop}Style`)) {
+            p[`${prop}Style`] = "solid"
+        }
+        return p
     }
 }
 
