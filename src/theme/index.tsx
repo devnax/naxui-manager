@@ -14,7 +14,7 @@ export const mergeObject = (a: ObjectType, b: ObjectType) => {
     b = { ...b }
     for (const key in b) {
         const v = (b as any)[key]
-        if (typeof v === 'object' && !Array.isArray(v)) {
+        if (typeof v === 'object' && !Array.isArray(v) && !React.isValidElement(v)) {
             a[key] = mergeObject(a[key], b[key])
         } else {
             a[key] = v

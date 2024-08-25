@@ -6,6 +6,7 @@ import serverStyleTags from './serverStyleTags'
 import useAnimation, { UseAnimationProps } from './hooks/useAnimation'
 import useTransition, { UseTransitionProps } from './hooks/useTransiton'
 import useTransitions, { UseTransitionsProps, UseTransitionsVariantsTypes, UseTransitionsVariant, UseTransitionsVariantCallback } from './hooks/useTransitions'
+import useInterface from './hooks/useInterface'
 
 export * from './css'
 export * from "./hooks/useProps"
@@ -30,8 +31,9 @@ export {
     isWindow,
     useMediaScreen,
     useWindowResize,
-    serverStyleTags,
     useAnimation,
     useTransition,
     useTransitions,
+    useInterface,
+    serverStyleTags
 }
