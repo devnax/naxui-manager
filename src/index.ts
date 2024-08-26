@@ -7,6 +7,7 @@ import useAnimation, { UseAnimationProps } from './hooks/useAnimation'
 import useTransition, { UseTransitionProps } from './hooks/useTransiton'
 import useTransitions, { UseTransitionsProps, UseTransitionsVariantsTypes, UseTransitionsVariant, UseTransitionsVariantCallback } from './hooks/useTransitions'
 import useInterface from './hooks/useInterface'
+import useColorTemplate from './hooks/useColorTemplate'
 
 export * from './css'
 export * from "./hooks/useProps"
@@ -14,6 +15,7 @@ export * from "./theme"
 export * from './css/types'
 export * from './hooks/useProps/types'
 export * from './theme/types'
+export * from './hooks/useColorTemplate'
 
 export type {
     UseAnimationProps,
@@ -35,5 +37,6 @@ export {
     useTransition,
     useTransitions,
     useInterface,
+    useColorTemplate,
     serverStyleTags
 }
