@@ -1,10 +1,10 @@
 'use client'
 import React, { ReactElement, forwardRef } from 'react';
-import Tag, { TagProps, TagComponenntType } from './src/Tag';
+import Tag, { TagProps, TagComponentType } from './src/Tag';
 import useInterface from './src/hooks/useInterface'
 import { ThemeColor, useTheme } from './src';
 
-export type ButtonProps<T extends TagComponenntType = 'button'> = Omit<TagProps<T>, "color" | "size"> & {
+export type ButtonProps<T extends TagComponentType = 'button'> = Omit<TagProps<T>, "color" | "size"> & {
     startIcon?: ReactElement;
     endIcon?: ReactElement;
     size?: "small" | "medium" | "large";
@@ -14,7 +14,7 @@ export type ButtonProps<T extends TagComponenntType = 'button'> = Omit<TagProps<
 }
 
 
-const _Button = <T extends TagComponenntType = 'button'>({ children, ...props }: ButtonProps<T>, ref: React.Ref<any>) => {
+const _Button = <T extends TagComponentType = 'button'>({ children, ...props }: ButtonProps<T>, ref: React.Ref<any>) => {
     const theme = useTheme()
 
     let { variant, color, startIcon, endIcon, size, loading, ...rest } = useInterface<ButtonProps>("Button", {
@@ -62,9 +62,9 @@ const _Button = <T extends TagComponenntType = 'button'>({ children, ...props }:
             transition=".2s"
             {...(sizes[size] || {})}
             {...rest}
-            {...theme.colors[variant].template[color]}
+            {...theme.colors[variant]?.template[color]}
             hover={{
-                ...theme.colors[variant].template[color].hover,
+                ...theme.colors[variant]?.template[color].hover,
                 ...((rest as any).hover || {})
             }}
             disabled={loading ?? rest.disabled ?? false}

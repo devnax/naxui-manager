@@ -3,7 +3,7 @@ import defaultThemeOption, { lightColorPallete, darkColorPallete } from './theme
 
 import * as React from "react"
 import { alpha, globalCss } from "../css"
-import Tag, { TagComponenntType, TagProps } from "../Tag"
+import Tag, { TagComponentType, TagProps } from "../Tag"
 export * from './types'
 
 const ThemeFactory = new Map<string, ThemeOptions>()
@@ -113,7 +113,7 @@ createTheme("dark", {
     colors: darkColorPallete
 })
 
-export type ThemeProviderProps<T extends TagComponenntType = 'div'> = TagProps<T> & {
+export type ThemeProviderProps<T extends TagComponentType = 'div'> = TagProps<T> & {
     theme: string;
     resetCss?: boolean;
 }

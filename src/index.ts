@@ -1,11 +1,10 @@
-import Tag, { TagProps, TagComponenntType } from './Tag'
+import Tag, { TagProps, TagComponentType } from './Tag'
 import isWindow from './hooks/isWindow'
 import useMediaScreen from './hooks/useMediaScreen'
 import useWindowResize from './hooks/useWindowResize'
 import serverStyleTags from './serverStyleTags'
-import useAnimation, { UseAnimationProps } from './hooks/useAnimation'
-import useTransition, { UseTransitionProps } from './hooks/useTransiton'
-import useTransitions, { UseTransitionsProps, UseTransitionsVariantsTypes, UseTransitionsVariant, UseTransitionsVariantCallback } from './hooks/useTransitions'
+import useAnimation from './hooks/useAnimation'
+import useTransition from './hooks/useTransition'
 import useInterface from './hooks/useInterface'
 import useColorTemplate from './hooks/useColorTemplate'
 
@@ -16,26 +15,19 @@ export * from './css/types'
 export * from './hooks/useProps/types'
 export * from './theme/types'
 export * from './hooks/useColorTemplate'
+export * from './hooks/useAnimation'
+export * from './hooks/useTransition'
 
-export type {
-    UseAnimationProps,
-    UseTransitionProps,
-    UseTransitionsProps,
-    UseTransitionsVariantsTypes,
-    UseTransitionsVariant,
-    UseTransitionsVariantCallback
-}
 
 export {
     Tag,
     TagProps,
-    TagComponenntType,
+    TagComponentType,
     isWindow,
     useMediaScreen,
     useWindowResize,
     useAnimation,
     useTransition,
-    useTransitions,
     useInterface,
     useColorTemplate,
     serverStyleTags

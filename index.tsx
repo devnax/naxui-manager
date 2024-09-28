@@ -1,8 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { getTheme, ThemeProvider as NUIT, useTheme } from './src/theme'
-import { adjustColor, alpha, Tag, useProps } from './src';
-import NButton from "./Button"
+import { getTheme, ThemeProvider, useTheme } from './src/theme'
+import { adjustColor, AliasesTypes, alpha, Tag, useProps, useTransition } from './src';
+import Button from './Button';
+import { css } from './src/css';
+import { CSSProps, formatProp } from 'naxcss';
 
 
 const count = 1
@@ -19,37 +21,37 @@ const Colors = ({ color }) => {
             data-name="asd"
 
         >
-            <NButton
+            <Button
                 bgcolor={alpha(color, .2)}
             >
                 Lighter
-            </NButton>
-            <NButton
+            </Button>
+            <Button
                 bgcolor={adjustColor(color, 1.3)}
             >
                 Lighter
-            </NButton>
-            <NButton
+            </Button>
+            <Button
                 bgcolor={adjustColor(color, 1.22)}
             >
                 Light
-            </NButton>
+            </Button>
 
-            <NButton
+            <Button
                 bgcolor={adjustColor(color, 1)}
             >
                 Main
-            </NButton>
-            <NButton
+            </Button>
+            <Button
                 bgcolor={adjustColor(color, .82)}
             >
                 Dark
-            </NButton>
-            <NButton
+            </Button>
+            <Button
                 bgcolor={adjustColor(color, .67)}
             >
                 Darker
-            </NButton>
+            </Button>
         </Tag>
     )
 }
@@ -63,22 +65,22 @@ const VariantButtons = ({ variant }: any) => {
             alignItems="center"
             p={2}
         >
-            <NButton
+            <Button
                 variant={variant}
                 color="outline"
-            >Button</NButton>
-            <NButton
+            >Button</Button>
+            <Button
                 variant={variant}
                 color="fill"
-            >Button</NButton>
-            <NButton
+            >Button</Button>
+            <Button
                 variant={variant}
                 color="text"
-            >Button</NButton>
-            <NButton
+            >Button</Button>
+            <Button
                 variant={variant}
                 color="alpha"
-            >Button</NButton>
+            >Button</Button>
         </Tag>
     )
 }
@@ -96,51 +98,123 @@ const List = () => {
             p={1}
             bgcolor="background.secondary"
         >
-            <NButton
+            <Button
                 variant="brand"
                 color="alpha"
-            >Dashboard</NButton>
-            <NButton
+            >Dashboard</Button>
+            <Button
                 variant="background"
                 color="text"
                 hover={{ ...theme.colors.brand.template.alpha.hover }}
-            >Courses</NButton>
-            <NButton
-                variant="background"
-                color="text"
-                hover={{ ...theme.colors.brand.template.alpha.hover }}
-
-            >Reports</NButton>
-            <NButton
+            >Courses</Button>
+            <Button
                 variant="background"
                 color="text"
                 hover={{ ...theme.colors.brand.template.alpha.hover }}
 
-            >Sells</NButton>
-            <NButton
+            >Reports</Button>
+            <Button
                 variant="background"
                 color="text"
                 hover={{ ...theme.colors.brand.template.alpha.hover }}
 
-            >Users</NButton>
-            <NButton
+            >Sells</Button>
+            <Button
                 variant="background"
                 color="text"
                 hover={{ ...theme.colors.brand.template.alpha.hover }}
 
-            >Settings</NButton>
+            >Users</Button>
+            <Button
+                variant="background"
+                color="text"
+                hover={{ ...theme.colors.brand.template.alpha.hover }}
+
+            >Settings</Button>
         </Tag>
     )
 }
 
+
 const NUI = () => {
+    const [_in, setIn] = React.useState(false)
     const [t, setT] = React.useState("light")
     const theme = getTheme(t)
+
+    const cls = useTransition(_in, element => {
+        return {
+            onFinish: () => {
+            },
+            variants: "fadeUp"
+        }
+    })
+
+    const anothercls = useTransition(_in, {
+        onFinish: (t) => {
+        },
+        onStart: (t) => {
+        },
+        variants: "fadeDown"
+    })
+
+
 
     return (
         <Tag>
 
-            <NUIT theme={t} height="100vh">
+            <ThemeProvider theme={t} height="100vh">
+                <Tag
+                    flexBox
+                    flexColumn
+                    gap={3}
+                    p={3}
+                >
+                    <Button
+                        onClick={() => {
+                            setIn(!_in)
+                        }}
+                    >Toggle</Button>
+                    <Tag flexBox gap={2} >
+                        <Tag
+                            color="brand.text"
+                            width={100}
+                            height={100}
+                            radius={1}
+                            bgcolor="brand.primary"
+                            className={anothercls}
+                        >
+                            <Tag color="brand.text" p={2}>Hello</Tag>
+                        </Tag>
+                        <Tag
+                            color="brand.text"
+                            bgcolor="brand.primary"
+                            className={cls}
+                            onClick={() => setIn(false)}
+                        >
+                            <Tag color="brand.text" p={2}>Hello</Tag>
+                        </Tag>
+
+                        {/* <Trans
+                            open={_in}
+                            type="zoom"
+                        /> */}
+                        {/* <Trans
+                            open={_in}
+                            type="fadeUp"
+                        />
+                        <Trans
+                            open={_in}
+                            type="zoom"
+                        />
+                        <Trans
+                            open={_in}
+                            type="grow"
+                        /> */}
+                    </Tag>
+
+                </Tag>
+
+
                 {/* <Tag
                     position="fixed"
                     top={0}
@@ -160,23 +234,23 @@ const NUI = () => {
                     borderBottom={1}
                     borderBottomColor="background.secondary"
                 >
-                    <NButton
+                    <Button
                         variant="background"
                         color="text"
                         hover={{ ...theme?.colors.brand.template.text.hover }}
-                    >Home</NButton>
-                    <NButton
-                        variant="background"
-                        color="text"
-                        hover={{ ...theme?.colors.brand.template.text.hover }}
-
-                    >About</NButton>
-                    <NButton
+                    >Home</Button>
+                    <Button
                         variant="background"
                         color="text"
                         hover={{ ...theme?.colors.brand.template.text.hover }}
 
-                    >Services</NButton>
+                    >About</Button>
+                    <Button
+                        variant="background"
+                        color="text"
+                        hover={{ ...theme?.colors.brand.template.text.hover }}
+
+                    >Services</Button>
                 </Tag>
                 <Tag
                     bgcolor="background"
@@ -186,13 +260,13 @@ const NUI = () => {
                     p={1}
                 >
 
-                    <NButton
+                    <Button
                         onClick={() => {
                             setT(t === 'dark' ? "light" : "dark")
                         }}
                         variant="background"
                         color="outline"
-                    >Change</NButton>
+                    >Change</Button>
                     <Tag
                         bgcolor="background"
                         flexBox
@@ -223,7 +297,7 @@ const NUI = () => {
                         />
                     </Tag>
                 </Tag>
-            </NUIT>
+            </ThemeProvider>
 
         </Tag>
     )

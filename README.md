@@ -76,13 +76,13 @@ const App = () => {
 Here is the example to create your custom `Button` component
 ```tsx
 import * as React from 'react';
-import {Tag, TagProps, TagComponenntType } from 'naxui-manager';
+import {Tag, TagProps, TagComponentType } from 'naxui-manager';
 
-export type ButtonProps<T extends TagComponenntType = 'button'> = TagProps<T> & {
+export type ButtonProps<T extends TagComponentType = 'button'> = TagProps<T> & {
     // Additional props specific to the Button component can be defined here
 };
 
-const Button = <T extends TagComponenntType = "button">({ children, ...rest }: ButtonProps<T>, ref: React.Ref<any>) => {
+const Button = <T extends TagComponentType = "button">({ children, ...rest }: ButtonProps<T>, ref: React.Ref<any>) => {
     return (
         <Tag
             component="button"
