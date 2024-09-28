@@ -4,14 +4,14 @@ import { animationEases } from '../useAnimation'
 import { AliasesTypes } from '../../css/types'
 import { CSSProps, formatProp } from 'naxcss';
 import { useTheme } from '../../theme';
-import * as predefinedVariants from './variants'
-export type UseTransitionVariantsTypes = keyof typeof predefinedVariants
+import * as predefinedVariant from './variants'
+export type UseTransitionVariantTypes = keyof typeof predefinedVariant
 
 export interface UseTransitionProps {
-    variants: {
+    variant: {
         from: CSSProps<AliasesTypes>;
         to: CSSProps<AliasesTypes>;
-    } | UseTransitionVariantsTypes;
+    } | UseTransitionVariantTypes;
     ease?: string;
     easing?: keyof typeof animationEases;
     duration?: number;
@@ -40,21 +40,21 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
 
     props = typeof props === "function" ? props(element as any) : props
 
-    let { variants, duration, delay, ease, easing, onFinish, onStart } = props as UseTransitionProps
+    let { variant, duration, delay, ease, easing, onFinish, onStart } = props as UseTransitionProps
     let _ease = ease || (animationEases as any)[easing as any] || animationEases.easeBounceOut
 
-    if (typeof variants === 'string') {
-        variants = (predefinedVariants as any)[variants](element)
+    if (typeof variant === 'string') {
+        variant = (predefinedVariant as any)[variant](element)
     }
 
-    const [_css, setCss] = useState<any>({ ...(variants as any).to, visibility: "hidden" })
+    const [_css, setCss] = useState<any>({ ...(variant as any).to, visibility: "hidden" })
 
     useEffect(() => {
         if (!initial) {
             if (open) {
-                setCss({ ...(variants as any).from, transition: "all 0s", visibility: "hidden" })
+                setCss({ ...(variant as any).from, transition: "all 0s", visibility: "hidden" })
             } else {
-                setCss({ ...(variants as any).to, transition: "all 0s", visibility: "hidden" })
+                setCss({ ...(variant as any).to, transition: "all 0s", visibility: "hidden" })
             }
             const ele = document.querySelector(`.${id}`)
             if (ele) {
@@ -79,9 +79,9 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
             setTimeout(() => setInitial(true), 1);
         } else {
             if (open) {
-                setCss((variants as any).to)
+                setCss((variant as any).to)
             } else {
-                setCss((p: any) => p.visibility ? { ...(variants as any).from, transition: "all 0s" } : (variants as any).from)
+                setCss((p: any) => p.visibility ? { ...(variant as any).from, transition: "all 0s" } : (variant as any).from)
             }
         }
     }, [open, initial])

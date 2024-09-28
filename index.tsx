@@ -145,7 +145,7 @@ const NUI = () => {
         return {
             onFinish: () => {
             },
-            variants: "fadeUp"
+            variant: "fadeUp"
         }
     })
 
@@ -154,7 +154,7 @@ const NUI = () => {
         },
         onStart: (t) => {
         },
-        variants: "fadeDown"
+        variant: "fadeDown"
     })
 
 
