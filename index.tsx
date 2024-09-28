@@ -143,7 +143,17 @@ const NUI = () => {
 
     const cls = useTransition(_in, element => {
         return {
-            onFinish: () => {
+            onOpen: () => {
+                console.log('open');
+            },
+            onOpened: () => {
+                console.log('opened');
+            },
+            onClose: () => {
+                console.log('close');
+            },
+            onClosed: () => {
+                console.log('closed');
             },
             variant: "fadeUp"
         }

@@ -18,6 +18,10 @@ export interface UseTransitionProps {
     delay?: number;
     onStart?: (type: "startOpen" | "startClose") => void;
     onFinish?: (type: "finishedOpen" | "finishedClose") => void;
+    onOpen?: () => void;
+    onOpened?: () => void;
+    onClose?: () => void;
+    onClosed?: () => void;
 }
 
 export type UseTransitionElementProps = {
@@ -40,7 +44,7 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
 
     props = typeof props === "function" ? props(element as any) : props
 
-    let { variant, duration, delay, ease, easing, onFinish, onStart } = props as UseTransitionProps
+    let { variant, duration, delay, ease, easing, onFinish, onStart, onOpen, onOpened, onClose, onClosed } = props as UseTransitionProps
     let _ease = ease || (animationEases as any)[easing as any] || animationEases.easeBounceOut
 
     if (typeof variant === 'string') {
@@ -61,13 +65,17 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
                 (ele as any).ontransitionstart = (ev: any) => {
                     if (ev.propertyName === Object.keys(_css)[0]) {
                         const isOpen = Array.from(ele.classList).includes("transition-open")
-                        onStart && onStart(isOpen ? "startOpen" : "startClose")
+                        onStart && onStart(isOpen ? "startOpen" : "startClose");
+                        (onOpen && isOpen) && onOpen();
+                        (onClose && !isOpen) && onClose()
                     }
                 }
                 (ele as any).ontransitionend = (ev: any) => {
                     if (ev.propertyName === Object.keys(_css)[0]) {
                         const isOpen = Array.from(ele.classList).includes("transition-open")
-                        onFinish && onFinish(isOpen ? "finishedOpen" : "finishedClose")
+                        onFinish && onFinish(isOpen ? "finishedOpen" : "finishedClose");
+                        (onOpened && isOpen) && onOpened();
+                        (onClosed && !isOpen) && onClosed();
                     }
                 }
                 setElement({
