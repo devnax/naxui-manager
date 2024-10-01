@@ -1,5 +1,5 @@
 import { css } from '../../css';
-import { useId, useState, useEffect } from 'react'
+import { useId, useState, useEffect, useMemo } from 'react'
 import { animationEases } from '../useAnimation'
 import { AliasesTypes } from '../../css/types'
 import { CSSProps, formatProp } from 'naxcss';
@@ -7,7 +7,10 @@ import { useTheme } from '../../theme';
 import * as predefinedVariant from './variants'
 export type UseTransitionVariantTypes = keyof typeof predefinedVariant
 
+
+export type UseTransitionState = "open" | "opened" | "close" | "closed"
 export interface UseTransitionProps {
+    hideable?: boolean;
     variant: {
         from: CSSProps<AliasesTypes>;
         to: CSSProps<AliasesTypes>;
@@ -22,6 +25,7 @@ export interface UseTransitionProps {
     onOpened?: () => void;
     onClose?: () => void;
     onClosed?: () => void;
+    onState?: (state: UseTransitionState) => void;
 }
 
 export type UseTransitionElementProps = {
@@ -44,14 +48,21 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
 
     props = typeof props === "function" ? props(element as any) : props
 
-    let { variant, duration, delay, ease, easing, onFinish, onStart, onOpen, onOpened, onClose, onClosed } = props as UseTransitionProps
+    let { hideable, variant, duration, delay, ease, easing, onFinish, onStart, onOpen, onOpened, onClose, onClosed, onState } = props as UseTransitionProps
     let _ease = ease || (animationEases as any)[easing as any] || animationEases.easeBounceOut
-
+    duration ??= 400
     if (typeof variant === 'string') {
         variant = (predefinedVariant as any)[variant](element)
     }
 
     const [_css, setCss] = useState<any>({ ...(variant as any).to, visibility: "hidden" })
+    const [transitionState, setTransitionState] = useState<UseTransitionState>(open ? "open" : "closed")
+
+    useMemo(() => {
+        if (open && transitionState === 'closed') {
+            setTransitionState("open")
+        }
+    }, [open])
 
     useEffect(() => {
         if (!initial) {
@@ -68,6 +79,8 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
                         onStart && onStart(isOpen ? "startOpen" : "startClose");
                         (onOpen && isOpen) && onOpen();
                         (onClose && !isOpen) && onClose()
+                        setTransitionState(isOpen ? "open" : "close")
+                        onState && onState(isOpen ? "open" : "close")
                     }
                 }
                 (ele as any).ontransitionend = (ev: any) => {
@@ -76,6 +89,8 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
                         onFinish && onFinish(isOpen ? "finishedOpen" : "finishedClose");
                         (onOpened && isOpen) && onOpened();
                         (onClosed && !isOpen) && onClosed();
+                        setTransitionState(isOpen ? "opened" : "closed")
+                        onState && onState(isOpen ? "opened" : "closed")
                     }
                 }
                 setElement({
@@ -84,8 +99,10 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
                     rect: ele.getBoundingClientRect()
                 })
             }
-            setTimeout(() => setInitial(true), 1);
+
+            setTimeout(() => setInitial(true), 100);
         } else {
+
             if (open) {
                 setCss((variant as any).to)
             } else {
@@ -94,14 +111,19 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
         }
     }, [open, initial])
 
-    let trans = ` ${duration || 400}ms ${_ease} ${delay || 0}ms`
+    let trans = ` ${duration}ms ${_ease} ${delay || 0}ms`
 
-    const cls = css({
+    let _ = {
         transition: Object.keys(_css || {}).map(k => formatProp(k)).join(trans + ", ") + trans,
         ..._css
-    }, theme)
+    }
 
-    return cls + " " + id + " transition-" + (open ? "open" : "close")
+    if (hideable && transitionState === 'closed') {
+        _.display = 'none!important'
+    }
+    const cls = css(_, theme)
+
+    return cls + " " + id + " transition-" + (open ? "open" : "close") + " " + "transition-state-" + transitionState
 }
 
 export default useTransition

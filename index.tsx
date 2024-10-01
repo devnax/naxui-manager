@@ -135,37 +135,52 @@ const List = () => {
     )
 }
 
-
-const NUI = () => {
-    const [_in, setIn] = React.useState(false)
-    const [t, setT] = React.useState("light")
-    const theme = getTheme(t)
-
-    const cls = useTransition(_in, element => {
-        return {
-            onOpen: () => {
-                console.log('open');
-            },
-            onOpened: () => {
-                console.log('opened');
-            },
-            onClose: () => {
-                console.log('close');
-            },
-            onClosed: () => {
-                console.log('closed');
-            },
-            variant: "fadeUp"
-        }
-    })
-
-    const anothercls = useTransition(_in, {
+const Trans = ({ open }) => {
+    const anothercls = useTransition(open, {
         onFinish: (t) => {
         },
         onStart: (t) => {
         },
         variant: "fadeDown"
     })
+    return (
+        <Tag
+            color="brand.text"
+            width={100}
+            height={100}
+            radius={1}
+            bgcolor="brand.primary"
+            className={anothercls}
+        >
+            <Tag color="brand.text" p={2}>Hello</Tag>
+        </Tag>
+    )
+}
+
+const NUI = () => {
+    const [_in, setIn] = React.useState(false)
+    const [t, setT] = React.useState("light")
+    const theme = getTheme(t)
+
+    // const cls = useTransition(_in, element => {
+    //     return {
+    //         onOpen: () => {
+    //             console.log('open');
+    //         },
+    //         onOpened: () => {
+    //             console.log('opened');
+    //         },
+    //         onClose: () => {
+    //             console.log('close');
+    //         },
+    //         onClosed: () => {
+    //             console.log('closed');
+    //         },
+    //         variant: "fadeUp"
+    //     }
+    // })
+
+
 
 
 
@@ -184,25 +199,27 @@ const NUI = () => {
                             setIn(!_in)
                         }}
                     >Toggle</Button>
-                    <Tag flexBox gap={2} >
-                        <Tag
-                            color="brand.text"
-                            width={100}
-                            height={100}
-                            radius={1}
-                            bgcolor="brand.primary"
-                            className={anothercls}
-                        >
-                            <Tag color="brand.text" p={2}>Hello</Tag>
-                        </Tag>
-                        <Tag
+                    <Tag flexBox gap={2}
+                        sx={{
+                            '& .trans-closed': {
+                                display: "none"
+                            }
+                        }}
+                    >
+                        <Trans open={_in} />
+
+                        {
+                            // _in && <Trans open={true} />
+                        }
+
+                        {/* <Tag
                             color="brand.text"
                             bgcolor="brand.primary"
                             className={cls}
                             onClick={() => setIn(false)}
                         >
                             <Tag color="brand.text" p={2}>Hello</Tag>
-                        </Tag>
+                        </Tag> */}
 
                         {/* <Trans
                             open={_in}
