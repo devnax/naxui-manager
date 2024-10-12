@@ -10,7 +10,6 @@ import getValue from "./getValue"
 import getProps from "./getProps"
 import aliases from "./aliases"
 import { AliasesTypes } from './types'
-import { ThemeOptions } from '../theme'
 
 export {
     classNames,
@@ -18,23 +17,23 @@ export {
     getProps
 }
 
-export const css_options = (theme: ThemeOptions, options?: OptionsProps) => {
+export const css_options = (options?: OptionsProps) => {
     return {
-        breakpoints: theme.breakpoints,
-        classPrefix: 'naxui',
+        breakpoints: {
+            xs: 0,
+            sm: 600,
+            md: 900,
+            lg: 1200,
+            xl: 1536
+        },
         ...options,
         aliases,
-        skipProps: (prop: any) => {
-            if (prop === "theme") return true
-            return false
-        },
         getValue: (v: any, p: any, _c: any,) => {
-
             if (options?.getValue) {
                 let _val = options?.getValue(p, v, _c)
                 if (_val) return _val
             }
-            return getValue(p, v, _c, theme)
+            return getValue(p, v, _c)
         },
         getProps: (p: any, v: any, _c: any) => {
             if (options?.getProps) {
@@ -46,16 +45,16 @@ export const css_options = (theme: ThemeOptions, options?: OptionsProps) => {
     }
 }
 
-export const css = (_css: CSSProps<AliasesTypes>, theme: ThemeOptions, options?: OptionsProps) => {
-    return naxcss.css<AliasesTypes>(_css, css_options(theme, options))
+export const css = (_css: CSSProps<AliasesTypes>, options?: OptionsProps) => {
+    return naxcss.css<AliasesTypes>(_css, css_options(options))
 }
 
-export const globalCss = (key: string, _css: GlobalCSSType<AliasesTypes>, theme: ThemeOptions, options?: OptionsProps) => {
-    return naxcss.globalCss<AliasesTypes>(key, _css, css_options(theme, options))
+export const globalCss = (key: string, _css: GlobalCSSType<AliasesTypes>, options?: OptionsProps) => {
+    return naxcss.globalCss<AliasesTypes>(key, _css, css_options(options))
 }
 
-export const keyframes = (frames: keyframesType<AliasesTypes>, theme: ThemeOptions, options?: OptionsProps) => {
-    return naxcss.keyframes(frames, css_options(theme, options))
+export const keyframes = (frames: keyframesType<AliasesTypes>, options?: OptionsProps) => {
+    return naxcss.keyframes(frames, css_options(options))
 }
 
 export const makeCacheKey = (css_raw: object) => naxcss.makeCacheKey(css_raw)

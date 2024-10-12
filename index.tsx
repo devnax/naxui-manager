@@ -89,54 +89,56 @@ const VariantButtons = ({ variant }: any) => {
 const List = () => {
     const theme = useTheme()
     return (
-        <Tag
-            flexBox
-            flexColumn
-            width={200}
-            radius={1}
-            overflow="hidden"
-            p={1}
-            bgcolor="background.secondary"
-        >
-            <Button
-                variant="brand"
-                color="alpha"
-            >Dashboard</Button>
-            <Button
-                variant="background"
-                color="text"
-                hover={{ ...theme.colors.brand.template.alpha.hover }}
-            >Courses</Button>
-            <Button
-                variant="background"
-                color="text"
-                hover={{ ...theme.colors.brand.template.alpha.hover }}
+        <ThemeProvider theme="light" display="inline-block" width={200}>
+            <Tag
+                flexBox
+                flexColumn
+                width={200}
+                radius={1}
+                overflow="hidden"
+                p={1}
+                bgcolor="background.secondary"
+            >
+                <Button
+                    variant="brand"
+                    color="alpha"
+                >Dashboard</Button>
+                <Button
+                    variant="background"
+                    color="text"
+                    hover={{ ...theme.colors.brand.template.alpha.hover }}
+                >Courses</Button>
+                <Button
+                    variant="background"
+                    color="text"
+                    hover={{ ...theme.colors.brand.template.alpha.hover }}
 
-            >Reports</Button>
-            <Button
-                variant="background"
-                color="text"
-                hover={{ ...theme.colors.brand.template.alpha.hover }}
+                >Reports</Button>
+                <Button
+                    variant="background"
+                    color="text"
+                    hover={{ ...theme.colors.brand.template.alpha.hover }}
 
-            >Sells</Button>
-            <Button
-                variant="background"
-                color="text"
-                hover={{ ...theme.colors.brand.template.alpha.hover }}
+                >Sells</Button>
+                <Button
+                    variant="background"
+                    color="text"
+                    hover={{ ...theme.colors.brand.template.alpha.hover }}
 
-            >Users</Button>
-            <Button
-                variant="background"
-                color="text"
-                hover={{ ...theme.colors.brand.template.alpha.hover }}
+                >Users</Button>
+                <Button
+                    variant="background"
+                    color="text"
+                    hover={{ ...theme.colors.brand.template.alpha.hover }}
 
-            >Settings</Button>
-        </Tag>
+                >Settings</Button>
+            </Tag>
+        </ThemeProvider>
     )
 }
 
 const Trans = ({ open }) => {
-    const anothercls = useTransition(open, {
+    const { classname, state } = useTransition(open, {
         onFinish: (t) => {
         },
         onStart: (t) => {
@@ -145,12 +147,14 @@ const Trans = ({ open }) => {
     })
     return (
         <Tag
+            display={state === 'closed' ? "none" : "inherit"}
             color="brand.text"
             width={100}
             height={100}
             radius={1}
             bgcolor="brand.primary"
-            className={anothercls}
+            className={classname}
+            shadow={1}
         >
             <Tag color="brand.text" p={2}>Hello</Tag>
         </Tag>
@@ -199,13 +203,28 @@ const NUI = () => {
                             setIn(!_in)
                         }}
                     >Toggle</Button>
-                    <Tag flexBox gap={2}
+                    <Tag
+                        flexBox
+                        flexRow
+                        flexWrap="wrap"
+                        gap={4}
+                    >
+                        {
+                            Array(20).fill(0).map((v, idx) => {
+                                return <Tag width={100} height={100} radius={1} shadow={idx + 1} ></Tag>
+                            })
+                        }
+                    </Tag>
+                    <Tag
+                        flexBox
+                        gap={2}
                         sx={{
                             '& .trans-closed': {
                                 display: "none"
                             }
                         }}
                     >
+
                         <Trans open={_in} />
 
                         {

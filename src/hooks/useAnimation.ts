@@ -1,5 +1,5 @@
 import { CSSProps } from 'naxcss'
-import { keyframes, css, useTheme } from '..'
+import { keyframes, css } from '..'
 import { useState, useEffect } from 'react';
 
 
@@ -26,11 +26,9 @@ const useAnimation = ({ from, to, delay, ease, duration, onStart, onFinish }: Us
     let _delay = delay || 0;
     let _duration = duration || 600;
     let _ease = ease || "easeBounceOut"
-    const theme = useTheme()
-
     const [timer, setTimer] = useState<any>()
     const [targetCss, setTargetCss] = useState<any>(from)
-    const animName: any = keyframes({ from, to }, theme)
+    const animName: any = keyframes({ from, to })
 
     useEffect(() => {
         onStart && onStart()
@@ -48,7 +46,7 @@ const useAnimation = ({ from, to, delay, ease, duration, onStart, onFinish }: Us
         animationDuration: _duration + "ms",
         animationTimingFunction: animationEases[_ease] || animationEases.easeBounceOut,
         ...(targetCss as any)
-    }, theme)
+    })
 }
 
 export default useAnimation

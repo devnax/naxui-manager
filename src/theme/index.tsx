@@ -1,9 +1,9 @@
+import * as React from "react"
 import { ThemeOptions, ObjectType, ThemeOptionInput, ThemeColor } from "./types"
 import defaultThemeOption, { lightColorPallete, darkColorPallete } from './theme-defaults'
-
-import * as React from "react"
-import { alpha, globalCss } from "../css"
+import { alpha, css_options, globalCss } from "../css"
 import Tag, { TagComponentType, TagProps } from "../Tag"
+import vars from "./vars"
 export * from './types'
 
 const ThemeFactory = new Map<string, ThemeOptions>()
@@ -75,11 +75,13 @@ const createColor = (theme: ThemeOptions, name: keyof ThemeColor) => {
 }
 
 export const createTheme = (name: string, options: ThemeOptionInput, darkMode?: boolean): ThemeOptions => {
+    const cssopt = css_options()
     if (!ThemeFactory.has(name)) {
         let theme: any = mergeObject(defaultThemeOption, {
             ...(darkMode ? darkColorPallete : {}),
             ...options,
-            name
+            name,
+            breakpoints: cssopt.breakpoints
         })
 
         theme = mergeObject(theme, {
@@ -119,14 +121,14 @@ export type ThemeProviderProps<T extends TagComponentType = 'div'> = TagProps<T>
 }
 
 export const ThemeProvider = ({ children, theme, resetCss, ...props }: ThemeProviderProps) => {
-
     const THEME = ThemeFactory.get(theme) as ThemeOptions
     if (!THEME) throw new Error(`Invalid theme name provided: ${theme}`)
 
-    React.useMemo(() => {
+    resetCss ??= true
 
+    React.useMemo(() => {
         if (!!Object.keys(THEME.globalStyle).length) {
-            globalCss(`${theme}-global-css`, THEME.globalStyle, THEME)
+            globalCss(`${theme}-global-css`, THEME.globalStyle)
         }
 
         resetCss && globalCss("reset-css", {
@@ -139,9 +141,8 @@ export const ThemeProvider = ({ children, theme, resetCss, ...props }: ThemeProv
             },
             "html, body": {
                 minHeight: "100%",
-                "-webkit-font-smoothing": "antialiased",
+                "-webkit-font-smoothing": "antialiased"
             },
-
             "img, picture, video, canvas, svg": {
                 maxWidth: "100%",
                 display: "block"
@@ -162,7 +163,11 @@ export const ThemeProvider = ({ children, theme, resetCss, ...props }: ThemeProv
             "p, h1, h2, h3, h4, h5, h6": {
                 overflowWrap: "break-word",
             }
-        }, THEME)
+        })
+
+        globalCss(`${theme}-theme-root`, {
+            [`.${theme}-theme-root`]: vars(THEME)
+        })
     }, [theme])
 
     return (
@@ -175,7 +180,7 @@ export const ThemeProvider = ({ children, theme, resetCss, ...props }: ThemeProv
                 fontWeight={THEME.typography.text.fontWeight}
                 lineHeight={THEME.typography.text.lineHeight}
                 {...props}
-                baseClass={`${theme}-theme-provider`}
+                baseClass={`${theme}-theme-root`}
                 direction={THEME.rtl ? "rtl" : "ltr"}
             >
                 {children}

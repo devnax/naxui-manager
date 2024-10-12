@@ -110,13 +110,6 @@ export default {
     name: "light",
     rtl: false,
     shadow: (num: number) => num ? (`0px 0px 2px -1px rgba(0,0,0,0.15), 0px ${num}px ${num}px 0px rgba(0,0,0,0.10), 0px ${num + 1}px ${num + 1}px -${num + 1}px rgba(0,0,0,0.12)`) : num,
-    breakpoints: {
-        xs: 0,
-        sm: 600,
-        md: 900,
-        lg: 1200,
-        xl: 1536
-    },
     globalStyle: {},
     colors: ThemeColors,
     typography: ThemeTypography,

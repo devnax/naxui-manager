@@ -65,10 +65,11 @@ interface CSSProperties {
     flexShrink: CSSValueType<"flexShrink">;
     flexWrap: CSSValueType<"flexWrap">;
     float: CSSValueType<"float">;
-    fontFamily: CSSValueType<"fontFamily"> | "theme";
+    fontFamily: CSSValueType<"fontFamily"> | "default";
     fontSize: CSSValueType<"fontSize"> | TypographyRefTypes;
     fontStyle: CSSValueType<"fontStyle">;
     fontWeight: CSSValueType<"fontWeight"> | TypographyRefTypes;
+    font: CSSValueType<"font"> | TypographyRefTypes;
     gap: CSSValueType<"gap">;
     grid: CSSValueType<"grid">;
     gridArea: CSSValueType<"gridArea">;

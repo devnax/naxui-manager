@@ -99,6 +99,7 @@ export const CSS_PROP_LIST = [
     "fontSize",
     "fontStyle",
     "fontWeight",
+    "font",
     "gap",
     "grid",
     "gridArea",

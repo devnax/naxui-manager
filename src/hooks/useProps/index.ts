@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { OptionsProps, classNames as mergecls } from 'naxcss';
-import { css, css_options } from '../../css';
+import { css } from '../../css';
 import { CSS_PROP_LIST } from './parceProps';
 import { CSSPropAsAttr } from './types'
-import { useTheme, mergeObject } from '../../theme';
+import { mergeObject } from '../../theme';
 export * from './types'
 
 
 export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
-    const theme = useTheme()
 
     let format = React.useMemo(() => {
         let sx, hover, baseClass: any, classNames: any;
@@ -17,7 +16,6 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
             sx = props.sx;
             delete props.sx
         }
-
         if (props.hover) {
             hover = props.hover;
             delete props.hover
@@ -26,7 +24,6 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
             baseClass = props.baseClass;
             delete props.baseClass
         }
-
         if (props.classNames) {
             classNames = props.classNames;
             delete props.classNames
@@ -50,14 +47,9 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
         }
 
         let classname = "";
-        if (baseClass) {
-            const cssOpt = css_options(theme, css_option)
-            baseClass = cssOpt.classPrefix + "-" + baseClass
-        }
 
         if (Object.keys(_css).length) {
-            _css.theme = theme.name
-            let cls: string = css(_css, theme, css_option)
+            let cls: string = css(_css, css_option)
             classname = mergecls(baseClass as any, ...(classNames || []), cls, (props as any).className)
         } else {
             classname = mergecls(baseClass as any, ...(classNames || []), (props as any).className)
@@ -66,7 +58,7 @@ export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
             classname,
             propKeys
         }
-    }, [JSON.stringify(props), theme.name]);
+    }, [JSON.stringify(props)]);
 
     const _props: any = {};
     if (format) {

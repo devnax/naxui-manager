@@ -122,7 +122,7 @@ export type ThemeTypographyInputType = {
 export interface ThemeOptionInput {
     rtl?: boolean;
     globalStyle?: GlobalCSSType<AliasesTypes>,
-    breakpoints?: { [key in BreakpointKeys]: number };
+    // breakpoints?: { [key in BreakpointKeys]: number };
     interfaces?: { [name: string]: <P extends object>(defaultProps: P, theme: ThemeOptions) => P };
     colors?: ThemeColorInput;
     typography?: ThemeTypographyInputType;

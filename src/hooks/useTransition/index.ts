@@ -79,8 +79,8 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
                         onStart && onStart(isOpen ? "startOpen" : "startClose");
                         (onOpen && isOpen) && onOpen();
                         (onClose && !isOpen) && onClose()
-                        setTransitionState(isOpen ? "open" : "close")
                         onState && onState(isOpen ? "open" : "close")
+                        setTransitionState(isOpen ? "open" : "close")
                     }
                 }
                 (ele as any).ontransitionend = (ev: any) => {
@@ -89,8 +89,8 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
                         onFinish && onFinish(isOpen ? "finishedOpen" : "finishedClose");
                         (onOpened && isOpen) && onOpened();
                         (onClosed && !isOpen) && onClosed();
-                        setTransitionState(isOpen ? "opened" : "closed")
                         onState && onState(isOpen ? "opened" : "closed")
+                        setTransitionState(isOpen ? "opened" : "closed")
                     }
                 }
                 setElement({
@@ -123,7 +123,10 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
     }
     const cls = css(_, theme)
 
-    return cls + " " + id + " transition-" + (open ? "open" : "close") + " " + "transition-state-" + transitionState
+    return {
+        classname: cls + " " + id + " transition-" + (open ? "open" : "close") + " " + "transition-state-" + transitionState,
+        state: transitionState
+    }
 }
 
 export default useTransition
