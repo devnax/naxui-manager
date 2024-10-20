@@ -9,10 +9,7 @@ export const lightColorPallete = {
         primary: "#FFFFFF",
         secondary: "#EDEFF7",
     },
-    divider: {
-        primary: "#C0C4CC",   // Light gray (to match the primary background)
-        secondary: "#DADCE0"
-    }
+    divider: "#DADCE0"
 }
 
 export const darkColorPallete = {
@@ -24,10 +21,7 @@ export const darkColorPallete = {
         primary: "#272727",
         secondary: "#1E1E1E",
     },
-    divider: {
-        primary: "#3D3D3D",
-        secondary: "#333333"
-    }
+    divider: "#3D3D3D"
 }
 
 export const ThemeColors = {

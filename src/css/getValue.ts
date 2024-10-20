@@ -31,10 +31,7 @@ const getValue = (prop: any, value: string | number, _css: CSSProps): any => {
         "background.primary": `var(--color-background-primary)`,
         "background.secondary": `var(--color-background-secondary)`,
         "background.alpha": `var(--color-background-alpha)`,
-
-        "divider": `var(--color-divider-primary)`,
-        "divider.primary": `var(--color-divider-primary)`,
-        "divider.secondary": `var(--color-divider-secondary)`,
+        "divider": `var(--color-divider)`,
 
         ...getColor("brand"),
         ...getColor("accent"),

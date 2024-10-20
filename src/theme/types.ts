@@ -56,7 +56,7 @@ export type ThemeTypographyItem = {
 export type ThemeColor = {
     background: Omit<ThemeColorItem, "text">;
     text: Omit<ThemeColorItem, "text" | "alpha" | "template">;
-    divider: Pick<ThemeColorItemInput, "primary" | "secondary">;
+    divider: string;
     brand: ThemeColorItem;
     accent: ThemeColorItem;
     success: ThemeColorItem
@@ -96,7 +96,7 @@ export type ThemeTypographyItemInput = Partial<ThemeTypographyItem>
 export type ThemeColorInput = {
     background?: Omit<ThemeColorItemInput, "text">
     text?: Omit<ThemeColorItemInput, "text">
-    divider?: Pick<ThemeColorItemInput, "primary" | "secondary">;
+    divider?: string;
     brand?: ThemeColorItemInput;
     accent?: ThemeColorItemInput;
     success?: ThemeColorItemInput
