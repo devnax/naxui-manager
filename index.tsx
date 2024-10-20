@@ -6,9 +6,7 @@ import Button from './Button';
 import { css } from './src/css';
 import { CSSProps, formatProp } from 'naxcss';
 
-
 const count = 1
-
 
 const Colors = ({ color }) => {
     return (
@@ -56,7 +54,6 @@ const Colors = ({ color }) => {
     )
 }
 
-
 const VariantButtons = ({ variant }: any) => {
     return (
         <Tag
@@ -85,7 +82,6 @@ const VariantButtons = ({ variant }: any) => {
     )
 }
 
-
 const List = () => {
     const theme = useTheme()
     return (
@@ -102,6 +98,9 @@ const List = () => {
                 <Button
                     variant="brand"
                     color="alpha"
+                    onClick={() => {
+                        theme.change(theme.name === 'light' ? "dark" : "light")
+                    }}
                 >Dashboard</Button>
                 <Button
                     variant="background"
@@ -184,37 +183,47 @@ const NUI = () => {
     //     }
     // })
 
-
-
-
-
     return (
         <Tag>
-
-            <ThemeProvider theme={t} height="100vh">
+            <ThemeProvider
+                theme={t}
+                height="100vh"
+                onThemeChange={(t) => {
+                    setT(t)
+                }}
+            >
+                <Button
+                    onClick={() => {
+                        setT(t === 'dark' ? "light" : "dark")
+                    }}
+                    variant="background"
+                    color="outline"
+                >Change</Button>
                 <Tag
                     flexBox
                     flexColumn
                     gap={3}
                     p={3}
                 >
+                    <Tag
+                        m={2}
+                        width={100}
+                        height={100}
+                        border={1}
+                    />
+                    <Tag
+                        m={2}
+                        width={100}
+                        height={100}
+                        border={1}
+                        borderColor="divider.secondary"
+                    />
                     <Button
                         onClick={() => {
                             setIn(!_in)
                         }}
                     >Toggle</Button>
-                    <Tag
-                        flexBox
-                        flexRow
-                        flexWrap="wrap"
-                        gap={4}
-                    >
-                        {
-                            Array(20).fill(0).map((v, idx) => {
-                                return <Tag width={100} height={100} radius={1} shadow={idx + 1} ></Tag>
-                            })
-                        }
-                    </Tag>
+
                     <Tag
                         flexBox
                         gap={2}
@@ -224,7 +233,6 @@ const NUI = () => {
                             }
                         }}
                     >
-
                         <Trans open={_in} />
 
                         {
@@ -257,7 +265,18 @@ const NUI = () => {
                             type="grow"
                         /> */}
                     </Tag>
-
+                    <Tag
+                        flexBox
+                        flexRow
+                        flexWrap="wrap"
+                        gap={4}
+                    >
+                        {
+                            Array(20).fill(0).map((v, idx) => {
+                                return <Tag width={100} height={100} radius={1} shadow={idx + 1} ></Tag>
+                            })
+                        }
+                    </Tag>
                 </Tag>
 
 
@@ -280,6 +299,7 @@ const NUI = () => {
                     borderBottom={1}
                     borderBottomColor="background.secondary"
                 >
+
                     <Button
                         variant="background"
                         color="text"
@@ -306,13 +326,7 @@ const NUI = () => {
                     p={1}
                 >
 
-                    <Button
-                        onClick={() => {
-                            setT(t === 'dark' ? "light" : "dark")
-                        }}
-                        variant="background"
-                        color="outline"
-                    >Change</Button>
+
                     <Tag
                         bgcolor="background"
                         flexBox

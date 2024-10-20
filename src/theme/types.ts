@@ -54,8 +54,9 @@ export type ThemeTypographyItem = {
 }
 
 export type ThemeColor = {
-    background: Omit<ThemeColorItem, "text">
-    text: Omit<ThemeColorItem, "text" | "alpha" | "template">
+    background: Omit<ThemeColorItem, "text">;
+    text: Omit<ThemeColorItem, "text" | "alpha" | "template">;
+    divider: Pick<ThemeColorItemInput, "primary" | "secondary">;
     brand: ThemeColorItem;
     accent: ThemeColorItem;
     success: ThemeColorItem
@@ -86,18 +87,16 @@ export interface ThemeOptions {
     interfaces: { [name: string]: <P extends object>(defaultProps: P, theme: ThemeOptions) => P };
     colors: ThemeColor;
     typography: ThemeTypographyType;
+    change: (theme: string) => void
 }
 
-
-
 // Theme Input
-
 export type ThemeColorItemInput = Partial<Omit<ThemeColorItem, "alpha">>
 export type ThemeTypographyItemInput = Partial<ThemeTypographyItem>
-
 export type ThemeColorInput = {
     background?: Omit<ThemeColorItemInput, "text">
     text?: Omit<ThemeColorItemInput, "text">
+    divider?: Pick<ThemeColorItemInput, "primary" | "secondary">;
     brand?: ThemeColorItemInput;
     accent?: ThemeColorItemInput;
     success?: ThemeColorItemInput
@@ -105,7 +104,6 @@ export type ThemeColorInput = {
     warning?: ThemeColorItemInput
     danger?: ThemeColorItemInput
 };
-
 export type ThemeTypographyInputType = {
     fontFamily?: string,
     h1?: ThemeTypographyItemInput;
@@ -118,16 +116,13 @@ export type ThemeTypographyInputType = {
     button?: ThemeTypographyItemInput;
     small?: ThemeTypographyItemInput;
 };
-
 export interface ThemeOptionInput {
     rtl?: boolean;
     globalStyle?: GlobalCSSType<AliasesTypes>,
-    // breakpoints?: { [key in BreakpointKeys]: number };
     interfaces?: { [name: string]: <P extends object>(defaultProps: P, theme: ThemeOptions) => P };
     colors?: ThemeColorInput;
     typography?: ThemeTypographyInputType;
 }
-
 
 // ============ Reference Types
 
@@ -141,7 +136,6 @@ export type TypographyRefTypes =
     | "text"
     | "button"
     | "small"
-
 
 export type ColorsRefTypes =
     | "text"

@@ -8,6 +8,10 @@ export const lightColorPallete = {
     background: {
         primary: "#FFFFFF",
         secondary: "#EDEFF7",
+    },
+    divider: {
+        primary: "#C0C4CC",   // Light gray (to match the primary background)
+        secondary: "#DADCE0"
     }
 }
 
@@ -19,6 +23,10 @@ export const darkColorPallete = {
     background: {
         primary: "#272727",
         secondary: "#1E1E1E",
+    },
+    divider: {
+        primary: "#3D3D3D",
+        secondary: "#333333"
     }
 }
 
@@ -113,7 +121,5 @@ export default {
     globalStyle: {},
     colors: ThemeColors,
     typography: ThemeTypography,
-    interfaces: {
-
-    }
+    interfaces: {}
 } as ThemeOptionInput

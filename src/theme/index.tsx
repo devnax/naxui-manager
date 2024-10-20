@@ -7,7 +7,10 @@ import vars from "./vars"
 export * from './types'
 
 const ThemeFactory = new Map<string, ThemeOptions>()
-const ThemeContex = React.createContext("light")
+const ThemeContex = React.createContext({
+    theme: "light",
+    onThemeChange: (_tname: string) => { }
+})
 
 export const mergeObject = (a: ObjectType, b: ObjectType) => {
     a = { ...a }
@@ -27,7 +30,7 @@ export const getTheme = (theme: string) => ThemeFactory.get(theme)
 
 const createColor = (theme: ThemeOptions, name: keyof ThemeColor) => {
     let color = theme.colors[name]
-    let { primary, secondary } = color
+    let { primary, secondary } = color as any
     let text = (color as any).text || theme.colors.text.primary
     let _alpha = alpha(primary, .1)
 
@@ -40,17 +43,17 @@ const createColor = (theme: ThemeOptions, name: keyof ThemeColor) => {
                 bgcolor: "transparent",
                 color: isBag(text, primary),
                 border: 1,
-                borderColor: isBag(alpha(secondary, .6), alpha(primary, .4)),
+                borderColor: isBag("divider.secondary", alpha(primary, .4)),
                 hover: {
-                    bgcolor: isBag(secondary, _alpha),
                     color: isBag(text, primary),
+                    borderColor: isBag("divider", alpha(primary, .8)),
                 }
             },
             fill: {
                 bgcolor: isBag(secondary, primary),
                 color: text,
                 hover: {
-                    bgcolor: isBag(alpha(secondary, .8), secondary),
+                    bgcolor: isBag(alpha(secondary, .6), secondary),
                     color: text,
                 }
             },
@@ -58,7 +61,7 @@ const createColor = (theme: ThemeOptions, name: keyof ThemeColor) => {
                 bgcolor: "transparent",
                 color: isBag(text, primary),
                 hover: {
-                    bgcolor: isBag(alpha(secondary, .8), alpha(primary, .18)),
+                    bgcolor: isBag(alpha(secondary, .6), alpha(primary, .1)),
                     color: isBag(text, primary),
                 }
             },
@@ -66,7 +69,7 @@ const createColor = (theme: ThemeOptions, name: keyof ThemeColor) => {
                 bgcolor: isBag(alpha(secondary, .5), alpha(primary, .1)),
                 color: isBag(text, primary),
                 hover: {
-                    bgcolor: isBag(alpha(secondary, .8), alpha(primary, .18)),
+                    bgcolor: isBag(alpha(secondary, .8), alpha(primary, .15)),
                     color: isBag(text, primary),
                 }
             }
@@ -104,23 +107,22 @@ export const createTheme = (name: string, options: ThemeOptionInput, darkMode?: 
 }
 
 export const useTheme = (): ThemeOptions => {
-    return ThemeFactory.get(React.useContext(ThemeContex) || "light") as ThemeOptions
+    const ctx = React.useContext(ThemeContex)
+    const t = ThemeFactory.get(ctx.theme) as ThemeOptions
+    t.change = (tname: string) => ctx.onThemeChange(tname)
+    return t
 }
 
-createTheme("light", {
-    colors: lightColorPallete
-})
-
-createTheme("dark", {
-    colors: darkColorPallete
-})
+createTheme("light", { colors: lightColorPallete })
+createTheme("dark", { colors: darkColorPallete })
 
 export type ThemeProviderProps<T extends TagComponentType = 'div'> = TagProps<T> & {
     theme: string;
     resetCss?: boolean;
+    onThemeChange?: (theme: string) => void
 }
 
-export const ThemeProvider = ({ children, theme, resetCss, ...props }: ThemeProviderProps) => {
+export const ThemeProvider = ({ children, theme, resetCss, onThemeChange, ...props }: ThemeProviderProps) => {
     const THEME = ThemeFactory.get(theme) as ThemeOptions
     if (!THEME) throw new Error(`Invalid theme name provided: ${theme}`)
 
@@ -171,7 +173,12 @@ export const ThemeProvider = ({ children, theme, resetCss, ...props }: ThemeProv
     }, [theme])
 
     return (
-        <ThemeContex.Provider value={theme}>
+        <ThemeContex.Provider value={{
+            theme,
+            onThemeChange: (tname) => {
+                onThemeChange && onThemeChange(tname)
+            }
+        }}>
             <Tag
                 minHeight="100%"
                 bgcolor={THEME.colors.background.primary}

@@ -64,6 +64,10 @@ const vars = (theme: ThemeOptions) => {
         "--color-background-secondary": theme.colors.background.secondary,
         "--color-background-alpha": theme.colors.background.alpha,
 
+        "--color-divider": theme.colors.divider.primary,
+        "--color-divider-primary": theme.colors.divider.primary,
+        "--color-divider-secondary": theme.colors.divider.secondary,
+
         "--color-brand": theme.colors.brand.primary,
         "--color-brand-primary": theme.colors.brand.primary,
         "--color-brand-secondary": theme.colors.brand.secondary,

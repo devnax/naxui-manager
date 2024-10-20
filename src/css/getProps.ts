@@ -26,7 +26,7 @@ const getProps = (prop: string, value: string, _css: CSSProps) => {
             [`${prop}Width`]: value + 'px' + (important || ""),
         }
         if (!keys.includes(`${prop}Color`)) {
-            p[`${prop}Color`] = "background.secondary"
+            p[`${prop}Color`] = "divider"
         }
         if (!keys.includes(`${prop}Style`)) {
             p[`${prop}Style`] = "solid"
