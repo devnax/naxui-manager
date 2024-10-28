@@ -193,6 +193,7 @@ const NUI = () => {
                 }}
             >
                 <Button
+                    classNames={[{ a: true }, "assa"]}
                     onClick={() => {
                         setT(t === 'dark' ? "light" : "dark")
                     }}

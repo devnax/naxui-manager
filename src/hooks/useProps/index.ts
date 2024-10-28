@@ -27,7 +27,7 @@ export const useProps = <T extends TagComponentType = "div">(props: TagProps<T>,
             keys,
             cls: mergecls([
                 props.baseClass,
-                ...(props.classNames || []),
+                ...props.classNames || [],
                 Object.keys(_css).length ? css(_css, css_option) : "",
                 props.className
             ])

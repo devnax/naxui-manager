@@ -1,5 +1,5 @@
 {
-    "version": "1.8.7",
+    "version": "1.8.8",
     "license": "MIT",
     "name": "naxui-manager",
     "author": "Naxrul Ahmed",
@@ -38,6 +38,6 @@
         "typescript": "^5.5.4"
     },
     "dependencies": {
-        "naxcss": "^2.5.4"
+        "naxcss": "^2.5.5"
     }
 }
