@@ -17,10 +17,10 @@ export type ButtonProps<T extends TagComponentType = 'button'> = Omit<TagProps<T
 const _Button = <T extends TagComponentType = 'button'>({ children, ...props }: ButtonProps<T>, ref: React.Ref<any>) => {
     const theme = useTheme()
 
-    let { variant, color, startIcon, endIcon, size, loading, ...rest } = useInterface<ButtonProps>("Button", {
+    let [{ variant, color, startIcon, endIcon, size, loading, ...rest }] = useInterface<any>("Button", props, {
         loading: false,
         size: "medium"
-    }, props as any)
+    } as any)
 
     rest.sx = (rest as any).sx || {};
     size = size ?? "medium"

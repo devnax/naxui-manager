@@ -196,7 +196,7 @@ const NUI = () => {
                     onClick={() => {
                         setT(t === 'dark' ? "light" : "dark")
                     }}
-                    variant="background"
+                    variant="accent"
                     color="outline"
                 >Change</Button>
                 <Tag
@@ -216,7 +216,7 @@ const NUI = () => {
                         width={100}
                         height={100}
                         border={1}
-                        borderColor="divider.secondary"
+                        borderColor="divider"
                     />
                     <Button
                         onClick={() => {
@@ -265,7 +265,7 @@ const NUI = () => {
                             type="grow"
                         /> */}
                     </Tag>
-                    <Tag
+                    {/* <Tag
                         flexBox
                         flexRow
                         flexWrap="wrap"
@@ -276,7 +276,7 @@ const NUI = () => {
                                 return <Tag width={100} height={100} radius={1} shadow={idx + 1} ></Tag>
                             })
                         }
-                    </Tag>
+                    </Tag> */}
                 </Tag>
 
 

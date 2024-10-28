@@ -43,7 +43,7 @@ const createColor = (theme: ThemeOptions, name: keyof ThemeColor) => {
                 bgcolor: "transparent",
                 color: isBag(text, primary),
                 border: 1,
-                borderColor: isBag("divider.secondary", alpha(primary, .4)),
+                borderColor: isBag("divider", alpha(primary, .4)),
                 hover: {
                     color: isBag(text, primary),
                     borderColor: isBag("divider", alpha(primary, .8)),

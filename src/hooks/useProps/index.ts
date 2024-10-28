@@ -2,72 +2,44 @@ import * as React from 'react';
 import { OptionsProps, classNames as mergecls } from 'naxcss';
 import { css } from '../../css';
 import { CSS_PROP_LIST } from './parceProps';
-import { CSSPropAsAttr } from './types'
-import { mergeObject } from '../../theme';
+import { TagComponentType, TagProps } from '../../Tag';
 export * from './types'
 
+export const useProps = <T extends TagComponentType = "div">(props: TagProps<T>, css_option?: OptionsProps): TagProps<T> => {
 
-export const useProps = (props: CSSPropAsAttr, css_option?: OptionsProps) => {
-
-    let format = React.useMemo(() => {
-        let sx, hover, baseClass: any, classNames: any;
-
-        if (props.sx) {
-            sx = props.sx;
-            delete props.sx
-        }
-        if (props.hover) {
-            hover = props.hover;
-            delete props.hover
-        }
-        if (props.baseClass) {
-            baseClass = props.baseClass;
-            delete props.baseClass
-        }
-        if (props.classNames) {
-            classNames = props.classNames;
-            delete props.classNames
-        }
-
-        let _css: any = {}
-        let propKeys: any = []
+    let f = React.useMemo(() => {
+        let _css: any = props.sx || {}
+        let keys: any = []
 
         for (let prop in props) {
-            if (CSS_PROP_LIST.includes(prop)) {
+            if (prop === 'sx' || prop === 'baseClass' || prop === 'classNames') {
+                continue;
+            } else if (prop === 'hover') {
+                _css['&:hover'] = props.hover
+            } else if (CSS_PROP_LIST.includes(prop)) {
                 _css[prop] = (props as any)[prop]
             } else {
-                propKeys.push(prop)
+                keys.push(prop)
             }
         }
 
-        _css = sx ? mergeObject(_css, sx) : _css
-
-        if (hover) {
-            _css['&:hover'] = hover
-        }
-
-        let classname = "";
-
-        if (Object.keys(_css).length) {
-            let cls: string = css(_css, css_option)
-            classname = mergecls(baseClass as any, ...(classNames || []), cls, (props as any).className)
-        } else {
-            classname = mergecls(baseClass as any, ...(classNames || []), (props as any).className)
-        }
         return {
-            classname,
-            propKeys
+            keys,
+            cls: mergecls([
+                props.baseClass,
+                ...(props.classNames || []),
+                Object.keys(_css).length ? css(_css, css_option) : "",
+                props.className
+            ])
         }
     }, [JSON.stringify(props)]);
 
     const _props: any = {};
-    if (format) {
-        for (let prop of format.propKeys) {
-            _props[prop] = (props as any)[prop]
-        }
-        if (format.classname) {
-            _props.className = format.classname
-        }
+    for (let prop of f.keys) {
+        _props[prop] = (props as any)[prop]
+    }
+    if (f.cls) {
+        _props.className = f.cls
     }
     return _props
 }
