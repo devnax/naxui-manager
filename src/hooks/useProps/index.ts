@@ -8,15 +8,20 @@ export * from './types'
 export const useProps = <T extends TagComponentType = "div">(props: TagProps<T>, css_option?: OptionsProps): TagProps<T> => {
 
     let f = React.useMemo(() => {
-        let _css: any = props.sx || {}
+        let _css: any = {}
         let keys: any = []
 
         for (let prop in props) {
-            if (prop === 'sx' || prop === 'baseClass' || prop === 'classNames') {
+            if (prop === 'baseClass' || prop === 'classNames') {
                 continue;
+            } else if (prop === 'sx') {
+                _css = {
+                    ..._css,
+                    ...(props as any).sx
+                }
             } else if (prop === 'hover') {
                 _css['&:hover'] = props.hover
-            } else if (CSS_PROP_LIST.includes(prop)) {
+            } else if (CSS_PROP_LIST[prop]) {
                 _css[prop] = (props as any)[prop]
             } else {
                 keys.push(prop)
