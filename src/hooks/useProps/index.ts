@@ -8,11 +8,11 @@ export * from './types'
 export const useProps = <T extends TagComponentType = "div">(props: TagPropsRoot<T>, css_option?: OptionsProps): TagProps<T> => {
 
     let f = React.useMemo(() => {
-        let _css: any = props.defaultSx || {}
+        let _css: any = props.sxr || {}
         let keys: any = []
 
         for (let prop in props) {
-            if (prop === 'defaultSx' || prop === 'baseClass' || prop === 'classNames') {
+            if (prop === 'sxr' || prop === 'baseClass' || prop === 'classNames') {
                 continue;
             } else if (prop === 'sx') {
                 _css = {

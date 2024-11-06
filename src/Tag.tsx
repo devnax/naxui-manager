@@ -10,7 +10,7 @@ export type TagProps<T extends TagComponentType = 'div'> = Omit<React.HTMLProps<
 } & CSSPropAsAttr
 
 export type TagPropsRoot<T extends TagComponentType = 'div'> = TagProps<T> & {
-    defaultSx?: CSSProps
+    sxr?: CSSProps
 }
 
 const Tag = <T extends TagComponentType = 'div'>({ component, children, ...rest }: TagPropsRoot<T>, ref: React.Ref<any>) => {
