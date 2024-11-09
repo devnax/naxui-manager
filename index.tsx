@@ -137,25 +137,43 @@ const List = () => {
 }
 
 const Trans = ({ open }) => {
-    const { classname, state } = useTransition(open, {
+    const [variant, setVariant] = React.useState<any>("fadeDown")
+    const { classname } = useTransition(open, {
         onFinish: (t) => {
         },
         onStart: (t) => {
         },
-        variant: "fadeDown"
+        variant
     })
     return (
-        <Tag
-            display={state === 'closed' ? "none" : "inherit"}
-            color="brand.text"
-            width={100}
-            height={100}
-            radius={1}
-            bgcolor="brand.primary"
-            className={classname}
-            shadow={1}
-        >
-            <Tag color="brand.text" p={2}>Hello</Tag>
+        <Tag >
+            <Button
+                onClick={() => {
+                    setVariant(variant === "fadeDown" ? {
+                        from: {
+                            transform: `translateX(20px)`,
+                            opacity: 0
+                        },
+                        to: {
+                            transform: `translateX(100px)`,
+                            opacity: 1
+                        }
+                    } : "fadeDown")
+                }}
+                mb={2}
+            >Change Variant</Button>
+            <Tag
+                // display={state === 'closed' ? "none" : "inherit"}
+                color="brand.text"
+                width={100}
+                height={100}
+                radius={1}
+                bgcolor="brand.primary"
+                className={classname}
+                shadow={1}
+            >
+                <Tag color="brand.text" p={2}>Hello</Tag>
+            </Tag>
         </Tag>
     )
 }

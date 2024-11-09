@@ -65,6 +65,14 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
     }, [open])
 
     useEffect(() => {
+        if (initial) {
+            if (open) {
+                setCss((variant as any).to)
+            }
+        }
+    }, [JSON.stringify(variant)])
+
+    useEffect(() => {
         if (!initial) {
             if (open) {
                 setCss({ ...(variant as any).from, transition: "all 0s", visibility: "hidden" })
@@ -102,7 +110,6 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
 
             setTimeout(() => setInitial(true), 100);
         } else {
-
             if (open) {
                 setCss((variant as any).to)
             } else {
