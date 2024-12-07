@@ -27,6 +27,8 @@ export const CSS_PROP_LIST: any = {
     disabled: true,
     spacing: true,
 
+    gradient: true,
+
     // CSS Props
     alignContent: true,
     alignItems: true,

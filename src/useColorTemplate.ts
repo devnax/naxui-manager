@@ -1,4 +1,4 @@
-import { useTheme } from "../theme"
+import { useTheme } from "./theme"
 export type useColorTemplateColors = "default" | "brand" | "accent" | "info" | "success" | "warning" | "danger"
 export type useColorTemplateType = "fill" | "outline" | "text" | "alpha"
 

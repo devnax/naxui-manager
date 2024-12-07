@@ -3,8 +3,8 @@ import { ThemeOptions } from '../theme';
 import { ColorsRefTypes, BreakpointKeys, TypographyRefTypes, } from '../theme/types';
 
 export type FN = (theme: ThemeOptions) => string | number
-export type CSSBreakpointType = { [key in BreakpointKeys]: string | number | FN }
-export type CSSValueType<T extends keyof CSS.Properties> = CSS.Properties[T] | Partial<CSSBreakpointType> | number | FN
+export type CSSBreakpointType = { [key in BreakpointKeys]: string | number }
+export type CSSValueType<T extends keyof CSS.Properties> = CSS.Properties[T] | Partial<CSSBreakpointType> | number
 
 export type AliasesTypes = {
     bgcolor?: CSSValueType<'background'> | ColorsRefTypes;

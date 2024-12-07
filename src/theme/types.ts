@@ -83,7 +83,7 @@ export interface ThemeOptions {
     rtl: boolean;
     globalStyle: GlobalCSSType<AliasesTypes>,
     breakpoints: { [key in BreakpointKeys]: number };
-    shadow: (num: number) => string;
+    shadow: string[];
     interfaces: { [name: string]: <P extends object>(defaultProps: P, theme: ThemeOptions) => P };
     colors: ThemeColor;
     typography: ThemeTypographyType;

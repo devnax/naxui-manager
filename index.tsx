@@ -1,10 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { getTheme, ThemeProvider, useTheme } from './src/theme'
-import { adjustColor, AliasesTypes, alpha, Tag, useProps, useTransition } from './src';
+import { adjustColor, AliasesTypes, alpha, Tag, useTransition } from './src';
 import Button from './Button';
 import { css } from './src/css';
 import { CSSProps, formatProp } from 'naxcss';
+import useBreakpoinProps from './src/breakpoint/useBreakpointProps';
 
 const count = 1
 
@@ -178,6 +179,27 @@ const Trans = ({ open }) => {
     )
 }
 
+const Breakpoin = ({ onClick }: any) => {
+    const [s, dispatch] = React.useState("red")
+    const props = useBreakpoinProps({
+        onClick,
+        color: {
+            xs: s,
+            md: "green",
+            sm: "yellow"
+        }
+    })
+
+    return (
+        <Tag
+            {...props}
+            onClick={() => dispatch(s === 'red' ? "green" : "red")}
+        >
+            Click me
+        </Tag>
+    )
+}
+
 const NUI = () => {
     const [_in, setIn] = React.useState(false)
     const [t, setT] = React.useState("light")
@@ -202,63 +224,88 @@ const NUI = () => {
     // })
 
     return (
-        <Tag>
-            <ThemeProvider
-                theme={t}
-                height="100vh"
-                onThemeChange={(t) => {
-                    setT(t)
-                }}
+        <ThemeProvider
+            theme={t}
+            height="100vh"
+            onChange={(t) => {
+                setT(t)
+            }}
+        >
+            <Tag
+                flexBox
+                flexRow
+                gap={3}
+                m={2}
+                flexWrap="wrap"
             >
+                {
+                    Array(10).fill(0).map((v, idx) => {
+                        return <Tag
+                            key={idx}
+                            width={100}
+                            height={100}
+                            shadow={idx}
+                            radius={1}
+                        />
+                    })
+                }
+            </Tag>
+
+            <Breakpoin
+                onClick={{
+                    xs: () => alert("xs"),
+                    md: () => alert("md"),
+                }}
+            />
+            <Button
+                classNames={[{ a: true }, "assa"]}
+                onClick={() => {
+                    setT(t === 'dark' ? "light" : "dark")
+                }}
+                variant="accent"
+                color="outline"
+            >Change</Button>
+            <Tag
+                flexBox
+                flexColumn
+                gap={3}
+                p={3}
+            >
+                <Tag
+                    m={2}
+                    width={100}
+                    height={100}
+                    border={1}
+                />
+                <Tag
+                    m={2}
+                    width={100}
+                    height={100}
+                    border={1}
+                    borderColor="divider"
+                />
                 <Button
-                    classNames={[{ a: true }, "assa"]}
                     onClick={() => {
-                        setT(t === 'dark' ? "light" : "dark")
+                        setIn(!_in)
                     }}
-                    variant="accent"
-                    color="outline"
-                >Change</Button>
+                >Toggle</Button>
+
                 <Tag
                     flexBox
-                    flexColumn
-                    gap={3}
-                    p={3}
-                >
-                    <Tag
-                        m={2}
-                        width={100}
-                        height={100}
-                        border={1}
-                    />
-                    <Tag
-                        m={2}
-                        width={100}
-                        height={100}
-                        border={1}
-                        borderColor="divider"
-                    />
-                    <Button
-                        onClick={() => {
-                            setIn(!_in)
-                        }}
-                    >Toggle</Button>
-
-                    <Tag
-                        flexBox
-                        gap={2}
-                        sx={{
-                            '& .trans-closed': {
-                                display: "none"
-                            }
-                        }}
-                    >
-                        <Trans open={_in} />
-
-                        {
-                            // _in && <Trans open={true} />
+                    gap={2}
+                    sx={{
+                        '& .trans-closed': {
+                            display: "none"
                         }
+                    }}
+                >
+                    {/* <Trans open={_in} /> */}
 
-                        {/* <Tag
+                    {
+                        // _in && <Trans open={true} />
+                    }
+
+                    {/* <Tag
                             color="brand.text"
                             bgcolor="brand.primary"
                             className={cls}
@@ -267,11 +314,11 @@ const NUI = () => {
                             <Tag color="brand.text" p={2}>Hello</Tag>
                         </Tag> */}
 
-                        {/* <Trans
+                    {/* <Trans
                             open={_in}
                             type="zoom"
                         /> */}
-                        {/* <Trans
+                    {/* <Trans
                             open={_in}
                             type="fadeUp"
                         />
@@ -283,8 +330,8 @@ const NUI = () => {
                             open={_in}
                             type="grow"
                         /> */}
-                    </Tag>
-                    {/* <Tag
+                </Tag>
+                {/* <Tag
                         flexBox
                         flexRow
                         flexWrap="wrap"
@@ -296,10 +343,10 @@ const NUI = () => {
                             })
                         }
                     </Tag> */}
-                </Tag>
+            </Tag>
 
 
-                {/* <Tag
+            {/* <Tag
                     position="fixed"
                     top={0}
                     left={0}
@@ -309,76 +356,73 @@ const NUI = () => {
                     bgcolor={theme?.colors.background.template.fill.bgcolor}
                 /> */}
 
-                <Tag
-                    height={60}
-                    bgcolor="background.primary"
-                    flexBox
-                    alignItems="center"
-                    px={2}
-                    borderBottom={1}
-                    borderBottomColor="background.secondary"
-                >
+            <Tag
+                height={60}
+                bgcolor="background.primary"
+                flexBox
+                alignItems="center"
+                px={2}
+                borderBottom={1}
+                borderBottomColor="background.secondary"
+            >
 
-                    <Button
-                        variant="background"
-                        color="text"
-                        hover={{ ...theme?.colors.brand.template.text.hover }}
-                    >Home</Button>
-                    <Button
-                        variant="background"
-                        color="text"
-                        hover={{ ...theme?.colors.brand.template.text.hover }}
+                <Button
+                    variant="background"
+                    color="text"
+                    hover={{ ...theme?.colors.brand.template.text.hover }}
+                >Home</Button>
+                <Button
+                    variant="background"
+                    color="text"
+                    hover={{ ...theme?.colors.brand.template.text.hover }}
 
-                    >About</Button>
-                    <Button
-                        variant="background"
-                        color="text"
-                        hover={{ ...theme?.colors.brand.template.text.hover }}
+                >About</Button>
+                <Button
+                    variant="background"
+                    color="text"
+                    hover={{ ...theme?.colors.brand.template.text.hover }}
 
-                    >Services</Button>
-                </Tag>
+                >Services</Button>
+            </Tag>
+            <Tag
+                bgcolor="background"
+                flexBox
+                flexColumn
+                gap={1}
+                p={1}
+            >
                 <Tag
                     bgcolor="background"
                     flexBox
                     flexColumn
-                    gap={1}
-                    p={1}
                 >
+                    {/* <List /> */}
 
-
-                    <Tag
-                        bgcolor="background"
-                        flexBox
-                        flexColumn
-                    >
-                        <List />
-
-                        <VariantButtons
-                            variant="background"
-                        />
-                        <VariantButtons
-                            variant="brand"
-                        />
-                        <VariantButtons
-                            variant="accent"
-                        />
-                        <VariantButtons
-                            variant="success"
-                        />
-                        <VariantButtons
-                            variant="info"
-                        />
-                        <VariantButtons
-                            variant="warning"
-                        />
-                        <VariantButtons
-                            variant="danger"
-                        />
-                    </Tag>
+                    <VariantButtons
+                        variant="background"
+                    />
+                    <VariantButtons
+                        variant="brand"
+                    />
+                    <VariantButtons
+                        variant="accent"
+                    />
+                    <VariantButtons
+                        variant="success"
+                    />
+                    <VariantButtons
+                        variant="info"
+                    />
+                    <VariantButtons
+                        variant="warning"
+                    />
+                    <VariantButtons
+                        variant="danger"
+                    />
                 </Tag>
-            </ThemeProvider>
+            </Tag>
+        </ThemeProvider>
 
-        </Tag>
     )
 }
 

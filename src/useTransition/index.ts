@@ -1,9 +1,9 @@
-import { css } from '../../css';
+import { css } from '../css';
 import { useId, useState, useEffect, useMemo } from 'react'
 import { animationEases } from '../useAnimation'
-import { AliasesTypes } from '../../css/types'
+import { AliasesTypes } from '../css/types'
 import { CSSProps, formatProp } from 'naxcss';
-import { useTheme } from '../../theme';
+import { useTheme } from '../theme';
 import * as predefinedVariant from './variants'
 export type UseTransitionVariantTypes = keyof typeof predefinedVariant
 

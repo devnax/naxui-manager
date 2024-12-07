@@ -3,9 +3,7 @@ import { ThemeOptions } from "./types";
 const vars = (theme: ThemeOptions) => {
 
     const shadows: any = {}
-    for (let i = 1; i <= 20; i++) {
-        shadows[`--shadow-${i}`] = theme.shadow(i)
-    }
+    theme.shadow.forEach((s, i) => shadows[`--shadow-${i}`] = s)
 
     return {
         "--bp-xs": theme.breakpoints.xs,

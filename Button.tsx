@@ -14,16 +14,15 @@ export type ButtonProps<T extends TagComponentType = 'button'> = Omit<TagProps<T
 }
 
 
-const _Button = <T extends TagComponentType = 'button'>({ children, ...props }: ButtonProps<T>, ref: React.Ref<any>) => {
+const _Button = <T extends TagComponentType = 'button'>({ children, variant, color, startIcon, endIcon, size, loading, ...rest }: ButtonProps<T>, ref: React.Ref<any>) => {
     const theme = useTheme()
 
-    let [{ variant, color, startIcon, endIcon, size, loading, ...rest }] = useInterface<any>("Button", props, {
-        loading: false,
-        size: "medium"
-    } as any)
+    // let [{ variant, color, startIcon, endIcon, size, loading, ...rest }] = useInterface<any>("Button", props, {
+    //     loading: false,
+    //     size: "medium"
+    // } as any)
 
     rest.sx = (rest as any).sx || {};
-    size = size ?? "medium"
 
     const sizes = {
         small: {
@@ -60,17 +59,9 @@ const _Button = <T extends TagComponentType = 'button'>({ children, ...props }: 
             position="relative"
             overflow="hidden"
             transition=".2s"
-            {...(sizes[size] || {})}
             {...rest}
-            {...theme.colors[variant]?.template[color]}
-            hover={{
-                ...theme.colors[variant]?.template[color].hover,
-                ...((rest as any).hover || {})
-            }}
-            disabled={loading ?? rest.disabled ?? false}
             ref={ref}
         >
-
 
             {startIcon && <Tag component='span' mr={1} ml={-.5} display="inline-block">{startIcon}</Tag>}
             {children}

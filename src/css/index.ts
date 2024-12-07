@@ -19,6 +19,7 @@ export {
 
 export const css_options = (options?: OptionsProps) => {
     return {
+        // classPrefix: "nui",
         breakpoints: {
             xs: 0,
             sm: 600,

@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { useTheme } from "../theme"
+import { useTheme } from "./theme"
 
 const useInterface = <P extends object>(name: string, userPorps: P, defaultProps: P) => {
     const theme = useTheme()

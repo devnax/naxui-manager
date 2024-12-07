@@ -4,12 +4,14 @@ import defaultThemeOption, { lightColorPallete, darkColorPallete } from './theme
 import { alpha, css_options, globalCss } from "../css"
 import Tag, { TagComponentType, TagProps } from "../Tag"
 import vars from "./vars"
+import { BreakpointProvider } from "../breakpoint"
 export * from './types'
 
 const ThemeFactory = new Map<string, ThemeOptions>()
+
 const ThemeContex = React.createContext({
     theme: "light",
-    onThemeChange: (_tname: string) => { }
+    onChange: (_tname: string) => { }
 })
 
 export const mergeObject = (a: ObjectType, b: ObjectType) => {
@@ -109,7 +111,7 @@ export const createTheme = (name: string, options: ThemeOptionInput, darkMode?: 
 export const useTheme = (): ThemeOptions => {
     const ctx = React.useContext(ThemeContex)
     const t = ThemeFactory.get(ctx.theme) as ThemeOptions
-    t.change = (tname: string) => ctx.onThemeChange(tname)
+    t.change = (tname: string) => ctx.onChange(tname)
     return t
 }
 
@@ -119,10 +121,14 @@ createTheme("dark", { colors: darkColorPallete })
 export type ThemeProviderProps<T extends TagComponentType = 'div'> = TagProps<T> & {
     theme: string;
     resetCss?: boolean;
-    onThemeChange?: (theme: string) => void
+    renderIsRoot?: React.ReactElement;
+    onChange?: (theme: string) => void
 }
 
-export const ThemeProvider = ({ children, theme, resetCss, onThemeChange, ...props }: ThemeProviderProps) => {
+const providers: string[] = []
+
+export const ThemeProvider = ({ children, theme, resetCss, onChange, renderIsRoot, ...props }: ThemeProviderProps) => {
+    const id = React.useId()
     const THEME = ThemeFactory.get(theme) as ThemeOptions
     if (!THEME) throw new Error(`Invalid theme name provided: ${theme}`)
 
@@ -132,7 +138,6 @@ export const ThemeProvider = ({ children, theme, resetCss, onThemeChange, ...pro
         if (!!Object.keys(THEME.globalStyle).length) {
             globalCss(`${theme}-global-css`, THEME.globalStyle)
         }
-
         resetCss && globalCss("reset-css", {
             "*": {
                 m: 0,
@@ -167,31 +172,52 @@ export const ThemeProvider = ({ children, theme, resetCss, onThemeChange, ...pro
             }
         })
 
-        globalCss(`${theme}-theme-root`, {
-            [`.${theme}-theme-root`]: vars(THEME)
+        globalCss(`nui-${theme}-theme-root`, {
+            [`.nui-${theme}-theme-root`]: vars(THEME)
         })
     }, [theme])
 
+    React.useMemo(() => {
+        providers.push(id)
+    }, [])
+
+    React.useEffect(() => {
+        return () => {
+            providers.splice(providers.indexOf(id), 1)
+        }
+    }, [])
+
+    const isRoot = id === providers[0]
+
+    let content = (
+        <Tag
+            minHeight="100%"
+            bgcolor={THEME.colors.background.primary}
+            fontFamily={THEME.typography.fontFamily}
+            fontSize={THEME.typography.text.fontSize}
+            fontWeight={THEME.typography.text.fontWeight}
+            lineHeight={THEME.typography.text.lineHeight}
+            {...props}
+            baseClass={`${theme}-theme-root`}
+            direction={THEME.rtl ? "rtl" : "ltr"}
+        >
+            {children}
+        </Tag>
+    )
+
     return (
-        <ThemeContex.Provider value={{
-            theme,
-            onThemeChange: (tname) => {
-                onThemeChange && onThemeChange(tname)
+        <ThemeContex.Provider
+            value={{
+                theme,
+                onChange: (tname: string) => onChange && onChange(tname)
+            }}
+        >
+            {
+                isRoot ? <BreakpointProvider>
+                    {content}
+                    {renderIsRoot}
+                </BreakpointProvider> : content
             }
-        }}>
-            <Tag
-                minHeight="100%"
-                bgcolor={THEME.colors.background.primary}
-                fontFamily={THEME.typography.fontFamily}
-                fontSize={THEME.typography.text.fontSize}
-                fontWeight={THEME.typography.text.fontWeight}
-                lineHeight={THEME.typography.text.lineHeight}
-                {...props}
-                baseClass={`${theme}-theme-root`}
-                direction={THEME.rtl ? "rtl" : "ltr"}
-            >
-                {children}
-            </Tag>
         </ThemeContex.Provider>
     )
 }

@@ -1,34 +1,33 @@
 import Tag, { TagProps, TagComponentType } from './Tag'
-import isWindow from './hooks/isWindow'
-import useMediaScreen from './hooks/useMediaScreen'
-import useWindowResize from './hooks/useWindowResize'
-import serverStyleTags from './serverStyleTags'
-import useAnimation from './hooks/useAnimation'
-import useTransition from './hooks/useTransition'
-import useInterface from './hooks/useInterface'
-import useColorTemplate from './hooks/useColorTemplate'
+import useTagProps from './Tag/useTagProps'
+import useAnimation from './useAnimation'
+import useTransition from './useTransition'
+import useColorTemplate from './useColorTemplate'
+import useBreakpoint from './breakpoint/useBreakpoint'
+import useBreakpointProps from './breakpoint/useBreakpointProps'
+import ServerStyleTags from './ServerStyleTags'
+import isWindow from './isWindow'
 
 export * from './css'
-export * from "./hooks/useProps"
 export * from "./theme"
 export * from './css/types'
-export * from './hooks/useProps/types'
+export * from './Tag/types'
 export * from './theme/types'
-export * from './hooks/useColorTemplate'
-export * from './hooks/useAnimation'
-export * from './hooks/useTransition'
+export * from './useColorTemplate'
+export * from './useAnimation'
+export * from './useTransition'
 
 
 export {
     Tag,
+    useTagProps,
     TagProps,
     TagComponentType,
-    isWindow,
-    useMediaScreen,
-    useWindowResize,
     useAnimation,
     useTransition,
-    useInterface,
     useColorTemplate,
-    serverStyleTags
+    ServerStyleTags,
+    useBreakpoint,
+    useBreakpointProps,
+    isWindow
 }

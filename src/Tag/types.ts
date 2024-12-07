@@ -1,7 +1,7 @@
 import * as CSS from 'csstype'
 import { CSSProps, classNamesTypes } from 'naxcss';
-import { AliasesTypes, CSSValueType } from "../../css/types"
-import { ColorsRefTypes, BreakpointKeys, TypographyRefTypes } from '../../theme/types';
+import { AliasesTypes, CSSValueType } from "../css/types"
+import { ColorsRefTypes, BreakpointKeys, TypographyRefTypes } from '../theme/types';
 
 interface CSSProperties {
     alignContent: CSSValueType<"alignContent">;
@@ -168,4 +168,4 @@ export type CSSPropAsAttr = Partial<CSSProperties> & AliasesTypes & {
     hover?: CSSProps;
     disabled?: boolean;
     classNames?: classNamesTypes[];
-} 
+}
