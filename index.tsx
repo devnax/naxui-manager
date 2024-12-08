@@ -181,7 +181,7 @@ const Trans = ({ open }) => {
 
 const Breakpoin = ({ onClick }: any) => {
     const [s, dispatch] = React.useState("red")
-    const props = useBreakpoinProps({
+    const props = useBreakpoinProps<any>({
         onClick,
         color: {
             xs: s,

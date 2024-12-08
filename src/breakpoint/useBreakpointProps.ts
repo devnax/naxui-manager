@@ -6,7 +6,7 @@ export type useBreakpoinPropsType<P> = P | {
    [key in BreakpointKeys]: P
 }
 
-const useBreakpoinProps = (props: object) => {
+const useBreakpoinProps = <P extends object>(props: useBreakpoinPropsType<P>): useBreakpoinPropsType<P> => {
    const bpoint = useBreakpoint()
 
    let format: any = React.useMemo(() => {

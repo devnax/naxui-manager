@@ -1,5 +1,5 @@
 import { CSSProps } from 'naxcss'
-import { keyframes, css } from '..'
+import { keyframes, css } from './css'
 import { useState, useEffect } from 'react';
 
 
