@@ -7,6 +7,7 @@ import useBreakpoint from './breakpoint/useBreakpoint'
 import useBreakpointProps from './breakpoint/useBreakpointProps'
 import ServerStyleTags from './ServerStyleTags'
 import isWindow from './isWindow'
+import useInterface from './useInterface'
 
 export * from './css'
 export * from "./theme"
@@ -29,5 +30,6 @@ export {
     ServerStyleTags,
     useBreakpoint,
     useBreakpointProps,
-    isWindow
+    isWindow,
+    useInterface
 }
