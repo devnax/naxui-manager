@@ -19,6 +19,7 @@ export interface UseTransitionProps {
     easing?: keyof typeof animationEases;
     duration?: number;
     delay?: number;
+    initialTransition?: boolean;
     onStart?: (type: "startOpen" | "startClose") => void;
     onFinish?: (type: "finishedOpen" | "finishedClose") => void;
     onOpen?: () => void;
@@ -48,9 +49,10 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
 
     props = typeof props === "function" ? props(element as any) : props
 
-    let { hideable, variant, duration, delay, ease, easing, onFinish, onStart, onOpen, onOpened, onClose, onClosed, onState } = props as UseTransitionProps
+    let { initialTransition, hideable, variant, duration, delay, ease, easing, onFinish, onStart, onOpen, onOpened, onClose, onClosed, onState } = props as UseTransitionProps
     let _ease = ease || (animationEases as any)[easing as any] || animationEases.easeBounceOut
     duration ??= 400
+    initialTransition ??= true
     if (typeof variant === 'string') {
         variant = (predefinedVariant as any)[variant](element)
     }
@@ -75,7 +77,7 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
     useEffect(() => {
         if (!initial) {
             if (open) {
-                setCss({ ...(variant as any).from, transition: "all 0s", visibility: "hidden" })
+                initialTransition && setCss({ ...(variant as any).from, transition: "all 0s", visibility: "hidden" })
             } else {
                 setCss({ ...(variant as any).to, transition: "all 0s", visibility: "hidden" })
             }
@@ -128,7 +130,7 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
     if (hideable && transitionState === 'closed') {
         _.display = 'none!important'
     }
-    const cls = css(_, theme)
+    const cls = initialTransition ? css(_, theme) : (initial ? css(_, theme) : "")
 
     return {
         classname: cls + " " + id + " transition-" + (open ? "open" : "close") + " " + "transition-state-" + transitionState,

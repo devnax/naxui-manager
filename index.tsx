@@ -235,6 +235,7 @@ const NUI = () => {
                 setT(t)
             }}
         >
+            <Trans open={true} />
             {
                 Array(100).fill(0).map((v, idx) => {
                     return <Breakpoin
