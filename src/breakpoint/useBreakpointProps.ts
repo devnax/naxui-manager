@@ -3,7 +3,7 @@ import useBreakpoint from "./useBreakpoint"
 import { BreakpointKeys } from "../theme"
 
 export type useBreakpoinPropsType<P> = P | {
-   [key in BreakpointKeys]: P
+   [key in BreakpointKeys]?: P
 }
 
 

@@ -3,7 +3,6 @@ import { useId, useState, useEffect, useMemo } from 'react'
 import { animationEases } from '../useAnimation'
 import { AliasesTypes } from '../css/types'
 import { CSSProps, formatProp } from 'naxcss';
-import { useTheme } from '../theme';
 import * as predefinedVariant from './variants'
 export type UseTransitionVariantTypes = keyof typeof predefinedVariant
 
@@ -38,7 +37,6 @@ export type UseTransitionElementProps = {
 const useTransition = (open: boolean, props: UseTransitionProps | ((element: UseTransitionElementProps) => UseTransitionProps)) => {
 
     const id = "transition-" + useId().replace(/\:/gi, "")
-    const theme = useTheme()
     const [initial, setInitial] = useState(false)
 
     const [element, setElement] = useState<UseTransitionElementProps>({
@@ -130,7 +128,7 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
     if (hideable && transitionState === 'closed') {
         _.display = 'none!important'
     }
-    const cls = initialTransition ? css(_, theme) : (initial ? css(_, theme) : "")
+    const cls = initialTransition ? css(_) : (initial ? css(_) : css({ ..._, visibility: "hidden" }))
 
     return {
         classname: cls + " " + id + " transition-" + (open ? "open" : "close") + " " + "transition-state-" + transitionState,

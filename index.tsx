@@ -139,7 +139,9 @@ const List = () => {
 
 const Trans = ({ open }) => {
     const [variant, setVariant] = React.useState<any>("fadeDown")
-    const { classname } = useTransition(open, {
+    const [toggle, settoggle] = React.useState<any>(false)
+    const { classname } = useTransition(toggle, {
+        initialTransition: false,
         onFinish: (t) => {
         },
         onStart: (t) => {
@@ -148,6 +150,12 @@ const Trans = ({ open }) => {
     })
     return (
         <Tag >
+            <Button
+                onClick={() => {
+                    settoggle(!toggle)
+                }}
+                mb={2}
+            >Toggle</Button>
             <Button
                 onClick={() => {
                     setVariant(variant === "fadeDown" ? {
@@ -235,7 +243,7 @@ const NUI = () => {
                 setT(t)
             }}
         >
-            <Trans open={true} />
+            <Trans open={false} />
             {
                 Array(100).fill(0).map((v, idx) => {
                     return <Breakpoin
