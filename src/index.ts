@@ -4,7 +4,7 @@ import useAnimation from './useAnimation'
 import useTransition from './useTransition'
 import useColorTemplate from './useColorTemplate'
 import useBreakpoint from './breakpoint/useBreakpoint'
-import useBreakpointProps from './breakpoint/useBreakpointProps'
+import useBreakpointProps, { useBreakpointPropsType } from './breakpoint/useBreakpointProps'
 import ServerStyleTags from './ServerStyleTags'
 import isWindow from './isWindow'
 import useInterface from './useInterface'
@@ -30,6 +30,7 @@ export {
     ServerStyleTags,
     useBreakpoint,
     useBreakpointProps,
+    useBreakpointPropsType,
     isWindow,
     useInterface
 }

@@ -2,12 +2,12 @@ import React, { isValidElement } from "react"
 import useBreakpoint from "./useBreakpoint"
 import { BreakpointKeys } from "../theme"
 
-export type useBreakpoinPropsType<P> = P | {
+export type useBreakpointPropsType<P> = P | {
    [key in BreakpointKeys]?: P
 }
 
 
-const useBreakpoinProps = <P extends object>(props: useBreakpoinPropsType<P>): useBreakpoinPropsType<P> => {
+const useBreakpoinProps = <P extends object>(props: useBreakpointPropsType<P>): useBreakpointPropsType<P> => {
    const bpoint = useBreakpoint()
    const stringifiedElement = JSON.stringify(props, (key, value) => {
       if (key === '_owner' || key === '_store') {
