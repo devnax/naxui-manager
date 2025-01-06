@@ -6,7 +6,6 @@ import { CSSProps, formatProp } from 'naxcss';
 import * as predefinedVariant from './variants'
 export type UseTransitionVariantTypes = keyof typeof predefinedVariant
 
-
 export type UseTransitionState = "open" | "opened" | "close" | "closed"
 export interface UseTransitionProps {
     hideable?: boolean;
@@ -38,7 +37,6 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
 
     const id = "transition-" + useId().replace(/\:/gi, "")
     const [initial, setInitial] = useState(false)
-
     const [element, setElement] = useState<UseTransitionElementProps>({
         height: 0,
         width: 0,
@@ -65,10 +63,8 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
     }, [open])
 
     useEffect(() => {
-        if (initial) {
-            if (open) {
-                setCss((variant as any).to)
-            }
+        if (initial && open) {
+            setCss((variant as any).to)
         }
     }, [JSON.stringify(variant)])
 
@@ -79,10 +75,10 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
             } else {
                 setCss({ ...(variant as any).to, transition: "all 0s", visibility: "hidden" })
             }
-            const ele = document.querySelector(`.${id}`)
+            const ele: HTMLElement | null = document.querySelector(`.${id}`)
             if (ele) {
-                (ele as any).ontransitionstart = (ev: any) => {
-                    if (ev.propertyName === Object.keys(_css)[0]) {
+                ele.ontransitionstart = (e: any) => {
+                    if (e.propertyName === Object.keys(_css)[0]) {
                         const isOpen = Array.from(ele.classList).includes("transition-open")
                         onStart && onStart(isOpen ? "startOpen" : "startClose");
                         (onOpen && isOpen) && onOpen();
@@ -91,8 +87,8 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
                         setTransitionState(isOpen ? "open" : "close")
                     }
                 }
-                (ele as any).ontransitionend = (ev: any) => {
-                    if (ev.propertyName === Object.keys(_css)[0]) {
+                ele.ontransitionend = (e: any) => {
+                    if (e.propertyName === Object.keys(_css)[0]) {
                         const isOpen = Array.from(ele.classList).includes("transition-open")
                         onFinish && onFinish(isOpen ? "finishedOpen" : "finishedClose");
                         (onOpened && isOpen) && onOpened();
@@ -107,14 +103,9 @@ const useTransition = (open: boolean, props: UseTransitionProps | ((element: Use
                     rect: ele.getBoundingClientRect()
                 })
             }
-
             setTimeout(() => setInitial(true), 100);
         } else {
-            if (open) {
-                setCss((variant as any).to)
-            } else {
-                setCss((p: any) => p.visibility ? { ...(variant as any).from, transition: "all 0s" } : (variant as any).from)
-            }
+            open ? setCss((variant as any).to) : setCss((p: any) => p.visibility ? { ...(variant as any).from, transition: "all 0s" } : (variant as any).from)
         }
     }, [open, initial])
 

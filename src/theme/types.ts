@@ -87,7 +87,6 @@ export interface ThemeOptions {
     interfaces: { [name: string]: <P extends object>(defaultProps: P, theme: ThemeOptions) => P };
     colors: ThemeColor;
     typography: ThemeTypographyType;
-    change: (theme: string) => void
 }
 
 // Theme Input

@@ -1,6 +1,5 @@
 import * as CSS from 'csstype'
-import { ThemeOptions } from '../theme';
-import { ColorsRefTypes, BreakpointKeys, TypographyRefTypes, } from '../theme/types';
+import { ColorsRefTypes, BreakpointKeys, TypographyRefTypes, ThemeOptions, } from '../theme/types';
 
 export type FN = (theme: ThemeOptions) => string | number
 export type CSSBreakpointType = { [key in BreakpointKeys]: string | number }

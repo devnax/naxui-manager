@@ -1,5 +1,49 @@
 import { UseTransitionElementProps } from "."
 
+export const slideDown = (_arg: UseTransitionElementProps) => {
+    return {
+        from: {
+            transform: `translateY(-${_arg.height}px)`,
+        },
+        to: {
+            transform: `translateY(0)`,
+        }
+    }
+}
+
+export const slideUp = (_arg: UseTransitionElementProps) => {
+    return {
+        from: {
+            transform: `translateY(${_arg.height}px)`,
+        },
+        to: {
+            transform: `translateY(0)`,
+        }
+    }
+}
+
+export const slideRight = (_arg: UseTransitionElementProps) => {
+    return {
+        from: {
+            transform: `translateX(-${_arg.width}px)`,
+        },
+        to: {
+            transform: `translateX(0)`,
+        }
+    }
+}
+
+export const slideLeft = (_arg: UseTransitionElementProps) => {
+    return {
+        from: {
+            transform: `translateX(${_arg.width}px)`,
+        },
+        to: {
+            transform: `translateX(0)`,
+        }
+    }
+}
+
 export const fade = (_arg: UseTransitionElementProps) => {
     return {
         from: {
@@ -14,7 +58,7 @@ export const fade = (_arg: UseTransitionElementProps) => {
 export const fadeDown = (_arg: UseTransitionElementProps) => {
     return {
         from: {
-            transform: `translateY(-20px)`,
+            transform: `translateY(-30px)`,
             opacity: 0
         },
         to: {
@@ -27,7 +71,7 @@ export const fadeDown = (_arg: UseTransitionElementProps) => {
 export const fadeUp = (_arg: UseTransitionElementProps) => {
     return {
         from: {
-            transform: `translateY(20px)`,
+            transform: `translateY(30px)`,
             opacity: 0
         },
         to: {
@@ -40,7 +84,7 @@ export const fadeUp = (_arg: UseTransitionElementProps) => {
 export const fadeRight = (_arg: UseTransitionElementProps) => {
     return {
         from: {
-            transform: `translateX(-20px)`,
+            transform: `translateX(-30px)`,
             opacity: 0
         },
         to: {
@@ -53,7 +97,7 @@ export const fadeRight = (_arg: UseTransitionElementProps) => {
 export const fadeLeft = (_arg: UseTransitionElementProps) => {
     return {
         from: {
-            transform: `translateX(20px)`,
+            transform: `translateX(30px)`,
             opacity: 0
         },
         to: {
@@ -75,7 +119,6 @@ export const grow = (_arg: UseTransitionElementProps) => {
         }
     }
 }
-
 
 export const zoom = (_arg: UseTransitionElementProps) => {
     return {
@@ -110,7 +153,7 @@ export const collapsVerticle = (_arg: UseTransitionElementProps) => {
             overflow: "hidden"
         },
         to: {
-            height: (_arg?.height || "auto") + "px",
+            height: _arg?.height ? _arg?.height + "px" : "auto",
             overflow: "hidden"
         }
     }
@@ -124,7 +167,7 @@ export const collapsHorizental = (_arg: UseTransitionElementProps) => {
             overflow: "hidden"
         },
         to: {
-            width: (_arg?.width || "auto") + "px",
+            width: _arg?.width ? _arg?.width + "px" : "auto",
             overflow: "hidden"
         }
     }

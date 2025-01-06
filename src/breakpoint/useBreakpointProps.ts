@@ -1,6 +1,6 @@
 import React, { isValidElement } from "react"
 import useBreakpoint from "./useBreakpoint"
-import { BreakpointKeys } from "../theme"
+import { BreakpointKeys } from "../theme/types"
 
 export type useBreakpointPropsType<P> = P | {
    [key in BreakpointKeys]?: P

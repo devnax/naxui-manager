@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { classNames as mergecls } from 'naxcss';
 import { TagComponentType, TagProps, TagPropsRoot } from '.';
-import { CSS_PROP_LIST } from './parceProps';
+import cssPropList from './cssPropList';
 import { css } from '../css';
 
 const useTagProps = <T extends TagComponentType = "div">(props: TagPropsRoot<T>): TagProps<T> => {
@@ -20,7 +20,7 @@ const useTagProps = <T extends TagComponentType = "div">(props: TagPropsRoot<T>)
             }
          } else if (prop === 'hover') {
             _css['&:hover'] = props.hover
-         } else if (CSS_PROP_LIST[prop]) {
+         } else if (cssPropList[prop]) {
             _css[prop] = (props as any)[prop]
          } else {
             keys.push(prop)

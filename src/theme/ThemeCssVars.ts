@@ -1,6 +1,6 @@
 import { ThemeOptions } from "./types";
 
-const vars = (theme: ThemeOptions) => {
+const ThemeCssVars = (theme: ThemeOptions) => {
 
     const shadows: any = {}
     theme.shadow.forEach((s, i) => shadows[`--shadow-${i}`] = s)
@@ -104,4 +104,4 @@ const vars = (theme: ThemeOptions) => {
 }
 
 
-export default vars
+export default ThemeCssVars

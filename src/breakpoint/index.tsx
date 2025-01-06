@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from "react";
 import { css_options } from "../css";
 import isWindow from "../isWindow";
-import { BreakpointKeys } from "../theme";
+import { BreakpointKeys } from "../theme/types";
 
 export const BreakpointCtx = React.createContext<BreakpointKeys>("xl")
 

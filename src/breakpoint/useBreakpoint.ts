@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { BreakpointCtx } from "."
 import { css_options } from "../css"
 import isWindow from "../isWindow"
-import { BreakpointKeys } from "../theme"
+import { BreakpointKeys } from "../theme/types"
 
 const useBreakpoint = () => {
    const val = useContext(BreakpointCtx)

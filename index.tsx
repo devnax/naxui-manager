@@ -1,13 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { getTheme, ThemeProvider, useTheme } from './src/theme'
-import { adjustColor, AliasesTypes, alpha, Tag, useTransition } from './src';
+import { createThemeSwitcher, ThemeProvider, useTheme } from './src/theme'
+import { adjustColor, alpha, Tag, useTransition } from './src';
 import Button from './Button';
-import { css } from './src/css';
-import { CSSProps, formatProp } from 'naxcss';
 import useBreakpoinProps from './src/breakpoint/useBreakpointProps';
-
-const count = 1
 
 const Colors = ({ color }) => {
     return (
@@ -100,7 +96,6 @@ const List = () => {
                     variant="brand"
                     color="alpha"
                     onClick={() => {
-                        theme.change(theme.name === 'light' ? "dark" : "light")
                     }}
                 >Dashboard</Button>
                 <Button
@@ -138,10 +133,12 @@ const List = () => {
 }
 
 const Trans = ({ open }) => {
-    const [variant, setVariant] = React.useState<any>("fadeDown")
+    const [variant, setVariant] = React.useState<any>("collapsVerticle")
     const [toggle, settoggle] = React.useState<any>(false)
     const { classname } = useTransition(toggle, {
         initialTransition: false,
+        // easing: "easeInOut",
+        // duration: 5000,
         onFinish: (t) => {
         },
         onStart: (t) => {
@@ -155,8 +152,8 @@ const Trans = ({ open }) => {
                     settoggle(!toggle)
                 }}
                 mb={2}
-            >Toggle</Button>
-            <Button
+            >{toggle ? "Show" : "Hide"}</Button>
+            {/* <Button
                 onClick={() => {
                     setVariant(variant === "fadeDown" ? {
                         from: {
@@ -170,7 +167,7 @@ const Trans = ({ open }) => {
                     } : "fadeDown")
                 }}
                 mb={2}
-            >Change Variant</Button>
+            >Change Variant</Button> */}
             <Tag
                 // display={state === 'closed' ? "none" : "inherit"}
                 color="brand.text"
@@ -212,50 +209,108 @@ const Breakpoin = ({ onClick }: any) => {
     )
 }
 
+
+const useThemeSwitcher = createThemeSwitcher("light")
+
+const Btn = () => {
+    const theme = useTheme()
+    return (
+        <button>{theme.name}</button>
+    )
+}
+
+const ThemeBox = () => {
+    const themeSwitcher = useThemeSwitcher()
+    return (
+        <button
+            onClick={() => {
+                themeSwitcher.change(themeSwitcher.name === 'light' ? "dark" : "light")
+            }}
+        >
+            change
+        </button>
+    )
+}
+
+import { useState } from "react";
+
+const VerticalCollapse = ({ children, isOpenInitially = false }) => {
+    const [isOpen, setIsOpen] = useState(isOpenInitially);
+
+    const toggleCollapse = () => {
+        setIsOpen((prev) => !prev);
+    };
+
+    return (
+        <div style={{ width: "300px", margin: "20px auto", border: "1px solid #ccc", borderRadius: "4px" }}>
+            <button
+                onClick={toggleCollapse}
+                style={{
+                    width: "100%",
+                    padding: "10px",
+                    background: "#007BFF",
+                    color: "#fff",
+                    border: "none",
+                    cursor: "pointer",
+                    borderRadius: "4px 4px 0 0",
+                }}
+            >
+                {isOpen ? "Collapse" : "Expand"}
+            </button>
+            <div
+                style={{
+                    overflow: "hidden",
+                    height: isOpen ? "auto" : "0",
+                    transition: "height 0.3s ease",
+                }}
+            >
+                <div style={{ padding: "10px" }}>{children}</div>
+            </div>
+        </div>
+    );
+};
+
+
+
+
+
+
 const NUI = () => {
     const [_in, setIn] = React.useState(false)
     const [t, setT] = React.useState("light")
-    const theme = getTheme(t)
-
-    // const cls = useTransition(_in, element => {
-    //     return {
-    //         onOpen: () => {
-    //             console.log('open');
-    //         },
-    //         onOpened: () => {
-    //             console.log('opened');
-    //         },
-    //         onClose: () => {
-    //             console.log('close');
-    //         },
-    //         onClosed: () => {
-    //             console.log('closed');
-    //         },
-    //         variant: "fadeUp"
-    //     }
-    // })
-
+    const [st, ssetT] = React.useState("light")
+    const theme = useThemeSwitcher()
     return (
         <ThemeProvider
-            theme={t}
-            height="100vh"
-            onChange={(t) => {
-                setT(t)
-            }}
+            theme={theme.name}
+            scrollbarCss
         >
-            <Trans open={false} />
-            {
-                Array(100).fill(0).map((v, idx) => {
-                    return <Breakpoin
-                        key={idx}
-                    />
-                })
-            }
-            <button onClick={() => setT(t === 'dark' ? "light" : "dark")}>toggle</button>
+            <VerticalCollapse>
+                <p>This is the content inside the collapsible section.</p>
+                <p>
+                    It can contain any elements, like text, images, or other components. The height will adjust
+                    automatically.
+                </p>
+            </VerticalCollapse>
+            <ThemeBox />
+            <Trans open />
+            <Tag
+                height={100}
+                width={100}
+                overflow="auto"
+            >
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab nisi itaque, non quibusdam vel ad. Error, voluptas ipsa corrupti facere rem voluptatibus inventore! Harum numquam animi voluptate provident obcaecati natus?
+            </Tag>
+            <ThemeProvider theme={theme.name} >
+                <Btn />
+            </ThemeProvider>
         </ThemeProvider>
 
     )
 }
+
+
+
 
 const App = () => {
     return (
